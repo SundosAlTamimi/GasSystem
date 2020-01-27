@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/z2"
+    android:padding="5dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#680C0C0C"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <pl.droidsonroids.gif.GifImageView
+            android:layout_width="170dp"
+            android:layout_height="220dp"
+            android:layout_marginStart="80dp"
+            android:layout_marginLeft="80dp"
+            android:src="@drawable/edit_man" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:paddingStart="100dp"
+            android:orientation="vertical">
+
+            <Button
+                android:layout_width="420dp"
+                android:layout_height="100dp"
+                android:background="@drawable/edit_voucher"
+                android:paddingTop="35dp"
+                android:text="تعديل فاتورة"
+                android:textSize="20sp" />
+
+            <Button
+                android:layout_width="420dp"
+                android:layout_height="100dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/edit_receipt_cash"
+                android:paddingTop="35dp"
+                android:text="تعديل سند قبض كاش"
+                android:textSize="20sp" />
+
+            <Button
+                android:layout_width="420dp"
+                android:layout_height="100dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/edit_receipt_cheque"
+                android:paddingTop="35dp"
+                android:text="تعديل سند قبض شيكات"
+                android:textSize="20sp" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+</LinearLayout>

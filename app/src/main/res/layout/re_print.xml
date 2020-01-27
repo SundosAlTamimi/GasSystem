@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/z2v"
+    android:padding="5dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:background="#680C0C0C"
+        android:orientation="vertical">
+
+        <pl.droidsonroids.gif.GifImageView
+            android:layout_width="150dp"
+            android:layout_height="200dp"
+            android:layout_marginTop="120dp"
+            android:src="@drawable/print_man" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:paddingBottom="30dp"
+            android:orientation="vertical">
+
+            <Button
+                android:layout_width="420dp"
+                android:layout_height="100dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/edit_voucher"
+                android:paddingTop="35dp"
+                android:text="اعادة طباعة فاتورة"
+                android:textSize="20sp" />
+
+            <Button
+                android:layout_width="420dp"
+                android:layout_height="100dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/edit_receipt_cash"
+                android:paddingTop="35dp"
+                android:text="اعادة طباعة سند قبض كاش"
+                android:textSize="20sp" />
+
+            <Button
+                android:layout_width="420dp"
+                android:layout_height="100dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/edit_receipt_cheque"
+                android:paddingTop="35dp"
+                android:text="اعادة طباعة سند قبض شيكات"
+                android:textSize="20sp" />
+
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>
