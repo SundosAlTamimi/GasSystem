@@ -1,12 +1,18 @@
 package com.falconssoft.gassystem;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.KeyEvent;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.animation.Animation;
@@ -26,7 +32,7 @@ import java.util.List;
 public class MakeVoucher extends AppCompatActivity {
 
     Button note, save, search, yes, no, done, cancel;
-    LinearLayout black, black2, dialog, noteDialog, linear;
+    LinearLayout black, black2, dialog, noteDialog, linear,linearmain,total_linear;
     EditText counterNo, custNo, previousRead, currentRead, consuming, consumingValue, previousPalance, gasReturn, serviceReturn, taxService, net, tax,
             currentConsuming, lastValue, noteTextView;
 
@@ -38,21 +44,41 @@ public class MakeVoucher extends AppCompatActivity {
     private Animation animation;
 
     String noteText = "";
+    private Toolbar toolbar;
 
-    @SuppressLint("ClickableViewAccessibility")
+    @SuppressLint({"ClickableViewAccessibility", "RestrictedApi"})
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.make_voucher);
+        setContentView(R.layout.make_voucher_new);
+        init();
+
+        setSupportActionBar(toolbar);
+        //************************************
+//        this.getSupportActionBar().setDefaultDisplayHomeAsUpEnabled(true);
+//       this.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+//       this.getSupportActionBar().setHomeButtonEnabled(true);
+        animation = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.move_to_down);
+        linearmain.startAnimation(animation);
+        total_linear.startAnimation(animation);
+
+        toolbar.setNavigationIcon(R.drawable.ic_arrow_forward_black_24dp); // Set the icon
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i=new Intent(MakeVoucher.this,MainActivity.class);
+                startActivity(i);
+            }
+        });
 
         final DecimalFormat threeDForm = new DecimalFormat("0.000");
 
         DHandler = new DatabaseHandler(MakeVoucher.this);
 //        DHandler.addCustomer(new Customer("","","",0,0,0,0,"",0,0,0));
-        init();
+
 
         animation = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.move_to_right);
-        linear.startAnimation(animation);
+//        linear.startAnimation(animation);
 
         search.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -178,7 +204,8 @@ public class MakeVoucher extends AppCompatActivity {
 
                 case R.id.save:
                     if (event.getAction() == MotionEvent.ACTION_UP) {
-                        save.setBackgroundDrawable(ContextCompat.getDrawable(getApplicationContext(), R.drawable.sav));
+//                        save.setBackgroundDrawable(ContextCompat.getDrawable(getApplicationContext(), R.drawable.sav));
+                        save.setBackgroundDrawable(ContextCompat.getDrawable(getApplicationContext(), R.drawable.save_yelow_btn));
 
                         if (!currentRead.getText().toString().equals("")) {
                             if (!gasReturn.getText().toString().equals("")) {
@@ -203,7 +230,9 @@ public class MakeVoucher extends AppCompatActivity {
                             currentRead.setError("Required!");
 
                     } else if (event.getAction() == MotionEvent.ACTION_DOWN) {
-                        save.setBackgroundDrawable(ContextCompat.getDrawable(getApplicationContext(), R.drawable.sav_hover));
+                        save.setBackgroundColor(getResources().getColor(R.color.yellow_hover));
+
+//                          save.setBackgroundColor(getResources().getColor(R.color.yellow1));
                     }
                     break;
 
@@ -309,7 +338,8 @@ public class MakeVoucher extends AppCompatActivity {
 
         black = findViewById(R.id.black);
         dialog = findViewById(R.id.dialog);
-        linear = findViewById(R.id.linear);
+        linearmain = findViewById(R.id.linearmain);
+        total_linear = findViewById(R.id.total_layout);
 
         black2 = findViewById(R.id.black2);
         noteDialog = findViewById(R.id.noteDialog);
@@ -328,6 +358,40 @@ public class MakeVoucher extends AppCompatActivity {
         tax = findViewById(R.id.tax);
         currentConsuming = findViewById(R.id.current_consuming);
         lastValue = findViewById(R.id.last_value);
+        toolbar=findViewById(R.id.appBar);
 
+    }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater menuInflater=getMenuInflater();
+        menuInflater.inflate(R.menu.add_voucher_menu_bar,menu);
+        return  true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        if(item.getItemId()==R.id.search_ic)
+        {
+            if (!counterNo.getText().toString().equals("")) {
+
+                Customer customer = DHandler.getCustomer(counterNo.getText().toString());
+                if (customer.getCounterNo() != null) {
+
+                    custNo.setText(customer.getCustName());
+                    previousRead.setText("" + customer.getLastRead());
+                    previousPalance.setText("" + customer.getCredet());
+                    serviceReturn.setText("" + customer.getBadalVal());
+
+                    gasPressure = customer.getGasPressure();
+                    gasPrice = customer.getgPrice();
+
+                } else
+                    Toast.makeText(MakeVoucher.this, "رقم العداد غير موجود", Toast.LENGTH_LONG).show();
+
+            } else
+                Toast.makeText(MakeVoucher.this, "ادخل رقم العداد", Toast.LENGTH_LONG).show();
+        }
+        return  true;
     }
 }

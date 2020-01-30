@@ -21,9 +21,12 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".MakeVoucher">
+        <activity android:name=".MakeVoucher"
+            android:parentActivityName=".MainActivity">
 
         </activity>
+
+
         <activity android:name=".Receipt">
 
         </activity>
