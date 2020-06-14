@@ -1,8 +1,12 @@
 package com.falconssoft.gassystem;
 
+import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -19,6 +23,7 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -33,9 +38,9 @@ public class MakeVoucher extends AppCompatActivity {
 
     Button note, save, search, yes, no, done, cancel;
     LinearLayout black, black2, dialog, noteDialog, linear,linearmain,total_linear;
-    EditText counterNo, custNo, previousRead, currentRead, consuming, consumingValue, previousPalance, gasReturn, serviceReturn, taxService, net, tax,
+    EditText  custNo, previousRead, currentRead, consuming, consumingValue, previousPalance, gasReturn, serviceReturn, taxService, net, tax,
             currentConsuming, lastValue, noteTextView;
-
+public  static  EditText counterNo;
     DatabaseHandler DHandler;
     double gasPressure = 0;
     double gasPrice = 0;
@@ -45,28 +50,26 @@ public class MakeVoucher extends AppCompatActivity {
 
     String noteText = "";
     private Toolbar toolbar;
+    ImageView barcodeimage;
+    public static final int REQUEST_Camera = 1;
+    String custNo_text = "";
 
     @SuppressLint({"ClickableViewAccessibility", "RestrictedApi"})
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.make_voucher_new);
+        setContentView(R.layout.small_screen);
         init();
 
         setSupportActionBar(toolbar);
-        //************************************
-//        this.getSupportActionBar().setDefaultDisplayHomeAsUpEnabled(true);
-//       this.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-//       this.getSupportActionBar().setHomeButtonEnabled(true);
         animation = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.move_to_down);
         linearmain.startAnimation(animation);
         total_linear.startAnimation(animation);
-
         toolbar.setNavigationIcon(R.drawable.ic_arrow_forward_black_24dp); // Set the icon
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i=new Intent(MakeVoucher.this,MainActivity.class);
+                Intent i = new Intent(MakeVoucher.this, MainActivity.class);
                 startActivity(i);
             }
         });
@@ -85,20 +88,8 @@ public class MakeVoucher extends AppCompatActivity {
             public void onClick(View v) {
 
                 if (!counterNo.getText().toString().equals("")) {
-
-                    Customer customer = DHandler.getCustomer(counterNo.getText().toString());
-                    if (customer.getCounterNo() != null) {
-
-                        custNo.setText(customer.getCustName());
-                        previousRead.setText("" + customer.getLastRead());
-                        previousPalance.setText("" + customer.getCredet());
-                        serviceReturn.setText("" + customer.getBadalVal());
-
-                        gasPressure = customer.getGasPressure();
-                        gasPrice = customer.getgPrice();
-
-                    } else
-                        Toast.makeText(MakeVoucher.this, "رقم العداد غير موجود", Toast.LENGTH_LONG).show();
+                    custNo_text=counterNo.getText().toString();
+                    searchByCustomerNo(custNo_text);
 
                 } else
                     Toast.makeText(MakeVoucher.this, "ادخل رقم العداد", Toast.LENGTH_LONG).show();
@@ -167,6 +158,35 @@ public class MakeVoucher extends AppCompatActivity {
             }
         });
 
+        barcodeimage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                custNo_text= counterNo.getText().toString();
+                if (!custNo_text.equals("")) {
+
+                } else {
+                    if (ContextCompat.checkSelfPermission(MakeVoucher.this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+                        ActivityCompat.requestPermissions(MakeVoucher.this, new String[]{Manifest.permission.CAMERA}, REQUEST_Camera);
+                        if (ContextCompat.checkSelfPermission(MakeVoucher.this, Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) {//just for first time
+                            Log.e("requestresult", "PERMISSION_GRANTED");
+                            Intent i = new Intent(MakeVoucher.this, ScanActivity.class);
+                            startActivity(i);
+
+                            searchByCustomerNo(custNo_text);
+                        }
+                    } else {
+                        Intent i = new Intent(MakeVoucher.this, ScanActivity.class);
+                        startActivity(i);
+                        searchByCustomerNo(custNo_text);
+                    }
+
+
+                }
+
+            }
+        });
+
 
         note.setOnTouchListener(onTouchListener);
         done.setOnTouchListener(onTouchListener);
@@ -176,6 +196,22 @@ public class MakeVoucher extends AppCompatActivity {
         yes.setOnTouchListener(onTouchListener);
         no.setOnTouchListener(onTouchListener);
 
+    }
+
+    private void searchByCustomerNo(String custNo_text) {
+        Customer customer = DHandler.getCustomer(custNo_text);
+        if (customer.getCounterNo() != null) {
+
+            custNo.setText(customer.getCustName());
+            previousRead.setText("" + customer.getLastRead());
+            previousPalance.setText("" + customer.getCredet());
+            serviceReturn.setText("" + customer.getBadalVal());
+
+            gasPressure = customer.getGasPressure();
+            gasPrice = customer.getgPrice();
+
+        } else
+            Toast.makeText(MakeVoucher.this, "رقم العداد غير موجود", Toast.LENGTH_LONG).show();
     }
 
     View.OnTouchListener onTouchListener = new View.OnTouchListener() {
@@ -359,6 +395,7 @@ public class MakeVoucher extends AppCompatActivity {
         currentConsuming = findViewById(R.id.current_consuming);
         lastValue = findViewById(R.id.last_value);
         toolbar=findViewById(R.id.appBar);
+        barcodeimage=(ImageView)findViewById(R.id.barcodeimage);
 
     }
     @Override
@@ -394,4 +431,15 @@ public class MakeVoucher extends AppCompatActivity {
         }
         return  true;
     }
+
+//    @Override
+//    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+//        super.onActivityResult(requestCode, resultCode, data);
+//        if (REQUEST_Camera == requestCode)
+//        {
+//            custNo_text=counterNo.getText().toString();
+//            searchByCustomerNo(custNo_text);
+//
+//        }
+//    }
 }

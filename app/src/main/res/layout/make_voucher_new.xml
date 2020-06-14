@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
 
-    android:layoutDirection="rtl"
- >
+    android:layoutDirection="rtl">
  <include
      android:id="@+id/appBar"
      layout="@layout/app_bar_layout"/>
@@ -24,7 +23,7 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:background="@drawable/back_white"
-            android:elevation="3dp"
+            android:elevation="2dp"
             android:layout_marginTop="5dp"
             android:layout_marginLeft="5dp"
             android:layout_marginRight="5dp"
@@ -71,12 +70,12 @@
                 <TextView
                     android:layout_width="130dp"
                     android:layout_height="wrap_content"
-                    android:text="رقم العداد"
-                    android:background="@drawable/gradiant_background"
-                    android:padding="5dp"
-                    android:inputType="number"
-                    android:elevation="5dp"
+                    android:background="@drawable/dark_gradiant_smallborder"
+                    android:elevation="2dp"
                     android:gravity="center"
+                    android:inputType="number"
+                    android:padding="5dp"
+                    android:text="رقم العداد"
                     android:textColor="@color/yellow1"
                     android:textSize="18sp" />
 
@@ -100,6 +99,12 @@
                     android:layout_marginRight="10dp"
                     android:textColor="@color/darkblue_"
                     android:textSize="18sp" />
+                <ImageView
+                    android:id="@+id/barcodeimage"
+                    android:layout_width="30dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_height="30dp"
+                    app:srcCompat="@drawable/barcode" />
 
             </LinearLayout>
 
@@ -112,11 +117,11 @@
                 <TextView
                     android:layout_width="130dp"
                     android:layout_height="wrap_content"
-                    android:text="اسم العميل"
-                    android:background="@drawable/gradiant_background"
-                    android:padding="5dp"
-                    android:elevation="5dp"
+                    android:background="@drawable/dark_gradiant_smallborder"
+                    android:elevation="2dp"
                     android:gravity="center"
+                    android:padding="5dp"
+                    android:text="اسم العميل"
                     android:textColor="@color/yellow1"
                     android:textSize="18sp" />
 
@@ -144,13 +149,13 @@
                 <TextView
                     android:layout_width="130dp"
                     android:layout_height="wrap_content"
-                    android:text="القراءة السابقة"
-                    android:background="@drawable/gradiant_background"
-                    android:padding="5dp"
+                    android:background="@drawable/dark_gradiant_smallborder"
                     android:elevation="2dp"
                     android:gravity="center"
+                    android:padding="5dp"
+                    android:text="القراءة السابقة"
                     android:textColor="@color/yellow1"
-                    android:textSize="18sp"/>
+                    android:textSize="18sp" />
 
                 <EditText
                     android:id="@+id/previous_read"
@@ -184,11 +189,11 @@
                 <TextView
                     android:layout_width="130dp"
                     android:layout_height="wrap_content"
-                    android:text="القراءة الحالية"
-                    android:background="@drawable/gradiant_background"
-                    android:padding="5dp"
+                    android:background="@drawable/dark_gradiant_smallborder"
                     android:elevation="2dp"
                     android:gravity="center"
+                    android:padding="5dp"
+                    android:text="القراءة الحالية"
                     android:textColor="@color/yellow1"
                     android:textSize="18sp" />
 
@@ -225,13 +230,13 @@
                 <TextView
                     android:layout_width="130dp"
                     android:layout_height="wrap_content"
-                    android:text="الاستهلاك"
-                    android:background="@drawable/gradiant_background"
-                    android:padding="5dp"
+                    android:background="@drawable/dark_gradiant_smallborder"
                     android:elevation="2dp"
                     android:gravity="center"
+                    android:padding="5dp"
+                    android:text="الاستهلاك"
                     android:textColor="@color/yellow1"
-                    android:textSize="18sp"/>
+                    android:textSize="18sp" />
 
                 <EditText
                     android:id="@+id/consuming"
@@ -265,13 +270,13 @@
                 <TextView
                     android:layout_width="130dp"
                     android:layout_height="wrap_content"
-                    android:text="قيمة الاستهلاك"
-                    android:background="@drawable/gradiant_background"
-                    android:padding="5dp"
+                    android:background="@drawable/dark_gradiant_smallborder"
                     android:elevation="2dp"
                     android:gravity="center"
+                    android:padding="5dp"
+                    android:text="قيمة الاستهلاك"
                     android:textColor="@color/yellow1"
-                    android:textSize="18sp"/>
+                    android:textSize="18sp" />
 
                 <EditText
                     android:id="@+id/consuming_value"
@@ -306,11 +311,11 @@
                 <TextView
                     android:layout_width="130dp"
                     android:layout_height="wrap_content"
-                    android:text="رصيد سابق"
-                    android:background="@drawable/gradiant_background"
-                    android:padding="5dp"
+                    android:background="@drawable/dark_gradiant_smallborder"
                     android:elevation="2dp"
                     android:gravity="center"
+                    android:padding="5dp"
+                    android:text="رصيد سابق"
                     android:textColor="@color/yellow1"
                     android:textSize="18sp" />
 
@@ -348,11 +353,11 @@
                 <TextView
                     android:layout_width="130dp"
                     android:layout_height="wrap_content"
-                    android:text="بدل اعادة غاز"
-                    android:background="@drawable/gradiant_background"
-                    android:padding="5dp"
+                    android:background="@drawable/dark_gradiant_smallborder"
                     android:elevation="2dp"
                     android:gravity="center"
+                    android:padding="5dp"
+                    android:text="بدل اعادة غاز"
                     android:textColor="@color/yellow1"
                     android:textSize="18sp" />
 
@@ -383,11 +388,11 @@
                 <TextView
                     android:layout_width="130dp"
                     android:layout_height="wrap_content"
-                    android:text="بدل الخدمات"
-                    android:background="@drawable/gradiant_background"
-                    android:padding="5dp"
+                    android:background="@drawable/dark_gradiant_smallborder"
                     android:elevation="2dp"
                     android:gravity="center"
+                    android:padding="5dp"
+                    android:text="بدل الخدمات"
                     android:textColor="@color/yellow1"
                     android:textSize="18sp" />
 
@@ -419,13 +424,13 @@
                 <TextView
                     android:layout_width="290dp"
                     android:layout_height="wrap_content"
-                    android:text="مجموع بدل الخدمات بعد الضريبة"
-                    android:background="@drawable/gradiant_background"
-                    android:padding="5dp"
+                    android:background="@drawable/dark_gradiant_smallborder"
                     android:elevation="2dp"
                     android:gravity="center"
+                    android:padding="5dp"
+                    android:text="مجموع بدل الخدمات بعد الضريبة"
                     android:textColor="@color/yellow1"
-                    android:textSize="18sp"/>
+                    android:textSize="18sp" />
 
                 <EditText
                     android:id="@+id/tax_services"
@@ -452,7 +457,7 @@
             android:layout_marginHorizontal="20dp"
             android:layout_marginTop="10sp"
             android:background="@drawable/back_white"
-            android:elevation="3dp"
+            android:elevation="2dp"
             android:gravity="center"
             android:orientation="vertical"
             android:padding="10dp">
@@ -474,7 +479,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="2"
-                        android:background="@drawable/gradiant_background"
+                        android:background="@drawable/dark_gradiant_smallborder"
                         android:elevation="2dp"
                         android:gravity="center"
                         android:padding="5dp"
@@ -509,7 +514,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="2"
 
-                        android:background="@drawable/gradiant_background"
+                        android:background="@drawable/dark_gradiant_smallborder"
                         android:elevation="2dp"
                         android:gravity="center"
                         android:padding="5dp"
@@ -544,7 +549,7 @@
                         android:layout_marginBottom="10dp"
                         android:layout_weight="2"
 
-                        android:background="@drawable/gradiant_background"
+                        android:background="@drawable/dark_gradiant_smallborder"
                         android:elevation="2dp"
                         android:gravity="center"
                         android:padding="5dp"
@@ -586,7 +591,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="2"
-                        android:background="@drawable/gradiant_background"
+                        android:background="@drawable/dark_gradiant_smallborder"
                         android:elevation="2dp"
                         android:gravity="center"
                         android:padding="5dp"
