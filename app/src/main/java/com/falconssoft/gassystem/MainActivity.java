@@ -86,6 +86,8 @@ public class MainActivity extends AppCompatActivity {
         linearVoucher.startAnimation(animation);
         linearRecipt.startAnimation(animation2);
 
+        Log.e("linearRecipt","linearRecipt");
+
 
         add_voucher.setOnClickListener(new View.OnClickListener() {
             @Override
