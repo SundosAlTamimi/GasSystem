@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
@@ -21,6 +22,7 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.falconssoft.gassystem.Modle.Customer;
+import com.falconssoft.gassystem.Modle.RecCash;
 import com.falconssoft.gassystem.Modle.Receipts;
 import com.falconssoft.gassystem.Modle.Voucher;
 
@@ -31,8 +33,8 @@ public class Receipt extends AppCompatActivity {
 
     LinearLayout black, black2, black3, dialog, noteDialog, custDialog, linear;
     private Animation animation;
-    EditText receiptNo, custNo, project, lastBalance, accountNo, counterNo, value, noteTextView;
-    Button note, save, search, yes, no, done, cancel;
+    EditText receiptNo, custNo, project, lastBalance, accountNo, counterNo, value, noteTextView,note;
+    Button  save, search, yes, no, done, cancel;
     ListView custList;
 
     DatabaseHandler DHandler;
@@ -40,7 +42,7 @@ public class Receipt extends AppCompatActivity {
 
     String noteText = "";
     private Toolbar toolbar;
-
+    public static Receipts recCash;
     @SuppressLint("ClickableViewAccessibility")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,17 +67,93 @@ public class Receipt extends AppCompatActivity {
 
         animation = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.move_to_down);
         linear.startAnimation(animation);
-//
-//        note.setOnTouchListener(onTouchListener);
-//        done.setOnTouchListener(onTouchListener);
-//        cancel.setOnTouchListener(onTouchListener);
-//
-//        save.setOnTouchListener(onTouchListener);
-//        yes.setOnTouchListener(onTouchListener);
-//        no.setOnTouchListener(onTouchListener);
-//
-//        search.setOnTouchListener(onTouchListener);
+        save.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
+                Save();
+
+            }
+        });
+
+
+    }
+
+
+    public void Save() {
+
+
+        if (!TextUtils.isEmpty(receiptNo.getText().toString())) {
+            if (!TextUtils.isEmpty(custNo.getText().toString())) {
+                if (!TextUtils.isEmpty(project.getText().toString())) {
+                    if (!TextUtils.isEmpty(custNo.getText().toString())) {
+                        if (!TextUtils.isEmpty(lastBalance.getText().toString())) {
+                            if (!TextUtils.isEmpty(accountNo.getText().toString())) {
+                                if (!TextUtils.isEmpty(counterNo.getText().toString())) {
+                                    if (!TextUtils.isEmpty(value.getText().toString())) {
+
+                                         recCash=new Receipts(
+                                                 receiptNo.getText().toString(),
+                                                 custNo.getText().toString(),
+                                                 project.getText().toString(),
+                                                 lastBalance.getText().toString(),
+                                                 accountNo.getText().toString(),
+                                                 counterNo.getText().toString(),
+                                                 Double.parseDouble(value.getText().toString()),
+                                                 note.getText().toString()
+                                         );
+//
+
+                                        SavePrint();
+
+                                    }
+                                } else {
+                                    value.setError("Required!");
+                                }
+                            } else {
+                                counterNo.setError("Required!");
+                            }
+                        } else {
+                            lastBalance.setError("Required!");
+                        }
+                    } else {
+                        custNo.setError("Required!");
+                    }
+                } else {
+                    project.setError("Required!");
+                }
+            } else {
+                custNo.setError("Required!");
+            }
+        } else {
+            receiptNo.setError("Required!");
+        }
+
+
+        Toast.makeText(this, "Save Success", Toast.LENGTH_SHORT).show();
+
+
+    }
+
+    void clearText(){
+        receiptNo.setText("");
+        custNo.setText("");
+        project.setText("");
+        lastBalance.setText("");
+        accountNo.setText("");
+        counterNo.setText("");
+        value.setText("");
+        note.setText("");
+    }
+
+    private void SavePrint() {
+
+        DHandler.addReceipt(recCash);
+        clearText();
+        Intent printExport=new Intent(Receipt.this,BluetoothConnectMenu.class);
+        printExport.putExtra("printKey", "1");
+        startActivity(printExport);
+        Toast.makeText(this, "Save Success", Toast.LENGTH_SHORT).show();
     }
 
 //    View.OnTouchListener onTouchListener = new View.OnTouchListener() {
@@ -256,8 +334,8 @@ public class Receipt extends AppCompatActivity {
 
     void init() {
 
-        note = findViewById(R.id.note);
-        save = findViewById(R.id.save);
+        note = findViewById(R.id.notes);
+        save = findViewById(R.id.save_);
         search = findViewById(R.id.search);
         yes = findViewById(R.id.yes);
         no = findViewById(R.id.no);
