@@ -226,7 +226,7 @@ public class MainActivity extends AppCompatActivity {
 
             try {
 
-                URL url = new URL("http://10.0.0.214/GAS_WEB_SERVICE/import.php?FLAG=2");
+                URL url = new URL("http://10.0.0.214/GAS_WEB_SERVICE/import.php?FLAG=1");
 
                 URLConnection conn = url.openConnection();
                 conn.setDoOutput(true);
@@ -257,14 +257,14 @@ public class MainActivity extends AppCompatActivity {
                         customer.setCounterNo(finalObject.getString("COUNTERNO"));
                         customer.setAccNo(finalObject.getString("ACCNO"));
                         customer.setCustName(finalObject.getString("CUSTOMERNAME"));
-                        customer.setLastRead(finalObject.getDouble("LASTREADER"));
                         customer.setGasPressure(finalObject.getDouble("GASPRESSURE"));
-                        customer.setCredet(finalObject.getDouble("CREDIT"));
                         customer.setgPrice(finalObject.getDouble("GPRICE"));
                         customer.setProjectName(finalObject.getString("PRJECTNAME"));
                         customer.setIsPer(finalObject.getInt("IS_PER"));
                         customer.setBadalVal(finalObject.getDouble("BDLVAL"));
+                        //customer.set(finalObject.getDouble("CREDIT"));
                         customer.setCustSts(finalObject.getInt("CUSTSTS"));
+                        customer.setLastRead(finalObject.getDouble("LASTREADER"));
 
                         customers.add(customer);
                     }
@@ -272,7 +272,7 @@ public class MainActivity extends AppCompatActivity {
                     Log.e("Import Data1", e.getMessage().toString());
                 }
 
-                try {
+                /*try {
                     JSONArray parentArrayOrders = parentObject.getJSONArray("GAS_USERS");
                     users.clear();
                     for (int i = 0; i < parentArrayOrders.length(); i++) {
@@ -287,6 +287,8 @@ public class MainActivity extends AppCompatActivity {
                 } catch (JSONException e) {
                     Log.e("Import Data2", e.getMessage().toString());
                 }
+
+                 */
 
                 try {
                     JSONArray parentArrayOrders = parentObject.getJSONArray("GAS_REMARKS");
@@ -353,13 +355,15 @@ public class MainActivity extends AppCompatActivity {
             handler.addCustomer(customers.get(i));
         }
 
-        for(int i = 0 ; i<users.size() ; i++) {
+       /* for(int i = 0 ; i<users.size() ; i++) {
             handler.addUser(users.get(i));
         }
-
+*/
         for(int i = 0 ; i<remarks.size() ; i++) {
             handler.addRemark(remarks.get(i));
         }
+
+
     }
 //
 //
