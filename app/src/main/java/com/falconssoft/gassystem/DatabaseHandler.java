@@ -8,6 +8,8 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
 import com.falconssoft.gassystem.Modle.Customer;
+import com.falconssoft.gassystem.Modle.MaxSerial;
+import com.falconssoft.gassystem.Modle.RecCash;
 import com.falconssoft.gassystem.Modle.Receipts;
 import com.falconssoft.gassystem.Modle.Remarks;
 import com.falconssoft.gassystem.Modle.Users;
@@ -19,7 +21,7 @@ import java.util.List;
 public class DatabaseHandler extends SQLiteOpenHelper {
 
     private static String TAG = "DatabaseHandler";
-    private static final int DATABASE_VERSION = 4;
+    private static final int DATABASE_VERSION = 5;
     private static final String DATABASE_NAME = "GasDatabase";
     static SQLiteDatabase db;
 
@@ -85,6 +87,23 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     private static final String BODY = "BODY";
 
     //******************************************************************
+    private static final String RECCASH_TABLE = "RECCASH";
+
+    private static final String RECNO = "RECNO";
+    private static final String ACCNAME = "ACCNAME";
+    private static final String ACCNO = "ACCNO";
+    private static final String CASH = "CASH";
+    private static final String REMARKS = "REMARKS";
+    private static final String RECDATE = "RECDATE";
+    private static final String IS_POST = "IS_POST";
+    private static final String PRJNAME = "PRJNAME";
+
+    //******************************************************************
+    private static final String SERIAL_TABLE = "MAXSERIAL";
+
+    private static final String SERIAL_COLMAX = "COLMAX";
+    private static final String SERIAL_MAXVAL = "MAXVAL";
+
 
 
     public DatabaseHandler(Context context) {
@@ -93,6 +112,12 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
+
+        String CREATE_SERIAL_TABLE = "CREATE TABLE " + SERIAL_TABLE + "("
+                + SERIAL_COLMAX + " TEXT,"
+                + SERIAL_MAXVAL + " INTEGER"
+                + ")";
+        db.execSQL(CREATE_SERIAL_TABLE);
 
         String CREATE_CUSTOMER_TABLE = "CREATE TABLE " + CUSTOMER_TABLE + "("
                 + COUNTER_NO + " TEXT,"
@@ -147,12 +172,31 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                 + BODY + " TEXT" + ")";
         db.execSQL(CREATE_REMARKS_TABLE);
 
+
+        String CREATE_RECCASH_TABLE = "CREATE TABLE " + RECCASH_TABLE + "("
+                + RECNO + " TEXT,"
+                + ACCNAME + " TEXT,"
+                + ACCNO + " TEXT,"
+                + CASH + " TEXT,"
+                + REMARKS + " TEXT,"
+                + RECDATE + " TEXT,"
+                + IS_POST + " TEXT" + ")";
+        db.execSQL(CREATE_RECCASH_TABLE);
+
+
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 
         try {
+
+            String CREATE_SERIAL_TABLE = "CREATE TABLE " + SERIAL_TABLE + "("
+                    + SERIAL_COLMAX + " TEXT,"
+                    + SERIAL_MAXVAL + " INTEGER"
+                    + ")";
+            db.execSQL(CREATE_SERIAL_TABLE);
+
             String CREATE_USERS_TABLE = "CREATE TABLE " + USERS_TABLE + "("
                     + USER_NAME + " TEXT,"
                     + PASSWORD + " TEXT" + ")";
@@ -193,7 +237,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
 
     public void addVoucher(Voucher voucher) {
-        db = this.getReadableDatabase();
+        SQLiteDatabase db = this.getReadableDatabase();
         ContentValues contentValues = new ContentValues();
 
         contentValues.put(COUNT_NO, voucher.getCounterNo());
@@ -210,7 +254,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         contentValues.put(TAX, voucher.getTax());
         contentValues.put(CURRENT_CONSUMING, voucher.getCurrentConsuming());
         contentValues.put(LAST_VALUE, voucher.getLastValue());
-        contentValues.put(NOTE, voucher.getLastValue());
+        contentValues.put(NOTE, voucher.getNote());
 
         db.insert(VOUCHERS_TABLE, null, contentValues);
         db.close();
@@ -229,9 +273,57 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         contentValues.put(VALUE2, receipt.getValue());
         contentValues.put(NOTE2, receipt.getNote());
 
-        db.insert(VOUCHERS_TABLE, null, contentValues);
+        db.insert(RECEIPT_TABLE, null, contentValues);
         db.close();
     }
+
+
+
+    public void addRecCash(RecCash receipt ) {
+        db = this.getReadableDatabase();
+        ContentValues values = new ContentValues();
+
+        values.put(RECNO, receipt.getRECNO());
+        values.put(ACCNAME, receipt.getACCNAME());
+        values.put(ACCNO, receipt.getACCNO());
+        values.put(CASH, receipt.getCASH());
+        values.put(REMARKS, receipt.getREMARKS());
+        values.put(RECDATE, receipt.getRECDATE());
+        values.put(IS_POST, receipt.getIS_POST());
+        values.put(PRJNAME, receipt.getPRJNAME());
+
+        db.insert(RECCASH_TABLE, null, values);
+        db.close();
+    }
+
+    public void addMaxSerial(MaxSerial maxSerial) {
+        db = this.getReadableDatabase();
+        ContentValues contentValues = new ContentValues();
+
+        contentValues.put(SERIAL_MAXVAL, maxSerial.getSerialMax());
+        contentValues.put(SERIAL_COLMAX, maxSerial.getColomMax());
+
+        db.insert(SERIAL_TABLE, null, contentValues);
+        db.close();
+    }
+
+//    public void addRecCash(RecCash receipt) {
+//        SQLiteDatabase db = this.getReadableDatabase();
+//        ContentValues contentValues = new ContentValues();
+//
+//
+//        contentValues.put(RECNO, receipt.getRECNO());
+//        contentValues.put(ACCNAME, receipt.getACCNAME());
+//        contentValues.put(ACCNO, receipt.getACCNO());
+//        contentValues.put(CASH, receipt.getCASH());
+//        contentValues.put(REMARKS, receipt.getREMARKS());
+//        contentValues.put(RECDATE, receipt.getRECDATE());
+//        contentValues.put(IS_POST, receipt.getIS_POST());
+//        contentValues.put(PRJNAME, receipt.getPRJNAME());
+//
+//        db.insert(RECCASH_TABLE, null, contentValues);
+//        db.close();
+//    }
 
     public void addUser(Users user) {
         db = this.getReadableDatabase();
@@ -342,6 +434,54 @@ public class DatabaseHandler extends SQLiteOpenHelper {
             } while (cursor.moveToNext());
         }
         return customer;
+    }
+
+
+    public List<MaxSerial> getMaxSerial() {
+        List<MaxSerial> customerList=new ArrayList<>();
+
+        String selectQuery = "SELECT  * FROM " + SERIAL_TABLE ;
+        db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+
+        if (cursor.moveToFirst()) {
+            do {
+                MaxSerial customer = new MaxSerial();
+                customer.setColomMax(cursor.getString(0));
+                customer.setSerialMax(cursor.getString(1));
+
+                customerList.add(customer);
+            } while (cursor.moveToNext());
+        }
+        return customerList;
+    }
+
+
+
+
+    public List<RecCash> getRecCash() {
+        List<RecCash> recCashList=new ArrayList<>();
+
+        String selectQuery = "SELECT  * FROM " + RECCASH_TABLE ;
+        db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+
+        if (cursor.moveToFirst()) {
+            do {
+
+                RecCash recCash = new RecCash();
+                recCash.setRECNO(cursor.getString(0));
+                recCash.setACCNAME(cursor.getString(1));
+                recCash.setACCNO(cursor.getString(2));
+                recCash.setCASH(cursor.getString(3));
+                recCash.setREMARKS(cursor.getString(4));
+                recCash.setRECDATE(cursor.getString(5));
+                recCash.setIS_POST(cursor.getString(6));
+                recCash.setPRJNAME(cursor.getString(7));
+
+            } while (cursor.moveToNext());
+        }
+        return recCashList;
     }
 
 
