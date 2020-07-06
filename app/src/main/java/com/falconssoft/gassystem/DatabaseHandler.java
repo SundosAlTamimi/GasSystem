@@ -224,7 +224,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         contentValues.put(CUSTOMER_NAME, customer.getCustName());
         contentValues.put(LAST_READER, customer.getLastRead());
         contentValues.put(GAS_PRESSURE, customer.getGasPressure());
-        contentValues.put(CREDIT, customer.getCredet());
+        //contentValues.put(CREDIT, customer.getCredet());
         contentValues.put(G_PRICE, customer.getgPrice());
         contentValues.put(PRJECT_NAME, customer.getProjectName());
         contentValues.put(IS_PER, customer.getIsPer());
