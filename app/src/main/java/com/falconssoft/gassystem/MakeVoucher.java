@@ -214,7 +214,6 @@ public class MakeVoucher extends AppCompatActivity {
 
                             gasPressure = customer.getGasPressure();
                             gasPrice = customer.getgPrice();
-
                             currentRead.requestFocus();
 
 //                            new Handler().post(new Runnable() {
@@ -342,6 +341,7 @@ public class MakeVoucher extends AppCompatActivity {
 
         DHandler.addVoucher(voucherGas);
 
+        counterNo.setText("");
         Intent printExport=new Intent(MakeVoucher.this,BluetoothConnectMenu.class);
         printExport.putExtra("printKey", "0");
         startActivity(printExport);
