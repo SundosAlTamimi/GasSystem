@@ -159,7 +159,7 @@
         <!--</LinearLayout>-->
 
         <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="370dp"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:padding="5dp">
@@ -208,43 +208,7 @@
                 </LinearLayout>
 
 
-                <LinearLayout
-                    android:layout_width="370dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginBottom="3dp"
-                    android:orientation="horizontal">
 
-                    <TextView
-                        android:layout_width="100dp"
-                        android:layout_height="wrap_content"
-                        android:elevation="5dp"
-                        android:padding="5dp"
-                        android:text="رقم العداد"
-                        android:textColor="@color/black"
-                        android:textSize="16sp" />
-
-                    <TextView
-                        android:id="@+id/counter_no"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginRight="10dp"
-                        android:elevation="2dp"
-
-                        android:padding="5dp"
-                        android:textColor="@color/black"
-                        android:textSize="16sp" />
-
-                    <!--<TextView-->
-                    <!--android:layout_width="match_parent"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:layout_marginRight="10dp"-->
-                    <!--android:layout_weight="1"-->
-                    <!--android:text="16072"-->
-                    <!--android:textColor="@color/darkblue_"-->
-                    <!--android:textSize="12sp" />-->
-
-                </LinearLayout>
 
 
                 <LinearLayout
@@ -309,38 +273,37 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-
-                    android:layout_marginBottom="2dp"
+                    android:layout_marginBottom="3dp"
                     android:orientation="horizontal">
 
                     <TextView
                         android:layout_width="100dp"
                         android:layout_height="wrap_content"
-                        android:elevation="2dp"
+                        android:elevation="5dp"
                         android:padding="5dp"
-                        android:text="ضغط الشبكه "
+                        android:text="رقم العداد"
                         android:textColor="@color/black"
                         android:textSize="16sp" />
 
                     <TextView
-                        android:id="@+id/prasuGas"
+                        android:id="@+id/counter_no"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginRight="10dp"
-                        android:layout_weight="1"
                         android:elevation="2dp"
+
                         android:padding="5dp"
                         android:textColor="@color/black"
                         android:textSize="16sp" />
 
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginRight="10dp"
-                        android:layout_weight="1.2"
-                        android:text="بار"
-                        android:textColor="@color/black"
-                        android:textSize="14sp" />
+                    <!--<TextView-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_marginRight="10dp"-->
+                    <!--android:layout_weight="1"-->
+                    <!--android:text="16072"-->
+                    <!--android:textColor="@color/darkblue_"-->
+                    <!--android:textSize="12sp" />-->
 
                 </LinearLayout>
                 <LinearLayout
@@ -355,17 +318,17 @@
                         android:layout_height="wrap_content"
                         android:elevation="2dp"
                         android:padding="5dp"
-                        android:text="سعر الغاز"
+                        android:text="المبلغ :"
                         android:textColor="@color/black"
                         android:textSize="16sp" />
 
                     <TextView
-                        android:id="@+id/saleGas"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginRight="10dp"
                         android:layout_weight="1"
                         android:elevation="2dp"
+                        android:text="فليس"
                         android:padding="5dp"
                         android:textColor="@color/black"
                         android:textSize="16sp" />
@@ -374,10 +337,12 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginRight="10dp"
-                        android:layout_weight="1.2"
-                        android:text="للطن / دينار "
+                        android:layout_weight="1"
+                        android:elevation="2dp"
+                        android:text="دينار"
+                        android:padding="5dp"
                         android:textColor="@color/black"
-                        android:textSize="14sp" />
+                        android:textSize="16sp" />
 
                 </LinearLayout>
                 <LinearLayout
@@ -392,7 +357,46 @@
                         android:layout_height="wrap_content"
                         android:elevation="2dp"
                         android:padding="5dp"
-                        android:text="معامل التمدد "
+                        android:textColor="@color/black"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/filse"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="10dp"
+                        android:layout_weight="1"
+                        android:elevation="2dp"
+                        android:padding="5dp"
+                        android:text="0000"
+                        android:textColor="@color/black"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/jd"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="10dp"
+                        android:layout_weight="1"
+                        android:elevation="2dp"
+                        android:padding="5dp"
+                        android:text="54"
+                        android:textColor="@color/black"
+                        android:textSize="16sp" />
+
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+
+                    android:layout_marginBottom="2dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content"
+                        android:elevation="2dp"
+                        android:padding="5dp"
                         android:textColor="@color/black"
                         android:textSize="16sp" />
 
@@ -407,16 +411,74 @@
                         android:textColor="@color/black"
                         android:textSize="16sp" />
 
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginRight="10dp"
-                        android:layout_weight="1.2"
-                        android:text="متر مكعب"
-                        android:textColor="@color/black"
-                        android:textSize="14sp" />
-
                 </LinearLayout>
+                <TextView
+                    android:layout_width="370dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="----------------------------------------------"
+                    android:textColor="@color/black" />
+
+                <TextView
+                    android:layout_width="370dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="===================================="
+                    android:textColor="@color/black" />
+
+
+
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="وذلك عن :   "
+                    android:textColor="@color/black" />
+
+
+                <TextView
+                    android:layout_width="370dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text=""
+                    android:textColor="@color/black" />
+
+                <TextView
+                    android:layout_width="370dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text=""
+                    android:textColor="@color/black" />
+
+
+                <TextView
+                    android:layout_width="370dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="===================================="
+                    android:textColor="@color/black" />
+
+
+                <TextView
+                    android:layout_width="370dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="===================================="
+                    android:textColor="@color/black" />
+
+                <TextView
+                    android:layout_width="370dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="ملاحظه : يعتمد سند القبض توقيع"
+                    android:textColor="@color/black" />
+
+                <TextView
+                    android:layout_width="370dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="===================================="
+                    android:textColor="@color/black" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -426,152 +488,49 @@
                     android:orientation="horizontal">
 
                     <TextView
-                        android:layout_width="100dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:elevation="2dp"
+                        android:text="المستلم : "
                         android:padding="5dp"
-                        android:text="القراءة السابقة"
                         android:textColor="@color/black"
                         android:textSize="16sp" />
 
                     <TextView
-                        android:id="@+id/previous_read"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginRight="10dp"
                         android:layout_weight="1"
                         android:elevation="2dp"
                         android:padding="5dp"
+                        android:text="_________"
                         android:textColor="@color/black"
                         android:textSize="16sp" />
 
                     <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginRight="10dp"
-                        android:layout_weight="1.2"
-                        android:text="متر مكعب"
-                        android:textColor="@color/black"
-                        android:textSize="14sp" />
-
-                </LinearLayout>
-
-                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="1"
+                    android:elevation="2dp"
+                    android:padding="5dp"
+                        android:text="التوقيع : "
+                    android:textColor="@color/black"
+                    android:textSize="16sp" />
 
-                    android:layout_marginBottom="2dp"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:layout_width="100dp"
-                        android:layout_height="wrap_content"
-                        android:elevation="2dp"
-                        android:padding="5dp"
-                        android:text="القراءة الحالية"
-                        android:textColor="@color/black"
-                        android:textSize="16sp" />
 
                     <TextView
-                        android:id="@+id/current_read"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginRight="10dp"
-                        android:layout_weight="1"
-                        android:elevation="2dp"
-
-                        android:padding="5dp"
-                        android:textColor="@color/black"
-                        android:textSize="16sp" />
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginRight="10dp"
-                        android:layout_weight="1.2"
-                        android:text="متر مكعب"
-                        android:textColor="@color/black"
-                        android:textSize="14sp" />
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-
-                    android:layout_marginBottom="2dp"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:layout_width="100dp"
-                        android:layout_height="wrap_content"
-                        android:elevation="2dp"
-                        android:padding="5dp"
-                        android:text="الاستهلاك"
-                        android:textColor="@color/black"
-                        android:textSize="16sp" />
-
-                    <TextView
-                        android:id="@+id/consuming"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginRight="10dp"
                         android:layout_weight="1"
                         android:elevation="2dp"
                         android:padding="5dp"
+                        android:text="_________"
                         android:textColor="@color/black"
                         android:textSize="16sp" />
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginRight="10dp"
-                        android:layout_weight="1.2"
-                        android:text="متر مكعب"
-                        android:textColor="@color/black"
-                        android:textSize="14sp" />
 
                 </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-
-                    android:layout_marginBottom="2dp"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:layout_width="100dp"
-                        android:layout_height="wrap_content"
-                        android:elevation="2dp"
-                        android:padding="5dp"
-                        android:text="قيمة الاستهلاك"
-                        android:textColor="@color/black"
-                        android:textSize="16sp" />
-
-                    <TextView
-                        android:id="@+id/consuming_value"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginRight="10dp"
-                        android:layout_weight="1"
-                        android:elevation="2dp"
-
-                        android:padding="5dp"
-                        android:textColor="@color/black"
-                        android:textSize="16sp" />
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginRight="10dp"
-                        android:layout_weight="1.2"
-                        android:text="دينار"
-                        android:textColor="@color/black"
-                        android:textSize="14sp" />
-
-                </LinearLayout>
-
 
 
                 <!--<LinearLayout-->

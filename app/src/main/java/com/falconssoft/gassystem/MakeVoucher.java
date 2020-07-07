@@ -63,6 +63,7 @@ public class MakeVoucher extends AppCompatActivity {
     ArrayAdapter<String> itemsAdapter;
     public  static  String selectedCounter="";
 
+    public static Customer customer;
 
     @SuppressLint({"ClickableViewAccessibility", "RestrictedApi"})
     @Override
@@ -175,7 +176,7 @@ public class MakeVoucher extends AppCompatActivity {
                 if (actionId == EditorInfo.IME_ACTION_DONE || actionId == EditorInfo.IME_ACTION_NEXT || actionId == EditorInfo.IME_ACTION_SEARCH
                         || actionId == EditorInfo.IME_NULL) {
 
-                    Customer customer = DHandler.getCustomer(counterNo.getText().toString());
+                     customer = DHandler.getCustomer(counterNo.getText().toString());
                     String customName = customer.getCustName();
                     if (!TextUtils.isEmpty(customName)) {
 
@@ -265,7 +266,6 @@ public class MakeVoucher extends AppCompatActivity {
         });
 
     }
-
 
 
     public void Save() {
@@ -636,7 +636,6 @@ public class MakeVoucher extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 
-//
         if (item.getItemId() == R.id.search_ic) {
             Log.e("getItemId","here");
             openSearchDialog();
