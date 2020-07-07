@@ -517,4 +517,57 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         db.close();
     }
 
+    public ArrayList<String> getAllCounter() {
+        ArrayList<String> contrList=new ArrayList<>();
+        String selectQuery = "SELECT  COUNTER_NO FROM " + CUSTOMER_TABLE ;
+        db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+
+        if (cursor.moveToFirst()) {
+            do {
+
+
+                contrList.add(cursor.getString(0));
+
+            } while (cursor.moveToNext());
+        }
+        Log.e("contrList",""+contrList.size());
+        return contrList;
+
+    }
+    public ArrayList<Customer> getListCustomer(String counterNo) {
+        ArrayList<Customer> customerList = new ArrayList<>();
+
+//      SELECT  * FROM CUSTOMER   where COUNTER_NO like '%11949%'
+
+        String selectQuery = "SELECT  * FROM " + CUSTOMER_TABLE + " where COUNTER_NO like +'%'+'" + counterNo + "'+'%' ";
+        db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+
+        if (cursor.moveToFirst()) {
+            do {
+                Customer customer = new Customer();
+
+                customer.setCounterNo(cursor.getString(0));
+                customer.setAccNo(cursor.getString(1));
+                customer.setCustName(cursor.getString(2));
+                customer.setLastRead(Double.parseDouble(cursor.getString(3)));
+                customer.setGasPressure(Double.parseDouble(cursor.getString(4)));
+                try {
+                    customer.setCredet(Double.parseDouble(cursor.getString(5)));
+                }catch (Exception e){
+                    customer.setCredet(0.0);
+                }
+                customer.setgPrice(Double.parseDouble(cursor.getString(6)));
+                customer.setProjectName(cursor.getString(7));
+                customer.setIsPer(Integer.parseInt(cursor.getString(8)));
+                customer.setBadalVal(Double.parseDouble(cursor.getString(9)));
+                customer.setCustSts(Integer.parseInt(cursor.getString(10)));
+                customerList.add(customer);
+
+            } while (cursor.moveToNext());
+        }
+        Log.e("customer",""+customerList.size());
+        return customerList;
+    }
 }

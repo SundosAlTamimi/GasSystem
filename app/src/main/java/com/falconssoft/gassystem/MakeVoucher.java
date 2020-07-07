@@ -1,11 +1,14 @@
 package com.falconssoft.gassystem;
 
 import android.annotation.SuppressLint;
+import android.app.Dialog;
+import android.content.ClipData;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextUtils;
@@ -17,12 +20,17 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.Window;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.view.inputmethod.EditorInfo;
+import android.widget.Adapter;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -30,6 +38,7 @@ import com.falconssoft.gassystem.Modle.Customer;
 import com.falconssoft.gassystem.Modle.Voucher;
 
 import java.text.DecimalFormat;
+import java.util.ArrayList;
 import java.util.List;
 
 public class MakeVoucher extends AppCompatActivity {
@@ -49,6 +58,11 @@ public class MakeVoucher extends AppCompatActivity {
     String noteText = "";
     private Toolbar toolbar;
     public  static Voucher voucherGas;
+    ArrayList<String> filteredList= new ArrayList<>();
+    ArrayList <String> currentList;
+    ArrayAdapter<String> itemsAdapter;
+    public  static  String selectedCounter="";
+
 
     @SuppressLint({"ClickableViewAccessibility", "RestrictedApi"})
     @Override
@@ -251,6 +265,7 @@ public class MakeVoucher extends AppCompatActivity {
         });
 
     }
+
 
 
     public void Save() {
@@ -621,26 +636,125 @@ public class MakeVoucher extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 
+//
         if (item.getItemId() == R.id.search_ic) {
-            if (!counterNo.getText().toString().equals("")) {
-
-                Customer customer = DHandler.getCustomer(counterNo.getText().toString());
-                if (customer.getCounterNo() != null) {
-
-                    custNo.setText(customer.getCustName());
-                    previousRead.setText("" + customer.getLastRead());
-                    previousPalance.setText("" + customer.getCredet());
-                    serviceReturn.setText("" + customer.getBadalVal());
-
-                    gasPressure = customer.getGasPressure();
-                    gasPrice = customer.getgPrice();
-
-                } else
-                    Toast.makeText(MakeVoucher.this, "رقم العداد غير موجود", Toast.LENGTH_LONG).show();
-
-            } else
-                Toast.makeText(MakeVoucher.this, "ادخل رقم العداد", Toast.LENGTH_LONG).show();
+            Log.e("getItemId","here");
+            openSearchDialog();
         }
+//
+//            if (!counterNo.getText().toString().equals("")) {
+//
+//                Customer customer = DHandler.getCustomer(counterNo.getText().toString());
+//                if (customer.getCounterNo() != null) {
+//
+//                    custNo.setText(customer.getCustName());
+//                    previousRead.setText("" + customer.getLastRead());
+//                    previousPalance.setText("" + customer.getCredet());
+//                    serviceReturn.setText("" + customer.getBadalVal());
+//
+//                    gasPressure = customer.getGasPressure();
+//                    gasPrice = customer.getgPrice();
+//
+//                } else
+//                    Toast.makeText(MakeVoucher.this, "رقم العداد غير موجود", Toast.LENGTH_LONG).show();
+//
+//            } else
+//                Toast.makeText(MakeVoucher.this, "ادخل رقم العداد", Toast.LENGTH_LONG).show();
+//        }
         return true;
+    }
+
+    private void openSearchDialog() {
+        final Dialog dialog = new Dialog(MakeVoucher.this);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.counter_no_layout);
+        dialog.setCancelable(false);
+
+       final  ListView listOfCounter=dialog.findViewById(R.id.counterList);
+       listOfCounter.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+           @Override
+           public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+//
+                selectedCounter = parent.getItemAtPosition(position).toString();
+               counterNo.setText(selectedCounter+"");
+               dialog.dismiss();
+               Log.e("selectedCounter",""+selectedCounter);
+
+           }
+       } );
+        filteredList=DHandler.getAllCounter();
+
+        itemsAdapter =
+                new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, filteredList);
+
+        listOfCounter.setAdapter(itemsAdapter);
+
+        TextView close=dialog.findViewById(R.id.close);
+        close.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+        SearchView searchView=dialog.findViewById(R.id.mSearch);
+
+        dialog.show();
+        currentList=new ArrayList<>();
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+
+                return false;
+
+            }
+
+            @Override
+            public boolean onQueryTextChange(String query) {
+
+                if (query != null && query.length() > 0) {
+
+//                     ArrayList<Customer> resultCustomer= DHandler.getListCustomer(query);
+//                     Log.e("resultCustomer",""+resultCustomer.size());
+                     if(!filteredList.equals(null)&&filteredList.size()!=0 )
+                     {
+                         currentList.clear();
+//                         filteredList.clear();
+                         for(int i=0;i<filteredList.size();i++)
+                         {
+                             if(filteredList.get(i).contains(query))
+                             {
+                                 currentList.add(filteredList.get(i));
+
+                             }
+
+                         }
+                         itemsAdapter =
+                                 new ArrayAdapter<String>(MakeVoucher.this, android.R.layout.simple_list_item_1, currentList);
+                         listOfCounter.setAdapter(itemsAdapter);
+
+
+
+                     }
+                     else{
+                         itemsAdapter =
+                                 new ArrayAdapter<String>(MakeVoucher.this, android.R.layout.simple_list_item_1, filteredList);
+                         listOfCounter.setAdapter(itemsAdapter);
+
+                     }
+
+
+
+
+                } else {
+                    itemsAdapter =
+                            new ArrayAdapter<String>(MakeVoucher.this, android.R.layout.simple_list_item_1, filteredList);
+                    listOfCounter.setAdapter(itemsAdapter);
+
+
+                }
+                return false;
+            }
+        });
+
     }
 }

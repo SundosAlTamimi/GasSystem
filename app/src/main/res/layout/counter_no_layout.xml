@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="400dp"
+    android:layout_height="500dp"
+    android:orientation="vertical"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <TextView
+        android:id="@+id/close"
+        android:layout_weight="5"
+        android:layout_height="match_parent"
+        android:layout_width="wrap_content"
+        android:layout_gravity="right"
+        android:drawableRight="@drawable/ic_close_black_24dp"/>
+
+    <LinearLayout
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        android:layout_weight="5"
+        android:layout_margin="5dp"
+        android:background="@drawable/back_darkdark_white"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="40dp"
+            android:layout_gravity="center"
+            android:layout_marginLeft="5dp"
+            android:textColor="@color/darkblue_"
+            android:gravity="center"
+            android:textSize="16sp"
+            android:text="Counter No " />
+
+        <android.support.v7.widget.SearchView
+            android:id="@+id/mSearch"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_weight="2"
+            android:layout_gravity="left"
+            android:gravity="right"
+            android:layout_marginLeft="10dp"
+            app:defaultQueryHint="Search.."
+            />
+    </LinearLayout>
+    <ListView
+        android:id="@+id/counterList"
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        android:padding="10dp"
+        android:layout_margin="5dp"
+        android:background="@drawable/edittext_back"
+        android:layout_weight="1"/>
+</LinearLayout>
