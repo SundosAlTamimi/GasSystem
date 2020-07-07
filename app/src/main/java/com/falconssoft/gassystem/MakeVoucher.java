@@ -49,6 +49,7 @@ public class MakeVoucher extends AppCompatActivity {
     String noteText = "";
     private Toolbar toolbar;
     public  static Voucher voucherGas;
+    public static Customer customer;
 
     @SuppressLint({"ClickableViewAccessibility", "RestrictedApi"})
     @Override
@@ -161,7 +162,7 @@ public class MakeVoucher extends AppCompatActivity {
                 if (actionId == EditorInfo.IME_ACTION_DONE || actionId == EditorInfo.IME_ACTION_NEXT || actionId == EditorInfo.IME_ACTION_SEARCH
                         || actionId == EditorInfo.IME_NULL) {
 
-                    Customer customer = DHandler.getCustomer(counterNo.getText().toString());
+                     customer = DHandler.getCustomer(counterNo.getText().toString());
                     String customName = customer.getCustName();
                     if (!TextUtils.isEmpty(customName)) {
 

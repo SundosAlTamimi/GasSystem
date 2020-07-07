@@ -347,7 +347,7 @@ public class MainActivity extends AppCompatActivity {
 
             if (result != null) {
                 Log.e("result", "*****************" + customers.size());
-                storeInDatabase();
+//                storeInDatabase();
             } else {
                 Toast.makeText(MainActivity.this, "Not able to fetch data from server, please check url.", Toast.LENGTH_SHORT).show();
             }
