@@ -396,7 +396,11 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                 customer.setCustName(cursor.getString(2));
                 customer.setLastRead(Double.parseDouble(cursor.getString(3)));
                 customer.setGasPressure(Double.parseDouble(cursor.getString(4)));
-                customer.setCredet(Double.parseDouble(cursor.getString(5)));
+                try {
+                    customer.setCredet(Double.parseDouble(cursor.getString(5)));
+                }catch (Exception e){
+                    customer.setCredet(0.0);
+                }
                 customer.setgPrice(Double.parseDouble(cursor.getString(6)));
                 customer.setProjectName(cursor.getString(7));
                 customer.setIsPer(Integer.parseInt(cursor.getString(8)));
@@ -424,7 +428,11 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                 customer.setCustName(cursor.getString(2));
                 customer.setLastRead(Double.parseDouble(cursor.getString(3)));
                 customer.setGasPressure(Double.parseDouble(cursor.getString(4)));
-                customer.setCredet(Double.parseDouble(cursor.getString(5)));
+                try {
+                    customer.setCredet(Double.parseDouble(cursor.getString(5)));
+                }catch (Exception e){
+                    customer.setCredet(0.0);
+                }
                 customer.setgPrice(Double.parseDouble(cursor.getString(6)));
                 customer.setProjectName(cursor.getString(7));
                 customer.setIsPer(Integer.parseInt(cursor.getString(8)));
@@ -495,9 +503,17 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
     // **************************************************** Delete ****************************************************
 
-    public void deleteBundle(String bundleNo){
-        db = this.getWritableDatabase();
-//        db.delete(BUNDLE_INFO_TABLE, " BUNDLE_NO=?" , new String[]{bundleNo});
+    public void deleteRemark()
+    {
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.execSQL("delete from " + REMARKS_TABLE);
+        db.close();
+    }
+
+    public void deleteCustomer()
+    {
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.execSQL("delete from " + CUSTOMER_TABLE);
         db.close();
     }
 

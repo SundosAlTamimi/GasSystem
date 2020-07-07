@@ -92,7 +92,7 @@ public class CPCLSample2 {
         this.cpclPrinter.setForm(0, 0, 0,testB.getHeight()+30 , count);
         this.cpclPrinter.setMedia(this.paperType);
 
-        this.cpclPrinter.printBitmap(testB, 400, 0);//x=400
+        this.cpclPrinter.printBitmap(testB, 550, 0);//x=400
 
 //        this.cpclPrinter.printBitmap("//sdcard//temp//test//sample_3.jpg", 100, 200);
 //        this.cpclPrinter.printBitmap("//sdcard//temp//test//sample_4.jpg", 120, 245);

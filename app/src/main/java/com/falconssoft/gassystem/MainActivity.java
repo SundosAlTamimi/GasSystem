@@ -72,6 +72,7 @@ public class MainActivity extends AppCompatActivity {
     SliderLayout sliderLayout;
     FloatingActionButton add_voucher,add_recipt;
     Animation animation,animation2;
+    DatabaseHandler databaseHandler;
 
     @SuppressLint("ClickableViewAccessibility")
     @Override
@@ -85,7 +86,7 @@ public class MainActivity extends AppCompatActivity {
         animation2 = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.move_to_left);
         linearVoucher.startAnimation(animation);
         linearRecipt.startAnimation(animation2);
-
+        databaseHandler=new DatabaseHandler(MainActivity.this);
 
         add_voucher.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -250,6 +251,7 @@ public class MainActivity extends AppCompatActivity {
                 try {
                     JSONArray parentArrayOrders = parentObject.getJSONArray("CUSTOMER_GAS");
                     customers.clear();
+                    databaseHandler.deleteCustomer();
                     for (int i = 0; i < parentArrayOrders.length(); i++) {
                         JSONObject finalObject = parentArrayOrders.getJSONObject(i);
 
@@ -268,7 +270,10 @@ public class MainActivity extends AppCompatActivity {
 
                         Log.e("*****", customer.getCustName());
                         customers.add(customer);
+                        databaseHandler.addCustomer(customer);
                     }
+
+
                 } catch (JSONException e) {
                     Log.e("Import Data1", e.getMessage().toString());
                 }
@@ -294,6 +299,7 @@ public class MainActivity extends AppCompatActivity {
                 try {
                     JSONArray parentArrayOrders = parentObject.getJSONArray("GAS_REMARKS");
                     customers.clear();
+                    databaseHandler.deleteRemark();
                     for (int i = 0; i < parentArrayOrders.length(); i++) {
                         JSONObject finalObject = parentArrayOrders.getJSONObject(i);
 
@@ -302,6 +308,7 @@ public class MainActivity extends AppCompatActivity {
                         remark.setBody(ReturnArabic(finalObject.getString("REMARKBODY")));
 
                         remarks.add(remark);
+                        databaseHandler.addRemark(remark);
                     }
                 } catch (JSONException e) {
                     Log.e("Import Data3", e.getMessage().toString());
