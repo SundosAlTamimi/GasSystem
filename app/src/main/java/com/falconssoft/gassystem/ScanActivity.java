@@ -2,7 +2,7 @@ package com.falconssoft.gassystem;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
-
+/*
 import com.google.zxing.Result;
 
 import me.dm7.barcodescanner.zxing.ZXingScannerView;
@@ -48,3 +48,4 @@ public class ScanActivity extends AppCompatActivity
         //mScannerView.resumeCameraPreview(this);
     }
 }
+*/
