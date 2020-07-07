@@ -493,6 +493,27 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     }
 
 
+    public List<Remarks> getAllRemark() {
+        List<Remarks> remarksList=new ArrayList<>();
+
+        String selectQuery = "SELECT  * FROM " + REMARKS_TABLE ;
+        db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+
+        if (cursor.moveToFirst()) {
+            do {
+
+                Remarks remarks = new Remarks();
+                remarks.setTitle(cursor.getString(0));
+                remarks.setBody(cursor.getString(1));
+
+
+            } while (cursor.moveToNext());
+        }
+        return remarksList;
+    }
+
+
     public void updateTableBundles(String bundleNo) {
         db = this.getWritableDatabase();
         ContentValues values = new ContentValues();

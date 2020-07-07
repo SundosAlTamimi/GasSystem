@@ -305,7 +305,7 @@
                     android:textColor="@color/darkblue_"
                     android:textSize="18sp" />
 
-                <EditText
+                <TextView
                     android:id="@+id/notes"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -313,8 +313,6 @@
                     android:background="@drawable/edittext_back"
                     android:elevation="2dp"
                     android:gravity="center"
-
-                    android:inputType="number"
                     android:padding="5dp"
                     android:textColor="@color/darkblue_"
                     android:textSize="18sp" />

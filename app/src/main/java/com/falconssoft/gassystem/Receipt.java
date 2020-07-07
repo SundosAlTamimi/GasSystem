@@ -1,6 +1,7 @@
 package com.falconssoft.gassystem;
 
 import android.annotation.SuppressLint;
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
@@ -10,6 +11,7 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.Window;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Adapter;
@@ -19,11 +21,13 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.falconssoft.gassystem.Modle.Customer;
 import com.falconssoft.gassystem.Modle.RecCash;
 import com.falconssoft.gassystem.Modle.Receipts;
+import com.falconssoft.gassystem.Modle.Remarks;
 import com.falconssoft.gassystem.Modle.Voucher;
 
 import java.util.ArrayList;
@@ -33,12 +37,13 @@ public class Receipt extends AppCompatActivity {
 
     LinearLayout black, black2, black3, dialog, noteDialog, custDialog, linear;
     private Animation animation;
-    EditText receiptNo, custNo, project, lastBalance, accountNo, counterNo, value, noteTextView,note;
+    EditText receiptNo, custNo, project, lastBalance, accountNo, counterNo, value, noteTextView;
     Button  save, search, yes, no, done, cancel;
     ListView custList;
-
+     TextView note;
     DatabaseHandler DHandler;
     ArrayList<Customer> customerList;
+    List<Remarks> RemarkList;
 
     String noteText = "";
     private Toolbar toolbar;
@@ -51,6 +56,7 @@ public class Receipt extends AppCompatActivity {
 
 
         init();
+        RemarkList=new ArrayList<>();
         setSupportActionBar(toolbar);
         toolbar.setNavigationIcon(R.drawable.ic_arrow_forward_black_24dp); // Set the icon
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
@@ -63,7 +69,7 @@ public class Receipt extends AppCompatActivity {
         DHandler = new DatabaseHandler(Receipt.this);
 
         customerList = DHandler.getAllCustomers();
-
+        RemarkList=DHandler.getAllRemark();
 
         animation = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.move_to_down);
         linear.startAnimation(animation);
@@ -77,8 +83,29 @@ public class Receipt extends AppCompatActivity {
         });
 
 
+        note.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ShowNoteDialog();
+            }
+        });
+
+
     }
 
+    public void ShowNoteDialog(){
+        final Dialog dialog = new Dialog(this,R.style.Theme_Dialog);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.note_dialog_show);
+        dialog.setCancelable(true);
+
+
+
+
+
+        dialog.show();
+
+    }
 
     public void Save() {
 
