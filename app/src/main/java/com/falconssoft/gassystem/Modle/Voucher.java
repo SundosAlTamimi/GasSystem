@@ -2,6 +2,12 @@ package com.falconssoft.gassystem.Modle;
 
 public class Voucher {
 
+//    http://localhost:8082/SaveInvoice?JSONSTR={"INV":[{"COUNTERNO":"10115","CUSTOMERNAME":"Mohammad Alamawi",
+//    "LASTREADER":"10","ACCNO":"10115222","GASPRESSURE":"1.3","GPRICE":"580","PRJECTNAME":"AAAAA","MO3AMEL":"1",
+//    "CURRENTREADER":"12","CCOST":"123","CCOSTVAL":"456","SERV":"4","REQVALUE":"123456","READERDATE":"01/08/2020",
+//    "INVTYPE":"1","INVNO":"111","NETVAL":"1256","TAXVAL":"120","GRET":"0","REMARKS":"afsdfsdfsdfsg ryerysdgd",
+//    "ESTEHLAK":"1242","CREDIT":"0","IS_POST":"0","IS_PER":"1","BDLVAL":"15"}]}
+
     private String counterNo;
     private String custName;
     private double previousRead;
@@ -17,6 +23,28 @@ public class Voucher {
     private double currentConsuming;
     private double lastValue;
     private String note;
+    private String gasPressure;
+    private String gprice;
+    private String PRJECTNAME;
+    private String MO3AMEL;
+    private String CCOST;
+
+    private String CCOSTVAL;
+    private String SERV;
+    private String REQVALUE;
+    private String READERDATE;
+    private String INVTYPE;
+
+
+    private String INVNO;
+    private String GRET;
+    private String REMARKS;
+
+    private String ESTEHLAK;
+    private String CREDIT;
+    private String IS_POST;
+    private String IS_PER;
+    private String BDLVAL;
 
     public Voucher(String counterNo, String custName, double previousRead, double currentRead, double consuming, double consumingValue,
                    double previousPalance, double badalGas, double badalService, double serviceNoTax, double net, double tax, double currentConsuming, double lastValue,

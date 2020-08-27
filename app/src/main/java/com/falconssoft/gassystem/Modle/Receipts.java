@@ -1,7 +1,8 @@
 package com.falconssoft.gassystem.Modle;
 
 public class Receipts {
-
+//http://localhost:8082/SaveRECCASH?JSONSTR={"REC":[{"RECNO":"123","ACCNAME":"ALAMAWI","ACCNO":"10115222",
+// "CASH":"150","REMARKS":"NOTE","RECDATE":"01/01/2020","IS_POST":"0","PRJNAME":"AAMMMAAMMAANNN"}]}
     private String receiptNo;
     private String custName;
     private String projectName;

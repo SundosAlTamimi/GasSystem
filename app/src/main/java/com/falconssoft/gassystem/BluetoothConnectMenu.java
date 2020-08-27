@@ -31,8 +31,10 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.falconssoft.gassystem.Modle.RecCash;
 import com.falconssoft.gassystem.Modle.Receipts;
 import com.falconssoft.gassystem.Modle.Voucher;
+import com.falconssoft.gassystem.Modle.VoucherModle;
 import com.falconssoft.gassystem.Port.AlertView;
 import com.sewoo.port.android.BluetoothPort;
 import com.sewoo.request.android.RequestHandler;
@@ -485,7 +487,7 @@ try {
     } else {
         Log.e("bitmap", "null");
     }
-    Log.e("bitmap", "" + voucherGas.getBadalGas());
+    Log.e("bitmap", "" + voucherGas.getAllowance());
     if (bitmap3 != null) {
         sample.imageTestEnglishReport(1, bitmap3);
     } else {
@@ -604,7 +606,7 @@ try {
     }
 
     @SuppressLint("SetTextI18n")
-    private Bitmap CovertRecipteTopBitmap(Receipts receipt) {
+    private Bitmap CovertRecipteTopBitmap(RecCash receipt) {
         LinearLayout linearView = null;
         final Dialog VocherDialog = new Dialog(BluetoothConnectMenu.this,R.style.Theme_Dialog);
         VocherDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -628,7 +630,7 @@ try {
 //        lastValue = VocherDialog.findViewById(R.id.last_value);
 
         taxno.setText("178088170");
-        voucherNo.setText(""+receipt.getReceiptNo());
+        voucherNo.setText(""+receipt.getResNo());
 //        date.setText(""+voucher.getCustName());
         projectName.setText(""+ receipt.getProjectName());
 
@@ -655,7 +657,7 @@ try {
 
 
     }
-    private Bitmap CovertRecipteToBitmap(Receipts receipt) {
+    private Bitmap CovertRecipteToBitmap(RecCash receipt) {
         LinearLayout linearView = null;
         final Dialog VocherDialog = new Dialog(BluetoothConnectMenu.this,R.style.Theme_Dialog);
         VocherDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -665,7 +667,7 @@ try {
 
         TextView counterNo, acc_no,filse,Jd,
                 custNo;
-        Log.e("bitmapsssaa",""+receipt.getValue());
+        Log.e("bitmapsssaa",""+receipt.getCash());
         counterNo = VocherDialog.findViewById(R.id.counter_no);
         custNo = VocherDialog.findViewById(R.id.cust_no);
 //        previousRead = VocherDialog.findViewById(R.id.previous_read);
@@ -675,8 +677,8 @@ try {
         filse = VocherDialog.findViewById(R.id.filse);
         Jd = VocherDialog.findViewById(R.id.jd);
 
-        String fil=String.valueOf(receipt.getValue()).substring(String.valueOf(receipt.getValue()).indexOf(".")+1,String.valueOf(receipt.getValue()).length());
-                String Jdes= String.valueOf(receipt.getValue()).substring(0,String.valueOf(receipt.getValue()).indexOf("."));
+        String fil=String.valueOf(receipt.getCash()).substring(String.valueOf(receipt.getCash()).indexOf(".")+1,String.valueOf(receipt.getCash()).length());
+                String Jdes= String.valueOf(receipt.getCash()).substring(0,String.valueOf(receipt.getCash()).indexOf("."));
 //        previousPalance = VocherDialog.findViewById(R.id.previous_palance);
 //        prasuGas= VocherDialog.findViewById(R.id.prasuGas);
 //        saleGas= VocherDialog.findViewById(R.id.saleGas);
@@ -691,7 +693,7 @@ try {
 //customer
         filse.setText(""+fil);
         Jd.setText(""+Jdes);
-        counterNo.setText(""+receipt.getCounterNo());
+//        counterNo.setText(""+receipt.getCounterNo());
         acc_no.setText(""+receipt.getAccNo());
 //        currentRead.setText(""+voucher.getCurrentRead());
 //        extendValue.setText("1");
@@ -699,7 +701,7 @@ try {
 //        saleGas.setText(""+customer.getgPrice());
 //        gasReturn.setText(""+voucher.getBadalGas());
 //        serviceReturn.setText(""+voucher.getBadalService());
-        custNo.setText(""+receipt.getCustName());
+        custNo.setText(""+receipt.getAccName());
 //        previousRead.setText(""+voucher.getPreviousRead());
 //        consuming.setText(""+voucher.getConsuming());
 //        consumingValue.setText(""+voucher.getConsumingValue());
@@ -733,7 +735,7 @@ try {
 
 
     }
-    private Bitmap CovertVoucherTopBitmap(Voucher voucher) {
+    private Bitmap CovertVoucherTopBitmap(VoucherModle voucher) {
         LinearLayout linearView = null;
         final Dialog VocherDialog = new Dialog(BluetoothConnectMenu.this,R.style.Theme_Dialog);
         VocherDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -742,7 +744,7 @@ try {
 //        CompanyInfo companyInfo = obj.getAllCompanyInfo().get(0);
 
         TextView taxno, voucherNo, date, projectName;
-        Log.e("bitmapSS",""+voucher.getLastValue());
+        Log.e("bitmapSS",""+voucher.getAccNo());
         voucherNo = VocherDialog.findViewById(R.id.voucherNo);
         date = VocherDialog.findViewById(R.id.date);
         taxno = VocherDialog.findViewById(R.id.taxno);
@@ -784,7 +786,7 @@ try {
 
 
     }
-    private Bitmap CovertVoucherToBitmap(Voucher voucher) {
+    private Bitmap CovertVoucherToBitmap(VoucherModle voucher) {
         LinearLayout linearView = null;
         final Dialog VocherDialog = new Dialog(BluetoothConnectMenu.this,R.style.Theme_Dialog);
         VocherDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -795,7 +797,6 @@ try {
         TextView counterNo, currentRead, gasReturn, serviceReturn,
          custNo, previousRead, consuming, consumingValue, previousPalance, taxService, net, tax,
                 currentConsuming, lastValue,prasuGas,saleGas,extendValue;
-        Log.e("bitmapفثسف",""+voucher.getLastValue());
         counterNo = VocherDialog.findViewById(R.id.counter_no);
         custNo = VocherDialog.findViewById(R.id.cust_no);
         previousRead = VocherDialog.findViewById(R.id.previous_read);
@@ -815,16 +816,19 @@ try {
 //        lastValue = VocherDialog.findViewById(R.id.last_value);
 //customer
         counterNo.setText(""+voucher.getCounterNo());
-        currentRead.setText(""+voucher.getCurrentRead());
+        currentRead.setText(""+voucher.getCurrentReader());
         extendValue.setText("1");
         prasuGas.setText(""+customer.getGasPressure());
         saleGas.setText(""+customer.getgPrice());
 //        gasReturn.setText(""+voucher.getBadalGas());
 //        serviceReturn.setText(""+voucher.getBadalService());
-        custNo.setText(""+voucher.getCustName());
-        previousRead.setText(""+voucher.getPreviousRead());
-        consuming.setText(""+voucher.getConsuming());
-        consumingValue.setText(""+voucher.getConsumingValue());
+        custNo.setText(""+voucher.getCustomerName());
+        previousRead.setText(""+voucher.getLastReader());
+
+//        consuming.setText(""+voucher.getConsuming());
+//        consumingValue.setText(""+voucher.getConsumingValue());
+
+
 //        prasuGas.setText(""+voucher.get);
 //        saleGas.setText(""+voucher.getConsumingValue());
 //        extendValue.setText(""+voucher.getConsumingValue());
@@ -856,7 +860,7 @@ try {
 
     }
 
-    private Bitmap CovertVoucherBoutomToBitmap(Voucher voucher) {
+    private Bitmap CovertVoucherBoutomToBitmap(VoucherModle voucher) {
         LinearLayout linearView = null;
         final Dialog VocherDialog = new Dialog(BluetoothConnectMenu.this,R.style.Theme_Dialog);
         VocherDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -885,18 +889,18 @@ try {
 
 //        counterNo.setText(""+voucher.getCounterNo());
 //        currentRead.setText(""+voucher.getCurrentRead());
-        gasReturn.setText(""+voucher.getBadalGas());
-        serviceReturn.setText(""+voucher.getBadalService());
+        gasReturn.setText(""+voucher.getCurrentReader());
+        serviceReturn.setText(""+voucher.getAllowance());
 //        custNo.setText(""+voucher.getCustName());
 //        previousRead.setText(""+voucher.getPreviousRead());
 //        consuming.setText(""+voucher.getConsuming());
 //        consumingValue.setText(""+voucher.getConsumingValue());
 //        previousPalance.setText(""+voucher.getPreviousPalance());
-        taxService.setText(""+voucher.getServiceNoTax());
-        net.setText(""+voucher.getNet());
-        tax.setText(""+voucher.getTax());
-        currentConsuming.setText(""+voucher.getCurrentConsuming());
-        lastValue.setText(""+voucher.getLastValue());
+        taxService.setText(""+voucher.getService());
+        net.setText(""+voucher.getNetValue());
+        tax.setText(""+voucher.getTaxValue());
+//        currentConsuming.setText(""+voucher.getCurrentConsuming());
+        lastValue.setText(""+voucher.getNetValue());
 
 
         linearView = (LinearLayout) VocherDialog.findViewById(R.id.linerForPrint);

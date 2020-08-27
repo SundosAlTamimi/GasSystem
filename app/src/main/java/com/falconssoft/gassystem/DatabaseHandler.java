@@ -5,6 +5,8 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.util.Log;
 
 import com.falconssoft.gassystem.Modle.Customer;
@@ -12,16 +14,19 @@ import com.falconssoft.gassystem.Modle.MaxSerial;
 import com.falconssoft.gassystem.Modle.RecCash;
 import com.falconssoft.gassystem.Modle.Receipts;
 import com.falconssoft.gassystem.Modle.Remarks;
+import com.falconssoft.gassystem.Modle.SettingModle;
 import com.falconssoft.gassystem.Modle.Users;
 import com.falconssoft.gassystem.Modle.Voucher;
+import com.falconssoft.gassystem.Modle.VoucherModle;
 
+import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
 public class DatabaseHandler extends SQLiteOpenHelper {
 
     private static String TAG = "DatabaseHandler";
-    private static final int DATABASE_VERSION = 5;
+    private static final int DATABASE_VERSION = 10;
     private static final String DATABASE_NAME = "GasDatabase";
     static SQLiteDatabase db;
 
@@ -43,6 +48,37 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     private static final String CURRENT_CONSUMING = "CURRENT_CONSUMING";
     private static final String LAST_VALUE = "LAST_VALUE";
     private static final String NOTE = "NOTE";
+
+    //******************************************************************
+    private static final String VOUCHERS = "VOUCHERS_TABLE";
+
+    private static final String COUNT_NO1 = "COUNTER_NO";
+    private static final String CUST_NAME1 = "CUST_NAME";
+    private static final String last_READ1 = "last_READ";
+    private static final String ACC_NO1 = "ACC_NO";
+    private static final String GAS_PRESSURE1 = "GAS_PRESSURE";
+    private static final String PROJECT_NAME1= "PROJECT_NAME";
+    private static final String PARAMETER1 = "PARAMETER";
+    private static final String CURRENT_READER1 = "CURRENT_READER";
+    private static final String C_COST1 = "C_COST";
+    private static final String C_COST_VAL1 = "C_COST_VAL";
+    private static final String SERVICE1 = "SERVICE";
+    private static final String REQ_VALUE1 = "REQ_VALUE";
+    private static final String READER_DATE1 = "READER_DATE";
+    private static final String INV_TYPE1 = "INV_TYPE";
+    private static final String INV_NO1 = "INV_NO";
+
+    private static final String NET_VAL1 = "NET_VAL";
+    private static final String TAX_VAL1 = "TAX_VAL";
+    private static final String GRET1 = "GRET";
+    private static final String REMARKS1 = "REMARKS";
+    private static final String CONSUMPTION1 = "CONSUMPTION";
+    private static final String CREDIT1 = "CREDIT";
+    private static final String IS_POST1 = "IS_POST";
+    private static final String IS_PER1 = "IS_PER";
+
+    private static final String BDLVAL1 = "BDLVAL";
+    private static final String IS_EXPORT1 = "IS_EXPORT";
 
     //******************************************************************
     private static final String RECEIPT_TABLE = "RECEIPT";
@@ -89,14 +125,25 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     //******************************************************************
     private static final String RECCASH_TABLE = "RECCASH";
 
-    private static final String RECNO = "RECNO";
-    private static final String ACCNAME = "ACCNAME";
-    private static final String ACCNO = "ACCNO";
-    private static final String CASH = "CASH";
-    private static final String REMARKS = "REMARKS";
-    private static final String RECDATE = "RECDATE";
-    private static final String IS_POST = "IS_POST";
-    private static final String PRJNAME = "PRJNAME";
+    private static final String RECNO2 = "RECNO";
+    private static final String ACCNAME2 = "ACCNAME";
+    private static final String ACCNO2 = "ACCNO";
+    private static final String CASH2 = "CASH";
+    private static final String REMARKS2 = "REMARKS";
+    private static final String RECDATE2 = "RECDATE";
+    private static final String IS_POST2 = "IS_POST";
+    private static final String PRJNAME2 = "PRJNAME";
+    private static final String IS_EXPORT2 = "IS_EXPORT";
+
+
+    //******************************************************************
+    private static final String SETTING_TABLE = "SETTING_TABLE";
+
+    private static final String IP_ADDRESS3 = "IP_ADDRESS";
+    private static final String COMPANY_NAME3 = "COMPANY_NAME";
+    private static final String ACC_NO3 = "ACC_NO";
+    private static final String TAX_NO3 = "TAX_NO";
+    private static final String LOGO3 = "LOGO";
 
     //******************************************************************
     private static final String SERIAL_TABLE = "MAXSERIAL";
@@ -151,6 +198,37 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                 + NOTE + " TEXT" + ")";
         db.execSQL(CREATE_VOUCHER_TABLE);
 
+        String CREATE_VOUCHERS_TABLE = "CREATE TABLE " + VOUCHERS + "("
+                + COUNT_NO1 + " TEXT,"
+                + CUST_NAME1 + " TEXT,"
+                + last_READ1 + " TEXT,"
+                + ACC_NO1 + " TEXT,"
+                + GAS_PRESSURE1 + " TEXT,"
+                + PROJECT_NAME1 + " TEXT,"
+                + PARAMETER1 + " TEXT,"
+                + CURRENT_READER1 + " TEXT,"
+                + C_COST1 + " TEXT,"
+                + C_COST_VAL1 + " TEXT,"
+                + SERVICE1 + " TEXT,"
+                + REQ_VALUE1 + " TEXT,"
+                + READER_DATE1 + " TEXT,"
+                + INV_TYPE1 + " TEXT,"
+                + INV_NO1 + " TEXT,"
+                + NET_VAL1 + " TEXT,"
+                + TAX_VAL1 + " TEXT,"
+                + GRET1 + " TEXT,"
+                + REMARKS1 + " TEXT,"
+                + CONSUMPTION1 + " TEXT,"
+                + CREDIT1 + " TEXT,"
+                + IS_POST1 + " TEXT,"
+                + IS_PER1 + " TEXT,"
+                + BDLVAL1 + " TEXT,"
+                + IS_EXPORT1 + " TEXT" + ")";
+        db.execSQL(CREATE_VOUCHERS_TABLE);
+
+
+
+
         String CREATE_RECEIPT_TABLE = "CREATE TABLE " + RECEIPT_TABLE + "("
                 + RECEIPT_NO2 + " TEXT,"
                 + CUST_NAME2 + " TEXT,"
@@ -174,14 +252,25 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
 
         String CREATE_RECCASH_TABLE = "CREATE TABLE " + RECCASH_TABLE + "("
-                + RECNO + " TEXT,"
-                + ACCNAME + " TEXT,"
-                + ACCNO + " TEXT,"
-                + CASH + " TEXT,"
-                + REMARKS + " TEXT,"
-                + RECDATE + " TEXT,"
-                + IS_POST + " TEXT" + ")";
+                + RECNO2 + " TEXT,"
+                + ACCNAME2 + " TEXT,"
+                + ACCNO2 + " TEXT,"
+                + CASH2 + " TEXT,"
+                + REMARKS2 + " TEXT,"
+                + RECDATE2 + " TEXT,"
+                + IS_POST2 + " TEXT,"
+                + IS_EXPORT2 + " TEXT,"
+                + PRJNAME2 + " TEXT" + ")";
         db.execSQL(CREATE_RECCASH_TABLE);
+
+
+        String CREATE_SETTING_TABLE = "CREATE TABLE " + SETTING_TABLE + "("
+                + IP_ADDRESS3 + " TEXT,"
+                + COMPANY_NAME3 + " TEXT,"
+                + ACC_NO3 + " TEXT,"
+                + TAX_NO3 + " TEXT,"
+                + LOGO3 + " BLOB" + ")";
+        db.execSQL(CREATE_SETTING_TABLE);
 
 
     }
@@ -206,10 +295,76 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                     + TITLE + " TEXT,"
                     + BODY + " TEXT" + ")";
             db.execSQL(CREATE_REMARKS_TABLE);
+
+
+
         }catch (Exception e)
         {
             Log.e("upgrade","BUNDLE Barcode");
         }
+
+
+        try{
+            db.execSQL("ALTER TABLE RECCASH ADD " + IS_EXPORT2 + " TEXT"+" DEFAULT '0'");
+
+        }catch (Exception e){
+            Log.e("upgrade","Ex ... REC_CASH");
+        }
+
+        try{
+            db.execSQL("ALTER TABLE RECCASH ADD " + PRJNAME2 + " TEXT"+" DEFAULT '0'");
+
+        }catch (Exception e){
+            Log.e("upgrade","Ex ... REC_CASH");
+        }
+
+        try{
+            String CREATE_VOUCHERS_TABLE = "CREATE TABLE " + VOUCHERS + "("
+                    + COUNT_NO1 + " TEXT,"
+                    + CUST_NAME1 + " TEXT,"
+                    + last_READ1 + " TEXT,"
+                    + ACC_NO1 + " TEXT,"
+                    + GAS_PRESSURE1 + " TEXT,"
+                    + PROJECT_NAME1 + " TEXT,"
+                    + PARAMETER1 + " TEXT,"
+                    + CURRENT_READER1 + " TEXT,"
+                    + C_COST1 + " TEXT,"
+                    + C_COST_VAL1 + " TEXT,"
+                    + SERVICE1 + " TEXT,"
+                    + REQ_VALUE1 + " TEXT,"
+                    + READER_DATE1 + " TEXT,"
+                    + INV_TYPE1 + " TEXT,"
+                    + INV_NO1 + " TEXT,"
+                    + NET_VAL1 + " TEXT,"
+                    + TAX_VAL1 + " TEXT,"
+                    + GRET1 + " TEXT,"
+                    + REMARKS1 + " TEXT,"
+                    + CONSUMPTION1 + " TEXT,"
+                    + CREDIT1 + " TEXT,"
+                    + IS_POST1 + " TEXT,"
+                    + IS_PER1 + " TEXT,"
+                    + BDLVAL1 + " TEXT,"
+                    + IS_EXPORT1 + " TEXT" + ")";
+            db.execSQL(CREATE_VOUCHERS_TABLE);
+
+        }catch (Exception e){
+            Log.e("upgrade","Ex ... VOUCHER TABLE");
+        }
+
+        try{
+
+            String CREATE_SETTING_TABLE = "CREATE TABLE " + SETTING_TABLE + "("
+                    + IP_ADDRESS3 + " TEXT,"
+                    + COMPANY_NAME3 + " TEXT,"
+                    + ACC_NO3 + " TEXT,"
+                    + TAX_NO3 + " TEXT,"
+                    + LOGO3 + " BLOB" + ")";
+            db.execSQL(CREATE_SETTING_TABLE);
+
+        }catch(Exception ex){
+            Log.e("upgrade","Ex ... SETTING_TABLE");
+        }
+
 
     }
 
@@ -260,6 +415,41 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         db.close();
     }
 
+
+    public void addVouchers(VoucherModle voucher) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        ContentValues contentValues = new ContentValues();
+
+        contentValues.put(COUNT_NO1, voucher.getCounterNo());
+        contentValues.put(CUST_NAME1, voucher.getCustomerName());
+        contentValues.put(last_READ1, voucher.getLastReader());
+        contentValues.put(ACC_NO1, voucher.getAccNo());
+        contentValues.put(GAS_PRESSURE1, voucher.getGasPressure());
+        contentValues.put(PROJECT_NAME1, voucher.getProjectName());
+        contentValues.put(PARAMETER1, voucher.getRemarks());
+        contentValues.put(CURRENT_READER1, voucher.getCurrentReader());
+        contentValues.put(C_COST1, voucher.getCCost());
+        contentValues.put(C_COST_VAL1, voucher.getcCostVal());
+        contentValues.put(SERVICE1, voucher.getService());
+        contentValues.put(REQ_VALUE1, voucher.getReQalValue());
+        contentValues.put(READER_DATE1, voucher.getReaderDate());
+        contentValues.put(INV_TYPE1, voucher.getInvoiceType());
+        contentValues.put(INV_NO1, voucher.getInvoiceNo());
+        contentValues.put(NET_VAL1, voucher.getNetValue());
+        contentValues.put(TAX_VAL1, voucher.getTaxValue());
+        contentValues.put(GRET1, voucher.getGret());
+        contentValues.put(REMARKS1, voucher.getRemarks());
+        contentValues.put(CONSUMPTION1, voucher.getConsumption());
+        contentValues.put(CREDIT1, voucher.getCredit());
+        contentValues.put(IS_POST1, voucher.getIsPost());
+        contentValues.put(IS_PER1, voucher.getIsPer());
+        contentValues.put(BDLVAL1, voucher.getAllowance());
+        contentValues.put(IS_EXPORT1, voucher.getIsExport());
+
+        db.insert(VOUCHERS, null, contentValues);
+        db.close();
+    }
+
     public void addReceipt(Receipts receipt) {
         db = this.getReadableDatabase();
         ContentValues contentValues = new ContentValues();
@@ -283,14 +473,15 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         db = this.getReadableDatabase();
         ContentValues values = new ContentValues();
 
-        values.put(RECNO, receipt.getRECNO());
-        values.put(ACCNAME, receipt.getACCNAME());
-        values.put(ACCNO, receipt.getACCNO());
-        values.put(CASH, receipt.getCASH());
-        values.put(REMARKS, receipt.getREMARKS());
-        values.put(RECDATE, receipt.getRECDATE());
-        values.put(IS_POST, receipt.getIS_POST());
-        values.put(PRJNAME, receipt.getPRJNAME());
+        values.put(RECNO2, receipt.getResNo());
+        values.put(ACCNAME2, receipt.getAccName());
+        values.put(ACCNO2, receipt.getAccNo());
+        values.put(CASH2, receipt.getCash());
+        values.put(REMARKS2, receipt.getRemarks());
+        values.put(RECDATE2, receipt.getRecDate());
+        values.put(IS_POST2, receipt.getIs_Post());
+        values.put(PRJNAME2, receipt.getProjectName());
+        values.put(IS_EXPORT2, receipt.getProjectName());
 
         db.insert(RECCASH_TABLE, null, values);
         db.close();
@@ -344,6 +535,29 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         contentValues.put(BODY, remark.getBody());
 
         db.insert(REMARKS_TABLE, null, contentValues);
+        db.close();
+    }
+
+
+    public void addSetting(SettingModle settingModle) {
+        db = this.getReadableDatabase();
+        ContentValues contentValues = new ContentValues();
+
+        byte[] byteImage = {};
+        if (settingModle.getLogo() != null) {
+            ByteArrayOutputStream stream = new ByteArrayOutputStream();
+            settingModle.getLogo().compress(Bitmap.CompressFormat.PNG, 0, stream);
+            byteImage = stream.toByteArray();
+        }
+
+        contentValues.put(IP_ADDRESS3, settingModle.getIpAddress());
+        contentValues.put(COMPANY_NAME3, settingModle.getCompanyName());
+        contentValues.put(ACC_NO3, settingModle.getAccNo());
+        contentValues.put(TAX_NO3, settingModle.getTaxNo());
+        contentValues.put(LOGO3, byteImage);
+
+
+        db.insert(SETTING_TABLE, null, contentValues);
         db.close();
     }
 
@@ -413,6 +627,53 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         return customerList;
     }
 
+
+    public ArrayList<VoucherModle> getAllVouchers() {
+        ArrayList<VoucherModle> customerList = new ArrayList<>();
+
+        String selectQuery = "SELECT  * FROM " + VOUCHERS ;
+        db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+
+        if (cursor.moveToFirst()) {
+            do {
+                VoucherModle voucherModle = new VoucherModle();
+
+
+                voucherModle.setCounterNo(cursor.getString(0));
+                voucherModle.setCustomerName(cursor.getString(1));
+                voucherModle.setLastReader(cursor.getString(2));
+                voucherModle.setAccNo(cursor.getString(3));
+                voucherModle.setGasPressure(cursor.getString(4));
+                voucherModle.setProjectName(cursor.getString(5));
+                voucherModle.setPrameter(cursor.getString(6));
+                voucherModle.setCurrentReader(cursor.getString(7));
+                voucherModle.setCCost(cursor.getString(8));
+                voucherModle.setcCostVal(cursor.getString(9));
+                voucherModle.setService(cursor.getString(10));
+
+                voucherModle.setReQalValue(cursor.getString(11));
+                voucherModle.setReaderDate(cursor.getString(12));
+                voucherModle.setInvoiceType(cursor.getString(13));
+                voucherModle.setInvoiceNo(cursor.getString(14));
+                voucherModle.setNetValue(cursor.getString(15));
+                voucherModle.setTaxValue(cursor.getString(16));
+                voucherModle.setGret(cursor.getString(17));
+                voucherModle.setRemarks(cursor.getString(18));
+                voucherModle.setConsumption(cursor.getString(19));
+                voucherModle.setCredit(cursor.getString(20));
+                voucherModle.setIsPost(cursor.getString(21));
+                voucherModle.setIsPer(cursor.getString(22));
+                voucherModle.setAllowance(cursor.getString(23));
+                voucherModle.setIsExport(cursor.getString(24));
+
+
+                customerList.add(voucherModle);
+            } while (cursor.moveToNext());
+        }
+        return customerList;
+    }
+
     public Customer getCustomer(String counterNo) {
         Customer customer = new Customer();;
 
@@ -444,6 +705,31 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         return customer;
     }
 
+    public SettingModle getSetting() {
+        SettingModle settingModle = new SettingModle();;
+
+        String selectQuery = "SELECT  * FROM " + SETTING_TABLE ;
+        db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+
+        if (cursor.moveToFirst()) {
+            do {
+
+                settingModle.setIpAddress(cursor.getString(0));
+                settingModle.setCompanyName(cursor.getString(1));
+                settingModle.setAccNo(cursor.getString(2));
+                settingModle.setTaxNo(cursor.getString(3));
+
+                try {
+                    settingModle.setLogo(BitmapFactory.decodeByteArray(cursor.getBlob(4), 0, cursor.getBlob(4).length));
+                }catch (Exception e){
+                    Log.e("SettingLogo","Exception"+e);
+                }
+
+            } while (cursor.moveToNext());
+        }
+        return settingModle;
+    }
 
     public List<MaxSerial> getMaxSerial() {
         List<MaxSerial> customerList=new ArrayList<>();
@@ -478,14 +764,15 @@ public class DatabaseHandler extends SQLiteOpenHelper {
             do {
 
                 RecCash recCash = new RecCash();
-                recCash.setRECNO(cursor.getString(0));
-                recCash.setACCNAME(cursor.getString(1));
-                recCash.setACCNO(cursor.getString(2));
-                recCash.setCASH(cursor.getString(3));
-                recCash.setREMARKS(cursor.getString(4));
-                recCash.setRECDATE(cursor.getString(5));
-                recCash.setIS_POST(cursor.getString(6));
-                recCash.setPRJNAME(cursor.getString(7));
+                recCash.setResNo(cursor.getString(0));
+                recCash.setAccName(cursor.getString(1));
+                recCash.setAccNo(cursor.getString(2));
+                recCash.setCash(cursor.getString(3));
+                recCash.setRemarks(cursor.getString(4));
+                recCash.setRecDate(cursor.getString(5));
+                recCash.setIs_Post(cursor.getString(6));
+                recCash.setIsExport(cursor.getString(7));
+                recCash.setProjectName(cursor.getString(8));
 
             } while (cursor.moveToNext());
         }
@@ -507,7 +794,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                 remarks.setTitle(cursor.getString(0));
                 remarks.setBody(cursor.getString(1));
 
-
+                remarksList.add(remarks);
             } while (cursor.moveToNext());
         }
         return remarksList;
@@ -535,6 +822,12 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     {
         SQLiteDatabase db = this.getWritableDatabase();
         db.execSQL("delete from " + CUSTOMER_TABLE);
+        db.close();
+    }
+
+    public void deleteAllSetting() {
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.execSQL("delete from " + SETTING_TABLE);
         db.close();
     }
 

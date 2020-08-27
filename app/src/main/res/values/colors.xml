@@ -49,5 +49,6 @@
     <color name="darkblue_1">#043C58</color>
     <color name="darkblue_">#DF075F8B</color>
     <color name="darkblue_2">#032A3D</color>
-
+    <color name="Nocolor">#00C28203</color>
+    <color name="Orange">#C27603</color>
 </resources>

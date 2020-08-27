@@ -1,0 +1,871 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    android:background="@drawable/gas_bac"
+    android:layoutDirection="rtl"
+ >
+ <!--<include-->
+     <!--android:id="@+id/appBar"-->
+     <!--layout="@layout/app_bar_layout"/>-->
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/jjj"
+        android:orientation="vertical">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/clear_buttons"
+            android:orientation="vertical"
+            android:padding="5dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/textView8"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginVertical="10dp"
+                    android:layout_weight="8"
+                    android:fontFamily="serif-monospace"
+                    android:gravity="center"
+                    android:text="طباعة فاتوره "
+                    android:textAlignment="center"
+                    android:textColor="@color/Orange"
+                    android:textSize="30sp"
+                    android:textStyle="bold" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="5dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="3dp"
+                    android:layout_weight="8"
+                    android:background="@drawable/edit_bac_s"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content"
+                        android:elevation="5dp"
+                        android:inputType="number"
+                        android:padding="5dp"
+                        android:text="رقم الفاتوره "
+                        android:textColor="@color/white_dark"
+                        android:textSize="14sp" />
+
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="10dp"
+
+                        android:elevation="2dp"
+                        android:gravity="center"
+                        android:inputType="number"
+                        android:lines="1"
+                        android:nextFocusDown="@id/current_read"
+                        android:padding="5dp"
+                        android:textColor="@color/white_dark"
+                        android:textSize="14sp" />
+
+                    <!--<TextView-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_marginRight="10dp"-->
+                    <!--android:layout_weight="1"-->
+                    <!--android:text="16072"-->
+                    <!--android:textColor="@color/darkblue_"-->
+                    <!--android:textSize="12sp" />-->
+
+                </LinearLayout>
+
+                <ScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2.4">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:padding="5dp">
+
+                        <LinearLayout
+                            android:id="@+id/linearmain"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="2dp"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginRight="2dp"
+                            android:layout_weight="1"
+                            android:elevation="3dp"
+
+                            android:gravity="center"
+                            android:orientation="vertical"
+                            android:padding="5dp">
+
+                            <LinearLayout
+                                android:id="@+id/linear"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="end"
+                                android:layout_margin="3dp"
+                                android:layout_marginTop="20dp"
+                                android:alpha="0.7"
+                                android:background="@drawable/border"
+                                android:gravity="end"
+                                android:orientation="horizontal"
+                                android:paddingHorizontal="20dp"
+                                android:visibility="gone">
+
+                                <Button
+                                    android:id="@+id/search"
+                                    android:layout_width="50dp"
+                                    android:layout_height="50dp"
+                                    android:layout_marginHorizontal="5dp"
+                                    android:background="@drawable/search_icon" />
+
+                                <Button
+                                    android:id="@+id/note"
+                                    android:layout_width="60dp"
+                                    android:layout_height="60dp"
+                                    android:background="@drawable/note" />
+
+
+                            </LinearLayout>
+
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="3dp"
+                                android:layout_marginTop="10dp"
+                                android:layout_marginBottom="3dp"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:layout_width="100dp"
+                                    android:layout_height="wrap_content"
+                                    android:elevation="5dp"
+                                    android:inputType="number"
+                                    android:padding="5dp"
+                                    android:text="رقم العداد"
+                                    android:textColor="@color/white_dark"
+                                    android:textSize="14sp" />
+
+                                <EditText
+                                    android:id="@+id/counter_no"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginRight="10dp"
+                                    android:background="@drawable/edite_back"
+                                    android:gravity="center"
+                                    android:lines="1"
+                                    android:nextFocusDown="@id/current_read"
+                                    android:padding="5dp"
+                                    android:textColor="@color/white_dark"
+                                    android:textSize="14sp" />
+
+                                <!--<TextView-->
+                                <!--android:layout_width="match_parent"-->
+                                <!--android:layout_height="wrap_content"-->
+                                <!--android:layout_marginRight="10dp"-->
+                                <!--android:layout_weight="1"-->
+                                <!--android:text="16072"-->
+                                <!--android:textColor="@color/darkblue_"-->
+                                <!--android:textSize="12sp" />-->
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+
+                                android:layout_margin="3dp"
+                                android:layout_marginBottom="2dp"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:layout_width="100dp"
+                                    android:layout_height="wrap_content"
+                                    android:elevation="5dp"
+                                    android:padding="5dp"
+                                    android:text="اسم العميل"
+                                    android:textColor="@color/white_dark"
+                                    android:textSize="14sp" />
+
+                                <EditText
+                                    android:id="@+id/cust_no"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginRight="10dp"
+                                    android:background="@drawable/edite_back"
+                                    android:elevation="2dp"
+                                    android:gravity="center"
+                                    android:lines="1"
+                                    android:padding="5dp"
+                                    android:scrollbars="horizontal"
+                                    android:textColor="@color/white_dark"
+                                    android:textSize="14sp" />
+
+                                <Button
+                                    android:id="@+id/searchCu"
+                                    android:layout_width="30dp"
+                                    android:layout_height="35dp"
+                                    android:background="@drawable/ic_search_black_24dp" />
+
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+
+                                android:layout_margin="3dp"
+                                android:layout_marginBottom="2dp"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:layout_width="100dp"
+                                    android:layout_height="wrap_content"
+                                    android:elevation="2dp"
+                                    android:padding="5dp"
+                                    android:text="القراءة السابقة"
+                                    android:textColor="@color/white_dark"
+                                    android:textSize="14sp" />
+
+                                <TextView
+                                    android:id="@+id/previous_read"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginRight="10dp"
+                                    android:layout_weight="1"
+                                    android:background="@drawable/edite_back"
+                                    android:elevation="2dp"
+                                    android:gravity="center"
+                                    android:padding="5dp"
+                                    android:textColor="@color/white_dark"
+                                    android:textSize="14sp" />
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginRight="10dp"
+                                    android:layout_weight="1.2"
+                                    android:text="متر مكعب"
+                                    android:textColor="@color/white_dark"
+                                    android:textSize="14sp" />
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+
+                                android:layout_margin="3dp"
+                                android:layout_marginBottom="2dp"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:layout_width="100dp"
+                                    android:layout_height="wrap_content"
+                                    android:elevation="2dp"
+                                    android:padding="5dp"
+                                    android:text="القراءة الحالية"
+                                    android:textColor="@color/white_dark"
+                                    android:textSize="14sp" />
+
+                                <TextView
+                                    android:id="@+id/current_read"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginRight="10dp"
+                                    android:layout_weight="1"
+                                    android:background="@drawable/edite_back"
+                                    android:elevation="2dp"
+                                    android:gravity="center"
+                                    android:padding="5dp"
+                                    android:textColor="@color/white_dark"
+                                    android:textSize="14sp" />
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginRight="10dp"
+                                    android:layout_weight="1.2"
+                                    android:text="متر مكعب"
+                                    android:textColor="@color/white_dark"
+                                    android:textSize="14sp" />
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+
+                                android:layout_margin="3dp"
+                                android:layout_marginBottom="2dp"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:layout_width="100dp"
+                                    android:layout_height="wrap_content"
+                                    android:elevation="2dp"
+                                    android:padding="5dp"
+                                    android:text="الاستهلاك"
+                                    android:textColor="@color/white_dark"
+                                    android:textSize="14sp" />
+
+                                <TextView
+                                    android:id="@+id/consuming"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginRight="10dp"
+                                    android:layout_weight="1"
+                                    android:background="@drawable/edite_back"
+                                    android:elevation="2dp"
+                                    android:gravity="center"
+                                    android:padding="5dp"
+                                    android:textColor="@color/white_dark"
+                                    android:textSize="14sp" />
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginRight="10dp"
+                                    android:layout_weight="1.2"
+                                    android:text="متر مكعب"
+                                    android:textColor="@color/white_dark"
+                                    android:textSize="14sp" />
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+
+                                android:layout_margin="3dp"
+                                android:layout_marginBottom="2dp"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:layout_width="100dp"
+                                    android:layout_height="wrap_content"
+                                    android:elevation="2dp"
+                                    android:padding="5dp"
+                                    android:text="قيمة الاستهلاك"
+                                    android:textColor="@color/white_dark"
+                                    android:textSize="14sp" />
+
+                                <TextView
+                                    android:id="@+id/consuming_value"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginRight="10dp"
+                                    android:layout_weight="1"
+                                    android:background="@drawable/edite_back"
+                                    android:elevation="2dp"
+                                    android:gravity="center"
+
+                                    android:padding="5dp"
+                                    android:textColor="@color/white_dark"
+                                    android:textSize="14sp" />
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginRight="10dp"
+                                    android:layout_weight="1.2"
+                                    android:text="دينار"
+                                    android:textColor="@color/white_dark"
+                                    android:textSize="14sp" />
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+
+
+                                android:layout_margin="3dp"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:layout_width="100dp"
+                                    android:layout_height="wrap_content"
+                                    android:elevation="2dp"
+                                    android:padding="5dp"
+                                    android:text="رصيد سابق"
+                                    android:textColor="@color/white_dark"
+                                    android:textSize="14sp" />
+
+                                <TextView
+                                    android:id="@+id/previous_palance"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginRight="10dp"
+                                    android:layout_weight="1"
+                                    android:background="@drawable/edite_back"
+                                    android:elevation="2dp"
+                                    android:gravity="center"
+
+                                    android:padding="5dp"
+                                    android:textColor="@color/white_dark"
+                                    android:textSize="14sp" />
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginRight="10dp"
+                                    android:layout_weight="1.2"
+                                    android:text="دينار"
+                                    android:textColor="@color/white_dark"
+                                    android:textSize="14sp" />
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+
+                                android:layout_margin="3dp"
+                                android:layout_marginTop="5dp"
+                                android:layout_marginBottom="2dp"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:layout_width="100dp"
+                                    android:layout_height="wrap_content"
+                                    android:elevation="2dp"
+                                    android:padding="5dp"
+                                    android:text="بدل اعادة غاز"
+                                    android:textColor="@color/white_dark"
+                                    android:textSize="14sp" />
+
+                                <TextView
+                                    android:id="@+id/gas_return"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+
+                                    android:layout_marginRight="10dp"
+                                    android:background="@drawable/edite_back"
+                                    android:elevation="2dp"
+                                    android:gravity="center"
+                                    android:inputType="numberDecimal"
+                                    android:padding="5dp"
+
+                                    android:text="0.0"
+                                    android:textColor="@color/white_dark"
+                                    android:textSize="14sp" />
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+
+                                android:layout_margin="3dp"
+                                android:layout_marginBottom="2dp"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:layout_width="100dp"
+                                    android:layout_height="wrap_content"
+                                    android:elevation="2dp"
+                                    android:padding="5dp"
+                                    android:text="بدل الخدمات"
+                                    android:textColor="@color/white_dark"
+                                    android:textSize="14sp" />
+
+                                <TextView
+                                    android:id="@+id/service_return"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+
+                                    android:layout_marginRight="10dp"
+                                    android:background="@drawable/edite_back"
+                                    android:elevation="2dp"
+                                    android:gravity="center"
+                                    android:inputType="numberDecimal"
+                                    android:padding="5dp"
+
+                                    android:text="0.0"
+                                    android:textColor="@color/white_dark"
+                                    android:textSize="14sp" />
+
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+
+                                android:layout_margin="3dp"
+                                android:layout_marginBottom="2dp"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:layout_width="170dp"
+                                    android:layout_height="wrap_content"
+                                    android:elevation="2dp"
+                                    android:padding="5dp"
+                                    android:text="مجموع بدل الخدمات بعد الضريبة"
+                                    android:textColor="@color/white_dark"
+                                    android:textSize="12sp" />
+
+                                <TextView
+                                    android:id="@+id/tax_services"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginRight="10dp"
+                                    android:background="@drawable/edite_back"
+                                    android:elevation="2dp"
+                                    android:gravity="center"
+                                    android:padding="5dp"
+                                    android:textColor="@color/white_dark"
+                                    android:textSize="14sp" />
+
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/total_layout"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginTop="5dp"
+                            android:layout_weight="1"
+                            android:elevation="3dp"
+                            android:gravity="center"
+                            android:orientation="vertical"
+                            android:padding="5dp">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+
+                                android:gravity="center_horizontal"
+                                android:orientation="vertical">
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_margin="3dp"
+                                    android:layout_marginBottom="2dp"
+                                    android:orientation="horizontal">
+
+                                    <TextView
+                                        android:layout_width="100dp"
+                                        android:layout_height="wrap_content"
+                                        android:elevation="2dp"
+                                        android:padding="5dp"
+                                        android:text="الصافي"
+                                        android:textColor="@color/white_dark"
+                                        android:textSize="14sp" />
+
+                                    <TextView
+                                        android:id="@+id/net"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginRight="10dp"
+                                        android:background="@drawable/edite_back"
+                                        android:elevation="2dp"
+                                        android:gravity="center"
+
+                                        android:padding="5dp"
+                                        android:textColor="@color/white_dark"
+                                        android:textSize="14sp" />
+
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_margin="3dp"
+                                    android:layout_marginBottom="2dp"
+                                    android:orientation="horizontal">
+
+                                    <TextView
+                                        android:layout_width="100dp"
+                                        android:layout_height="wrap_content"
+
+                                        android:elevation="2dp"
+                                        android:padding="5dp"
+                                        android:text="الضريبة"
+                                        android:textColor="@color/white_dark"
+                                        android:textSize="14sp" />
+
+                                    <TextView
+                                        android:id="@+id/tax"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginRight="10dp"
+                                        android:background="@drawable/edite_back"
+                                        android:elevation="2dp"
+                                        android:gravity="center"
+                                        android:padding="5dp"
+                                        android:textColor="@color/white_dark"
+                                        android:textSize="14sp" />
+
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_margin="3dp"
+                                    android:layout_marginBottom="2dp"
+                                    android:orientation="horizontal">
+
+                                    <TextView
+                                        android:layout_width="100dp"
+                                        android:layout_height="wrap_content"
+
+                                        android:elevation="2dp"
+                                        android:padding="5dp"
+                                        android:text="استهلاك الفترة"
+                                        android:textColor="@color/white_dark"
+                                        android:textSize="14sp" />
+
+                                    <TextView
+                                        android:id="@+id/current_consuming"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginRight="10dp"
+                                        android:background="@drawable/edite_back"
+                                        android:elevation="2dp"
+                                        android:gravity="center"
+                                        android:padding="5dp"
+                                        android:textColor="@color/white_dark"
+                                        android:textSize="14sp" />
+
+                                </LinearLayout>
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="3dp"
+                                    android:layout_marginLeft="5dp"
+                                    android:layout_marginTop="5dp"
+                                    android:layout_marginRight="5dp"
+                                    android:layout_marginBottom="5dp"
+                                    android:background="@color/Orange" />
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_margin="3dp"
+                                    android:layout_marginTop="10dp"
+                                    android:orientation="horizontal">
+
+                                    <TextView
+                                        android:layout_width="100dp"
+                                        android:layout_height="wrap_content"
+                                        android:elevation="2dp"
+                                        android:gravity="center"
+                                        android:padding="5dp"
+                                        android:text="القيمة المطلوبة"
+                                        android:textColor="@color/white_dark"
+                                        android:textSize="14sp" />
+
+                                    <TextView
+                                        android:id="@+id/last_value"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginRight="10dp"
+                                        android:background="@drawable/edite_back"
+                                        android:elevation="2dp"
+                                        android:gravity="center"
+                                        android:padding="5dp"
+                                        android:textColor="@color/white_dark"
+                                        android:textSize="14sp" />
+
+
+                                </LinearLayout>
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+
+                    </LinearLayout>
+                </ScrollView>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+
+                    android:layout_margin="5dp"
+                    android:layout_weight="0"
+                    android:gravity="center">
+
+                    <Button
+                        android:id="@+id/save"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_margin="5dp"
+                        android:background="@drawable/save_yelow_btn"
+                        android:elevation="10dp"
+                        android:gravity="center"
+                        android:padding="5dp"
+                        android:text="طباعه"
+                        android:textColor="@color/white_dark"
+                        android:textSize="14sp" />
+
+                    <Button
+                        android:id="@+id/cancel_btn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginRight="30dp"
+                        android:background="@drawable/back_white"
+                        android:elevation="10dp"
+                        android:gravity="center"
+                        android:padding="5dp"
+                        android:text="الغاء"
+                        android:textColor="@color/Orange"
+                        android:textSize="14sp" />
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/black"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/jjj"
+        android:gravity="center"
+        android:visibility="gone"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:id="@+id/dialog"
+            android:layout_width="450dp"
+            android:layout_height="260dp"
+            android:visibility="gone"
+            android:background="@drawable/dialog_back_v"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="80dp"
+                android:layout_marginEnd="60dp"
+                android:text="هل تريد الخروج ؟"
+                android:textColor="#FFFFFF"
+                android:textSize="23sp" />
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="80dp"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+
+                <Button
+                    android:id="@+id/yes"
+                    android:layout_width="50dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="10dp"
+                    android:text="نعم" />
+
+                <Button
+                    android:id="@+id/no"
+                    android:layout_width="50dp"
+                    android:layout_height="wrap_content"
+                    android:text="لا" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/black2"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/jjj"
+        android:gravity="center"
+        android:visibility="gone"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:id="@+id/noteDialog"
+            android:layout_width="410dp"
+            android:layout_height="270dp"
+            android:visibility="gone"
+            android:background="@drawable/back_2"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="اضافة ملاحظة"
+                android:layout_marginTop="30dp"
+                android:layout_marginStart="60dp"
+                android:textColor="#FFFFFF"
+                android:textSize="23sp" />
+
+            <EditText
+                android:id="@+id/noteText"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:background="#FFFFFF"
+                android:gravity="top"
+                android:padding="10dp"
+
+                android:layout_marginTop="10dp"
+                />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+
+                <Button
+                    android:id="@+id/done"
+                    android:layout_width="90dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="20dp"
+                    android:text="تم" />
+
+                <Button
+                    android:id="@+id/cancel"
+                    android:layout_width="90dp"
+                    android:layout_height="wrap_content"
+                    android:text="الغاء" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+
+</RelativeLayout>

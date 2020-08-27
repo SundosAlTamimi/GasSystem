@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/layBar"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center|bottom"
+    android:background="@color/Nocolor"
+    android:padding="1dp"
+    android:layout_margin="50dp"
+    android:orientation="horizontal">
+    <!--<TextView-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:fontFamily="sans-serif-light"-->
+        <!--android:gravity="center"-->
+        <!--android:text=""-->
+        <!--android:layout_weight="0.5"-->
+        <!--android:textColor="@color/colorGold"-->
+        <!--android:textSize="25sp"-->
+        <!--/>-->
+
+    <!--<TextView-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:fontFamily="sans-serif-light"-->
+        <!--android:gravity="center"-->
+        <!--android:text=""-->
+        <!--android:layout_weight="1"-->
+        <!--android:textColor="@color/colorGold"-->
+        <!--android:textSize="25sp"-->
+        <!--/>-->
+
+    <!--<ImageView-->
+        <!--android:id="@+id/imgbar"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:layout_weight="3"-->
+        <!--android:background="@drawable/ic_account_circle_black_dp" />-->
+
+    <!--<LinearLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:layout_weight="2.3"-->
+        <!--android:orientation="vertical">-->
+
+        <!--<TextView-->
+            <!--android:id="@+id/currency"-->
+            <!--android:layout_width="50dp"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:gravity="start"-->
+           <!--android:text="JD"-->
+            <!--android:textColor="@color/white"-->
+            <!--android:textSize="25sp"-->
+            <!--app:autoSizeMaxTextSize="25sp"-->
+            <!--app:autoSizeMinTextSize="12sp"-->
+            <!--app:autoSizeStepGranularity="2sp"-->
+            <!--app:autoSizeTextType="uniform"-->
+            <!--android:textStyle="bold"-->
+            <!--android:fontFamily="serif"-->
+            <!--tools:ignore="VectorDrawableCompat" />-->
+
+    <!--</LinearLayout>-->
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/Nocolor"
+        android:gravity="center"
+        android:layout_margin="10dp"
+        android:orientation="vertical">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/imgbar"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_weight="3"
+            android:gravity="center"
+            android:src="@drawable/ic_add_black_24dp"
+            android:textColor="@color/white"
+            app:civ_border_color="@color/white"
+            app:civ_border_width="0.2dp"
+            />
+
+        <TextView
+            android:id="@+id/textbar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:fontFamily="sans-serif-light"
+            android:gravity="center"
+            android:text="point"
+            android:textColor="@color/white"
+            android:textSize="30sp"
+            app:autoSizeMaxTextSize="30sp"
+            app:autoSizeMinTextSize="15sp"
+            app:autoSizeStepGranularity="2sp"
+            app:autoSizeTextType="uniform" />
+
+    </LinearLayout>
+
+    <!--<LinearLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:layout_weight="2.3"-->
+        <!--android:gravity="end"-->
+        <!--android:orientation="vertical">-->
+
+        <!--<TextView-->
+            <!--android:id="@+id/AccType"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:gravity="end"-->
+            <!--android:text=""-->
+            <!--android:textColor="@color/white"-->
+            <!--android:textSize="20sp"-->
+            <!--app:autoSizeMaxTextSize="20sp"-->
+            <!--app:autoSizeMinTextSize="12sp"-->
+            <!--app:autoSizeStepGranularity="2sp"-->
+            <!--app:autoSizeTextType="uniform"-->
+            <!--android:textStyle="bold"-->
+            <!--android:fontFamily="serif"-->
+            <!--tools:ignore="VectorDrawableCompat" />-->
+    <!--</LinearLayout>-->
+
+
+    <!--<TextView-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:fontFamily="sans-serif-light"-->
+        <!--android:gravity="center"-->
+        <!--android:text=""-->
+        <!--android:layout_weight="1"-->
+        <!--android:textColor="@color/colorGold"-->
+        <!--android:textSize="25sp"-->
+        <!--/>-->
+
+    <!--<TextView-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:fontFamily="sans-serif-light"-->
+        <!--android:gravity="center"-->
+        <!--android:text=""-->
+        <!--android:layout_weight="0.5"-->
+        <!--android:textColor="@color/colorGold"-->
+        <!--android:textSize="25sp"-->
+        <!--/>-->
+
+
+</LinearLayout>
+

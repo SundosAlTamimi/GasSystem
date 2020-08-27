@@ -7,7 +7,11 @@ import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.Editable;
 import android.text.TextUtils;
+import android.text.TextWatcher;
+import android.text.method.MovementMethod;
+import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
@@ -30,7 +34,10 @@ import com.falconssoft.gassystem.Modle.Receipts;
 import com.falconssoft.gassystem.Modle.Remarks;
 import com.falconssoft.gassystem.Modle.Voucher;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 public class Receipt extends AppCompatActivity {
@@ -38,39 +45,54 @@ public class Receipt extends AppCompatActivity {
     LinearLayout black, black2, black3, dialog, noteDialog, custDialog, linear;
     private Animation animation;
     EditText receiptNo, custNo, project, lastBalance, accountNo, counterNo, value, noteTextView;
-    Button  save, search, yes, no, done, cancel;
+    Button  save, search, yes, no, done, cancel,searchs;
     ListView custList;
      TextView note;
     DatabaseHandler DHandler;
     ArrayList<Customer> customerList;
     List<Remarks> RemarkList;
+    String today;
 
     String noteText = "";
-    private Toolbar toolbar;
-    public static Receipts recCash;
+//    private Toolbar toolbar;
+    public static RecCash recCash;
+    ListAdapterNOTE listAdapterNOTE;
+    ListAdapterCustomerName listAdapterCustomerName;
     @SuppressLint("ClickableViewAccessibility")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.receipt_new);
-
-
         init();
-        RemarkList=new ArrayList<>();
-        setSupportActionBar(toolbar);
-        toolbar.setNavigationIcon(R.drawable.ic_arrow_forward_black_24dp); // Set the icon
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+        Date currentTimeAndDate = Calendar.getInstance().getTime();
+        SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+        today = df.format(currentTimeAndDate);
+
+
+
+
+        cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i=new Intent(Receipt.this,MainActivity.class);
-                startActivity(i);
+                finish();
             }
         });
+        RemarkList=new ArrayList<>();
+//        setSupportActionBar(toolbar);
+//        toolbar.setNavigationIcon(R.drawable.ic_arrow_forward_black_24dp); // Set the icon
+//        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent i=new Intent(Receipt.this,MainActivity.class);
+//                startActivity(i);
+//            }
+//        });
         DHandler = new DatabaseHandler(Receipt.this);
 
         customerList = DHandler.getAllCustomers();
         RemarkList=DHandler.getAllRemark();
-
+        note.setMovementMethod(ScrollingMovementMethod.getInstance());
+        custNo.setMovementMethod(ScrollingMovementMethod.getInstance());
         animation = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.move_to_down);
         linear.startAnimation(animation);
         save.setOnClickListener(new View.OnClickListener() {
@@ -86,26 +108,117 @@ public class Receipt extends AppCompatActivity {
         note.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ShowNoteDialog();
+                ShowNoteDialog(note);
             }
         });
 
+        searchs.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ShowCustomerDialog(custNo);
+            }
+        });
 
     }
 
-    public void ShowNoteDialog(){
+    public void ShowNoteDialog(final TextView textView){
         final Dialog dialog = new Dialog(this,R.style.Theme_Dialog);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setContentView(R.layout.note_dialog_show);
         dialog.setCancelable(true);
 
+        final EditText noteSearch=dialog.findViewById(R.id.noteSearch);
+final ListView ListNote=dialog.findViewById(R.id.ListNote);
 
+         listAdapterNOTE = new ListAdapterNOTE(Receipt.this, RemarkList,textView,dialog);
+        ListNote.setAdapter(listAdapterNOTE);
 
+        noteSearch.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+                if(!noteSearch.getText().toString().equals("")){
+                    List<Remarks> searchRemark=new ArrayList<>();
+                    searchRemark.clear();
+                    for(int i=0;i<RemarkList.size();i++){
+                        if(RemarkList.get(i).getBody().contains(noteSearch.getText().toString())||RemarkList.get(i).getTitle().contains(noteSearch.getText().toString())){
+                            searchRemark.add(RemarkList.get(i));
+
+                        }
+                    }
+
+                     listAdapterNOTE = new ListAdapterNOTE(Receipt.this, searchRemark,textView,dialog);
+                    ListNote.setAdapter(listAdapterNOTE);
+
+                }
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
 
         dialog.show();
 
     }
+
+    public void ShowCustomerDialog(final TextView textView){
+        final Dialog dialog = new Dialog(this,R.style.Theme_Dialog);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.customer_dialog_show);
+        dialog.setCancelable(true);
+
+        final EditText noteSearch=dialog.findViewById(R.id.noteSearch);
+        final ListView ListNote=dialog.findViewById(R.id.ListNote);
+
+        listAdapterCustomerName = new ListAdapterCustomerName(Receipt.this, customerList,textView,dialog);
+        ListNote.setAdapter(listAdapterCustomerName);
+
+        noteSearch.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+                if(!noteSearch.getText().toString().equals("")){
+                    List<Customer> searchCustomer=new ArrayList<>();
+                    searchCustomer.clear();
+                    for(int i=0;i<customerList.size();i++){
+                        if(customerList.get(i).getCustName().contains(noteSearch.getText().toString())){
+                            searchCustomer.add(customerList.get(i));
+
+                        }
+                    }
+
+
+                    listAdapterCustomerName = new ListAdapterCustomerName(Receipt.this, searchCustomer,textView,dialog);
+                    ListNote.setAdapter(listAdapterCustomerName);
+
+
+                }
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
+        dialog.show();
+
+    }
+
 
     public void Save() {
 
@@ -118,18 +231,20 @@ public class Receipt extends AppCompatActivity {
                             if (!TextUtils.isEmpty(accountNo.getText().toString())) {
                                 if (!TextUtils.isEmpty(counterNo.getText().toString())) {
                                     if (!TextUtils.isEmpty(value.getText().toString())) {
-
-                                         recCash=new Receipts(
-                                                 receiptNo.getText().toString(),
-                                                 custNo.getText().toString(),
-                                                 project.getText().toString(),
-                                                 lastBalance.getText().toString(),
-                                                 accountNo.getText().toString(),
-                                                 counterNo.getText().toString(),
-                                                 Double.parseDouble(value.getText().toString()),
-                                                 note.getText().toString()
-                                         );
 //
+
+                                        recCash=new RecCash();
+
+                                        recCash.setResNo(receiptNo.getText().toString());
+                                        recCash.setAccNo( accountNo.getText().toString());
+                                        recCash.setAccName(custNo.getText().toString());
+                                        recCash.setCash( value.getText().toString());
+                                        recCash.setRemarks(note.getText().toString());
+                                        recCash.setRecDate(convertToEnglish(today));
+                                        recCash.setIs_Post("0");
+                                        recCash.setIsExport("0");
+                                        recCash.setProjectName(project.getText().toString());
+
 
                                         SavePrint();
 
@@ -175,7 +290,7 @@ public class Receipt extends AppCompatActivity {
 
     private void SavePrint() {
 
-        DHandler.addReceipt(recCash);
+        DHandler.addRecCash(recCash);
         clearText();
         Intent printExport=new Intent(Receipt.this,BluetoothConnectMenu.class);
         printExport.putExtra("printKey", "1");
@@ -359,6 +474,11 @@ public class Receipt extends AppCompatActivity {
 //        }
 //    };
 
+    public String convertToEnglish(String value) {
+        String newValue = (((((((((((value + "").replaceAll("١", "1")).replaceAll("٢", "2")).replaceAll("٣", "3")).replaceAll("٤", "4")).replaceAll("٥", "5")).replaceAll("٦", "6")).replaceAll("٧", "7")).replaceAll("٨", "8")).replaceAll("٩", "9")).replaceAll("٠", "0").replaceAll("٫", "."));
+        return newValue;
+    }
+
     void init() {
 
         note = findViewById(R.id.notes);
@@ -367,7 +487,7 @@ public class Receipt extends AppCompatActivity {
         yes = findViewById(R.id.yes);
         no = findViewById(R.id.no);
         done = findViewById(R.id.done);
-        cancel = findViewById(R.id.cancel);
+        cancel = findViewById(R.id.cancel_btn);
 
         black = findViewById(R.id.black);
         dialog = findViewById(R.id.dialog);
@@ -388,9 +508,10 @@ public class Receipt extends AppCompatActivity {
         accountNo = findViewById(R.id.account_no);
         counterNo = findViewById(R.id.counter_no);
         value = findViewById(R.id.value);
+        searchs= findViewById(R.id.searchs);
 
         custList = findViewById(R.id.cust_list);
-        toolbar=findViewById(R.id.appBar);
+//        toolbar=findViewById(R.id.appBar);
 
     }
 }
