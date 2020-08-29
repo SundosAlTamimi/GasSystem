@@ -17,16 +17,18 @@ public class RecCash {
     private String is_Post;
     private String projectName;
     private String isExport;
-
+    private String serial;
+    private String counterNo;
+    private String lastBalance;
 
 
     public RecCash() {
 
     }
 
-    public RecCash(String resNo, String accName, String accNo,
-                   String cash, String remarks, String recDate,
-                   String is_Post, String projectName, String isExport) {
+    public RecCash(String resNo, String accName, String accNo, String cash, String remarks, String recDate,
+                   String is_Post, String projectName, String isExport, String serial,
+                   String counterNo, String lastBalance) {
         this.resNo = resNo;
         this.accName = accName;
         this.accNo = accNo;
@@ -36,7 +38,12 @@ public class RecCash {
         this.is_Post = is_Post;
         this.projectName = projectName;
         this.isExport = isExport;
+        this.serial = serial;
+        this.counterNo = counterNo;
+        this.lastBalance = lastBalance;
     }
+
+
 
     public String getResNo() {
         return resNo;
@@ -108,6 +115,30 @@ public class RecCash {
 
     public void setIsExport(String isExport) {
         this.isExport = isExport;
+    }
+
+    public String getSerial() {
+        return serial;
+    }
+
+    public void setSerial(String serial) {
+        this.serial = serial;
+    }
+
+    public String getCounterNo() {
+        return counterNo;
+    }
+
+    public void setCounterNo(String counterNo) {
+        this.counterNo = counterNo;
+    }
+
+    public String getLastBalance() {
+        return lastBalance;
+    }
+
+    public void setLastBalance(String lastBalance) {
+        this.lastBalance = lastBalance;
     }
 
     public JSONObject getJSONObjectRecCash() { // for server

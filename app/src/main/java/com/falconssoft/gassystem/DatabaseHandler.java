@@ -26,7 +26,7 @@ import java.util.List;
 public class DatabaseHandler extends SQLiteOpenHelper {
 
     private static String TAG = "DatabaseHandler";
-    private static final int DATABASE_VERSION = 10;
+    private static final int DATABASE_VERSION = 12;
     private static final String DATABASE_NAME = "GasDatabase";
     static SQLiteDatabase db;
 
@@ -79,6 +79,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
     private static final String BDLVAL1 = "BDLVAL";
     private static final String IS_EXPORT1 = "IS_EXPORT";
+    private static final String SERIAL1 = "SERIAL";
 
     //******************************************************************
     private static final String RECEIPT_TABLE = "RECEIPT";
@@ -134,6 +135,9 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     private static final String IS_POST2 = "IS_POST";
     private static final String PRJNAME2 = "PRJNAME";
     private static final String IS_EXPORT2 = "IS_EXPORT";
+    private static final String SERIAL2 = "SERIAL";
+    private static final String COUNTER_REC_NO2 = "COUNTER_REC_NO";
+    private static final String LAST_BALANCE2 = "LAST_BALANCE";
 
 
     //******************************************************************
@@ -223,7 +227,8 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                 + IS_POST1 + " TEXT,"
                 + IS_PER1 + " TEXT,"
                 + BDLVAL1 + " TEXT,"
-                + IS_EXPORT1 + " TEXT" + ")";
+                + IS_EXPORT1 + " TEXT,"
+                + SERIAL1 + " TEXT" + ")";
         db.execSQL(CREATE_VOUCHERS_TABLE);
 
 
@@ -260,7 +265,10 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                 + RECDATE2 + " TEXT,"
                 + IS_POST2 + " TEXT,"
                 + IS_EXPORT2 + " TEXT,"
-                + PRJNAME2 + " TEXT" + ")";
+                + PRJNAME2 + " TEXT,"
+                + SERIAL2 + " TEXT,"
+                + COUNTER_REC_NO2 + " TEXT,"
+                + LAST_BALANCE2 + " TEXT" + ")";
         db.execSQL(CREATE_RECCASH_TABLE);
 
 
@@ -365,6 +373,35 @@ public class DatabaseHandler extends SQLiteOpenHelper {
             Log.e("upgrade","Ex ... SETTING_TABLE");
         }
 
+        try{
+            db.execSQL("ALTER TABLE VOUCHERS_TABLE ADD " + SERIAL1 + " TEXT"+" DEFAULT '0'");
+
+        }catch (Exception e){
+            Log.e("upgrade","Ex ... VOUCHERS_TABLE SERIAL");
+        }
+
+        try{
+            db.execSQL("ALTER TABLE RECCASH ADD " + SERIAL2 + " TEXT"+" DEFAULT '0'");
+
+        }catch (Exception e){
+            Log.e("upgrade","Ex ... RECCASH SERIAL");
+        }
+
+
+        try{
+            db.execSQL("ALTER TABLE RECCASH ADD " + COUNTER_REC_NO2 + " TEXT"+" DEFAULT '0'");
+
+        }catch (Exception e){
+            Log.e("upgrade","Ex ... RECCASH COUNTER_REC_NO2");
+        }
+
+
+        try{
+            db.execSQL("ALTER TABLE RECCASH ADD " + LAST_BALANCE2 + " TEXT"+" DEFAULT '0'");
+
+        }catch (Exception e){
+            Log.e("upgrade","Ex ... RECCASH LAST_BALANCE2");
+        }
 
     }
 
@@ -445,6 +482,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         contentValues.put(IS_PER1, voucher.getIsPer());
         contentValues.put(BDLVAL1, voucher.getAllowance());
         contentValues.put(IS_EXPORT1, voucher.getIsExport());
+        contentValues.put(SERIAL1, voucher.getSerial());
 
         db.insert(VOUCHERS, null, contentValues);
         db.close();
@@ -482,6 +520,9 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         values.put(IS_POST2, receipt.getIs_Post());
         values.put(PRJNAME2, receipt.getProjectName());
         values.put(IS_EXPORT2, receipt.getProjectName());
+        values.put(SERIAL2, receipt.getSerial());
+        values.put(COUNTER_REC_NO2, receipt.getCounterNo());
+        values.put(LAST_BALANCE2, receipt.getLastBalance());
 
         db.insert(RECCASH_TABLE, null, values);
         db.close();
@@ -542,13 +583,20 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     public void addSetting(SettingModle settingModle) {
         db = this.getReadableDatabase();
         ContentValues contentValues = new ContentValues();
-
         byte[] byteImage = {};
-        if (settingModle.getLogo() != null) {
-            ByteArrayOutputStream stream = new ByteArrayOutputStream();
-            settingModle.getLogo().compress(Bitmap.CompressFormat.PNG, 0, stream);
-            byteImage = stream.toByteArray();
+        try {
+            if (settingModle.getLogo() != null) {
+                ByteArrayOutputStream stream = new ByteArrayOutputStream();
+                settingModle.getLogo().compress(Bitmap.CompressFormat.PNG, 0, stream);
+                byteImage = stream.toByteArray();
+            }
+        }catch (Exception e){
+
+            Log.e("Setting","byteImage"+e);
+
         }
+
+
 
         contentValues.put(IP_ADDRESS3, settingModle.getIpAddress());
         contentValues.put(COMPANY_NAME3, settingModle.getCompanyName());
@@ -666,7 +714,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                 voucherModle.setIsPer(cursor.getString(22));
                 voucherModle.setAllowance(cursor.getString(23));
                 voucherModle.setIsExport(cursor.getString(24));
-
+                voucherModle.setSerial(cursor.getString(25));
 
                 customerList.add(voucherModle);
             } while (cursor.moveToNext());
@@ -773,7 +821,9 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                 recCash.setIs_Post(cursor.getString(6));
                 recCash.setIsExport(cursor.getString(7));
                 recCash.setProjectName(cursor.getString(8));
-
+                recCash.setSerial(cursor.getString(9));
+                recCash.setCounterNo(cursor.getString(10));
+                recCash.setLastBalance(cursor.getString(11));
             } while (cursor.moveToNext());
         }
         return recCashList;
@@ -884,4 +934,97 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         Log.e("customer",""+customerList.size());
         return customerList;
     }
+
+    public int  getMax(String tableName){
+        int maxNo=0;
+        //select IFNULL(Max(VHF_NO),0)  FROM TRANSFER_ITEMS_INFO
+
+        String selectQuery = "select IFNULL(Max(SERIAL),1)  FROM  "+tableName;
+        db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+
+        if (cursor.moveToFirst()) {
+            do {
+
+                maxNo=cursor.getInt(0);
+
+
+            } while (cursor.moveToNext());
+        }
+        return maxNo;
+
+    }
+
+
+
+    public VoucherModle getVoucherByVoucherNo(String voucherNo) {
+        VoucherModle voucherModle = new VoucherModle();
+
+        String selectQuery = "SELECT  * FROM " + VOUCHERS +" where INV_NO ='"+voucherNo+"'" ;
+        db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+
+        if (cursor.moveToFirst()) {
+            do {
+
+                voucherModle.setCounterNo(cursor.getString(0));
+                voucherModle.setCustomerName(cursor.getString(1));
+                voucherModle.setLastReader(cursor.getString(2));
+                voucherModle.setAccNo(cursor.getString(3));
+                voucherModle.setGasPressure(cursor.getString(4));
+                voucherModle.setProjectName(cursor.getString(5));
+                voucherModle.setPrameter(cursor.getString(6));
+                voucherModle.setCurrentReader(cursor.getString(7));
+                voucherModle.setCCost(cursor.getString(8));
+                voucherModle.setcCostVal(cursor.getString(9));
+                voucherModle.setService(cursor.getString(10));
+                voucherModle.setReQalValue(cursor.getString(11));
+                voucherModle.setReaderDate(cursor.getString(12));
+                voucherModle.setInvoiceType(cursor.getString(13));
+                voucherModle.setInvoiceNo(cursor.getString(14));
+                voucherModle.setNetValue(cursor.getString(15));
+                voucherModle.setTaxValue(cursor.getString(16));
+                voucherModle.setGret(cursor.getString(17));
+                voucherModle.setRemarks(cursor.getString(18));
+                voucherModle.setConsumption(cursor.getString(19));
+                voucherModle.setCredit(cursor.getString(20));
+                voucherModle.setIsPost(cursor.getString(21));
+                voucherModle.setIsPer(cursor.getString(22));
+                voucherModle.setAllowance(cursor.getString(23));
+                voucherModle.setIsExport(cursor.getString(24));
+                voucherModle.setSerial(cursor.getString(25));
+
+            } while (cursor.moveToNext());
+        }
+        return voucherModle;
+    }
+
+
+    public RecCash getRecCashByRecNo(String RecNo) {
+        RecCash recCash = new RecCash();
+
+        String selectQuery = "SELECT  * FROM " + RECCASH_TABLE +" where RECNO ='"+RecNo+"'" ;
+        db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+
+        if (cursor.moveToFirst()) {
+            do {
+
+                recCash.setResNo(cursor.getString(0));
+                recCash.setAccName(cursor.getString(1));
+                recCash.setAccNo(cursor.getString(2));
+                recCash.setCash(cursor.getString(3));
+                recCash.setRemarks(cursor.getString(4));
+                recCash.setRecDate(cursor.getString(5));
+                recCash.setIs_Post(cursor.getString(6));
+                recCash.setIsExport(cursor.getString(7));
+                recCash.setProjectName(cursor.getString(8));
+                recCash.setSerial(cursor.getString(9));
+                recCash.setCounterNo(cursor.getString(10));
+                recCash.setLastBalance(cursor.getString(11));
+            } while (cursor.moveToNext());
+        }
+        return recCash;
+    }
+
 }

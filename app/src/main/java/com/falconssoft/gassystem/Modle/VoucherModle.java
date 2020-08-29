@@ -40,16 +40,19 @@ public class VoucherModle {
     private String isPer;//0
     private String allowance;//0
     private String isExport;
+    private String serial;
 
     public VoucherModle() {
 
     }
 
-    public VoucherModle(String counterNo, String customerName, String lastReader, String accNo, String gasPressure,
-                        String gasPrice, String projectName, String prameter, String currentReader, String CCost,
-                        String cCostVal, String service, String reQalValue, String readerDate, String invoiceType, String invoiceNo, String netValue,
-                        String taxValue, String gret, String remarks, String consumption, String credit, String isPost,
-                        String isPer, String allowance, String isExport) {
+    public VoucherModle(String counterNo, String customerName, String lastReader,
+                        String accNo, String gasPressure, String gasPrice, String projectName,
+                        String prameter, String currentReader, String CCost, String cCostVal,
+                        String service, String reQalValue, String readerDate, String invoiceType,
+                        String invoiceNo, String netValue, String taxValue, String gret, String remarks, String consumption,
+                        String credit, String isPost, String isPer, String allowance, String
+                                isExport, String serial) {
         this.counterNo = counterNo;
         this.customerName = customerName;
         this.lastReader = lastReader;
@@ -76,6 +79,7 @@ public class VoucherModle {
         this.isPer = isPer;
         this.allowance = allowance;
         this.isExport = isExport;
+        this.serial = serial;
     }
 
     public String getCounterNo() {
@@ -286,6 +290,13 @@ public class VoucherModle {
         this.isExport = isExport;
     }
 
+    public String getSerial() {
+        return serial;
+    }
+
+    public void setSerial(String serial) {
+        this.serial = serial;
+    }
 
     public JSONObject getJSONObjectRecCash() { // for server
         JSONObject obj = new JSONObject();

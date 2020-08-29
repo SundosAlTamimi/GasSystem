@@ -69,6 +69,7 @@
                         android:textSize="14sp" />
 
                     <EditText
+                        android:id="@+id/voucherNo"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginRight="10dp"
@@ -715,7 +716,7 @@
                     android:gravity="center">
 
                     <Button
-                        android:id="@+id/save"
+                        android:id="@+id/PrintVoucherButton"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
@@ -729,7 +730,7 @@
                         android:textSize="14sp" />
 
                     <Button
-                        android:id="@+id/cancel_btn"
+                        android:id="@+id/cancelPrintVoucherButton"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"

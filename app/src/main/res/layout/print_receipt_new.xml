@@ -59,6 +59,7 @@
                     android:textSize="14sp" />
 
                 <EditText
+                    android:id="@+id/RecCashNoEditText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="10dp"
@@ -192,12 +193,12 @@
                         android:textColor="@color/white_dark"
                         android:textSize="18sp" />
 
-                    <Button
-                        android:id="@+id/searchs"
-                        android:layout_width="30dp"
-                        android:layout_height="35dp"
-                        android:background="@drawable/ic_search_black_24dp"
-                        android:backgroundTint="@color/Orange"/>
+                    <!--<Button-->
+                        <!--android:id="@+id/searchs"-->
+                        <!--android:layout_width="30dp"-->
+                        <!--android:layout_height="35dp"-->
+                        <!--android:background="@drawable/ic_search_black_24dp"-->
+                        <!--android:backgroundTint="@color/Orange"/>-->
 
 
                 </LinearLayout>
@@ -409,7 +410,7 @@
                 android:gravity="center">
 
                 <Button
-                    android:id="@+id/save_"
+                    android:id="@+id/printRecCashButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -424,7 +425,7 @@
                     android:textSize="18sp" />
 
                 <Button
-                    android:id="@+id/cancel_btn"
+                    android:id="@+id/cancelRecCashButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"

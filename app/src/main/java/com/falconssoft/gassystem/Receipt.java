@@ -13,11 +13,13 @@ import android.text.TextWatcher;
 import android.text.method.MovementMethod;
 import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.view.inputmethod.EditorInfo;
 import android.widget.Adapter;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -33,6 +35,8 @@ import com.falconssoft.gassystem.Modle.RecCash;
 import com.falconssoft.gassystem.Modle.Receipts;
 import com.falconssoft.gassystem.Modle.Remarks;
 import com.falconssoft.gassystem.Modle.Voucher;
+import com.google.zxing.integration.android.IntentIntegrator;
+import com.google.zxing.integration.android.IntentResult;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -40,14 +44,15 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+
 public class Receipt extends AppCompatActivity {
 
     LinearLayout black, black2, black3, dialog, noteDialog, custDialog, linear;
     private Animation animation;
-    EditText receiptNo, custNo, project, lastBalance, accountNo, counterNo, value, noteTextView;
-    Button  save, search, yes, no, done, cancel,searchs;
+    EditText  custNo,value, noteTextView;
+    Button  save, search, yes, no, done, cancel,searchs;//,barCode;
     ListView custList;
-     TextView note;
+    TextView note,barCodTextTemp,receiptNo, project, lastBalance, accountNo, counterNo;
     DatabaseHandler DHandler;
     ArrayList<Customer> customerList;
     List<Remarks> RemarkList;
@@ -57,18 +62,26 @@ public class Receipt extends AppCompatActivity {
 //    private Toolbar toolbar;
     public static RecCash recCash;
     ListAdapterNOTE listAdapterNOTE;
+    GlobelFunction globelFunction;
     ListAdapterCustomerName listAdapterCustomerName;
+    int  maxVouNo=0;
+    String intentReSend="";
+    Button editRecCashButton;
+    EditText RecCashEditText;
+    LinearLayout editRecNoLinear;
+    RecCash recCashEdit;
     @SuppressLint("ClickableViewAccessibility")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.receipt_new);
         init();
+
         Date currentTimeAndDate = Calendar.getInstance().getTime();
         SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
         today = df.format(currentTimeAndDate);
 
-
+        globelFunction=new GlobelFunction();
 
 
         cancel.setOnClickListener(new View.OnClickListener() {
@@ -88,7 +101,7 @@ public class Receipt extends AppCompatActivity {
 //            }
 //        });
         DHandler = new DatabaseHandler(Receipt.this);
-
+        maxVouNo= DHandler.getMax("RECCASH")+1;
         customerList = DHandler.getAllCustomers();
         RemarkList=DHandler.getAllRemark();
         note.setMovementMethod(ScrollingMovementMethod.getInstance());
@@ -103,6 +116,23 @@ public class Receipt extends AppCompatActivity {
 
             }
         });
+
+        intentReSend = getIntent().getStringExtra("EDIT_REC");
+
+        if (intentReSend != null && intentReSend.equals("EDIT_REC")) {
+            editRecCashButton.setVisibility(View.VISIBLE);
+            save.setVisibility(View.GONE);
+            editRecNoLinear.setVisibility(View.VISIBLE);
+            receiptNo.setText("");
+
+        }else{
+            editRecCashButton.setVisibility(View.GONE);
+            save.setVisibility(View.VISIBLE);
+            editRecNoLinear.setVisibility(View.GONE);
+            receiptNo.setText(""+maxVouNo);
+        }
+
+
 
 
         note.setOnClickListener(new View.OnClickListener() {
@@ -119,6 +149,69 @@ public class Receipt extends AppCompatActivity {
             }
         });
 
+//        barCode.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                readBarCode(counterNo, 0);
+//
+//            }
+//        });
+
+
+        RecCashEditText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                if (actionId == EditorInfo.IME_ACTION_DONE || actionId == EditorInfo.IME_ACTION_NEXT || actionId == EditorInfo.IME_ACTION_SEARCH
+                        || actionId == EditorInfo.IME_NULL) {
+                    if(!TextUtils.isEmpty(RecCashEditText.getText().toString())) {
+                        recCashEdit = DHandler.getRecCashByRecNo(RecCashEditText.getText().toString());
+                        if(!TextUtils.isEmpty(recCashEdit.getAccNo())){
+                            fillRecCashPrinting(recCashEdit);
+                        }else{
+                            clearText();
+                            Toast.makeText(Receipt.this, "no RecCash", Toast.LENGTH_SHORT).show();
+                        }
+
+
+                    }else {
+                        RecCashEditText.setError("Required!");
+                    }
+                }
+
+
+                return false;
+            }
+        });
+
+
+    }
+
+    public  void fillRecCash(Customer receipt){
+
+        if(!TextUtils.isEmpty(receipt.getCounterNo())){
+            project.setText(receipt.getProjectName());
+            lastBalance.setText(""+receipt.getCredet());
+            accountNo.setText(receipt.getAccNo());
+            counterNo.setText(receipt.getCounterNo());
+
+        }else {
+        }
+    }
+
+
+    void fillRecCashPrinting(RecCash receipt){
+        if(!TextUtils.isEmpty(receipt.getAccName())){
+            receiptNo.setText(receipt.getResNo());
+            custNo.setText(receipt.getAccName());
+            project.setText(receipt.getProjectName());
+            lastBalance.setText(receipt.getLastBalance());//
+            accountNo.setText(receipt.getAccNo());
+            counterNo.setText(receipt.getCounterNo());
+            value.setText(receipt.getCash());
+            note.setText(receipt.getRemarks());
+
+        }else {
+        }
     }
 
     public void ShowNoteDialog(final TextView textView){
@@ -178,7 +271,7 @@ final ListView ListNote=dialog.findViewById(R.id.ListNote);
         final EditText noteSearch=dialog.findViewById(R.id.noteSearch);
         final ListView ListNote=dialog.findViewById(R.id.ListNote);
 
-        listAdapterCustomerName = new ListAdapterCustomerName(Receipt.this, customerList,textView,dialog);
+        listAdapterCustomerName = new ListAdapterCustomerName(Receipt.this, customerList,textView,dialog,1,Receipt.this);
         ListNote.setAdapter(listAdapterCustomerName);
 
         noteSearch.addTextChangedListener(new TextWatcher() {
@@ -201,7 +294,7 @@ final ListView ListNote=dialog.findViewById(R.id.ListNote);
                     }
 
 
-                    listAdapterCustomerName = new ListAdapterCustomerName(Receipt.this, searchCustomer,textView,dialog);
+                    listAdapterCustomerName = new ListAdapterCustomerName(Receipt.this, searchCustomer,textView,dialog,1,Receipt.this);
                     ListNote.setAdapter(listAdapterCustomerName);
 
 
@@ -234,16 +327,20 @@ final ListView ListNote=dialog.findViewById(R.id.ListNote);
 //
 
                                         recCash=new RecCash();
-
-                                        recCash.setResNo(receiptNo.getText().toString());
+                                        int  maxVno= DHandler.getMax("RECCASH")+1;
+                                        recCash.setResNo(""+maxVno);
                                         recCash.setAccNo( accountNo.getText().toString());
                                         recCash.setAccName(custNo.getText().toString());
                                         recCash.setCash( value.getText().toString());
                                         recCash.setRemarks(note.getText().toString());
-                                        recCash.setRecDate(convertToEnglish(today));
+                                        recCash.setRecDate(globelFunction.DateInToday());
                                         recCash.setIs_Post("0");
                                         recCash.setIsExport("0");
+                                        recCash.setLastBalance(lastBalance.getText().toString());
+                                        recCash.setCounterNo(counterNo.getText().toString());
                                         recCash.setProjectName(project.getText().toString());
+                                        recCash.setSerial(""+maxVno);
+
 
 
                                         SavePrint();
@@ -474,10 +571,7 @@ final ListView ListNote=dialog.findViewById(R.id.ListNote);
 //        }
 //    };
 
-    public String convertToEnglish(String value) {
-        String newValue = (((((((((((value + "").replaceAll("١", "1")).replaceAll("٢", "2")).replaceAll("٣", "3")).replaceAll("٤", "4")).replaceAll("٥", "5")).replaceAll("٦", "6")).replaceAll("٧", "7")).replaceAll("٨", "8")).replaceAll("٩", "9")).replaceAll("٠", "0").replaceAll("٫", "."));
-        return newValue;
-    }
+
 
     void init() {
 
@@ -511,7 +605,53 @@ final ListView ListNote=dialog.findViewById(R.id.ListNote);
         searchs= findViewById(R.id.searchs);
 
         custList = findViewById(R.id.cust_list);
+
+        editRecCashButton=findViewById(R.id.editRecCash);
+        editRecNoLinear=findViewById(R.id.editRecNoLinear);
+        RecCashEditText=findViewById(R.id.RecCashEditText);
+        editRecNoLinear.setVisibility(View.GONE);
+        editRecCashButton.setVisibility(View.GONE);
+        recCashEdit=new RecCash();
+
 //        toolbar=findViewById(R.id.appBar);
 
+//        barCode=findViewById(R.id.barcode);
+
     }
+
+    public void readBarCode(TextView itemCodeText, int swBarcode) {
+
+        barCodTextTemp = itemCodeText;
+        Log.e("barcode_099", "in");
+        IntentIntegrator intentIntegrator = new IntentIntegrator(Receipt.this);
+        intentIntegrator.setDesiredBarcodeFormats(intentIntegrator.ALL_CODE_TYPES);
+        intentIntegrator.setBeepEnabled(false);
+        intentIntegrator.setCameraId(0);
+        intentIntegrator.setPrompt("SCAN");
+        intentIntegrator.setBarcodeImageEnabled(false);
+        intentIntegrator.initiateScan();
+
+    }
+
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+        IntentResult Result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
+        if (Result != null) {
+            if (Result.getContents() == null) {
+                Log.d("MainActivity", "cancelled scan");
+                Toast.makeText(this, "cancelled", Toast.LENGTH_SHORT).show();
+            } else {
+                Log.d("MainActivity", "Scanned");
+//                Toast.makeText(this, getString(R.string.scan) + Result.getContents(), Toast.LENGTH_SHORT).show();
+//                TostMesage(getResources().getString(R.string.scan)+Result.getContents());
+                barCodTextTemp.setText(Result.getContents() + "");
+            }
+        } else {
+            super.onActivityResult(requestCode, resultCode, data);
+        }
+    }
+
+
 }

@@ -26,12 +26,17 @@ public class ExportJeson {
     private ProgressDialog progressDialogSave;
     private JSONObject obj;
     DatabaseHandler dbHandler;
+    GlobelFunction globelFunction;
+    String ip;
 
 
     public ExportJeson(Context context, JSONObject object) {//, JSONObject obj
         this.obj = object;
         this.context = context;
         dbHandler = new DatabaseHandler(context);
+        globelFunction=new GlobelFunction();
+        ip=globelFunction.GlobelFunctionSetting(dbHandler);
+
 //        progressDialog = new ProgressDialog(context,R.style.MyTheme);
 //        progressDialog.setCancelable(false);
 //        progressDialog.setMessage("Loading...");
@@ -99,8 +104,8 @@ public class ExportJeson {
 //                if(mainSettings.size()!=0) {
 //                    ip= mainSettings.get(0).getIP();
 //                }
-                String link = "http://"+"10.0.0.22" + "/SaveInvoice";
-//
+                String link = "http://"+ip + "/SaveInvoice";
+                Log.e("ipAdress", "ip -->" + ip);
                 String data = "JSONSTR=" + URLEncoder.encode(obj.toString(), "UTF-8");
                 Log.e("tag_link", "ExportData -->" + link);
                 Log.e("tag_data", "ExportData -->" + data);
@@ -222,13 +227,9 @@ public class ExportJeson {
         @Override
         protected String doInBackground(String... params) {///GetModifer?compno=736&compyear=2019
             try {
-//                final List<MainSetting> mainSettings=dbHandler.getAllMainSetting();
-//                String ip="";
-//                if(mainSettings.size()!=0) {
-//                    ip= mainSettings.get(0).getIP();
-//                }
-                String link = "http://"+"10.0.0.22"+ "/SaveRECCASH";
 //
+                String link = "http://"+ip+ "/SaveRECCASH";
+Log.e("ipAdress", "ip -->" + ip);
                 String data = "JSONSTR=" + URLEncoder.encode(obj.toString(), "UTF-8") ;
                 Log.e("tag_link", "ExportData -->" + link);
                 Log.e("tag_data", "ExportData -->" + data);

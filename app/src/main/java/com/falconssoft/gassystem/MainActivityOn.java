@@ -211,28 +211,34 @@ public class MainActivityOn extends AppCompatActivity {
                     switch (i){
                         case 0://تعديل فاتورة
 
-//                            Intent AddVocher= new Intent(MainActivityOn.this,MakeVoucher.class);
-//                            startActivity(AddVocher);
+                            Intent editIntent=new Intent(MainActivityOn.this,MakeVoucher.class);
+                            editIntent.putExtra("EDIT_VOUCHER","EDIT_VOUCHER");
+                            // ChequeInfo
+//                            editeIntent.putExtra("ChequeInfo",chequeInfo);
+                            startActivity(editIntent);
                             break;
                         case 1://اضافة فاتورة
                             Intent AddVocher= new Intent(MainActivityOn.this,MakeVoucher.class);
                             startActivity(AddVocher);
                             break;
                         case 2://طباعة فاتورة
-//                            Intent i= new Intent(MainActivityOn.this, Receipt.class);
-//                            startActivity(i);
+                            Intent PrintVoucherIntent= new Intent(MainActivityOn.this, PrintVoucher.class);
+                            startActivity(PrintVoucherIntent);
                             break;
                         case 3://تعديل سند قبض
-//                            Intent i= new Intent(MainActivityOn.this, Receipt.class);
-//                            startActivity(i);
+                            Intent editRecIntent=new Intent(MainActivityOn.this,Receipt.class);
+                            editRecIntent.putExtra("EDIT_REC","EDIT_REC");
+                            // ChequeInfo
+//                            editeIntent.putExtra("ChequeInfo",chequeInfo);
+                            startActivity(editRecIntent);
                             break;
                         case 4://اضافة سند قبض
                             Intent receipt= new Intent(MainActivityOn.this, Receipt.class);
                             startActivity(receipt);
                             break;
                         case 5://طباعة سند قبض
-//                            Intent i= new Intent(MainActivityOn.this, Receipt.class);
-//                            startActivity(i);
+                            Intent PrintRecCashIntent= new Intent(MainActivityOn.this, PrintRecCash.class);
+                            startActivity(PrintRecCashIntent);
                             break;
 
                         case 6://اعدادات

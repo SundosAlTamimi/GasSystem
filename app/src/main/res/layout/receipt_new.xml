@@ -22,19 +22,98 @@
             android:background="@drawable/clear_buttons"
             android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/textView19"
+            <!--<TextView-->
+                <!--android:id="@+id/textView19"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="match_parent"-->
+                <!--android:layout_marginVertical="20dp"-->
+                <!--android:layout_weight="8"-->
+                <!--android:fontFamily="serif-monospace"-->
+                <!--android:gravity="center"-->
+                <!--android:text="سند قبض "-->
+                <!--android:textAlignment="center"-->
+                <!--android:textColor="@color/Orange"-->
+                <!--android:textSize="30sp"-->
+                <!--android:textStyle="bold" />-->
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginVertical="20dp"
                 android:layout_weight="8"
-                android:fontFamily="serif-monospace"
+                android:orientation="horizontal">
+                <TextView
+                    android:id="@+id/textView8"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginVertical="5dp"
+                    android:layout_weight="1"
+                    android:fontFamily="serif-monospace"
+                    android:gravity="center"
+                    android:text="سند قبض "
+                    android:textAlignment="center"
+                    android:textColor="@color/Orange"
+                    android:textSize="30sp"
+                    android:textStyle="bold" />
+                <!--<Button-->
+                    <!--android:id="@+id/barcode"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="50dp"-->
+                    <!--android:layout_weight="4"-->
+                    <!--android:background="@drawable/ic_graphic_eq_black_24dp"-->
+                    <!--android:textAllCaps="false"-->
+                    <!--android:backgroundTint="@color/Orange"-->
+                    <!--android:textColor="@color/white"-->
+                    <!--android:textSize="10sp" />-->
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/editRecNoLinear"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="3dp"
+                android:layout_weight="8"
+                android:background="@drawable/edit_bac_s"
                 android:gravity="center"
-                android:text="سند قبض "
-                android:textAlignment="center"
-                android:textColor="@color/Orange"
-                android:textSize="30sp"
-                android:textStyle="bold" />
+                android:visibility="gone"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:elevation="5dp"
+                    android:inputType="number"
+                    android:padding="5dp"
+                    android:text="رقم الفاتوره "
+                    android:textColor="@color/white_dark"
+                    android:textSize="14sp" />
+
+                <EditText
+                    android:id="@+id/RecCashEditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
+
+                    android:elevation="2dp"
+                    android:gravity="center"
+                    android:inputType="number"
+                    android:lines="1"
+                    android:nextFocusDown="@id/current_read"
+                    android:padding="5dp"
+                    android:textColor="@color/white_dark"
+                    android:textSize="14sp" />
+
+                <!--<TextView-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_marginRight="10dp"-->
+                <!--android:layout_weight="1"-->
+                <!--android:text="16072"-->
+                <!--android:textColor="@color/darkblue_"-->
+                <!--android:textSize="12sp" />-->
+
+            </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/linear"
@@ -96,7 +175,7 @@
                         android:textColor="@color/white_dark"
                         android:textSize="18sp" />
 
-                    <EditText
+                    <TextView
                         android:id="@+id/receipt_no"
                         android:layout_width="match_parent"
 
@@ -171,7 +250,7 @@
                         android:textColor="@color/white_dark"
                         android:textSize="18sp" />
 
-                    <EditText
+                    <TextView
                         android:id="@+id/project"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -203,7 +282,7 @@
                         android:textColor="@color/white_dark"
                         android:textSize="16sp" />
 
-                    <EditText
+                    <TextView
                         android:id="@+id/last_balance"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -236,7 +315,7 @@
                         android:textColor="@color/white_dark"
                         android:textSize="18sp" />
 
-                    <EditText
+                    <TextView
                         android:id="@+id/account_no"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -268,7 +347,7 @@
                         android:textColor="@color/white_dark"
                         android:textSize="18sp" />
 
-                    <EditText
+                    <TextView
                         android:id="@+id/counter_no"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -375,6 +454,23 @@
                     android:text="حفظ"
                     android:textColor="@color/white_dark"
                     android:textSize="18sp" />
+
+                <Button
+                    android:id="@+id/editRecCash"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+
+                    android:layout_marginRight="30dp"
+                    android:layout_weight="0"
+                    android:background="@drawable/save_yelow_btn"
+                    android:elevation="15dp"
+                    android:gravity="center"
+                    android:padding="5dp"
+                    android:text="تعديل"
+                    android:textColor="@color/white_dark"
+                    android:textSize="18sp"
+                    android:visibility="gone"/>
 
                 <Button
                     android:id="@+id/cancel_btn"

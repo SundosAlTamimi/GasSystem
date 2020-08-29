@@ -37,6 +37,8 @@ import android.widget.Toast;
 import com.falconssoft.gassystem.Modle.Customer;
 import com.falconssoft.gassystem.Modle.Voucher;
 import com.falconssoft.gassystem.Modle.VoucherModle;
+import com.google.zxing.integration.android.IntentIntegrator;
+import com.google.zxing.integration.android.IntentResult;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -44,11 +46,11 @@ import java.util.List;
 
 public class MakeVoucher extends AppCompatActivity {
 
-    Button note, save, search, yes, no, done, cancel, cancelButton,searchCu;
+    Button note, save, search, yes, no, done, cancel, cancelButton,searchCu,barCode;
     LinearLayout black, black2, dialog, noteDialog, linear, linearmain, total_linear;
     EditText counterNo, currentRead, gasReturn, serviceReturn,previousRead;
     TextView custNo, consuming, consumingValue, previousPalance, taxService, net, tax,
-            currentConsuming, lastValue, noteTextView;
+            currentConsuming, lastValue, noteTextView,barCodTextTemp;
     DatabaseHandler DHandler;
     double gasPressure = 0;
     double gasPrice = 0;
@@ -68,6 +70,12 @@ public class MakeVoucher extends AppCompatActivity {
 
     public static Customer customer;
     ListAdapterCustomerName listAdapterCustomerName;
+    GlobelFunction globelFunction;
+
+    Button editButton;
+    String intentReSend="";
+    LinearLayout editVoucherNoLinear;
+
 
     @SuppressLint({"ClickableViewAccessibility", "RestrictedApi"})
     @Override
@@ -75,6 +83,7 @@ public class MakeVoucher extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.make_voucher_new);
         init();
+        globelFunction=new GlobelFunction();
 
 //        setSupportActionBar(toolbar);
         animation = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.move_to_down);
@@ -165,7 +174,7 @@ public class MakeVoucher extends AppCompatActivity {
                 if (actionId == EditorInfo.IME_ACTION_DONE || actionId == EditorInfo.IME_ACTION_NEXT || actionId == EditorInfo.IME_ACTION_SEARCH
                         || actionId == EditorInfo.IME_NULL) {
 
-                    Customer customer = DHandler.getCustomer(counterNo.getText().toString());
+//                     customer = DHandler.getCustomer(counterNo.getText().toString());
                     String customName = customer.getCustName();
                     if (!TextUtils.isEmpty(customName)) {
 
@@ -187,7 +196,7 @@ public class MakeVoucher extends AppCompatActivity {
                 if (actionId == EditorInfo.IME_ACTION_DONE || actionId == EditorInfo.IME_ACTION_NEXT || actionId == EditorInfo.IME_ACTION_SEARCH
                         || actionId == EditorInfo.IME_NULL) {
 
-                     customer = DHandler.getCustomer(counterNo.getText().toString());
+//                     customer = DHandler.getCustomer(counterNo.getText().toString());
                     String customName = customer.getCustName();
                     if (!TextUtils.isEmpty(customName)) {
 
@@ -207,7 +216,7 @@ public class MakeVoucher extends AppCompatActivity {
                 if (actionId == EditorInfo.IME_ACTION_DONE || actionId == EditorInfo.IME_ACTION_NEXT || actionId == EditorInfo.IME_ACTION_SEARCH
                         || actionId == EditorInfo.IME_NULL) {
 
-                    Customer customer = DHandler.getCustomer(counterNo.getText().toString());
+//                    Customer customer = DHandler.getCustomer(counterNo.getText().toString());
                     String customName = customer.getCustName();
                     if (!TextUtils.isEmpty(customName)) {
 
@@ -230,7 +239,7 @@ public class MakeVoucher extends AppCompatActivity {
                     clearText();
                     if (!counterNo.getText().toString().equals("")) {
 
-                        Customer customer = DHandler.getCustomer(counterNo.getText().toString());
+                         customer = DHandler.getCustomer(counterNo.getText().toString());
                         if (customer.getCounterNo() != null) {
 
                             custNo.setText(customer.getCustName());
@@ -276,6 +285,45 @@ public class MakeVoucher extends AppCompatActivity {
             }
         });
 
+
+        barCode.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                readBarCode(counterNo, 0);
+
+            }
+        });
+
+
+
+        intentReSend = getIntent().getStringExtra("EDIT_VOUCHER");
+
+        if (intentReSend != null && intentReSend.equals("EDIT_VOUCHER")) {
+            editButton.setVisibility(View.VISIBLE);
+            save.setVisibility(View.GONE);
+            editVoucherNoLinear.setVisibility(View.VISIBLE);
+
+            barCode.setVisibility(View.GONE);
+
+        }else{
+            editButton.setVisibility(View.GONE);
+            save.setVisibility(View.VISIBLE);
+            editVoucherNoLinear.setVisibility(View.GONE);
+            barCode.setVisibility(View.VISIBLE);
+
+        }
+
+
+        editButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+//                update
+
+            }
+        });
+
+
     }
 
     public void ShowCustomerDialog(final TextView textView){
@@ -287,7 +335,7 @@ public class MakeVoucher extends AppCompatActivity {
         final EditText noteSearch=dialog.findViewById(R.id.noteSearch);
         final ListView ListNote=dialog.findViewById(R.id.ListNote);
 
-        listAdapterCustomerName = new ListAdapterCustomerName(MakeVoucher.this, customerList,textView,dialog);
+        listAdapterCustomerName = new ListAdapterCustomerName(null, customerList,textView,dialog,0,MakeVoucher.this);
         ListNote.setAdapter(listAdapterCustomerName);
 
         noteSearch.addTextChangedListener(new TextWatcher() {
@@ -310,7 +358,7 @@ public class MakeVoucher extends AppCompatActivity {
                     }
 
 
-                    listAdapterCustomerName = new ListAdapterCustomerName(MakeVoucher.this, searchCustomer,textView,dialog);
+                    listAdapterCustomerName = new ListAdapterCustomerName(null, searchCustomer,textView,dialog,0,MakeVoucher.this);
                     ListNote.setAdapter(listAdapterCustomerName);
 
 
@@ -347,34 +395,34 @@ public class MakeVoucher extends AppCompatActivity {
                                                         if (!TextUtils.isEmpty(lastValue.getText().toString())) {
 
                                                             voucherGas=new VoucherModle();
-
+                                                             int  maxVno= DHandler.getMax("VOUCHERS_TABLE")+1;
                                                             voucherGas.setCounterNo(counterNo.getText().toString());
                                                             voucherGas.setCustomerName( custNo.getText().toString());
                                                             voucherGas.setLastReader(previousRead.getText().toString());
-                                                            voucherGas.setAccNo("");
-                                                            voucherGas.setGasPressure("");
-                                                            voucherGas.setGasPrice("");
-                                                            voucherGas.setProjectName("");
-                                                            voucherGas.setPrameter("");
+                                                            voucherGas.setAccNo(customer.getAccNo());
+                                                            voucherGas.setGasPressure(""+customer.getGasPressure());
+                                                            voucherGas.setGasPrice(""+customer.getgPrice());
+                                                            voucherGas.setProjectName(customer.getProjectName());
+                                                            voucherGas.setPrameter("1");
                                                             voucherGas.setCurrentReader(currentRead.getText().toString());
-                                                            voucherGas.setCCost("");
-                                                            voucherGas.setcCostVal("");
-                                                            voucherGas.setService(taxService.getText().toString());
-                                                            voucherGas.setReQalValue("");
-                                                            voucherGas.setReaderDate("");
-                                                            voucherGas.setInvoiceType("");
-                                                            voucherGas.setInvoiceNo("");
+                                                            voucherGas.setCCost(consuming.getText().toString());
+                                                            voucherGas.setcCostVal(consumingValue.getText().toString());
+                                                            voucherGas.setService(serviceReturn.getText().toString());
+                                                            voucherGas.setReQalValue(lastValue.getText().toString());
+                                                            voucherGas.setReaderDate(globelFunction.DateInToday());
+                                                            voucherGas.setInvoiceType("502");
+                                                            voucherGas.setInvoiceNo(""+maxVno);//serial
                                                             voucherGas.setNetValue(net.getText().toString());
                                                             voucherGas.setTaxValue(tax.getText().toString());
-                                                            voucherGas.setGret("");
-                                                            voucherGas.setRemarks("");
-                                                            voucherGas.setConsumption("");
-                                                            voucherGas.setCredit("");
+                                                            voucherGas.setGret(gasReturn.getText().toString());
+                                                            voucherGas.setRemarks("");//***importAdd
+                                                            voucherGas.setConsumption(currentConsuming.getText().toString());
+                                                            voucherGas.setCredit(previousPalance.getText().toString());
                                                             voucherGas.setIsPost("0");
-                                                            voucherGas.setIsPer("1");
-                                                            voucherGas.setAllowance("");
+                                                            voucherGas.setIsPer("0");
+                                                            voucherGas.setAllowance("0");
                                                             voucherGas.setIsExport("0");
-
+                                                            voucherGas.setSerial(""+maxVno);
 
                                                               SavePrint();
 
@@ -640,7 +688,11 @@ public class MakeVoucher extends AppCompatActivity {
 //        toolbar = findViewById(R.id.appBar);
         customerList=new ArrayList<>();
         searchCu=findViewById(R.id.searchCu);
-
+        barCode=findViewById(R.id.barcode);
+        editButton=findViewById(R.id.editButton);
+        editButton.setVisibility(View.GONE);
+        editVoucherNoLinear=findViewById(R.id.editVoucherNoLinear);
+        editVoucherNoLinear.setVisibility(View.GONE);
     }
 
     void calculateFunction(double GP, double COE, double GPRC) {
@@ -833,4 +885,41 @@ public class MakeVoucher extends AppCompatActivity {
         });
 
     }
+
+    public void readBarCode(TextView itemCodeText, int swBarcode) {
+
+        barCodTextTemp = itemCodeText;
+        Log.e("barcode_099", "in");
+        IntentIntegrator intentIntegrator = new IntentIntegrator(MakeVoucher.this);
+        intentIntegrator.setDesiredBarcodeFormats(intentIntegrator.ALL_CODE_TYPES);
+        intentIntegrator.setBeepEnabled(false);
+        intentIntegrator.setCameraId(0);
+        intentIntegrator.setPrompt("SCAN");
+        intentIntegrator.setBarcodeImageEnabled(false);
+        intentIntegrator.initiateScan();
+
+    }
+
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+        IntentResult Result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
+        if (Result != null) {
+            if (Result.getContents() == null) {
+                Log.d("MainActivity", "cancelled scan");
+                Toast.makeText(this, "cancelled", Toast.LENGTH_SHORT).show();
+            } else {
+                Log.d("MainActivity", "Scanned");
+//                Toast.makeText(this, getString(R.string.scan) + Result.getContents(), Toast.LENGTH_SHORT).show();
+//                TostMesage(getResources().getString(R.string.scan)+Result.getContents());
+                barCodTextTemp.setText(Result.getContents() + "");
+            }
+        } else {
+            super.onActivityResult(requestCode, resultCode, data);
+        }
+    }
+
+
+
 }

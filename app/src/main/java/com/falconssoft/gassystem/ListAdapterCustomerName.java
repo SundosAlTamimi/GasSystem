@@ -1,5 +1,6 @@
 package com.falconssoft.gassystem;
 
+import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.view.View;
@@ -15,17 +16,24 @@ import com.falconssoft.gassystem.Modle.Remarks;
 import java.util.List;
 
 
+
 public class ListAdapterCustomerName extends BaseAdapter {
     CheckBox checkPriceed;
-    private Context context;
+    private Receipt context;
+    private Context contexts;
     TextView customerText;
     List<Customer> itemsList;
+    int flag;
  String phoneNo,language;
     Dialog dialog;
-    public ListAdapterCustomerName(Context context, List<Customer> itemsList, TextView customerText, Dialog dialog) {
+    public ListAdapterCustomerName(Receipt context, List<Customer> itemsList, TextView customerText, Dialog dialog,int flag,Context contexts) {
         this.context = context;
         this.itemsList = itemsList;
 this.dialog=dialog;
+this.flag=flag;
+
+        this.contexts = contexts;
+
         this.customerText=customerText;
     }
 
@@ -78,6 +86,10 @@ TableRow tableRow;
             @Override
             public void onClick(View v) {
                 customerText.setText(""+itemsList.get(i).getCustName());
+                if(flag==1) {
+                    context.fillRecCash(itemsList.get(i));
+                }
+
                  dialog.dismiss();
             }
         });

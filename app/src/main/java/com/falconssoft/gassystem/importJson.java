@@ -44,6 +44,7 @@ public class importJson {
     String JsonResponseSaveSwitch;
     SweetAlertDialog pd = null;
           String isAssetsIn,ip,QrUse;
+          GlobelFunction globelFunction;
 
 
     public importJson(Context context, String itemCodes, int is) {//, JSONObject obj
@@ -51,7 +52,8 @@ public class importJson {
         this.context = context;
         dbHandler = new DatabaseHandler(context);
         this.itemCode=itemCodes;
-        this.ip="10.0.0.22:8082";
+        globelFunction=new GlobelFunction();
+        this.ip=globelFunction.GlobelFunctionSetting(dbHandler);
         if(is!=0) {
             pd = new SweetAlertDialog(context, SweetAlertDialog.PROGRESS_TYPE);
             pd.getProgressHelper().setBarColor(Color.parseColor("#FDD835"));
@@ -134,14 +136,10 @@ public class importJson {
         @Override
         protected String doInBackground(String... params) {///GetModifer?compno=736&compyear=2019
             try {
-//                final List<MainSetting>mainSettings=dbHandler.getAllMainSetting();
-//                String ip="";
-//                if(mainSettings.size()!=0) {
-//                    ip= mainSettings.get(0).getIP();
-//                }
 
-//
                 String link = "http://"+ip + "/GetCustomers";
+                Log.e("ipAdress", "ip -->" + ip);
+
                 // ITEM_CARD
 //                String max=dbHandler.getMaxInDate("ITEM_CARD");
 
@@ -328,6 +326,7 @@ public class importJson {
 //                    ip=mainSettings.get(0).getIP();
 //                }
                 String link = "http://"+ip + "/GetNotes";
+                Log.e("ipAdress", "ip -->" + ip);
 
                 // ITEM_CARD
 //                String max=dbHandler.getMaxInDate("ITEM_SWITCH");
