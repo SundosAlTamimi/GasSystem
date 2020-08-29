@@ -4,9 +4,15 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.design.widget.NavigationView;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -29,10 +35,14 @@ import java.util.List;
 
 import cn.pedant.SweetAlert.SweetAlertDialog;
 
-public class MainActivityOn extends AppCompatActivity {
+public class MainActivityOn extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     RecyclerView recyclerViews;
     private List<String> picforbar;
     private List<String> pic;
+    private DrawerLayout drawerLayout;
+    private NavigationView navigationView;
+    private Toolbar toolbar;
+    private ActionBarDrawerToggle toggle;
 
     SliderLayout sliderLayout;
     private CarouselLayoutManager layoutManagerd;
@@ -43,7 +53,16 @@ public class MainActivityOn extends AppCompatActivity {
         setContentView(R.layout.new_design);
         recyclerViews = (RecyclerView) findViewById(R.id.res);
         sliderLayout = findViewById(R.id.imageSlider_2);
-      picforbar=new ArrayList<>();
+        picforbar=new ArrayList<>();
+        toolbar = findViewById(R.id.main_toolbar);
+        setSupportActionBar(toolbar);
+        navigationView = findViewById(R.id.main_nav_view);
+        drawerLayout = findViewById(R.id.main_drawerLayout);
+        toggle = new ActionBarDrawerToggle(this, drawerLayout,R.string.open, R.string.close);
+        drawerLayout.addDrawerListener(toggle);
+        toggle.syncState();
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        navigationView.setNavigationItemSelectedListener(this);
 
         picforbar.add("تعديل فاتورة");
         picforbar.add("اضافة فاتورة");
@@ -123,6 +142,37 @@ public class MainActivityOn extends AppCompatActivity {
         recyclerViews.requestFocus();
 
 
+    }
+
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+        switch (menuItem.getItemId()){
+            case R.id.menu_add_voucher:
+                Intent AddVocher= new Intent(MainActivityOn.this,MakeVoucher.class);
+                startActivity(AddVocher);
+                break;
+            case R.id.menu_edit_voucher:
+                break;
+            case R.id.menu_print_voucher:
+                break;
+            case R.id.menu_add_receipt_voucher:
+                Intent receipt= new Intent(MainActivityOn.this, Receipt.class);
+                startActivity(receipt);
+                break;
+            case R.id.menu_edit_receipt_voucher:
+                break;
+            case R.id.menu_print_receipt_voucher:
+                break;
+            case R.id.menu_import:
+                break;
+            case R.id.menu_export:
+                break;
+            case R.id.menu_settings:
+                Intent SettingIntent= new Intent(MainActivityOn.this, AppSetting.class);
+                startActivity(SettingIntent);
+                break;
+        }
+        return false;
     }
 
 
@@ -260,6 +310,16 @@ public class MainActivityOn extends AppCompatActivity {
             return list.size();
 //            return Integer.MAX_VALUE;
         }
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if (toggle.onOptionsItemSelected(item)) {
+            return true;
+        }
+
+
+        return super.onOptionsItemSelected(item);
     }
 
 

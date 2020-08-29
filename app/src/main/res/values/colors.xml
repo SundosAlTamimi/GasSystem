@@ -51,4 +51,8 @@
     <color name="darkblue_2">#032A3D</color>
     <color name="Nocolor">#00C28203</color>
     <color name="Orange">#C27603</color>
+
+    <color name="dark_gray">#535353</color>
+    <color name="dark_gray2">#2B2A2A</color>
+
 </resources>
