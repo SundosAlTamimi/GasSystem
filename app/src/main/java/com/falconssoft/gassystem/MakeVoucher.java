@@ -51,7 +51,7 @@ public class MakeVoucher extends AppCompatActivity {
     Button note, save, search, yes, no, done, cancel, cancelButton,searchCu,barCode;
     LinearLayout black, black2, dialog, noteDialog, linear, linearmain, total_linear;
     EditText counterNo, currentRead, gasReturn, serviceReturn,previousRead;
-    TextView custNo, consuming, consumingValue, previousPalance, taxService, net, tax,
+    TextView custNo, consuming, consumingValue, previousPalance, taxService, net, tax,noteRemark,
             currentConsuming, lastValue, noteTextView,barCodTextTemp;
     DatabaseHandler DHandler;
     double gasPressure = 0;
@@ -84,6 +84,8 @@ public class MakeVoucher extends AppCompatActivity {
      String maxSerialVoucher="0";
 
      Button searchCounter;
+    ListAdapterNOTE listAdapterNOTE;
+    List<Remarks > RemarkList;
 
 
     @SuppressLint({"ClickableViewAccessibility", "RestrictedApi"})
@@ -176,6 +178,9 @@ public class MakeVoucher extends AppCompatActivity {
         yes.setOnTouchListener(onTouchListener);
         no.setOnTouchListener(onTouchListener);
         counterNo.requestFocus();
+
+        RemarkList=DHandler.getAllRemark();
+
 
 //        currentRead.setOnEditorActionListener(new TextView.OnEditorActionListener() {
 //            @Override
@@ -453,6 +458,14 @@ counterNo.setEnabled(false);
         });
 
 
+        noteRemark.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ShowNoteDialog(noteRemark);
+            }
+        });
+
+
     }
 
     public void ShowCustomerCounterSerchDialog(final TextView textView){
@@ -549,7 +562,7 @@ counterNo.setEnabled(false);
                                                                     voucherGas.setNetValue(net.getText().toString());
                                                                     voucherGas.setTaxValue(tax.getText().toString());
                                                                     voucherGas.setGret(gasReturn.getText().toString());
-                                                                    voucherGas.setRemarks("");//***importAdd
+                                                                    voucherGas.setRemarks(noteRemark.getText().toString());//***importAdd
                                                                     voucherGas.setConsumption(currentConsuming.getText().toString());
                                                                     voucherGas.setCredit(previousPalance.getText().toString());
                                                                     voucherGas.setIsPost("0");
@@ -749,7 +762,7 @@ counterNo.setEnabled(false);
                                                             voucherGas.setNetValue(net.getText().toString());
                                                             voucherGas.setTaxValue(tax.getText().toString());
                                                             voucherGas.setGret(gasReturn.getText().toString());
-                                                            voucherGas.setRemarks("");//***importAdd
+                                                            voucherGas.setRemarks(noteRemark.getText().toString());//***importAdd
                                                             voucherGas.setConsumption(currentConsuming.getText().toString());
                                                             voucherGas.setCredit(previousPalance.getText().toString());
                                                             voucherGas.setIsPost("0");
@@ -836,6 +849,8 @@ counterNo.setEnabled(false);
         currentConsuming.setText("");
         lastValue.setText("");
 //        noteTextView.setText("");
+        noteRemark.setText("");
+
 
     }
 
@@ -1030,6 +1045,7 @@ counterNo.setEnabled(false);
         editVoucherNoLinear=findViewById(R.id.editVoucherNoLinear);
         editVoucherNoLinear.setVisibility(View.GONE);
         searchCounter=findViewById(R.id.searchCounter);
+        noteRemark=findViewById(R.id.noteRemark);
     }
 
     void calculateFunction(double GP, double COE, double GPRC) {
@@ -1271,11 +1287,14 @@ counterNo.setEnabled(false);
         previousPalance .setText(voucherModle.getCredit());
         gasReturn.setText(voucherModle.getGret());
         serviceReturn .setText(voucherModle.getService());
-        taxService .setText(String.valueOf(Double.parseDouble(voucherModle.getGret())+Double.parseDouble(voucherModle.getService())));
+        double taxSer=Double.parseDouble(globelFunction.DecimalFormat(""+((Double.parseDouble(voucherModle.getGret())+Double.parseDouble(voucherModle.getService())+ Double.parseDouble(voucherModle.getTaxValue())))));
+        taxService .setText(String.valueOf(taxSer));
         net .setText(voucherModle.getNetValue());
         tax.setText(voucherModle.getTaxValue());
         currentConsuming .setText(voucherModle.getConsumption());
         lastValue .setText(voucherModle.getReQalValue());
+        noteRemark.setText(voucherModle.getRemarks());
+
 
     }
 
@@ -1295,8 +1314,62 @@ counterNo.setEnabled(false);
         tax.setText("");
         currentConsuming .setText("");
         lastValue .setText("");
+        noteRemark.setText("");
 
     }
+
+
+    public void ShowNoteDialog(final TextView textView){
+        final Dialog dialog = new Dialog(this,R.style.Theme_Dialog);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.note_dialog_show);
+        dialog.setCancelable(true);
+
+        final EditText noteSearch=dialog.findViewById(R.id.noteSearch);
+        final ListView ListNote=dialog.findViewById(R.id.ListNote);
+
+        listAdapterNOTE = new ListAdapterNOTE(MakeVoucher.this, RemarkList,textView,dialog);
+        ListNote.setAdapter(listAdapterNOTE);
+
+        noteSearch.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+                if(!noteSearch.getText().toString().equals("")){
+                    List<Remarks> searchRemark=new ArrayList<>();
+                    searchRemark.clear();
+                    for(int i=0;i<RemarkList.size();i++){
+                        if(RemarkList.get(i).getBody().contains(noteSearch.getText().toString())||RemarkList.get(i).getTitle().contains(noteSearch.getText().toString())){
+                            searchRemark.add(RemarkList.get(i));
+
+                        }
+                    }
+
+                    listAdapterNOTE = new ListAdapterNOTE(MakeVoucher.this, searchRemark,textView,dialog);
+                    ListNote.setAdapter(listAdapterNOTE);
+
+                }else {
+                    listAdapterNOTE = new ListAdapterNOTE(MakeVoucher.this, RemarkList,textView,dialog);
+                    ListNote.setAdapter(listAdapterNOTE);
+                }
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
+        dialog.show();
+
+    }
+
 
 
 

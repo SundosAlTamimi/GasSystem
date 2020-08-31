@@ -945,7 +945,8 @@ public class BluetoothConnectMenu extends Activity {
 //        consuming.setText(""+voucher.getConsuming());
 //        consumingValue.setText(""+voucher.getConsumingValue());
         previousPalance.setText(""+voucher.getCredit());
-        taxService.setText(String.valueOf(Double.parseDouble(voucher.getGret())+Double.parseDouble(voucher.getService())));
+        double taxSer=Double.parseDouble(globelFunction.DecimalFormat(""+((Double.parseDouble(voucher.getGret())+Double.parseDouble(voucher.getService())+ Double.parseDouble(voucher.getTaxValue())))));
+        taxService .setText(String.valueOf(taxSer));
         net.setText(""+voucher.getNetValue());
         tax.setText(""+voucher.getTaxValue());
         currentConsuming.setText(""+voucher.getConsumption());

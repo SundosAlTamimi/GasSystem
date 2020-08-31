@@ -23,7 +23,7 @@ import static com.falconssoft.gassystem.MakeVoucher.voucherGas;
 public class PrintVoucher extends AppCompatActivity {
 
     TextView counterNo, currentRead, gasReturn, serviceReturn,previousRead;
-    TextView custNo, consuming, consumingValue, previousPalance, taxService, net, tax,
+    TextView custNo, consuming, consumingValue, previousPalance, taxService, net, tax,noteRemark,
             currentConsuming, lastValue, noteTextView,barCodTextTemp;
     EditText voucherNo;
     VoucherModle voucherModle;
@@ -31,6 +31,7 @@ public class PrintVoucher extends AppCompatActivity {
     Button cancel,print;
     boolean PrintOn=false;
 
+    GlobelFunction globelFunction;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -39,7 +40,7 @@ public class PrintVoucher extends AppCompatActivity {
         setContentView(R.layout.print_voucher_new);
         init();
 //        getVoucherByVoucherNo
-
+        globelFunction=new GlobelFunction();
         voucherNo.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
@@ -113,11 +114,13 @@ public class PrintVoucher extends AppCompatActivity {
         previousPalance .setText(voucherModle.getCredit());
         gasReturn.setText(voucherModle.getGret());
         serviceReturn .setText(voucherModle.getService());
-        taxService .setText(String.valueOf(Double.parseDouble(voucherModle.getGret())+Double.parseDouble(voucherModle.getService())));
+        double taxSer=Double.parseDouble(globelFunction.DecimalFormat(""+((Double.parseDouble(voucherModle.getGret())+Double.parseDouble(voucherModle.getService())+ Double.parseDouble(voucherModle.getTaxValue())))));
+        taxService .setText(String.valueOf(taxSer));
         net .setText(voucherModle.getNetValue());
         tax.setText(voucherModle.getTaxValue());
         currentConsuming .setText(voucherModle.getConsumption());
         lastValue .setText(voucherModle.getReQalValue());
+        noteRemark.setText(voucherModle.getRemarks());
 
     }
 
@@ -137,6 +140,7 @@ public class PrintVoucher extends AppCompatActivity {
         tax.setText("");
         currentConsuming .setText("");
         lastValue .setText("");
+        noteRemark.setText("");
 
     }
 
@@ -161,6 +165,8 @@ public class PrintVoucher extends AppCompatActivity {
         databaseHandler=new DatabaseHandler(PrintVoucher.this);
         cancel=findViewById(R.id.cancelPrintVoucherButton);
         print=findViewById(R.id.PrintVoucherButton);
+        noteRemark=findViewById(R.id.noteRemark);
+
 
     }
 

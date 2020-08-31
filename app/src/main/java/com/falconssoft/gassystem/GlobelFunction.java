@@ -8,6 +8,7 @@ import android.util.Log;
 import com.falconssoft.gassystem.Modle.Customer;
 import com.falconssoft.gassystem.Modle.SettingModle;
 
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -66,6 +67,17 @@ public class GlobelFunction {
         SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
         String today = df.format(currentTimeAndDate);
         return convertToEnglish(today);
+    }
+
+
+    public  String DecimalFormat(String value){
+        String returnVale="";
+        double valueD=Double.parseDouble(value);
+        DecimalFormat threeDForm;
+        threeDForm = new DecimalFormat("#.###");
+        returnVale=convertToEnglish(threeDForm.format(valueD));
+
+        return  returnVale;
     }
 
 
