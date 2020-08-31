@@ -2,29 +2,36 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="370dp"
+    android:layout_width="320dp"
     android:layout_height="wrap_content"
     android:orientation="vertical"
     >
-
-
+<!--370dp pda-->
+<!---->
     <LinearLayout
         android:id="@+id/linerForPrint"
-        android:layout_width="370dp"
+        android:layout_width="320dp"
         android:layout_height="wrap_content"
         android:background="@color/white"
         android:layoutDirection="rtl"
         android:orientation="vertical">
 
         <LinearLayout
-            android:layout_width="370dp"
+            android:layout_width="320dp"
             android:layout_height="wrap_content"
             android:gravity="center"
             android:orientation="vertical">
 
+
+            <ImageView
+                android:id="@+id/logoPic"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:src="@drawable/gas_" />
+
             <TextView
                 android:id="@+id/textView4"
-                android:layout_width="370dp"
+                android:layout_width="320dp"
                 android:layout_height="wrap_content"
                 android:text="التحكم التقني للغاز المركزي  "
                 android:textAlignment="center"
@@ -43,12 +50,12 @@
                 android:textSize="16sp" />
 
             <TextView
-                android:layout_width="370dp"
+                android:layout_width="320dp"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:text="---------------------------------------------------------------------------------"
+                android:text="------------------------------------------------------------------"
                 android:textColor="@color/black" />
-
+<!--/"-&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;-->
             <TableRow
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -75,62 +82,63 @@
 
 
             <TextView
-                android:layout_width="370dp"
+                android:layout_width="320dp"
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:text="===================================="
                 android:textColor="@color/black" />
 
-
+            <!--====================================-->
             <TextView
-                android:layout_width="370dp"
+                android:layout_width="320dp"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:text="------------------------------ارقام الاتصال--------------------------------"
+                android:text="-------------------ارقام الاتصال-------------------"
                 android:textColor="@color/black" />
+            <!--&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;ارقام الاتصال&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;-->
             <TextView
-                android:layout_width="370dp"
+                android:layout_width="320dp"
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:text="0799521940 - 065355760"
                 android:textColor="@color/black" />
             <TextView
-                android:layout_width="370dp"
+                android:layout_width="320dp"
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:text="فاكس : 065355760"
                 android:textColor="@color/black" />
             <TextView
-                android:layout_width="370dp"
+                android:layout_width="320dp"
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:text="الجبيهة : اشارات المنهل"
                 android:textColor="@color/black" />
 
             <TextView
-                android:layout_width="370dp"
+                android:layout_width="320dp"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:text="- ---------------------------اسم المشروع ----------------------------"
+                android:text="----------------- اسم المشروع -----------------"
                 android:textColor="@color/black" />
-
+            <!-- - -&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;اسم المشروع &#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;-->
             <TextView
                 android:id="@+id/projectName"
-                android:layout_width="370dp"
+                android:layout_width="320dp"
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:text="شركة ابراج الكرامه للاسكان 1"
                 android:textColor="@color/black" />
             <TextView
-                android:layout_width="370dp"
+                android:layout_width="320dp"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:text="---------------------------------------------------------------------------------"
+                android:text="------------------------------------------------------------------"
                 android:textColor="@color/black" />
 
-
+            <!-- -&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;-->
             <TableRow
-                android:layout_width="370dp"
+                android:layout_width="320dp"
                 android:layout_height="wrap_content"
                 android:padding="5dp"
                 tools:visibility="visible">
@@ -174,12 +182,12 @@
 
 
             <TextView
-                android:layout_width="370dp"
+                android:layout_width="320dp"
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:text="===================================="
                 android:textColor="@color/black" />
-
+            <!--====================================-->
         </LinearLayout>
 
         <!--<LinearLayout-->

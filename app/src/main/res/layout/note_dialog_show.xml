@@ -34,7 +34,7 @@
                     android:fontFamily="serif-monospace"
                     android:gravity="center"
                     android:padding="5dp"
-                    android:text=" Search "
+                    android:text=" البحث "
                     android:textAllCaps="true"
                     android:textColor="@color/Orange"
                     android:textSize="25sp"
@@ -44,7 +44,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/edit_bac_s"
-                    android:padding="5dp">
+                    android:padding="5dp"
+                    android:layoutDirection="rtl">
 
                     <TextView
                         android:id="@+id/textView5"
@@ -53,7 +54,7 @@
                         android:layout_weight="1"
                         android:fontFamily="serif-monospace"
                         android:gravity="center"
-                        android:text="Note Tital/Body"
+                        android:text=" المحتوى /\ الملاحظه العنوان  "
                         android:textColor="@color/white_dark"
                         android:textSize="16sp" />
 
@@ -64,6 +65,8 @@
                         android:layout_weight="1"
                         android:ems="5"
                         android:gravity="center"
+                        android:textCursorDrawable="@drawable/cursor_edit_text"
+
                         android:inputType="textPersonName"
                         android:textColor="@color/white_dark"
                         android:textSize="16sp" />
@@ -89,7 +92,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:gravity="center"
-                            android:text="Tital"
+                            android:text="العنوان"
                             android:fontFamily="serif-monospace"
 
                             android:textColor="@color/Orange"
@@ -103,7 +106,7 @@
                             android:gravity="center"
                             android:fontFamily="serif-monospace"
 
-                            android:text="Body"
+                            android:text="المحتوى"
 
                             android:textColor="@color/Orange"
                             android:textSize="16sp" />

@@ -40,7 +40,7 @@
     <color name="exit_hover">#E77471</color>
     <color name="light_blue_over">#E0FFFF</color>
     <color name="light_blue">#C2DFFF</color>
-    <color name="dark_blue">#89cbee</color>
+    <color name="dark_blue">#47B5EE</color>
     <color name="blue_ice">#368BC1</color>
     <color name="jeans_blue">#a0cfec</color>
     <color name="floor">#A4E8ADAA</color>
@@ -54,5 +54,6 @@
 
     <color name="dark_gray">#535353</color>
     <color name="dark_gray2">#2B2A2A</color>
+    <color name="blue">#0889FA</color>
 
 </resources>

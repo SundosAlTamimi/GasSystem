@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="370dp"
+    android:layout_width="320dp"
     android:layout_height="wrap_content"
     android:orientation="vertical"
     >
@@ -9,14 +9,14 @@
 
     <LinearLayout
         android:id="@+id/linerForPrint"
-        android:layout_width="370dp"
+        android:layout_width="320dp"
         android:layout_height="wrap_content"
         android:background="@color/white"
         android:layoutDirection="rtl"
         android:orientation="vertical">
 
         <!--<LinearLayout-->
-            <!--android:layout_width="370dp"-->
+            <!--android:layout_width="320dp"-->
             <!--android:layout_height="wrap_content"-->
             <!--android:gravity="center"-->
             <!--android:orientation="vertical">-->
@@ -159,14 +159,13 @@
         <!--</LinearLayout>-->
 
         <LinearLayout
-            android:layout_width="370dp"
+            android:layout_width="320dp"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="5dp">
+            android:orientation="vertical">
 
             <LinearLayout
                 android:id="@+id/linearmain"
-                android:layout_width="match_parent"
+                android:layout_width="320dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="2dp"
                 android:layout_marginTop="5dp"
@@ -207,10 +206,36 @@
 
                 </LinearLayout>
 
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+
+                    android:layout_marginBottom="2dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content"
+                        android:elevation="5dp"
+                        android:padding="5dp"
+                        android:text="تاريخ السند"
+                        android:textColor="@color/black"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/recDate"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="10dp"
+                        android:elevation="2dp"
+                        android:gravity="start"
+                        android:padding="5dp"
+                        android:text=""
+                        android:textColor="@color/black"
+                        android:textSize="16sp" />
 
 
-
-
+                </LinearLayout>
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -234,13 +259,14 @@
                         android:layout_marginRight="10dp"
                         android:elevation="2dp"
                         android:gravity="start"
-                        android:text="12545"
                         android:padding="5dp"
+                        android:text="12545"
                         android:textColor="@color/black"
                         android:textSize="16sp" />
 
 
                 </LinearLayout>
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -263,13 +289,14 @@
                         android:layout_height="wrap_content"
                         android:layout_marginRight="10dp"
                         android:elevation="2dp"
-                        android:gravity="end"
+                        android:gravity="start"
                         android:padding="5dp"
                         android:textColor="@color/black"
                         android:textSize="16sp" />
 
 
                 </LinearLayout>
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -306,6 +333,7 @@
                     <!--android:textSize="12sp" />-->
 
                 </LinearLayout>
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -328,23 +356,36 @@
                         android:layout_marginRight="10dp"
                         android:layout_weight="1"
                         android:elevation="2dp"
-                        android:text="فليس"
                         android:padding="5dp"
+                        android:gravity="center"
+                        android:text="فيلس"
+                        android:textColor="@color/black"
+                        android:textSize="16sp" />
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0"
+                        android:gravity="center"
+                        android:padding="5dp"
+                        android:text="."
                         android:textColor="@color/black"
                         android:textSize="16sp" />
 
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginRight="10dp"
                         android:layout_weight="1"
                         android:elevation="2dp"
-                        android:text="دينار"
                         android:padding="5dp"
+                        android:gravity="center"
+                        android:text="دينار"
                         android:textColor="@color/black"
                         android:textSize="16sp" />
 
                 </LinearLayout>
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -368,7 +409,21 @@
                         android:layout_weight="1"
                         android:elevation="2dp"
                         android:padding="5dp"
+                        android:gravity="center"
+
                         android:text="0000"
+                        android:textColor="@color/black"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/textView10"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0"
+                        android:gravity="center"
+
+                        android:padding="5dp"
+                        android:text="."
                         android:textColor="@color/black"
                         android:textSize="16sp" />
 
@@ -376,19 +431,22 @@
                         android:id="@+id/jd"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginRight="10dp"
                         android:layout_weight="1"
                         android:elevation="2dp"
+                        android:gravity="center"
+
                         android:padding="5dp"
                         android:text="54"
                         android:textColor="@color/black"
                         android:textSize="16sp" />
 
                 </LinearLayout>
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
 
+                    android:visibility="gone"
                     android:layout_marginBottom="2dp"
                     android:orientation="horizontal">
 
@@ -412,21 +470,20 @@
                         android:textSize="16sp" />
 
                 </LinearLayout>
+
                 <TextView
-                    android:layout_width="370dp"
+                    android:layout_width="320dp"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:text="----------------------------------------------"
+                    android:text="--------------------------------------------------"
                     android:textColor="@color/black" />
 
                 <TextView
-                    android:layout_width="370dp"
+                    android:layout_width="320dp"
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:text="===================================="
                     android:textColor="@color/black" />
-
-
 
 
                 <TextView
@@ -437,14 +494,15 @@
 
 
                 <TextView
-                    android:layout_width="370dp"
+                    android:id="@+id/remarkRec"
+                    android:layout_width="315dp"
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:text=""
                     android:textColor="@color/black" />
 
                 <TextView
-                    android:layout_width="370dp"
+                    android:layout_width="320dp"
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:text=""
@@ -452,7 +510,7 @@
 
 
                 <TextView
-                    android:layout_width="370dp"
+                    android:layout_width="320dp"
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:text="===================================="
@@ -460,21 +518,21 @@
 
 
                 <TextView
-                    android:layout_width="370dp"
+                    android:layout_width="320dp"
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:text="===================================="
                     android:textColor="@color/black" />
 
                 <TextView
-                    android:layout_width="370dp"
+                    android:layout_width="320dp"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:text="ملاحظه : يعتمد سند القبض توقيع"
+                    android:text="ملاحظه : يعتمد سند القبض بدون توقيع"
                     android:textColor="@color/black" />
 
                 <TextView
-                    android:layout_width="370dp"
+                    android:layout_width="320dp"
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:text="===================================="
@@ -491,8 +549,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:elevation="2dp"
+                        android:padding="5dp"
                         android:text="المستلم : "
-                        android:padding="5dp"
                         android:textColor="@color/black"
                         android:textSize="16sp" />
 
@@ -503,20 +561,20 @@
                         android:layout_weight="1"
                         android:elevation="2dp"
                         android:padding="5dp"
-                        android:text="_________"
+                        android:text="______"
                         android:textColor="@color/black"
                         android:textSize="16sp" />
-
+                    <!--_________-->
                     <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="10dp"
-                    android:layout_weight="1"
-                    android:elevation="2dp"
-                    android:padding="5dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="10dp"
+                        android:layout_weight="1"
+                        android:elevation="2dp"
+                        android:padding="5dp"
                         android:text="التوقيع : "
-                    android:textColor="@color/black"
-                    android:textSize="16sp" />
+                        android:textColor="@color/black"
+                        android:textSize="16sp" />
 
 
                     <TextView
@@ -526,105 +584,105 @@
                         android:layout_weight="1"
                         android:elevation="2dp"
                         android:padding="5dp"
-                        android:text="_________"
+                        android:text="______"
                         android:textColor="@color/black"
                         android:textSize="16sp" />
-
+                    <!--_________-->
                 </LinearLayout>
 
 
                 <!--<LinearLayout-->
-                    <!--android:layout_width="match_parent"-->
-                    <!--android:layout_height="wrap_content"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
 
-                    <!--android:layout_marginTop="5dp"-->
-                    <!--android:layout_marginBottom="2dp"-->
-                    <!--android:orientation="horizontal">-->
+                <!--android:layout_marginTop="5dp"-->
+                <!--android:layout_marginBottom="2dp"-->
+                <!--android:orientation="horizontal">-->
 
-                    <!--<TextView-->
-                        <!--android:layout_width="100dp"-->
-                        <!--android:layout_height="wrap_content"-->
-                        <!--android:elevation="2dp"-->
-                        <!--android:padding="5dp"-->
-                        <!--android:text="بدل اعادة غاز"-->
-                        <!--android:textColor="@color/black"-->
-                        <!--android:textSize="14sp" />-->
+                <!--<TextView-->
+                <!--android:layout_width="100dp"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:elevation="2dp"-->
+                <!--android:padding="5dp"-->
+                <!--android:text="بدل اعادة غاز"-->
+                <!--android:textColor="@color/black"-->
+                <!--android:textSize="14sp" />-->
 
-                    <!--<TextView-->
-                        <!--android:id="@+id/gas_return"-->
-                        <!--android:layout_width="match_parent"-->
-                        <!--android:layout_height="wrap_content"-->
+                <!--<TextView-->
+                <!--android:id="@+id/gas_return"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
 
-                        <!--android:layout_marginRight="10dp"-->
-                        <!--android:elevation="2dp"-->
-                        <!--android:inputType="numberDecimal"-->
-                        <!--android:padding="5dp"-->
+                <!--android:layout_marginRight="10dp"-->
+                <!--android:elevation="2dp"-->
+                <!--android:inputType="numberDecimal"-->
+                <!--android:padding="5dp"-->
 
-                        <!--android:text="0.0"-->
-                        <!--android:textColor="@color/black"-->
-                        <!--android:textSize="14sp" />-->
-
-                <!--</LinearLayout>-->
-
-                <!--<LinearLayout-->
-                    <!--android:layout_width="match_parent"-->
-                    <!--android:layout_height="wrap_content"-->
-
-                    <!--android:layout_marginBottom="2dp"-->
-                    <!--android:orientation="horizontal">-->
-
-                    <!--<TextView-->
-                        <!--android:layout_width="100dp"-->
-                        <!--android:layout_height="wrap_content"-->
-                        <!--android:elevation="2dp"-->
-                        <!--android:padding="5dp"-->
-                        <!--android:text="بدل الخدمات"-->
-                        <!--android:textColor="@color/black"-->
-                        <!--android:textSize="14sp" />-->
-
-                    <!--<TextView-->
-                        <!--android:id="@+id/service_return"-->
-                        <!--android:layout_width="match_parent"-->
-                        <!--android:layout_height="wrap_content"-->
-
-                        <!--android:layout_marginRight="10dp"-->
-                        <!--android:elevation="2dp"-->
-                        <!--android:inputType="numberDecimal"-->
-                        <!--android:padding="5dp"-->
-
-                        <!--android:text="0.0"-->
-                        <!--android:textColor="@color/black"-->
-                        <!--android:textSize="14sp" />-->
-
+                <!--android:text="0.0"-->
+                <!--android:textColor="@color/black"-->
+                <!--android:textSize="14sp" />-->
 
                 <!--</LinearLayout>-->
 
                 <!--<LinearLayout-->
-                    <!--android:layout_width="match_parent"-->
-                    <!--android:layout_height="wrap_content"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
 
-                    <!--android:layout_marginBottom="2dp"-->
-                    <!--android:orientation="horizontal">-->
+                <!--android:layout_marginBottom="2dp"-->
+                <!--android:orientation="horizontal">-->
 
-                    <!--<TextView-->
-                        <!--android:layout_width="170dp"-->
-                        <!--android:layout_height="wrap_content"-->
-                        <!--android:elevation="2dp"-->
-                        <!--android:padding="5dp"-->
-                        <!--android:text="مجموع بدل الخدمات بعد الضريبة"-->
-                        <!--android:textColor="@color/black"-->
-                        <!--android:textSize="12sp" />-->
+                <!--<TextView-->
+                <!--android:layout_width="100dp"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:elevation="2dp"-->
+                <!--android:padding="5dp"-->
+                <!--android:text="بدل الخدمات"-->
+                <!--android:textColor="@color/black"-->
+                <!--android:textSize="14sp" />-->
 
-                    <!--<TextView-->
-                        <!--android:id="@+id/tax_services"-->
-                        <!--android:layout_width="match_parent"-->
-                        <!--android:layout_height="wrap_content"-->
-                        <!--android:layout_marginRight="10dp"-->
-                        <!--android:elevation="2dp"-->
-                        <!--android:inputType="number"-->
-                        <!--android:padding="5dp"-->
-                        <!--android:textColor="@color/black"-->
-                        <!--android:textSize="14sp" />-->
+                <!--<TextView-->
+                <!--android:id="@+id/service_return"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+
+                <!--android:layout_marginRight="10dp"-->
+                <!--android:elevation="2dp"-->
+                <!--android:inputType="numberDecimal"-->
+                <!--android:padding="5dp"-->
+
+                <!--android:text="0.0"-->
+                <!--android:textColor="@color/black"-->
+                <!--android:textSize="14sp" />-->
+
+
+                <!--</LinearLayout>-->
+
+                <!--<LinearLayout-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+
+                <!--android:layout_marginBottom="2dp"-->
+                <!--android:orientation="horizontal">-->
+
+                <!--<TextView-->
+                <!--android:layout_width="170dp"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:elevation="2dp"-->
+                <!--android:padding="5dp"-->
+                <!--android:text="مجموع بدل الخدمات بعد الضريبة"-->
+                <!--android:textColor="@color/black"-->
+                <!--android:textSize="12sp" />-->
+
+                <!--<TextView-->
+                <!--android:id="@+id/tax_services"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_marginRight="10dp"-->
+                <!--android:elevation="2dp"-->
+                <!--android:inputType="number"-->
+                <!--android:padding="5dp"-->
+                <!--android:textColor="@color/black"-->
+                <!--android:textSize="14sp" />-->
 
 
                 <!--</LinearLayout>-->
@@ -632,151 +690,151 @@
             </LinearLayout>
 
             <!--<TextView-->
-                <!--android:layout_width="370dp"-->
-                <!--android:layout_height="3dp"-->
-                <!--android:layout_marginLeft="5dp"-->
-                <!--android:layout_marginTop="5dp"-->
-                <!--android:layout_marginRight="5dp"-->
-                <!--android:background="@color/black" />-->
+            <!--android:layout_width="370dp"-->
+            <!--android:layout_height="3dp"-->
+            <!--android:layout_marginLeft="5dp"-->
+            <!--android:layout_marginTop="5dp"-->
+            <!--android:layout_marginRight="5dp"-->
+            <!--android:background="@color/black" />-->
 
             <!--<LinearLayout-->
-                <!--android:id="@+id/total_layout"-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_gravity="center"-->
-                <!--android:layout_marginTop="5dp"-->
-                <!--android:background="@drawable/back_white"-->
-                <!--android:elevation="3dp"-->
-                <!--android:gravity="center"-->
-                <!--android:orientation="vertical"-->
-                <!--android:padding="5dp">-->
+            <!--android:id="@+id/total_layout"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_gravity="center"-->
+            <!--android:layout_marginTop="5dp"-->
+            <!--android:background="@drawable/back_white"-->
+            <!--android:elevation="3dp"-->
+            <!--android:gravity="center"-->
+            <!--android:orientation="vertical"-->
+            <!--android:padding="5dp">-->
 
-                <!--<LinearLayout-->
-                    <!--android:layout_width="match_parent"-->
-                    <!--android:layout_height="match_parent"-->
+            <!--<LinearLayout-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent"-->
 
-                    <!--android:gravity="center_horizontal"-->
-                    <!--android:orientation="vertical">-->
+            <!--android:gravity="center_horizontal"-->
+            <!--android:orientation="vertical">-->
 
-                    <!--<LinearLayout-->
-                        <!--android:layout_width="match_parent"-->
-                        <!--android:layout_height="wrap_content"-->
-                        <!--android:layout_marginBottom="2dp"-->
-                        <!--android:orientation="horizontal">-->
+            <!--<LinearLayout-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginBottom="2dp"-->
+            <!--android:orientation="horizontal">-->
 
-                        <!--<TextView-->
-                            <!--android:layout_width="100dp"-->
-                            <!--android:layout_height="wrap_content"-->
-                            <!--android:elevation="2dp"-->
-                            <!--android:padding="5dp"-->
-                            <!--android:text="الصافي"-->
-                            <!--android:textColor="@color/black"-->
-                            <!--android:textSize="14sp" />-->
+            <!--<TextView-->
+            <!--android:layout_width="100dp"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:elevation="2dp"-->
+            <!--android:padding="5dp"-->
+            <!--android:text="الصافي"-->
+            <!--android:textColor="@color/black"-->
+            <!--android:textSize="14sp" />-->
 
-                        <!--<TextView-->
-                            <!--android:id="@+id/net"-->
-                            <!--android:layout_width="match_parent"-->
-                            <!--android:layout_height="wrap_content"-->
-                            <!--android:layout_marginRight="10dp"-->
-                            <!--android:elevation="2dp"-->
+            <!--<TextView-->
+            <!--android:id="@+id/net"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginRight="10dp"-->
+            <!--android:elevation="2dp"-->
 
-                            <!--android:inputType="number"-->
-                            <!--android:padding="5dp"-->
-                            <!--android:textColor="@color/black"-->
-                            <!--android:textSize="14sp" />-->
+            <!--android:inputType="number"-->
+            <!--android:padding="5dp"-->
+            <!--android:textColor="@color/black"-->
+            <!--android:textSize="14sp" />-->
 
-                    <!--</LinearLayout>-->
+            <!--</LinearLayout>-->
 
-                    <!--<LinearLayout-->
-                        <!--android:layout_width="match_parent"-->
-                        <!--android:layout_height="wrap_content"-->
-                        <!--android:layout_marginBottom="2dp"-->
-                        <!--android:orientation="horizontal">-->
+            <!--<LinearLayout-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginBottom="2dp"-->
+            <!--android:orientation="horizontal">-->
 
-                        <!--<TextView-->
-                            <!--android:layout_width="100dp"-->
-                            <!--android:layout_height="wrap_content"-->
+            <!--<TextView-->
+            <!--android:layout_width="100dp"-->
+            <!--android:layout_height="wrap_content"-->
 
-                            <!--android:elevation="2dp"-->
-                            <!--android:padding="5dp"-->
-                            <!--android:text="الضريبة"-->
-                            <!--android:textColor="@color/black"-->
-                            <!--android:textSize="14sp" />-->
+            <!--android:elevation="2dp"-->
+            <!--android:padding="5dp"-->
+            <!--android:text="الضريبة"-->
+            <!--android:textColor="@color/black"-->
+            <!--android:textSize="14sp" />-->
 
-                        <!--<TextView-->
-                            <!--android:id="@+id/tax"-->
-                            <!--android:layout_width="match_parent"-->
-                            <!--android:layout_height="wrap_content"-->
-                            <!--android:layout_marginRight="10dp"-->
-                            <!--android:elevation="2dp"-->
-                            <!--android:inputType="number"-->
-                            <!--android:padding="5dp"-->
-                            <!--android:textColor="@color/black"-->
-                            <!--android:textSize="14sp" />-->
+            <!--<TextView-->
+            <!--android:id="@+id/tax"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginRight="10dp"-->
+            <!--android:elevation="2dp"-->
+            <!--android:inputType="number"-->
+            <!--android:padding="5dp"-->
+            <!--android:textColor="@color/black"-->
+            <!--android:textSize="14sp" />-->
 
-                    <!--</LinearLayout>-->
+            <!--</LinearLayout>-->
 
-                    <!--<LinearLayout-->
-                        <!--android:layout_width="match_parent"-->
-                        <!--android:layout_height="wrap_content"-->
-                        <!--android:layout_marginBottom="2dp"-->
-                        <!--android:orientation="horizontal">-->
+            <!--<LinearLayout-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginBottom="2dp"-->
+            <!--android:orientation="horizontal">-->
 
-                        <!--<TextView-->
-                            <!--android:layout_width="100dp"-->
-                            <!--android:layout_height="wrap_content"-->
+            <!--<TextView-->
+            <!--android:layout_width="100dp"-->
+            <!--android:layout_height="wrap_content"-->
 
-                            <!--android:elevation="2dp"-->
-                            <!--android:padding="5dp"-->
-                            <!--android:text="استهلاك الفترة"-->
-                            <!--android:textColor="@color/black"-->
-                            <!--android:textSize="14sp" />-->
+            <!--android:elevation="2dp"-->
+            <!--android:padding="5dp"-->
+            <!--android:text="استهلاك الفترة"-->
+            <!--android:textColor="@color/black"-->
+            <!--android:textSize="14sp" />-->
 
-                        <!--<TextView-->
-                            <!--android:id="@+id/current_consuming"-->
-                            <!--android:layout_width="match_parent"-->
-                            <!--android:layout_height="wrap_content"-->
-                            <!--android:layout_marginRight="10dp"-->
-                            <!--android:elevation="2dp"-->
-                            <!--android:inputType="number"-->
-                            <!--android:padding="5dp"-->
-                            <!--android:textColor="@color/black"-->
-                            <!--android:textSize="14sp" />-->
+            <!--<TextView-->
+            <!--android:id="@+id/current_consuming"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginRight="10dp"-->
+            <!--android:elevation="2dp"-->
+            <!--android:inputType="number"-->
+            <!--android:padding="5dp"-->
+            <!--android:textColor="@color/black"-->
+            <!--android:textSize="14sp" />-->
 
-                    <!--</LinearLayout>-->
-
-
-                    <!--<LinearLayout-->
-                        <!--android:layout_width="match_parent"-->
-                        <!--android:layout_height="wrap_content"-->
-                        <!--android:layout_marginTop="10dp"-->
-                        <!--android:orientation="horizontal">-->
-
-                        <!--<TextView-->
-                            <!--android:layout_width="100dp"-->
-                            <!--android:layout_height="wrap_content"-->
-                            <!--android:elevation="2dp"-->
-                            <!--android:gravity="center"-->
-                            <!--android:padding="5dp"-->
-                            <!--android:text="القيمة المطلوبة"-->
-                            <!--android:textColor="@color/black"-->
-                            <!--android:textSize="14sp" />-->
-
-                        <!--<TextView-->
-                            <!--android:id="@+id/last_value"-->
-                            <!--android:layout_width="match_parent"-->
-                            <!--android:layout_height="wrap_content"-->
-                            <!--android:layout_marginRight="10dp"-->
-                            <!--android:elevation="2dp"-->
-                            <!--android:inputType="number"-->
-                            <!--android:padding="5dp"-->
-                            <!--android:textColor="@color/black"-->
-                            <!--android:textSize="14sp" />-->
+            <!--</LinearLayout>-->
 
 
-                    <!--</LinearLayout>-->
+            <!--<LinearLayout-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginTop="10dp"-->
+            <!--android:orientation="horizontal">-->
 
-                <!--</LinearLayout>-->
+            <!--<TextView-->
+            <!--android:layout_width="100dp"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:elevation="2dp"-->
+            <!--android:gravity="center"-->
+            <!--android:padding="5dp"-->
+            <!--android:text="القيمة المطلوبة"-->
+            <!--android:textColor="@color/black"-->
+            <!--android:textSize="14sp" />-->
+
+            <!--<TextView-->
+            <!--android:id="@+id/last_value"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginRight="10dp"-->
+            <!--android:elevation="2dp"-->
+            <!--android:inputType="number"-->
+            <!--android:padding="5dp"-->
+            <!--android:textColor="@color/black"-->
+            <!--android:textSize="14sp" />-->
+
+
+            <!--</LinearLayout>-->
+
+            <!--</LinearLayout>-->
 
             <!--</LinearLayout>-->
 

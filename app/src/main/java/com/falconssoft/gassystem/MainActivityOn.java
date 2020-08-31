@@ -4,13 +4,17 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
+import android.support.v4.content.ContextCompat;
+import android.support.v4.graphics.drawable.DrawableCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -24,16 +28,24 @@ import android.widget.Toast;
 import com.azoft.carousellayoutmanager.CarouselLayoutManager;
 import com.azoft.carousellayoutmanager.CarouselZoomPostLayoutListener;
 import com.azoft.carousellayoutmanager.CenterScrollListener;
+import com.facebook.stetho.Stetho;
+import com.falconssoft.gassystem.Modle.RecCash;
+import com.falconssoft.gassystem.Modle.VoucherModle;
 import com.smarteist.autoimageslider.DefaultSliderView;
 import com.smarteist.autoimageslider.IndicatorAnimations;
 import com.smarteist.autoimageslider.SliderAnimations;
 import com.smarteist.autoimageslider.SliderLayout;
 import com.smarteist.autoimageslider.SliderView;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.List;
 
 import cn.pedant.SweetAlert.SweetAlertDialog;
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class MainActivityOn extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     RecyclerView recyclerViews;
@@ -45,12 +57,16 @@ public class MainActivityOn extends AppCompatActivity implements NavigationView.
     private ActionBarDrawerToggle toggle;
 
     SliderLayout sliderLayout;
+    GlobelFunction globelFunction;
     private CarouselLayoutManager layoutManagerd;
+    String ipAddress="noSetting";
+    DatabaseHandler databaseHandler;
 
     @Override
     protected void onCreate( Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.new_design);
+        Stetho.initializeWithDefaults(this);
         recyclerViews = (RecyclerView) findViewById(R.id.res);
         sliderLayout = findViewById(R.id.imageSlider_2);
         picforbar=new ArrayList<>();
@@ -83,6 +99,10 @@ public class MainActivityOn extends AppCompatActivity implements NavigationView.
         setSliderViews();
 
         showAllDataAccount();
+        databaseHandler=new DatabaseHandler(MainActivityOn.this);
+
+        globelFunction=new GlobelFunction();
+        ipAddress=globelFunction.GlobelFunctionSetting(databaseHandler);
 
     }
 
@@ -110,7 +130,8 @@ public class MainActivityOn extends AppCompatActivity implements NavigationView.
             }
 
             sliderView.setImageScaleType(ImageView.ScaleType.CENTER_CROP);
-            sliderView.setDescription("The Gas System produst by Falcons Soft Companey." +
+            sliderView.setDescriptionTextColor(getResources().getColor(R.color.Orange));
+            sliderView.setDescription("The Gas System Product By Falcons Soft Company." +
                     "  " + (i + 1));
             final int finalI = i;
 
@@ -138,8 +159,15 @@ public class MainActivityOn extends AppCompatActivity implements NavigationView.
         layoutManagerd.setPostLayoutListener(new CarouselZoomPostLayoutListener());
         recyclerViews.setAdapter(new TestAdapterForbar(this, picforbar));
         recyclerViews.requestFocus();
-        recyclerViews.scrollToPosition(4);
+        recyclerViews.scrollToPosition(6);
         recyclerViews.requestFocus();
+
+
+    }
+
+
+    void importDataToServer(){
+
 
 
     }
@@ -152,20 +180,57 @@ public class MainActivityOn extends AppCompatActivity implements NavigationView.
                 startActivity(AddVocher);
                 break;
             case R.id.menu_edit_voucher:
+
+                Intent editIntent=new Intent(MainActivityOn.this,MakeVoucher.class);
+                editIntent.putExtra("EDIT_VOUCHER","EDIT_VOUCHER");
+                // ChequeInfo
+//                            editeIntent.putExtra("ChequeInfo",chequeInfo);
+                startActivity(editIntent);
                 break;
             case R.id.menu_print_voucher:
+                Intent PrintVoucherIntent= new Intent(MainActivityOn.this, PrintVoucher.class);
+                startActivity(PrintVoucherIntent);
                 break;
             case R.id.menu_add_receipt_voucher:
                 Intent receipt= new Intent(MainActivityOn.this, Receipt.class);
                 startActivity(receipt);
                 break;
             case R.id.menu_edit_receipt_voucher:
+                Intent editRecIntent=new Intent(MainActivityOn.this,Receipt.class);
+                editRecIntent.putExtra("EDIT_REC","EDIT_REC");
+                // ChequeInfo
+//                            editeIntent.putExtra("ChequeInfo",chequeInfo);
+                startActivity(editRecIntent);
                 break;
             case R.id.menu_print_receipt_voucher:
+                Intent PrintRecCashIntent= new Intent(MainActivityOn.this, PrintRecCash.class);
+                startActivity(PrintRecCashIntent);
+
                 break;
             case R.id.menu_import:
+                ipAddress=globelFunction.GlobelFunctionSetting(databaseHandler);
+                Log.e("ipAddress","globelFunction"+ipAddress);
+                if (!ipAddress.equals("noSetting")) {
+
+                    importJson sendCloud = new importJson(MainActivityOn.this, 1);
+                    sendCloud.startSending("GET_CUSTOMER");
+
+                } else {
+
+                    new SweetAlertDialog(MainActivityOn.this, SweetAlertDialog.WARNING_TYPE)
+                            .setTitleText("الاعدادات " + "!")
+                            .setContentText("الرجاء اضافة الاعدادات ")
+                            .setConfirmText("الغاء")
+                            .showCancelButton(false)
+                            .setCancelClickListener(null)
+                            .setConfirmClickListener(null).show();
+
+
+                }
+
                 break;
             case R.id.menu_export:
+                exportDataToServer();
                 break;
             case R.id.menu_settings:
                 Intent SettingIntent= new Intent(MainActivityOn.this, AppSetting.class);
@@ -176,10 +241,74 @@ public class MainActivityOn extends AppCompatActivity implements NavigationView.
     }
 
 
+    void exportDataToServer(){
+        boolean isExported=false,isExportedRec=false;
+
+        List<VoucherModle> voucherModleList=new ArrayList<>();
+        List<RecCash> recCashes=new ArrayList<>();
+
+        voucherModleList=databaseHandler.getAllVouchersExport();
+        recCashes=databaseHandler.getRecCashExport();
+        JSONArray obj2 = new JSONArray();
+        for (int i = 0; i < voucherModleList.size(); i++) {
+
+                obj2.put(voucherModleList.get(i).getJSONObjectVoucher());
+                isExported = true;
+
+        }
+
+
+        JSONObject obj = new JSONObject();
+        try {
+            obj.put("INV", obj2);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+if(isExported) {
+    ExportJeson sendCloud = new ExportJeson(MainActivityOn.this, obj);
+    sendCloud.startSending("ExportVoucher");
+}else{
+
+    Toast.makeText(this, "All Voucher Export", Toast.LENGTH_SHORT).show();
+
+}
+
+
+//__________________________________________________________________
+        JSONArray ArrayRec = new JSONArray();
+        for (int i = 0; i < recCashes.size(); i++) {
+
+            ArrayRec.put(recCashes.get(i).getJSONObjectRecCash());
+            isExportedRec = true;
+
+        }
+
+
+        JSONObject objRec = new JSONObject();
+        try {
+            objRec.put("REC", ArrayRec);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        if(isExportedRec) {
+            ExportJeson sendCloud = new ExportJeson(MainActivityOn.this, objRec);
+            sendCloud.startSending("ExportRecCash");
+        }else{
+
+            Toast.makeText(this, "All Rec Export", Toast.LENGTH_SHORT).show();
+
+        }
+
+
+    }
+
+
     static class CViewHolderForbar extends RecyclerView.ViewHolder {
 
         TextView ItemName;
-        ImageView itemImage;
+        CircleImageView itemImage;
         LinearLayout layBar;
 
         public CViewHolderForbar( View itemView) {
@@ -217,25 +346,47 @@ public class MainActivityOn extends AppCompatActivity implements NavigationView.
             switch (i){
 
                 case 0:
+
+//                    DrawableCompat.setTint(
+//                            DrawableCompat.wrap(cViewHolder.itemImage.getDrawable()),
+//                            ContextCompat.getColor(context, R.color.Orange)
+//                    );
+
+                    cViewHolder.itemImage.setColorFilter(ContextCompat.getColor(context, R.color.Orange));
+                    cViewHolder.itemImage.setBorderColor(context.getResources().getColor(R.color.Orange));
+
                     cViewHolder.itemImage.setImageDrawable(context.getResources().getDrawable(R.drawable.ic_edit_black_24dp));
+
                     break;
                 case 1:
+                    cViewHolder.itemImage.setColorFilter(ContextCompat.getColor(context, R.color.Orange));
+                    cViewHolder.itemImage.setBorderColor(context.getResources().getColor(R.color.Orange));
                     cViewHolder.itemImage.setImageDrawable(context.getResources().getDrawable(R.drawable.ic_add_black_24dp));
                     break;
                 case 2:
+                    cViewHolder.itemImage.setColorFilter(ContextCompat.getColor(context, R.color.Orange));
+                    cViewHolder.itemImage.setBorderColor(context.getResources().getColor(R.color.Orange));
                     cViewHolder.itemImage.setImageDrawable(context.getResources().getDrawable(R.drawable.ic_print_black_24dp));
                     break;
                 case 3:
+//                    cViewHolder.itemImage.setColorFilter(ContextCompat.getColor(context, R.color.dark_blue));
+//                    cViewHolder.itemImage.setBorderColor(context.getResources().getColor(R.color.dark_blue));
                     cViewHolder.itemImage.setImageDrawable(context.getResources().getDrawable(R.drawable.ic_edit_black_24dp));
                     break;
                 case 4:
+//                    cViewHolder.itemImage.setColorFilter(ContextCompat.getColor(context, R.color.dark_blue));
+//                    cViewHolder.itemImage.setBorderColor(context.getResources().getColor(R.color.dark_blue));
                     cViewHolder.itemImage.setImageDrawable(context.getResources().getDrawable(R.drawable.ic_add_black_24dp));
                     break;
                 case 5:
+//                    cViewHolder.itemImage.setColorFilter(ContextCompat.getColor(context, R.color.dark_blue));
+//                    cViewHolder.itemImage.setBorderColor(context.getResources().getColor(R.color.dark_blue));
                     cViewHolder.itemImage.setImageDrawable(context.getResources().getDrawable(R.drawable.ic_print_black_24dp));
                     break;
 
                 case 6:
+                    cViewHolder.itemImage.setColorFilter(ContextCompat.getColor(context, R.color.blue_ice));
+                    cViewHolder.itemImage.setBorderColor(context.getResources().getColor(R.color.blue_ice));
                     cViewHolder.itemImage.setImageDrawable(context.getResources().getDrawable(R.drawable.ic_settings_black_24dp));
                     break;
 

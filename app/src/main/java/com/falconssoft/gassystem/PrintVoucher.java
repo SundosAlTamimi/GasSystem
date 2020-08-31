@@ -113,7 +113,7 @@ public class PrintVoucher extends AppCompatActivity {
         previousPalance .setText(voucherModle.getCredit());
         gasReturn.setText(voucherModle.getGret());
         serviceReturn .setText(voucherModle.getService());
-        taxService .setText(""+Double.parseDouble(voucherModle.getGret())+Double.parseDouble(voucherModle.getService()));
+        taxService .setText(String.valueOf(Double.parseDouble(voucherModle.getGret())+Double.parseDouble(voucherModle.getService())));
         net .setText(voucherModle.getNetValue());
         tax.setText(voucherModle.getTaxValue());
         currentConsuming .setText(voucherModle.getConsumption());

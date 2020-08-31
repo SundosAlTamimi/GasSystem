@@ -27,7 +27,7 @@ public class VoucherModle {
     private String service;//بدل خدمه
     private String reQalValue;//القيمه المطلوبه
     private String readerDate;//تاريخ القر
-    private String invoiceType;//502
+    private String invoiceType;//501
     private String invoiceNo;//رقم الفاتوره
     private String netValue;//الصافي
     private String taxValue;//الضريبه
@@ -41,18 +41,17 @@ public class VoucherModle {
     private String allowance;//0
     private String isExport;
     private String serial;
+    private String status;
 
     public VoucherModle() {
 
     }
 
-    public VoucherModle(String counterNo, String customerName, String lastReader,
-                        String accNo, String gasPressure, String gasPrice, String projectName,
-                        String prameter, String currentReader, String CCost, String cCostVal,
-                        String service, String reQalValue, String readerDate, String invoiceType,
-                        String invoiceNo, String netValue, String taxValue, String gret, String remarks, String consumption,
-                        String credit, String isPost, String isPer, String allowance, String
-                                isExport, String serial) {
+    public VoucherModle(String counterNo, String customerName, String lastReader, String accNo, String gasPressure, String gasPrice,
+                        String projectName, String prameter, String currentReader, String CCost, String cCostVal, String service,
+                        String reQalValue, String readerDate, String invoiceType, String invoiceNo, String netValue, String taxValue,
+                        String gret, String remarks, String consumption, String credit, String isPost, String isPer, String allowance,
+                        String isExport, String serial, String status) {
         this.counterNo = counterNo;
         this.customerName = customerName;
         this.lastReader = lastReader;
@@ -80,6 +79,7 @@ public class VoucherModle {
         this.allowance = allowance;
         this.isExport = isExport;
         this.serial = serial;
+        this.status = status;
     }
 
     public String getCounterNo() {
@@ -294,11 +294,20 @@ public class VoucherModle {
         return serial;
     }
 
+
     public void setSerial(String serial) {
         this.serial = serial;
     }
 
-    public JSONObject getJSONObjectRecCash() { // for server
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public JSONObject getJSONObjectVoucher() { // for server
         JSONObject obj = new JSONObject();
         try {
 

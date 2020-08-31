@@ -47,11 +47,10 @@ public class importJson {
           GlobelFunction globelFunction;
 
 
-    public importJson(Context context, String itemCodes, int is) {//, JSONObject obj
+    public importJson(Context context, int is) {//, JSONObject obj
 //        this.obj = obj;
         this.context = context;
         dbHandler = new DatabaseHandler(context);
-        this.itemCode=itemCodes;
         globelFunction=new GlobelFunction();
         this.ip=globelFunction.GlobelFunctionSetting(dbHandler);
         if(is!=0) {
@@ -161,7 +160,7 @@ public class importJson {
                 HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
                 httpURLConnection.setDoOutput(true);
                 httpURLConnection.setDoInput(true);
-                httpURLConnection.setRequestMethod("POST");
+//                httpURLConnection.setRequestMethod("POST");
 
 
 
@@ -208,8 +207,8 @@ public class importJson {
         protected void onPostExecute(String JsonResponse) {
             super.onPostExecute(JsonResponse);
 
-            if (JsonResponse != null && JsonResponse.contains("ItemOCode")) {
-                Log.e("tag_ItemOCode", "****Success");
+            if (JsonResponse != null && JsonResponse.contains("COUNTERNO")) {
+                Log.e("COUNTERNO", "****Success");
 //                progressDialog.dismiss();
                 JsonResponseSave=JsonResponse;
                  new SaveCustomer().execute();
@@ -393,8 +392,8 @@ public class importJson {
         protected void onPostExecute(String JsonResponse) {
             super.onPostExecute(JsonResponse);
 
-            if (JsonResponse != null && JsonResponse.contains("ItemOCode")) {
-                Log.e("TAG_itemSwitch", "****Success");
+            if (JsonResponse != null && JsonResponse.contains("REMARKBODY")) {
+                Log.e("REMARKBODY", "****Success");
 
                 JsonResponseSaveSwitch=JsonResponse;
                 new SaveRemark().execute();
@@ -402,6 +401,7 @@ public class importJson {
             }
             else if (JsonResponse != null && JsonResponse.contains("No Data Found.")){
 //                new SyncItemUnite().execute();
+                pd.dismissWithAnimation();
 
             }else {
                 Log.e("TAG_itemSwitch", "****Failed to export data");
@@ -1291,6 +1291,7 @@ public class importJson {
                     obj.setProjectName(finalObject.getString("PRJECTNAME"));
                     obj.setIsPer(Integer.parseInt(finalObject.getString("IS_PER")));
                     obj.setBadalVal(Double.parseDouble(finalObject.getString("BDLVAL")));
+                    obj.setCredet(Double.parseDouble(finalObject.getString("CREDIT")));
 //                    obj.setno(finalObject.getString("REMARKS"));
                     obj.setCustSts(Integer.parseInt(finalObject.getString("CUSTSTS")));
 //                    obj.setCustame(finalObject.getString("CUSTTYPE"));
@@ -1356,7 +1357,7 @@ public class importJson {
 //            progressDialogSave.setProgress(0);
 //            progressDialogSave.show();
             pd.getProgressHelper().setBarColor(Color.parseColor("#1F6381"));
-            pd.setTitleText("sAVE remark");
+            pd.setTitleText("SAVE remark");
 
         }
 
@@ -1370,9 +1371,9 @@ public class importJson {
 
                     JSONArray parentArray = new JSONArray(JsonResponseSaveSwitch);
 
-
                     List<Remarks> remark=new ArrayList<>();
 
+                    dbHandler.deleteRemark();
                     for (int i = 0; i < parentArray.length(); i++) {
                         JSONObject finalObject = parentArray.getJSONObject(i);
 
@@ -1412,6 +1413,8 @@ public class importJson {
 
             pd.getProgressHelper().setBarColor(Color.parseColor("#A5DC86"));
             pd.setTitleText("SAVE");
+
+            pd.dismissWithAnimation();
 
 
         }

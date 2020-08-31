@@ -20,15 +20,17 @@ public class RecCash {
     private String serial;
     private String counterNo;
     private String lastBalance;
-
+    private String oldCash;
+    private String oldRemark;
+    private String status;
 
     public RecCash() {
 
     }
 
-    public RecCash(String resNo, String accName, String accNo, String cash, String remarks, String recDate,
-                   String is_Post, String projectName, String isExport, String serial,
-                   String counterNo, String lastBalance) {
+    public RecCash(String resNo, String accName, String accNo, String cash, String remarks, String recDate, String is_Post,
+                   String projectName, String isExport, String serial, String counterNo, String lastBalance, String oldCash,
+                   String oldRemark, String status) {
         this.resNo = resNo;
         this.accName = accName;
         this.accNo = accNo;
@@ -41,9 +43,10 @@ public class RecCash {
         this.serial = serial;
         this.counterNo = counterNo;
         this.lastBalance = lastBalance;
+        this.oldCash = oldCash;
+        this.oldRemark = oldRemark;
+        this.status = status;
     }
-
-
 
     public String getResNo() {
         return resNo;
@@ -139,6 +142,30 @@ public class RecCash {
 
     public void setLastBalance(String lastBalance) {
         this.lastBalance = lastBalance;
+    }
+
+    public String getOldCash() {
+        return oldCash;
+    }
+
+    public void setOldCash(String oldCash) {
+        this.oldCash = oldCash;
+    }
+
+    public String getOldRemark() {
+        return oldRemark;
+    }
+
+    public void setOldRemark(String oldRemark) {
+        this.oldRemark = oldRemark;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     public JSONObject getJSONObjectRecCash() { // for server

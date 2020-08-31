@@ -1,7 +1,9 @@
 package com.falconssoft.gassystem;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.text.TextUtils;
+import android.util.Log;
 
 import com.falconssoft.gassystem.Modle.Customer;
 import com.falconssoft.gassystem.Modle.SettingModle;
@@ -16,6 +18,10 @@ public class GlobelFunction {
     Context context;
     DatabaseHandler databaseHandler;
     public  static String ipAddress;
+    public  static Bitmap logoPic;
+    public  static SettingModle settingModleG;
+    public  static String taxNo;
+    public  static String accNo;
 
 
     public GlobelFunction() {
@@ -28,10 +34,23 @@ public class GlobelFunction {
         this.databaseHandler=databaseHandler;
         SettingModle settingModle=databaseHandler.getSetting();
         ipAddress=settingModle.getIpAddress();
-        if(TextUtils.isEmpty(ipAddress)){
+
+        if(!TextUtils.isEmpty(ipAddress)){
+            Log.e("ipAddress","globlFunction"+ipAddress);
+            logoPic=settingModle.getLogo();
+            settingModleG=settingModle;
+            taxNo=settingModle.getTaxNo();
+            accNo=settingModle.getAccNo();
             return  ipAddress;
+
         }else{
+            Log.e("ipAddress","noSetting"+ipAddress);
+            settingModleG=null;
+            logoPic=null;
+            taxNo=null;
+            accNo=null;
             return "noSetting";
+
         }
 
     }

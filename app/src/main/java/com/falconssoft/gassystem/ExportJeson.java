@@ -52,11 +52,11 @@ public class ExportJeson {
     public void startSending(String flag) {
 //        Log.e("check",flag);
 
-        if (flag.equals("ExportData"))
+        if (flag.equals("ExportVoucher"))
             new ExportDataSaveInvoice().execute();
 
-        if (flag.equals("ExportDataBackup"))
-            new ExportDataBackup().execute();
+        if (flag.equals("ExportRecCash"))
+            new ExportRecCash().execute();
 
 //        if (flag.equals("ExportTransferData"))
 //            new ExportTransferData().execute();
@@ -165,9 +165,10 @@ public class ExportJeson {
 
             if (JsonResponse != null && JsonResponse.contains("Saved Successfully")) {
                 Log.e("ExportData", "****Success");
-//                dbHandler.updateIsExport();
+                dbHandler.updateIsExportVoucher();
                 pdItem.getProgressHelper().setBarColor(Color.parseColor("#A5DC86"));
                 pdItem.setTitleText("SaveInvoice");
+
                 if(pdItem!=null){
                     pdItem.dismissWithAnimation();
 
@@ -201,7 +202,7 @@ public class ExportJeson {
 
     }
 
-    private class ExportDataBackup extends AsyncTask<String, String, String> {
+    private class ExportRecCash extends AsyncTask<String, String, String> {
         private String JsonResponse = null;
         private HttpURLConnection urlConnection = null;
         private BufferedReader reader = null;
@@ -289,7 +290,7 @@ Log.e("ipAdress", "ip -->" + ip);
 
             if (JsonResponse != null && JsonResponse.contains("Saved Successfully")) {
                 Log.e("ExportData", "****Success");
-//                dbHandler.updateIsExportBackupInfoTable();
+                dbHandler.updateIsExportRec();
                 pdItem.getProgressHelper().setBarColor(Color.parseColor("#A5DC86"));
                 pdItem.setTitleText("Successfully");
                 if(pdItem!=null){

@@ -67,6 +67,7 @@
                     android:gravity="center"
                     android:inputType="number"
                     android:lines="1"
+                    android:textCursorDrawable="@drawable/cursor_edit_text"
                     android:nextFocusDown="@id/current_read"
                     android:padding="5dp"
                     android:textColor="@color/white_dark"
@@ -356,6 +357,7 @@
                         android:background="@drawable/edite_back"
                         android:elevation="2dp"
                         android:gravity="center"
+                        android:textCursorDrawable="@drawable/cursor_edit_text"
 
                         android:inputType="number"
                         android:padding="5dp"

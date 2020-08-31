@@ -134,7 +134,7 @@
                     <EditText
                         android:id="@+id/ipTextSetting"
                         android:layout_width="match_parent"
-
+                        android:textCursorDrawable="@drawable/cursor_edit_text"
                         android:layout_height="wrap_content"
                         android:layout_marginRight="10dp"
                         android:background="@drawable/edite_back"
@@ -203,6 +203,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginRight="10dp"
                         android:layout_weight="1"
+                        android:textCursorDrawable="@drawable/cursor_edit_text"
 
 
                         android:background="@drawable/edite_back"
@@ -242,6 +243,8 @@
                         android:elevation="2dp"
                         android:gravity="center"
                         android:inputType="number"
+                        android:textCursorDrawable="@drawable/cursor_edit_text"
+
                         android:padding="5dp"
                         android:textColor="@color/white_dark"
                         android:textSize="18sp" />
@@ -307,6 +310,8 @@
                         android:elevation="2dp"
                         android:gravity="center"
                         android:inputType="number"
+                        android:textCursorDrawable="@drawable/cursor_edit_text"
+
                         android:padding="5dp"
                         android:textColor="@color/white_dark"
                         android:textSize="18sp" />

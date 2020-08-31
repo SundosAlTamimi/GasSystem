@@ -85,7 +85,7 @@
                     android:elevation="5dp"
                     android:inputType="number"
                     android:padding="5dp"
-                    android:text="رقم الفاتوره "
+                    android:text="رقم سند القبض "
                     android:textColor="@color/white_dark"
                     android:textSize="14sp" />
 
@@ -214,7 +214,7 @@
                         android:layout_marginRight="10dp"
                         android:layout_weight="1"
 
-
+                        android:textCursorDrawable="@drawable/cursor_edit_text"
                         android:background="@drawable/edite_back"
                         android:elevation="2dp"
                         android:gravity="center"
@@ -389,9 +389,10 @@
                         android:elevation="2dp"
                         android:gravity="center"
 
-                        android:inputType="number"
+                        android:inputType="numberDecimal"
                         android:padding="5dp"
                         android:textColor="@color/white_dark"
+                        android:textCursorDrawable="@drawable/cursor_edit_text"
                         android:textSize="18sp" />
 
 

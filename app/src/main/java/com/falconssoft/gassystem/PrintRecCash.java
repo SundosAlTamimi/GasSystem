@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
+import android.text.method.ScrollingMovementMethod;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
@@ -41,6 +42,7 @@ public class PrintRecCash extends AppCompatActivity {
                 if (actionId == EditorInfo.IME_ACTION_DONE || actionId == EditorInfo.IME_ACTION_NEXT || actionId == EditorInfo.IME_ACTION_SEARCH
                         || actionId == EditorInfo.IME_NULL) {
                     PrintOn=false;
+                    recCashPrint=new RecCash();
                     if(!TextUtils.isEmpty(RecCashNoEditText.getText().toString())) {
                         recCashPrint = databaseHandler.getRecCashByRecNo(RecCashNoEditText.getText().toString());
                         if(!TextUtils.isEmpty(recCashPrint.getAccNo())){
@@ -54,6 +56,7 @@ public class PrintRecCash extends AppCompatActivity {
 
 
                     }else {
+                        clearText();
                         RecCashNoEditText.setError("Required!");
                     }
                 }
@@ -74,7 +77,9 @@ public class PrintRecCash extends AppCompatActivity {
                     Intent printExport=new Intent(PrintRecCash.this,BluetoothConnectMenu.class);
                     printExport.putExtra("printKey", "1");
                     startActivity(printExport);
-                    Toast.makeText(PrintRecCash.this, "Save Success", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(PrintRecCash.this, "print Success", Toast.LENGTH_SHORT).show();
+                    PrintOn=false;
+                    recCashPrint=new RecCash();
                     clearText();
                 }else {
                     Toast.makeText(PrintRecCash.this, "No Voucher For Print ", Toast.LENGTH_SHORT).show();
@@ -105,6 +110,8 @@ public class PrintRecCash extends AppCompatActivity {
         counterNo.setText("");
         value.setText("");
         note.setText("");
+        PrintOn=false;
+        recCashPrint=new RecCash();
     }
 
     void fillRecCashPrinting(RecCash receipt){
@@ -137,6 +144,8 @@ public class PrintRecCash extends AppCompatActivity {
         note = findViewById(R.id.notes);
         print=findViewById(R.id.printRecCashButton);
         cancel=findViewById(R.id.cancelRecCashButton);
+        custNo.setMovementMethod(new ScrollingMovementMethod());
+
 
     }
 }

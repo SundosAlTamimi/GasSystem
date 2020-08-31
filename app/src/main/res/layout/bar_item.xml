@@ -79,8 +79,9 @@
             android:gravity="center"
             android:src="@drawable/ic_add_black_24dp"
             android:textColor="@color/white"
-            app:civ_border_color="@color/white"
-            app:civ_border_width="0.2dp"
+            android:backgroundTint="@color/Orange"
+            app:civ_border_color="@color/white_dark"
+            app:civ_border_width="2dp"
             />
 
         <TextView
