@@ -483,33 +483,61 @@ public class BluetoothConnectMenu extends Activity {
                         try {
                             sample.selectContinuousPaper();
                             Bitmap bitmap = null, bitmap3 = null, bitmap4 = null, bitmap5 = null;
-                            bitmap = CovertVoucherTopBitmap(voucherGas);
-                            bitmap3 = CovertVoucherToBitmap(voucherGas);
-                            bitmap4 = CovertVoucherBoutomToBitmap(voucherGas);
-//                        bitmap5=CovertVoucherEndToBitmap(voucherGas);
-                            if (bitmap != null) {
-                                sample.imageTestEnglishReport(1, bitmap);
-                            } else {
-                                Log.e("bitmap", "null");
-                            }
-//                            Log.e("bitmap", "" + voucherGas.getAllowance());
-                            if (bitmap3 != null) {
-                                sample.imageTestEnglishReport(1, bitmap3);
-                            } else {
-                                Log.e("bitmap3", "null");
-                            }
 
-                            if (bitmap4 != null) {
-                                sample.imageTestEnglishReport(1, bitmap4);
-                            } else {
-                                Log.e("bitmap4", "null");
-                            }
+
+                            if(false) {
+                                bitmap = CovertVoucherTopBitmap(voucherGas);
+                                bitmap3 = CovertVoucherToBitmap(voucherGas);
+                                bitmap4 = CovertVoucherBoutomToBitmap(voucherGas);
+//                        bitmap5=CovertVoucherEndToBitmap(voucherGas);
+                                if (bitmap != null) {
+                                    sample.imageTestEnglishReport(1, bitmap);
+                                } else {
+                                    Log.e("bitmap", "null");
+                                }
+//                            Log.e("bitmap", "" + voucherGas.getAllowance());
+                                if (bitmap3 != null) {
+                                    sample.imageTestEnglishReport(1, bitmap3);
+                                } else {
+                                    Log.e("bitmap3", "null");
+                                }
+
+                                if (bitmap4 != null) {
+                                    sample.imageTestEnglishReport(1, bitmap4);
+                                } else {
+                                    Log.e("bitmap4", "null");
+                                }
 
 //                        if(bitmap5!=null) {
 //                            sample.imageTestEnglishReport(1, bitmap5);
 //                        }else{
 //                            Log.e("bitmap5","null");
 //                        }
+                            }else {
+
+                                bitmap = CovertVoucherTopBitmapGreenGas(voucherGas);
+                                bitmap3 = CovertVoucherToBitmapGreenGas(voucherGas);
+                                bitmap4 = CovertVoucherBoutomToBitmapGreenGas(voucherGas);
+//                        bitmap5=CovertVoucherEndToBitmap(voucherGas);
+                                if (bitmap != null) {
+                                    sample.imageTestEnglishReport(1, bitmap);
+                                } else {
+                                    Log.e("bitmap", "null");
+                                }
+//                            Log.e("bitmap", "" + voucherGas.getAllowance());
+                                if (bitmap3 != null) {
+                                    sample.imageTestEnglishReport(1, bitmap3);
+                                } else {
+                                    Log.e("bitmap3", "null");
+                                }
+
+                                if (bitmap4 != null) {
+                                    sample.imageTestEnglishReport(1, bitmap4);
+                                } else {
+                                    Log.e("bitmap4", "null");
+                                }
+
+                            }
                         } catch (Exception e) {
                             Log.e("Error In Voucher prtint", "error 508");
 
@@ -520,16 +548,34 @@ public class BluetoothConnectMenu extends Activity {
 
                         try {
                             sample.selectContinuousPaper();
-                            Bitmap bitmap2 = null, bitmap6 = null;
+                            Bitmap bitmap2 = null, bitmap6 = null, bitmap7 = null, bitmap8 = null;
 
-                            bitmap6 = CovertRecipteTopBitmap(recCash);
-                            bitmap2 = CovertRecipteToBitmap(recCash);
+
+                            if (false){
+                                bitmap6 = CovertRecipteTopBitmap(recCash);
+                                bitmap2 = CovertRecipteToBitmap(recCash);
+
 //bitmap2 != null &&
                             if (bitmap2 != null && bitmap6 != null) {
                                 sample.imageTestEnglishReport(1, bitmap6);
                                 sample.imageTestEnglishReport(1, bitmap2);
                             } else {
                                 Log.e("bitmap2", "null");
+                            }
+
+                        }else {
+
+                                bitmap7 = CovertRecipteTopBitmapGreenGas(recCash);
+                                bitmap8 = CovertRecipteToBitmapGreenGas(recCash);
+
+//bitmap2 != null &&
+                                if (bitmap7 != null && bitmap8 != null) {
+                                    sample.imageTestEnglishReport(1, bitmap7);
+                                    sample.imageTestEnglishReport(1, bitmap8);
+                                } else {
+                                    Log.e("bitmap7", "null");
+                                }
+
                             }
 
                         }catch (Exception e){
@@ -903,6 +949,370 @@ public class BluetoothConnectMenu extends Activity {
         double taxSer=Double.parseDouble(globelFunction.DecimalFormat(""+((Double.parseDouble(voucher.getGret())+Double.parseDouble(voucher.getService())+ Double.parseDouble(voucher.getTaxValue())))));
         taxService .setText(String.valueOf(taxSer));
         net.setText(""+voucher.getNetValue());
+        tax.setText(""+voucher.getTaxValue());
+        currentConsuming.setText(""+voucher.getConsumption());
+        lastValue.setText(""+voucher.getReQalValue());
+        remarkVoucher.setText(voucher.getRemarks());
+
+        if(globelFunction.accNo!=null) {
+            AccNoCompany.setText("" + globelFunction.accNo);
+        }else{
+            AccNoCompany.setText("");
+        }
+
+        linearView = (LinearLayout) VocherDialog.findViewById(R.id.linerForPrint);
+
+        linearView.measure(View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED),
+                View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED));
+        linearView.layout(1, 1, linearView.getMeasuredWidth(), linearView.getMeasuredHeight());
+
+        Log.e("size of img ", "width=" + linearView.getMeasuredWidth() + "      higth =" + linearView.getHeight());
+//        VocherDialog.show();
+        linearView.setDrawingCacheEnabled(true);
+        linearView.buildDrawingCache();
+        Bitmap bit =linearView.getDrawingCache();
+
+        return bit;// creates bitmap and returns the same
+
+
+    }
+
+
+
+    private Bitmap CovertRecipteTopBitmapGreenGas(RecCash receipt) {
+        LinearLayout linearView = null;
+        final Dialog VocherDialog = new Dialog(BluetoothConnectMenu.this,R.style.Theme_Dialog);
+        VocherDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        VocherDialog.setCancelable(true);
+        VocherDialog.setContentView(R.layout.receipt_dialog_print_heder_green_gas);
+
+        ImageView logoPic;
+        TextView taxno, voucherNo, date, projectName,CompanyName;
+        voucherNo = VocherDialog.findViewById(R.id.voucherNo);
+        date = VocherDialog.findViewById(R.id.date);
+        taxno = VocherDialog.findViewById(R.id.taxno);
+//        projectName = VocherDialog.findViewById(R.id.projectName);
+        logoPic=VocherDialog.findViewById(R.id.logoPic);
+        CompanyName=VocherDialog.findViewById(R.id.CompanyName);
+
+
+        if(globelFunction.taxNo!=null){
+            taxno.setText(globelFunction.taxNo);
+            CompanyName.setText(globelFunction.companyName);
+        }else{
+            taxno.setText("");
+            CompanyName.setText("");
+        }
+
+        voucherNo.setText(""+receipt.getResNo());
+        date.setText(""+globelFunction.DateInToday());
+//        projectName.setText(""+ receipt.getProjectName());
+
+        if(globelFunction.logoPic!=null) {
+            logoPic.setImageBitmap(globelFunction.logoPic);
+        }else{
+
+            logoPic.setImageBitmap(null);
+            Log.e("globelFunction","null");
+        }
+
+
+
+//        taxService.setText(""+voucher.getServiceNoTax());
+//        net.setText(""+voucher.getNet());
+//        tax.setText(""+voucher.getTax());
+//        currentConsuming.setText(""+voucher.getCurrentConsuming());
+//        lastValue.setText(""+voucher.getLastValue());
+
+
+        linearView = (LinearLayout) VocherDialog.findViewById(R.id.linerForPrint);
+
+        linearView.measure(View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED),
+                View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED));
+        linearView.layout(1, 1, linearView.getMeasuredWidth(), linearView.getMeasuredHeight());
+
+        Log.e("size of img ", "width=" + linearView.getMeasuredWidth() + "      higth =" + linearView.getHeight());
+//        VocherDialog.show();
+        linearView.setDrawingCacheEnabled(true);
+        linearView.buildDrawingCache();
+        Bitmap bit =linearView.getDrawingCache();
+
+        return bit;// creates bitmap and returns the same
+
+
+    }
+
+    private Bitmap CovertRecipteToBitmapGreenGas(RecCash receipt) {
+        LinearLayout linearView = null;
+        final Dialog VocherDialog = new Dialog(BluetoothConnectMenu.this,R.style.Theme_Dialog);
+        VocherDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        VocherDialog.setCancelable(true);
+        VocherDialog.setContentView(R.layout.recepite_dialog_print_green_gas);
+//        CompanyInfo companyInfo = obj.getAllCompanyInfo().get(0);
+
+        TextView counterNo, acc_no,filse,Jd,remarkRec,recDate,
+                custNo;
+        Log.e("bitmapsssaa",""+receipt.getCash());
+        counterNo = VocherDialog.findViewById(R.id.counter_no);
+        custNo = VocherDialog.findViewById(R.id.cust_no);
+//        previousRead = VocherDialog.findViewById(R.id.previous_read);
+//        currentRead = VocherDialog.findViewById(R.id.current_read);
+//        consuming = VocherDialog.findViewById(R.id.consuming);
+        acc_no = VocherDialog.findViewById(R.id.acc_no);
+        filse = VocherDialog.findViewById(R.id.filse);
+        Jd = VocherDialog.findViewById(R.id.jd);
+        remarkRec= VocherDialog.findViewById(R.id.remarkRec);
+        recDate=VocherDialog.findViewById(R.id.recDate);
+
+        double amount=Double.parseDouble(receipt.getCash());
+        Log.e("amount","Double "+amount);
+
+        String fil=String.valueOf(amount).substring(String.valueOf(amount).indexOf(".")+1,String.valueOf(amount).length());
+        String Jdes= String.valueOf(amount).substring(0,String.valueOf(amount).indexOf("."));
+//        previousPalance = VocherDialog.findViewById(R.id.previous_palance);
+//        prasuGas= VocherDialog.findViewById(R.id.prasuGas);
+//        saleGas= VocherDialog.findViewById(R.id.saleGas);
+//        extendValue= VocherDialog.findViewById(R.id.extendValue);
+//        gasReturn =VocherDialog. findViewById(R.id.gas_return);
+//        serviceReturn = VocherDialog.findViewById(R.id.service_return);
+//        taxService = VocherDialog.findViewById(R.id.tax_services);
+//        net = VocherDialog.findViewById(R.id.net);
+//        tax = VocherDialog.findViewById(R.id.tax);
+//        currentConsuming = VocherDialog.findViewById(R.id.current_consuming);
+//        lastValue = VocherDialog.findViewById(R.id.last_value);
+//customer
+        filse.setText(""+fil);
+        Jd.setText(""+Jdes);
+        counterNo.setText(""+receipt.getCounterNo());
+        acc_no.setText(""+receipt.getAccNo());
+//        currentRead.setText(""+voucher.getCurrentRead());
+//        extendValue.setText("1");
+//        prasuGas.setText(""+customer.getGasPressure());
+//        saleGas.setText(""+customer.getgPrice());
+//        gasReturn.setText(""+voucher.getBadalGas());
+//        serviceReturn.setText(""+voucher.getBadalService());
+        custNo.setText(""+receipt.getAccName());
+        remarkRec.setText(receipt.getRemarks());
+        recDate.setText(receipt.getRecDate());
+//        previousRead.setText(""+voucher.getPreviousRead());
+//        consuming.setText(""+voucher.getConsuming());
+//        consumingValue.setText(""+voucher.getConsumingValue());
+//        prasuGas.setText(""+voucher.get);
+//        saleGas.setText(""+voucher.getConsumingValue());
+//        extendValue.setText(""+voucher.getConsumingValue());
+
+
+
+//        previousPalance.setText(""+voucher.getPreviousPalance());
+//        taxService.setText(""+voucher.getServiceNoTax());
+//        net.setText(""+voucher.getNet());
+//        tax.setText(""+voucher.getTax());
+//        currentConsuming.setText(""+voucher.getCurrentConsuming());
+//        lastValue.setText(""+voucher.getLastValue());
+
+
+        linearView = (LinearLayout) VocherDialog.findViewById(R.id.linerForPrint);
+
+        linearView.measure(View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED),
+                View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED));
+        linearView.layout(1, 1, linearView.getMeasuredWidth(), linearView.getMeasuredHeight());
+
+        Log.e("size of img ", "width=" + linearView.getMeasuredWidth() + "      higth =" + linearView.getHeight());
+//        VocherDialog.show();
+        linearView.setDrawingCacheEnabled(true);
+        linearView.buildDrawingCache();
+        Bitmap bit =linearView.getDrawingCache();
+
+        return bit;// creates bitmap and returns the same
+
+
+    }
+
+    private Bitmap CovertVoucherTopBitmapGreenGas(VoucherModle voucher) {
+        LinearLayout linearView = null;
+        final Dialog VocherDialog = new Dialog(BluetoothConnectMenu.this,R.style.Theme_Dialog);
+        VocherDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        VocherDialog.setCancelable(true);
+        VocherDialog.setContentView(R.layout.voucher_dialog_print_heder_green_gas);
+//        CompanyInfo companyInfo = obj.getAllCompanyInfo().get(0);
+
+        ImageView logoPic;
+        TextView taxno, voucherNo, date, projectName,CompanyName;
+        Log.e("bitmapSS",""+voucher.getAccNo());
+        voucherNo = VocherDialog.findViewById(R.id.voucherNo);
+        date = VocherDialog.findViewById(R.id.date);
+        taxno = VocherDialog.findViewById(R.id.taxno);
+//        projectName = VocherDialog.findViewById(R.id.projectName);
+        logoPic=VocherDialog.findViewById(R.id.logoPic);
+        CompanyName=VocherDialog.findViewById(R.id.CompanyName);
+
+
+        if(globelFunction.taxNo!=null){
+            taxno.setText(globelFunction.taxNo);
+            CompanyName.setText(globelFunction.companyName);
+        }else{
+            taxno.setText("");
+            CompanyName.setText("");
+        }
+        if(globelFunction.logoPic!=null) {
+            logoPic.setImageBitmap(globelFunction.logoPic);
+        }else{
+
+            logoPic.setImageBitmap(null);
+            Log.e("globelFunction","null");
+        }
+
+//        gasReturn =VocherDialog. findViewById(R.id.gas_return);
+//        serviceReturn = VocherDialog.findViewById(R.id.service_return);
+//        taxService = VocherDialog.findViewById(R.id.tax_services);
+//        net = VocherDialog.findViewById(R.id.net);
+//        tax = VocherDialog.findViewById(R.id.tax);
+//        currentConsuming = VocherDialog.findViewById(R.id.current_consuming);
+//        lastValue = VocherDialog.findViewById(R.id.last_value);
+
+        voucherNo.setText(""+voucher.getInvoiceNo());
+        date.setText(""+globelFunction.DateInToday());
+//        projectName.setText(""+ voucher.getProjectName());
+
+//        taxService.setText(""+voucher.getServiceNoTax());
+//        net.setText(""+voucher.getNet());
+//        tax.setText(""+voucher.getTax());
+//        currentConsuming.setText(""+voucher.getCurrentConsuming());
+//        lastValue.setText(""+voucher.getLastValue());
+
+
+        linearView = (LinearLayout) VocherDialog.findViewById(R.id.linerForPrint);
+
+        linearView.measure(View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED),
+                View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED));
+        linearView.layout(1, 1, linearView.getMeasuredWidth(), linearView.getMeasuredHeight());
+
+        Log.e("size of img ", "width=" + linearView.getMeasuredWidth() + "      higth =" + linearView.getHeight());
+//        VocherDialog.show();
+        linearView.setDrawingCacheEnabled(true);
+        linearView.buildDrawingCache();
+        Bitmap bit =linearView.getDrawingCache();
+
+        return bit;// creates bitmap and returns the same
+
+
+    }
+
+    private Bitmap CovertVoucherToBitmapGreenGas(VoucherModle voucher) {
+        LinearLayout linearView = null;
+        final Dialog VocherDialog = new Dialog(BluetoothConnectMenu.this,R.style.Theme_Dialog);
+        VocherDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        VocherDialog.setCancelable(true);
+        VocherDialog.setContentView(R.layout.voucher_dialog_print_green_gas);
+
+        TextView counterNo, currentRead,readerDate, gasReturn, serviceReturn,accNo,
+                custNo, previousRead, consuming, consumingValue, previousPalance, taxService, net, tax,
+                prasuGas,saleGas,extendValue;
+        counterNo = VocherDialog.findViewById(R.id.counter_no);
+        custNo = VocherDialog.findViewById(R.id.cust_no);
+        previousRead = VocherDialog.findViewById(R.id.previous_read);
+        currentRead = VocherDialog.findViewById(R.id.current_read);
+        readerDate= VocherDialog.findViewById(R.id.readerDate);
+        consuming = VocherDialog.findViewById(R.id.consuming);
+        consumingValue = VocherDialog.findViewById(R.id.consuming_value);
+        prasuGas= VocherDialog.findViewById(R.id.prasuGas);
+        saleGas= VocherDialog.findViewById(R.id.saleGas);
+        extendValue= VocherDialog.findViewById(R.id.extendValue);
+//        gasReturn =VocherDialog. findViewById(R.id.gas_return);
+//        serviceReturn = VocherDialog.findViewById(R.id.service_return);
+//        taxService = VocherDialog.findViewById(R.id.tax_services);
+//        net = VocherDialog.findViewById(R.id.net);
+//        tax = VocherDialog.findViewById(R.id.tax);
+//        currentConsuming = VocherDialog.findViewById(R.id.current_consuming);
+//        lastValue = VocherDialog.findViewById(R.id.last_value);
+        accNo= VocherDialog.findViewById(R.id.acc_no);
+//customer
+        counterNo.setText(""+voucher.getCounterNo());
+        currentRead.setText(""+voucher.getCurrentReader());
+        extendValue.setText("1");
+        prasuGas.setText(""+voucher.getGasPressure());
+        saleGas.setText(""+voucher.getGasPrice());
+        readerDate.setText(""+voucher.getReaderDate());
+//        gasReturn.setText(""+voucher.getBadalGas());
+//        serviceReturn.setText(""+voucher.getBadalService());
+        custNo.setText(""+voucher.getCustomerName());
+        previousRead.setText(""+voucher.getLastReader());
+
+        consuming.setText(""+voucher.getCCost());
+        consumingValue.setText(""+voucher.getcCostVal());
+        accNo.setText(""+voucher.getAccNo());
+
+//        prasuGas.setText(""+voucher.get);
+//        saleGas.setText(""+voucher.getConsumingValue());
+//        extendValue.setText(""+voucher.getConsumingValue());
+
+
+
+//        previousPalance.setText(""+voucher.getPreviousPalance());
+//        taxService.setText(""+voucher.getServiceNoTax());
+//        net.setText(""+voucher.getNet());
+//        tax.setText(""+voucher.getTax());
+//        currentConsuming.setText(""+voucher.getCurrentConsuming());
+//        lastValue.setText(""+voucher.getLastValue());
+
+
+        linearView = (LinearLayout) VocherDialog.findViewById(R.id.linerForPrint);
+
+        linearView.measure(View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED),
+                View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED));
+        linearView.layout(1, 1, linearView.getMeasuredWidth(), linearView.getMeasuredHeight());
+
+        Log.e("size of img ", "width=" + linearView.getMeasuredWidth() + "      higth =" + linearView.getHeight());
+
+        linearView.setDrawingCacheEnabled(true);
+        linearView.buildDrawingCache();
+        Bitmap bit =linearView.getDrawingCache();
+
+        return bit;// creates bitmap and returns the same
+
+
+    }
+    private Bitmap CovertVoucherBoutomToBitmapGreenGas(VoucherModle voucher) {
+        LinearLayout linearView = null;
+        final Dialog VocherDialog = new Dialog(BluetoothConnectMenu.this,R.style.Theme_Dialog);
+        VocherDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        VocherDialog.setCancelable(true);
+        VocherDialog.setContentView(R.layout.voucher_dialog_print_bou_green_gas);
+//        CompanyInfo companyInfo = obj.getAllCompanyInfo().get(0);
+
+        TextView counterNo, currentRead,remarkVoucher,AccNoCompany, gasReturn, serviceReturn,
+                custNo, previousRead, consuming, consumingValue, previousPalance, taxService, net, tax,
+                currentConsuming, lastValue;
+
+//        counterNo = VocherDialog.findViewById(R.id.counter_no);
+//        custNo = VocherDialog.findViewById(R.id.cust_no);
+//        previousRead = VocherDialog.findViewById(R.id.previous_read);
+//        currentRead = VocherDialog.findViewById(R.id.current_read);
+//        consuming = VocherDialog.findViewById(R.id.consuming);
+//        consumingValue = VocherDialog.findViewById(R.id.consuming_value);
+        previousPalance = VocherDialog.findViewById(R.id.previous_palance);
+        gasReturn =VocherDialog. findViewById(R.id.gas_return);
+        serviceReturn = VocherDialog.findViewById(R.id.service_return);
+        taxService = VocherDialog.findViewById(R.id.tax_services);
+        net = VocherDialog.findViewById(R.id.net);
+        tax = VocherDialog.findViewById(R.id.tax);
+        currentConsuming = VocherDialog.findViewById(R.id.current_consuming);
+        lastValue = VocherDialog.findViewById(R.id.last_value);
+        AccNoCompany= VocherDialog.findViewById(R.id.AccNoCompany);
+        remarkVoucher=VocherDialog.findViewById(R.id.remarkVoucher);
+
+//        counterNo.setText(""+voucher.getCounterNo());
+//        currentRead.setText(""+voucher.getCurrentRead());
+        gasReturn.setText(""+voucher.getGret());
+        serviceReturn.setText(""+voucher.getService());
+//        custNo.setText(""+voucher.getCustName());
+//        previousRead.setText(""+voucher.getPreviousRead());
+//        consuming.setText(""+voucher.getConsuming());
+//        consumingValue.setText(""+voucher.getConsumingValue());
+        previousPalance.setText(""+voucher.getCredit());
+        double taxSer=Double.parseDouble(globelFunction.DecimalFormat(""+((Double.parseDouble(voucher.getGret())+Double.parseDouble(voucher.getService())+ Double.parseDouble(voucher.getTaxValue())))));
+        taxService .setText(String.valueOf(taxSer));
+        net.setText(""+globelFunction.DecimalFormat(voucher.getNetValue()));
         tax.setText(""+voucher.getTaxValue());
         currentConsuming.setText(""+voucher.getConsumption());
         lastValue.setText(""+voucher.getReQalValue());

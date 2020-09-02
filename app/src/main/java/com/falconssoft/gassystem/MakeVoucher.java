@@ -133,8 +133,9 @@ public class MakeVoucher extends AppCompatActivity {
         save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                calculatCall();
                 Save();
-                clearText();
+
             }
         });
 
@@ -201,6 +202,19 @@ public class MakeVoucher extends AppCompatActivity {
 
 
         currentRead .setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+
+                if(!hasFocus){
+
+                    calculatCall();
+
+                }
+
+            }
+        });
+
+        previousRead.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
 
@@ -393,6 +407,7 @@ public class MakeVoucher extends AppCompatActivity {
             editVoucherNoLinear.setVisibility(View.VISIBLE);
 counterNo.setEnabled(false);
             barCode.setVisibility(View.GONE);
+            searchCounter.setVisibility(View.GONE);
 
         }else{
             editButton.setVisibility(View.GONE);
@@ -400,6 +415,7 @@ counterNo.setEnabled(false);
             editVoucherNoLinear.setVisibility(View.GONE);
             barCode.setVisibility(View.VISIBLE);
             counterNo.setEnabled(true);
+            searchCounter.setVisibility(View.VISIBLE);
 
 
         }
@@ -410,6 +426,7 @@ counterNo.setEnabled(false);
             public void onClick(View v) {
 
 //                update
+                calculatCall();
                 Update();
 
             }
@@ -575,6 +592,7 @@ counterNo.setEnabled(false);
                                                                     DHandler.addVouchers(voucherGas);
                                                                     DHandler.updateVoucherStatusBackUP(voucherModleEdit.getSerial(),voucherModleEdit.getInvoiceNo());
                                                                     counterNo.setText("");
+                                                                    Toast.makeText(this, "تم التعديل بنجاح ", Toast.LENGTH_SHORT).show();
                                                                     clearText();
                                                                 } else {
                                                                     lastValue.setError("Required!");
@@ -620,10 +638,7 @@ counterNo.setEnabled(false);
             }
 
 
-            Toast.makeText(this, "Update Success", Toast.LENGTH_SHORT).show();
-
         }else{
-
 
 
         }
@@ -643,6 +658,7 @@ counterNo.setEnabled(false);
             }
 
             if (!TextUtils.isEmpty( counterNoV)) {
+
 
                 calculateFunction(Double.parseDouble(voucherModleEdit.getGasPressure()), 1, Double.parseDouble(voucherModleEdit.getGasPrice()));
 
@@ -664,6 +680,8 @@ counterNo.setEnabled(false);
         }
 
     }
+
+//    boolean is
 
     public void ShowCustomerDialog(final TextView textView){
         final Dialog dialog = new Dialog(this,R.style.Theme_Dialog);
@@ -772,6 +790,7 @@ counterNo.setEnabled(false);
                                                             voucherGas.setSerial(maxSerialVoucher);
 
                                                               SavePrint();
+                                                            Toast.makeText(this, "تم الحفظ بنجاح", Toast.LENGTH_SHORT).show();
 
                                                         } else {
                                                             lastValue.setError("Required!");
@@ -817,7 +836,7 @@ counterNo.setEnabled(false);
             }
 
 
-        Toast.makeText(this, "Save Success", Toast.LENGTH_SHORT).show();
+
 
 
     }
@@ -828,10 +847,12 @@ counterNo.setEnabled(false);
         DHandler.addVouchersBackup(voucherGas);
         DHandler.updateMaxVoucher(""+(Integer.parseInt(maxSerialVoucher)+1));
         counterNo.setText("");
+        clearText();
         Intent printExport=new Intent(MakeVoucher.this,BluetoothConnectMenu.class);
         printExport.putExtra("printKey", "0");
         startActivity(printExport);
-        Toast.makeText(this, "Save Success", Toast.LENGTH_SHORT).show();
+
+
     }
 
     private void clearText() {
@@ -1053,50 +1074,79 @@ counterNo.setEnabled(false);
         double DPR = 0, VOD = 0, DP = 0, NetTotal = 0, TAX = 0, REQVAL = 0, GRV = 0, SRV = 0, TXV = 0, TX = 0, netValue = 0;
 
 
-        if (!previousRead.getText().toString().equals("") && !currentRead.getText().toString().equals("")) {
-            //_____________________________________الاستهلاك ___________________________________
-            DPR = Double.parseDouble(currentRead.getText().toString()) - Double.parseDouble(previousRead.getText().toString());
-            consuming.setText("" + DPR);
-            //_____________________________________قيمة الاستهلاك ___________________________________
+        if (!previousRead.getText().toString().equals("") && !currentRead.getText().toString().equals("")&& !previousPalance.getText().toString().equals("")) {
+            if (!previousRead.getText().toString().equals(".")) {
+                if(!currentRead.getText().toString().equals(".")) {
+                    if(Double.parseDouble(currentRead.getText().toString())!=0) {
 
-            String vo = convertToEnglish(threeDForm.format(((DPR * GP * COE / 0.436) * GPRC) / 1000));
-            VOD = Double.parseDouble(vo);
-            consumingValue.setText("" + VOD);
+                        currentRead.setText(""+Double.parseDouble(currentRead.getText().toString()));//this for make number in text double format
+                        previousRead.setText(""+Double.parseDouble(previousRead.getText().toString()));//this for make number in text double format
+                        //_____________________________________الاستهلاك ___________________________________
+                        DPR = Double.parseDouble(currentRead.getText().toString()) - Double.parseDouble(previousRead.getText().toString());
+                        consuming.setText("" + DPR);
+                        //_____________________________________قيمة الاستهلاك ___________________________________
 
-            //_____________________________________استهلاك الفتره ___________________________________
+                        String vo = convertToEnglish(threeDForm.format(((DPR * GP * COE / 0.436) * GPRC) / 1000));
+                        VOD = Double.parseDouble(vo);
+                        consumingValue.setText("" + VOD);
 
-            if (!gasReturn.getText().toString().equals("")) {
-                GRV = Double.parseDouble(gasReturn.getText().toString());
+                        //_____________________________________استهلاك الفتره ___________________________________
 
-            } else {
-                GRV = 0.0;
+                        if (!gasReturn.getText().toString().equals("")) {
+                            if (!gasReturn.getText().toString().equals(".")) {
+                                gasReturn.setText(""+Double.parseDouble(gasReturn.getText().toString()));//this for make number in text double format
+                                GRV = Double.parseDouble(gasReturn.getText().toString());
+                            } else {
+                                gasReturn.setError("DOT!");
+                                clearAfterError();
+                            }
 
+                        } else {
+                            GRV = 0.0;
+
+                        }
+
+                        if (!serviceReturn.getText().toString().equals("")) {
+                            if (!serviceReturn.getText().toString().equals(".")) {
+                                serviceReturn.setText(""+Double.parseDouble(serviceReturn.getText().toString()));//this for make number in text double format
+                                SRV = Double.parseDouble(serviceReturn.getText().toString());
+                            } else {
+                                serviceReturn.setError("DOT!");
+                                clearAfterError();
+                            }
+                        } else {
+
+                            SRV = 0.0;
+                        }
+
+                        netValue = (GRV + SRV);//الصافي
+                        net.setText("" + netValue);
+
+
+                        TX = Double.parseDouble(convertToEnglish(threeDForm.format((GRV + SRV) * 0.16))); //الضريبه
+                        tax.setText("" + TX);
+
+                        TXV = Double.parseDouble(convertToEnglish(threeDForm.format((GRV + SRV) + TX)));//مجموع بدل خدمات
+                        taxService.setText("" + TXV);
+
+                        DP = Double.parseDouble(convertToEnglish(threeDForm.format(VOD + TXV))); //استهلاك الفتره
+                        currentConsuming.setText("" + DP);
+
+                        NetTotal = Double.parseDouble(convertToEnglish(threeDForm.format(DP + Double.parseDouble(previousPalance.getText().toString())))); //القيمه المطلوبه
+                        lastValue.setText("" + NetTotal);
+                    }else {
+                        currentRead.setError("Zero!");
+                        clearAfterError();
+                    }
+                }else {
+                    currentRead.setError("DOT!");
+                    clearAfterError();
+                }
+            }else{
+                previousRead.setError("DOT!");
+                currentRead.setText("");
+                clearAfterError();
             }
-
-            if (!serviceReturn.getText().toString().equals("")) {
-                SRV = Double.parseDouble(serviceReturn.getText().toString());
-            } else {
-
-                SRV = 0.0;
-            }
-
-            netValue = (GRV + SRV);//الصافي
-            net.setText("" + netValue);
-
-
-            TX = Double.parseDouble(convertToEnglish(threeDForm.format((GRV + SRV) * 0.16))); //الضريبه
-            tax.setText("" + TX);
-
-            TXV = Double.parseDouble(convertToEnglish(threeDForm.format((GRV + SRV) + TX)));//مجموع بدل خدمات
-            taxService.setText("" + TXV);
-
-            DP = Double.parseDouble(convertToEnglish(threeDForm.format(VOD + TXV))); //استهلاك الفتره
-            currentConsuming.setText("" + DP);
-
-            NetTotal = Double.parseDouble(convertToEnglish(threeDForm.format(DP + Double.parseDouble(previousPalance.getText().toString())))); //القيمه المطلوبه
-            lastValue.setText("" + NetTotal);
-
-
         }
 
 
@@ -1309,6 +1359,27 @@ counterNo.setEnabled(false);
         previousPalance .setText("");
         gasReturn.setText("");
         serviceReturn .setText("");
+        taxService .setText("");
+        net .setText("");
+        tax.setText("");
+        currentConsuming .setText("");
+        lastValue .setText("");
+        noteRemark.setText("");
+
+    }
+
+
+    private void clearAfterError() {
+
+//        counterNo.setText("");
+//        custNo .setText("");
+//        previousRead .setText("");
+//        currentRead .setText("");
+        consuming.setText("");
+        consumingValue .setText("");
+//        previousPalance .setText("0.0");
+//        gasReturn.setText("");
+//        serviceReturn .setText("");
         taxService .setText("");
         net .setText("");
         tax.setText("");
