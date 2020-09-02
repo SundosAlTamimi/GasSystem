@@ -23,7 +23,7 @@ public class GlobelFunction {
     public  static SettingModle settingModleG;
     public  static String taxNo;
     public  static String accNo;
-
+    public  static String companyName;
 
     public GlobelFunction() {
 
@@ -42,6 +42,7 @@ public class GlobelFunction {
             settingModleG=settingModle;
             taxNo=settingModle.getTaxNo();
             accNo=settingModle.getAccNo();
+            companyName=settingModle.getCompanyName();
             return  ipAddress;
 
         }else{
@@ -50,6 +51,8 @@ public class GlobelFunction {
             logoPic=null;
             taxNo=null;
             accNo=null;
+            companyName=null;
+
             return "noSetting";
 
         }

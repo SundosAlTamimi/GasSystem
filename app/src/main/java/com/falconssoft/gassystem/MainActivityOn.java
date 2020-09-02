@@ -14,7 +14,9 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -42,7 +44,9 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import cn.pedant.SweetAlert.SweetAlertDialog;
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -91,6 +95,7 @@ public class MainActivityOn extends AppCompatActivity implements NavigationView.
         picforbar.add("اعدادات");
 
 
+        widthFun();
 
         sliderLayout.setIndicatorAnimation(IndicatorAnimations.SWAP); //set indicator animation by using SliderLayout.IndicatorAnimations. :WORM or THIN_WORM or COLOR or DROP or FILL or NONE or SCALE or SCALE_DOWN or SLIDE and SWAP!!
         sliderLayout.setSliderTransformAnimation(SliderAnimations.FADETRANSFORMATION);
@@ -104,6 +109,21 @@ public class MainActivityOn extends AppCompatActivity implements NavigationView.
         globelFunction=new GlobelFunction();
         ipAddress=globelFunction.GlobelFunctionSetting(databaseHandler);
 
+    }
+
+    private void widthFun() {
+
+        Display display = getWindowManager().getDefaultDisplay();
+        int SCREEN_WIDTH = display.getWidth();
+        int SCREEN_HEIGHT = display.getHeight();
+
+        DisplayMetrics metrics = new DisplayMetrics();
+        Map<String, Integer> map = new HashMap<String, Integer>();
+        map.put("screenWidth", Integer.valueOf(metrics.widthPixels));
+        map.put("screenHeight", Integer.valueOf(metrics.heightPixels));
+        map.put("screenDensity", Integer.valueOf(metrics.densityDpi));
+
+        Log.e("size",""+SCREEN_WIDTH+"    "+SCREEN_HEIGHT+"\n"+map.get("screenDensity"));
     }
 
 

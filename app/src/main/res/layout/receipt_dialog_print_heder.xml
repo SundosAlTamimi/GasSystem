@@ -30,7 +30,7 @@
                 android:src="@drawable/gas_" />
 
             <TextView
-                android:id="@+id/textView4"
+                android:id="@+id/CompanyName"
                 android:layout_width="320dp"
                 android:layout_height="wrap_content"
                 android:text="التحكم التقني للغاز المركزي  "

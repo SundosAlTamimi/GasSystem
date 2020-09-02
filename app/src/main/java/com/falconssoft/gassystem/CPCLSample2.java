@@ -133,6 +133,57 @@ public class CPCLSample2 {
         this.cpclPrinter.printForm();
     }
 
+
+    public void imageTestEnglishReports(int count, Bitmap testB,Bitmap testB2 ,Bitmap testB3,Bitmap testB4) throws IOException {//
+//        this.cpclPrinter.setForm(0, 0, 0,testB.getHeight(), count);
+//        this.cpclPrinter.setMedia(this.paperType);
+//        this.cpclPrinter.printBitmap(testB, 0, 0);//x=400
+//        this.cpclPrinter.printForm();
+//
+//        this.cpclPrinter.setForm(0, 0, 0,testB2.getHeight()+20, count);
+//        this.cpclPrinter.setMedia(this.paperType);
+//        this.cpclPrinter.printBitmap(testB2, 0, 0);//x=400
+//        this.cpclPrinter.printForm();
+//        this.cpclPrinter.setForm(0, 0, 0,testB.getHeight(), count);
+//        this.cpclPrinter.setMedia(this.paperType);
+//        this.cpclPrinter.printBitmap(testB3, 0, 0);//x=400
+//        this.cpclPrinter.printForm();
+
+//        this.cpclPrinter.printAndroidFont(1,"-----------------ملاحظات-----------------");
+        this.cpclPrinter.setForm(0, 0, 0, 20, count);
+        this.cpclPrinter.setMedia(this.paperType);
+        this.cpclPrinter.printAndroidFont("-----------ملاحظات------------", 1000, 24, 0, 1);
+        this.cpclPrinter.printForm();
+        this.cpclPrinter.setForm(0, 0, 0, 20, count);
+        this.cpclPrinter.setMedia(this.paperType);
+        this.cpclPrinter.printAndroidFont("يرجى تسديد الفاتوره خلال اسبوع من تاريخ اصدارها\n1254512\n ------------------------------",450, 24, 0, 1);
+        this.cpclPrinter.printForm();
+
+        this.cpclPrinter.setForm(0, 0, 0, 20, count);
+        this.cpclPrinter.setMedia(this.paperType);
+        this.cpclPrinter.printAndroidFont("يرجى تسديد الفاتوره خلال اسبوع من تاريخ اصدارها\n1254512\n ------------------------------",450, 24, 0, 1);
+        this.cpclPrinter.printForm();
+
+        this.cpclPrinter.setForm(0, 0, 0, 20, count);
+        this.cpclPrinter.setMedia(this.paperType);
+        this.cpclPrinter.printAndroidFont("رقم الحساب لدى البنك الاردني االكويتي\\n فرع شارع المدينه المنورة", 450, 24, 0, 1);
+        this.cpclPrinter.printForm();
+
+        this.cpclPrinter.setForm(0, 0, 0, 20, count);
+        this.cpclPrinter.setMedia(this.paperType);
+        this.cpclPrinter.printAndroidFont("545465", 1000, 24, 0, 1);
+        this.cpclPrinter.printForm();
+
+        this.cpclPrinter.setForm(0, 0, 0, 20, count);
+        this.cpclPrinter.setMedia(this.paperType);
+        this.cpclPrinter.printAndroidFont("----------------------------------", 450, 24, 0, 1);
+        this.cpclPrinter.printForm();
+//        this.cpclPrinter.setForm(0, 0, 0,testB.getHeight(), count);
+//        this.cpclPrinter.setMedia(this.paperType);
+//        this.cpclPrinter.printBitmap(testB4, 0, 0);//x=400
+//        this.cpclPrinter.printForm();
+    }
+
     public void dmStamp(int count, Bitmap bitmap) throws IOException {
         this.cpclPrinter.setForm(0, 200, 200, 406, count);
         this.cpclPrinter.setMedia(this.paperType);
@@ -144,14 +195,14 @@ public class CPCLSample2 {
         this.cpclPrinter.printForm();
     }
 
-    public void fontTest(int count) throws UnsupportedEncodingException {
-        this.cpclPrinter.setForm(0, 200, 200, 406, count);
+    public void fontTest(int count,String data) throws UnsupportedEncodingException {
+        this.cpclPrinter.setForm(0, 0, 0, 60, count);
         this.cpclPrinter.setMedia(this.paperType);
-        this.cpclPrinter.printCPCLText(0, 0, 0, 1, 1, "FONT-0-0", 2);
-        this.cpclPrinter.printCPCLText(0, 0, 1, 1, 50, "FONT-0-1", 0);
-        this.cpclPrinter.printCPCLText(0, 4, 0, 1, 100, "FONT-4-0", 0);
-        this.cpclPrinter.printCPCLText(0, 4, 1, 1, 150, "FONT-4-1", 0);
-        this.cpclPrinter.printCPCLText(0, 4, 2, 1, 260, "4-2", 0);
+        this.cpclPrinter.printCPCLText(0, 0, 0, 1, 1, data, 1);
+//        this.cpclPrinter.printCPCLText(0, 0, 1, 1, 50, "FONT-0-1", 0);
+//        this.cpclPrinter.printCPCLText(0, 4, 0, 1, 100, "FONT-4-0", 0);
+//        this.cpclPrinter.printCPCLText(0, 4, 1, 1, 150, "FONT-4-1", 0);
+//        this.cpclPrinter.printCPCLText(0, 4, 2, 1, 260, "4-2", 0);
         this.cpclPrinter.printForm();
     }
 
@@ -245,21 +296,21 @@ public class CPCLSample2 {
         return result;
     }
 
-    public void printAndroidFont(int count) throws UnsupportedEncodingException {
-        int nLineWidth = 384;
-        String data = "Receipt";
+    public void printAndroidFont(int count, String data) throws UnsupportedEncodingException {
+        int nLineWidth = 1000;
+//        String data = "Receipt";
         Object var4 = null;
 
         try {
-            this.cpclPrinter.setForm(0, 200, 200, 406, count);
+            this.cpclPrinter.setForm(0, 0, 0, 20, count);
             this.cpclPrinter.setMedia(this.paperType);
-            this.cpclPrinter.printAndroidFont(data, nLineWidth, 100, 0, 1);
-            this.cpclPrinter.printAndroidFont("Left Alignment", nLineWidth, 24, 120, 0);
-            this.cpclPrinter.printAndroidFont("Center Alignment", nLineWidth, 24, 150, 1);
-            this.cpclPrinter.printAndroidFont("Right Alignment", nLineWidth, 24, 180, 2);
-            this.cpclPrinter.printAndroidFont(Typeface.SANS_SERIF, "SANS_SERIF : 1234iwIW", nLineWidth, 24, 210, 0);
-            this.cpclPrinter.printAndroidFont(Typeface.SERIF, "SERIF : 1234iwIW", nLineWidth, 24, 240, 0);
-            this.cpclPrinter.printAndroidFont(Typeface.MONOSPACE, "MONOSPACE : 1234iwIW", nLineWidth, 24, 270, 0);
+            this.cpclPrinter.printAndroidFont(data, nLineWidth, 24, 0, 1);
+//            this.cpclPrinter.printAndroidFont("Left Alignment", nLineWidth, 24, 120, 0);
+//            this.cpclPrinter.printAndroidFont("Center Alignment", nLineWidth, 24, 150, 1);
+//            this.cpclPrinter.printAndroidFont("Right Alignment", nLineWidth, 24, 180, 2);
+//            this.cpclPrinter.printAndroidFont(Typeface.SANS_SERIF, "SANS_SERIF : 1234iwIW", nLineWidth, 24, 210, 0);
+//            this.cpclPrinter.printAndroidFont(Typeface.SERIF, "SERIF : 1234iwIW", nLineWidth, 24, 240, 0);
+//            this.cpclPrinter.printAndroidFont(Typeface.MONOSPACE, "MONOSPACE : 1234iwIW", nLineWidth, 24, 270, 0);
             this.cpclPrinter.printForm();
         } catch (IOException var6) {
             var6.printStackTrace();

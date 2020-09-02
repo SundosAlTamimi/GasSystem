@@ -141,7 +141,23 @@ public class AppSetting extends AppCompatActivity {
                         settingModle.setTaxNo(taxNo.getText().toString());
                         settingModle.setAccNo(accNo.getText().toString());
 
-                        settingModle.setLogo(serverPicBitmap);
+                        if(serverPicBitmap!=null) {
+                            settingModle.setLogo(serverPicBitmap);
+                        }else
+                        {
+
+                            String ip="";
+                            try {
+                                ip = settingModles.getIpAddress();
+                            }catch (Exception e){
+                                ip="";
+                            }
+                           if(!TextUtils.isEmpty(ip)) {
+                               settingModle.setLogo(settingModles.getLogo());
+                           }else {
+                               settingModle.setLogo(null);
+                           }
+                        }
                         databaseHandler.deleteAllSetting();
                         databaseHandler.addSetting(settingModle);
                         Toast.makeText(this, "Save Successful", Toast.LENGTH_SHORT).show();

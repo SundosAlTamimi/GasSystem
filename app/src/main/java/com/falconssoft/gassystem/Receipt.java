@@ -50,28 +50,29 @@ public class Receipt extends AppCompatActivity {
 
     LinearLayout black, black2, black3, dialog, noteDialog, custDialog, linear;
     private Animation animation;
-    EditText  custNo,value, noteTextView;
-    Button  save, search, yes, no, done, cancel,searchs;//,barCode;
+    EditText custNo, value, noteTextView;
+    Button save, search, yes, no, done, cancel, searchs;//,barCode;
     ListView custList;
-    TextView note,barCodTextTemp,receiptNo, project, lastBalance, accountNo, counterNo;
+    TextView note, barCodTextTemp, receiptNo, project, lastBalance, accountNo, counterNo;
     DatabaseHandler DHandler;
     ArrayList<Customer> customerList;
     List<Remarks> RemarkList;
     String today;
 
     String noteText = "";
-//    private Toolbar toolbar;
+    //    private Toolbar toolbar;
     public static RecCash recCash;
     ListAdapterNOTE listAdapterNOTE;
     GlobelFunction globelFunction;
     ListAdapterCustomerName listAdapterCustomerName;
-    int  maxVouNo=0;
-    String intentReSend="";
+    int maxVouNo = 0;
+    String intentReSend = "";
     Button editRecCashButton;
     EditText RecCashEditText;
     LinearLayout editRecNoLinear;
     RecCash recCashEdit;
-    String maxSerialRec="0";
+    String maxSerialRec = "0";
+
     @SuppressLint("ClickableViewAccessibility")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,7 +84,7 @@ public class Receipt extends AppCompatActivity {
         SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
         today = df.format(currentTimeAndDate);
 
-        globelFunction=new GlobelFunction();
+        globelFunction = new GlobelFunction();
 
 
         cancel.setOnClickListener(new View.OnClickListener() {
@@ -92,7 +93,7 @@ public class Receipt extends AppCompatActivity {
                 finish();
             }
         });
-        RemarkList=new ArrayList<>();
+        RemarkList = new ArrayList<>();
 //        setSupportActionBar(toolbar);
 //        toolbar.setNavigationIcon(R.drawable.ic_arrow_forward_black_24dp); // Set the icon
 //        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
@@ -105,15 +106,15 @@ public class Receipt extends AppCompatActivity {
         DHandler = new DatabaseHandler(Receipt.this);
 //        maxVouNo= DHandler.getMax("RECCASH")+1;
 
-        MaxSerial maxSerial=DHandler.getMaxSerialTable();
-        if(!TextUtils.isEmpty( maxSerial.getColomMax())){
-            maxSerialRec=maxSerial.getColomMax();
-        }else {
-            maxSerialRec="1";
-            DHandler.addMaxSerialTable(new MaxSerial("1","1"));
+        MaxSerial maxSerial = DHandler.getMaxSerialTable();
+        if (!TextUtils.isEmpty(maxSerial.getColomMax())) {
+            maxSerialRec = maxSerial.getColomMax();
+        } else {
+            maxSerialRec = "1";
+            DHandler.addMaxSerialTable(new MaxSerial("1", "1"));
         }
         customerList = DHandler.getAllCustomers();
-        RemarkList=DHandler.getAllRemark();
+        RemarkList = DHandler.getAllRemark();
         note.setMovementMethod(ScrollingMovementMethod.getInstance());
         custNo.setMovementMethod(ScrollingMovementMethod.getInstance());
         animation = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.move_to_down);
@@ -137,7 +138,7 @@ public class Receipt extends AppCompatActivity {
             custNo.setEnabled(false);
             searchs.setVisibility(View.GONE);
 
-        }else{
+        } else {
             editRecCashButton.setVisibility(View.GONE);
             save.setVisibility(View.VISIBLE);
             editRecNoLinear.setVisibility(View.GONE);
@@ -146,8 +147,6 @@ public class Receipt extends AppCompatActivity {
             searchs.setVisibility(View.VISIBLE);
 
         }
-
-
 
 
         note.setOnClickListener(new View.OnClickListener() {
@@ -201,25 +200,24 @@ public class Receipt extends AppCompatActivity {
 //        });
 
 
-
         RecCashEditText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
 
-                if(!hasFocus){
+                if (!hasFocus) {
 
-                    recCashEdit=new RecCash();
-                    if(!TextUtils.isEmpty(RecCashEditText.getText().toString())) {
+                    recCashEdit = new RecCash();
+                    if (!TextUtils.isEmpty(RecCashEditText.getText().toString())) {
                         recCashEdit = DHandler.getRecCashByRecNo(RecCashEditText.getText().toString());
-                        if(!TextUtils.isEmpty(recCashEdit.getAccNo())){
+                        if (!TextUtils.isEmpty(recCashEdit.getAccNo())) {
                             fillRecCashPrinting(recCashEdit);
-                        }else{
+                        } else {
                             clearText();
                             Toast.makeText(Receipt.this, "no RecCash", Toast.LENGTH_SHORT).show();
                         }
 
 
-                    }else {
+                    } else {
                         RecCashEditText.setError("Required!");
                         clearText();
                     }
@@ -234,7 +232,7 @@ public class Receipt extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-               update();
+                update();
 
             }
         });
@@ -242,21 +240,21 @@ public class Receipt extends AppCompatActivity {
 
     }
 
-    public  void fillRecCash(Customer receipt){
+    public void fillRecCash(Customer receipt) {
 
-        if(!TextUtils.isEmpty(receipt.getCounterNo())){
+        if (!TextUtils.isEmpty(receipt.getCounterNo())) {
             project.setText(receipt.getProjectName());
-            lastBalance.setText(""+receipt.getCredet());
+            lastBalance.setText("" + receipt.getCredet());
             accountNo.setText(receipt.getAccNo());
             counterNo.setText(receipt.getCounterNo());
 
-        }else {
+        } else {
         }
     }
 
 
-    void fillRecCashPrinting(RecCash receipt){
-        if(!TextUtils.isEmpty(receipt.getAccName())){
+    void fillRecCashPrinting(RecCash receipt) {
+        if (!TextUtils.isEmpty(receipt.getAccName())) {
             receiptNo.setText(receipt.getResNo());
             custNo.setText(receipt.getAccName());
             project.setText(receipt.getProjectName());
@@ -266,20 +264,20 @@ public class Receipt extends AppCompatActivity {
             value.setText(receipt.getCash());
             note.setText(receipt.getRemarks());
 
-        }else {
+        } else {
         }
     }
 
-    public void ShowNoteDialog(final TextView textView){
-        final Dialog dialog = new Dialog(this,R.style.Theme_Dialog);
+    public void ShowNoteDialog(final TextView textView) {
+        final Dialog dialog = new Dialog(this, R.style.Theme_Dialog);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setContentView(R.layout.note_dialog_show);
         dialog.setCancelable(true);
 
-        final EditText noteSearch=dialog.findViewById(R.id.noteSearch);
-final ListView ListNote=dialog.findViewById(R.id.ListNote);
+        final EditText noteSearch = dialog.findViewById(R.id.noteSearch);
+        final ListView ListNote = dialog.findViewById(R.id.ListNote);
 
-         listAdapterNOTE = new ListAdapterNOTE(Receipt.this, RemarkList,textView,dialog);
+        listAdapterNOTE = new ListAdapterNOTE(Receipt.this, RemarkList, textView, dialog);
         ListNote.setAdapter(listAdapterNOTE);
 
         noteSearch.addTextChangedListener(new TextWatcher() {
@@ -291,21 +289,21 @@ final ListView ListNote=dialog.findViewById(R.id.ListNote);
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
 
-                if(!noteSearch.getText().toString().equals("")){
-                    List<Remarks> searchRemark=new ArrayList<>();
+                if (!noteSearch.getText().toString().equals("")) {
+                    List<Remarks> searchRemark = new ArrayList<>();
                     searchRemark.clear();
-                    for(int i=0;i<RemarkList.size();i++){
-                        if(RemarkList.get(i).getBody().contains(noteSearch.getText().toString())||RemarkList.get(i).getTitle().contains(noteSearch.getText().toString())){
+                    for (int i = 0; i < RemarkList.size(); i++) {
+                        if (RemarkList.get(i).getBody().contains(noteSearch.getText().toString()) || RemarkList.get(i).getTitle().contains(noteSearch.getText().toString())) {
                             searchRemark.add(RemarkList.get(i));
 
                         }
                     }
 
-                     listAdapterNOTE = new ListAdapterNOTE(Receipt.this, searchRemark,textView,dialog);
+                    listAdapterNOTE = new ListAdapterNOTE(Receipt.this, searchRemark, textView, dialog);
                     ListNote.setAdapter(listAdapterNOTE);
 
-                }else {
-                    listAdapterNOTE = new ListAdapterNOTE(Receipt.this, RemarkList,textView,dialog);
+                } else {
+                    listAdapterNOTE = new ListAdapterNOTE(Receipt.this, RemarkList, textView, dialog);
                     ListNote.setAdapter(listAdapterNOTE);
                 }
 
@@ -321,16 +319,16 @@ final ListView ListNote=dialog.findViewById(R.id.ListNote);
 
     }
 
-    public void ShowCustomerDialog(final TextView textView){
-        final Dialog dialog = new Dialog(this,R.style.Theme_Dialog);
+    public void ShowCustomerDialog(final TextView textView) {
+        final Dialog dialog = new Dialog(this, R.style.Theme_Dialog);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setContentView(R.layout.customer_dialog_show);
         dialog.setCancelable(true);
 
-        final EditText noteSearch=dialog.findViewById(R.id.noteSearch);
-        final ListView ListNote=dialog.findViewById(R.id.ListNote);
+        final EditText noteSearch = dialog.findViewById(R.id.noteSearch);
+        final ListView ListNote = dialog.findViewById(R.id.ListNote);
 
-        listAdapterCustomerName = new ListAdapterCustomerName(Receipt.this, customerList,textView,dialog,1,Receipt.this);
+        listAdapterCustomerName = new ListAdapterCustomerName(Receipt.this, customerList, textView, dialog, 1, Receipt.this);
         ListNote.setAdapter(listAdapterCustomerName);
 
         noteSearch.addTextChangedListener(new TextWatcher() {
@@ -342,24 +340,24 @@ final ListView ListNote=dialog.findViewById(R.id.ListNote);
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
 
-                if(!noteSearch.getText().toString().equals("")){
-                    List<Customer> searchCustomer=new ArrayList<>();
+                if (!noteSearch.getText().toString().equals("")) {
+                    List<Customer> searchCustomer = new ArrayList<>();
                     searchCustomer.clear();
-                    for(int i=0;i<customerList.size();i++){
-                        if(customerList.get(i).getCustName().contains(noteSearch.getText().toString())){
+                    for (int i = 0; i < customerList.size(); i++) {
+                        if (customerList.get(i).getCustName().contains(noteSearch.getText().toString())) {
                             searchCustomer.add(customerList.get(i));
 
                         }
                     }
 
 
-                    listAdapterCustomerName = new ListAdapterCustomerName(Receipt.this, searchCustomer,textView,dialog,1,Receipt.this);
+                    listAdapterCustomerName = new ListAdapterCustomerName(Receipt.this, searchCustomer, textView, dialog, 1, Receipt.this);
                     ListNote.setAdapter(listAdapterCustomerName);
 
 
-                }else {
+                } else {
 
-                    listAdapterCustomerName = new ListAdapterCustomerName(Receipt.this, customerList,textView,dialog,1,Receipt.this);
+                    listAdapterCustomerName = new ListAdapterCustomerName(Receipt.this, customerList, textView, dialog, 1, Receipt.this);
                     ListNote.setAdapter(listAdapterCustomerName);
 
                 }
@@ -386,46 +384,51 @@ final ListView ListNote=dialog.findViewById(R.id.ListNote);
                     if (!TextUtils.isEmpty(custNo.getText().toString())) {
                         if (!TextUtils.isEmpty(lastBalance.getText().toString())) {
                             if (!TextUtils.isEmpty(accountNo.getText().toString())) {
-                                if (!TextUtils.isEmpty(counterNo.getText().toString())) {
-                                    if (!TextUtils.isEmpty(value.getText().toString())) {
-//
+                                if (!TextUtils.isEmpty(counterNo.getText().toString())) {//Double.parseDouble(value.getText().toString())
+                                    if (!TextUtils.isEmpty(value.getText().toString()) && !value.getText().toString().equals(".")) {
+                                        if (Double.parseDouble(value.getText().toString()) != 0) {
 
-                                        recCash=new RecCash();
+                                            recCash = new RecCash();
 
-                                        MaxSerial maxSerial=DHandler.getMaxSerialTable();
-                                        if(!TextUtils.isEmpty( maxSerial.getColomMax())){
-                                            maxSerialRec=maxSerial.getColomMax();
-                                        }else {
-                                            maxSerialRec="1";
-                                            DHandler.addMaxSerialTable(new MaxSerial("1","1"));
-                                        }
+                                            MaxSerial maxSerial = DHandler.getMaxSerialTable();
+                                            if (!TextUtils.isEmpty(maxSerial.getColomMax())) {
+                                                maxSerialRec = maxSerial.getColomMax();
+                                            } else {
+                                                maxSerialRec = "1";
+                                                DHandler.addMaxSerialTable(new MaxSerial("1", "1"));
+                                            }
 
 //                                        int  maxVno= DHandler.getMax("RECCASH")+1;
-                                        recCash.setResNo(maxSerialRec);
-                                        recCash.setAccNo( accountNo.getText().toString());
-                                        recCash.setAccName(custNo.getText().toString());
-                                        recCash.setCash( value.getText().toString());
-                                        recCash.setRemarks(note.getText().toString());
-                                        recCash.setRecDate(globelFunction.DateInToday());
-                                        recCash.setIs_Post("0");
-                                        recCash.setIsExport("0");
-                                        recCash.setLastBalance(lastBalance.getText().toString());
-                                        recCash.setCounterNo(counterNo.getText().toString());
-                                        recCash.setProjectName(project.getText().toString());
-                                        recCash.setSerial(maxSerialRec);
-                                        recCash.setOldCash("");
-                                        recCash.setOldRemark("");
-                                        recCash.setStatus("0");
+                                            recCash.setResNo(maxSerialRec);
+                                            recCash.setAccNo(accountNo.getText().toString());
+                                            recCash.setAccName(custNo.getText().toString());
+                                            recCash.setCash(""+Double.parseDouble(value.getText().toString()));
+                                            recCash.setRemarks(note.getText().toString());
+                                            recCash.setRecDate(globelFunction.DateInToday());
+                                            recCash.setIs_Post("0");
+                                            recCash.setIsExport("0");
+                                            recCash.setLastBalance(lastBalance.getText().toString());
+                                            recCash.setCounterNo(counterNo.getText().toString());
+                                            recCash.setProjectName(project.getText().toString());
+                                            recCash.setSerial(maxSerialRec);
+                                            recCash.setOldCash("");
+                                            recCash.setOldRemark("");
+                                            recCash.setStatus("0");
 
 
-                                        SavePrint();
+                                            SavePrint();
 
+                                        } else {
+                                            value.setError("Zero!");
+                                        }
+                                    } else {
+                                        value.setError("Required!");
                                     }
                                 } else {
-                                    value.setError("Required!");
+                                    counterNo.setError("Required!");
                                 }
                             } else {
-                                counterNo.setError("Required!");
+                                accountNo.setError("Required!");
                             }
                         } else {
                             lastBalance.setError("Required!");
@@ -450,7 +453,6 @@ final ListView ListNote=dialog.findViewById(R.id.ListNote);
     }
 
 
-
     public void update() {
 
         if (!TextUtils.isEmpty(recCashEdit.getResNo())) {
@@ -461,7 +463,8 @@ final ListView ListNote=dialog.findViewById(R.id.ListNote);
                             if (!TextUtils.isEmpty(lastBalance.getText().toString())) {
                                 if (!TextUtils.isEmpty(accountNo.getText().toString())) {
                                     if (!TextUtils.isEmpty(counterNo.getText().toString())) {
-                                        if (!TextUtils.isEmpty(value.getText().toString())) {
+                                        if (!TextUtils.isEmpty(value.getText().toString()) && !value.getText().toString().equals(".")) {
+                                            if (Double.parseDouble(value.getText().toString()) != 0) {
 //
 
 //                                        recCash=new RecCash();
@@ -479,18 +482,23 @@ final ListView ListNote=dialog.findViewById(R.id.ListNote);
 //                                        recCash.setProjectName(project.getText().toString());
 //                                        recCash.setSerial(receiptNo.getText().toString());
 
-                                            DHandler.updateRecCash(recCashEdit.getSerial(), recCashEdit.getResNo(),
-                                                    value.getText().toString(), recCashEdit.getCash(), note.getText().toString(), recCashEdit.getRemarks());
+                                                DHandler.updateRecCash(recCashEdit.getSerial(), recCashEdit.getResNo(),
+                                                       ""+ Double.parseDouble(value.getText().toString()), recCashEdit.getCash(), note.getText().toString(), recCashEdit.getRemarks());
 
-                                            receiptNo.setText("");
-                                            clearText();
-                                            Toast.makeText(this, "update Success", Toast.LENGTH_SHORT).show();
+                                                receiptNo.setText("");
+                                                clearText();
+                                                Toast.makeText(this, "update Success", Toast.LENGTH_SHORT).show();
+                                            } else {
+                                                value.setError("zero!");
+                                            }
+                                        } else {
+                                            value.setError("Required!");
                                         }
                                     } else {
-                                        value.setError("Required!");
+                                        counterNo.setError("Required!");
                                     }
                                 } else {
-                                    counterNo.setError("Required!");
+                                    accountNo.setError("Required!");
                                 }
                             } else {
                                 lastBalance.setError("Required!");
@@ -515,7 +523,7 @@ final ListView ListNote=dialog.findViewById(R.id.ListNote);
         }
     }
 
-    void clearText(){
+    void clearText() {
 //        receiptNo.setText("");
         custNo.setText("");
         project.setText("");
@@ -529,10 +537,10 @@ final ListView ListNote=dialog.findViewById(R.id.ListNote);
     private void SavePrint() {
 
         DHandler.addRecCash(recCash);
-        DHandler.updateMaxRec(""+(Integer.parseInt(maxSerialRec)+1));
-        receiptNo.setText(""+(Integer.parseInt(maxSerialRec)+1));
+        DHandler.updateMaxRec("" + (Integer.parseInt(maxSerialRec) + 1));
+        receiptNo.setText("" + (Integer.parseInt(maxSerialRec) + 1));
         clearText();
-        Intent printExport=new Intent(Receipt.this,BluetoothConnectMenu.class);
+        Intent printExport = new Intent(Receipt.this, BluetoothConnectMenu.class);
         printExport.putExtra("printKey", "1");
         startActivity(printExport);
         Toast.makeText(this, "Save Success", Toast.LENGTH_SHORT).show();
@@ -715,7 +723,6 @@ final ListView ListNote=dialog.findViewById(R.id.ListNote);
 //    };
 
 
-
     void init() {
 
         note = findViewById(R.id.notes);
@@ -745,16 +752,16 @@ final ListView ListNote=dialog.findViewById(R.id.ListNote);
         accountNo = findViewById(R.id.account_no);
         counterNo = findViewById(R.id.counter_no);
         value = findViewById(R.id.value);
-        searchs= findViewById(R.id.searchs);
+        searchs = findViewById(R.id.searchs);
 
         custList = findViewById(R.id.cust_list);
 
-        editRecCashButton=findViewById(R.id.editRecCash);
-        editRecNoLinear=findViewById(R.id.editRecNoLinear);
-        RecCashEditText=findViewById(R.id.RecCashEditText);
+        editRecCashButton = findViewById(R.id.editRecCash);
+        editRecNoLinear = findViewById(R.id.editRecNoLinear);
+        RecCashEditText = findViewById(R.id.RecCashEditText);
         editRecNoLinear.setVisibility(View.GONE);
         editRecCashButton.setVisibility(View.GONE);
-        recCashEdit=new RecCash();
+        recCashEdit = new RecCash();
 
 
 //        toolbar=findViewById(R.id.appBar);

@@ -759,7 +759,7 @@ counterNo.setEnabled(false);
                                                             voucherGas.setReaderDate(globelFunction.DateInToday());
                                                             voucherGas.setInvoiceType("501");
                                                             voucherGas.setInvoiceNo(maxSerialVoucher);//serial
-                                                            voucherGas.setNetValue(net.getText().toString());
+                                                            voucherGas.setNetValue(globelFunction.DecimalFormat(net.getText().toString()));
                                                             voucherGas.setTaxValue(tax.getText().toString());
                                                             voucherGas.setGret(gasReturn.getText().toString());
                                                             voucherGas.setRemarks(noteRemark.getText().toString());//***importAdd
