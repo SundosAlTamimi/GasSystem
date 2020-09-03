@@ -432,7 +432,7 @@ public class BluetoothConnectMenu extends Activity {
 
 
             dialog.getProgressHelper().setBarColor(Color.parseColor("#A5DC86"));
-            dialog.setTitleText(" Connect to printer ...");
+            dialog.setTitleText(" يتم الوصول للطابعه ...");
             dialog.setCancelable(false);
             dialog.show();
             super.onPreExecute();
@@ -599,8 +599,8 @@ public class BluetoothConnectMenu extends Activity {
 
 //                AlertView.showAlert("Disconnect Bluetoothُ", "Try Again ...", BluetoothConnectMenu.this.context);
                 new SweetAlertDialog(BluetoothConnectMenu.this, SweetAlertDialog.ERROR_TYPE)
-                        .setTitleText("Oops...Try Again")
-                        .setContentText("Disconnect Bluetooth")
+                        .setTitleText("حاول مره اخرى !!! ")
+                        .setContentText("فشل الاتصال مع الطابعه ")
                         .show();
 
 
