@@ -93,6 +93,8 @@ public class PrintRecCash extends AppCompatActivity {
         cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Intent intent=new Intent(PrintRecCash.this,MainActivityOn.class);
+                startActivity(intent);
                 finish();
             }
         });
@@ -147,5 +149,12 @@ public class PrintRecCash extends AppCompatActivity {
         custNo.setMovementMethod(new ScrollingMovementMethod());
 
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent=new Intent(PrintRecCash.this,MainActivityOn.class);
+        startActivity(intent);
+        finish();
     }
 }

@@ -20,8 +20,8 @@
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning"
         tools:targetApi="m">
-        <activity android:name=".MainActivity">
-
+        <activity android:name=".MainActivity"
+            android:screenOrientation="sensorPortrait">
             <!--<intent-filter>-->
                 <!--<action android:name="android.intent.action.MAIN" />-->
 
@@ -31,7 +31,8 @@
         </activity>
 
 
-        <activity android:name=".MainActivityOn">
+        <activity android:name=".MainActivityOn"
+            android:screenOrientation="sensorPortrait">
             <!--<intent-filter>-->
                 <!--<action android:name="android.intent.action.MAIN" />-->
 
@@ -39,7 +40,8 @@
             <!--</intent-filter>-->
         </activity>
 
-        <activity android:name=".SplashGasScreen">
+        <activity android:name=".SplashGasScreen"
+            android:screenOrientation="sensorPortrait">
             <intent-filter>
             <action android:name="android.intent.action.MAIN" />
 
@@ -48,21 +50,25 @@
         </activity>
 
         <activity android:name=".MakeVoucher"
+            android:screenOrientation="sensorPortrait"
             android:parentActivityName=".MainActivity">
 
         </activity>
 
         <activity android:name=".AppSetting"
+            android:screenOrientation="sensorPortrait"
             android:parentActivityName=".MainActivity">
 
         </activity>
 
         <activity android:name=".PrintVoucher"
+            android:screenOrientation="sensorPortrait"
             android:parentActivityName=".MainActivity">
 
         </activity>
 
         <activity android:name=".PrintRecCash"
+            android:screenOrientation="sensorPortrait"
             android:parentActivityName=".MainActivity">
 
         </activity>
@@ -73,16 +79,20 @@
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Dialog" />
 
-        <activity android:name=".Receipt">
+        <activity android:name=".Receipt"
+            android:screenOrientation="sensorPortrait">
 
         </activity>
-        <activity android:name=".Edit">
+        <activity android:name=".Edit"
+            android:screenOrientation="sensorPortrait">
 
         </activity>
-        <activity android:name=".Reprint">
+        <activity android:name=".Reprint"
+            android:screenOrientation="sensorPortrait">
 
         </activity>
-        <activity android:name=".Setting">
+        <activity android:name=".Setting"
+            android:screenOrientation="sensorPortrait">
 
         </activity>
 

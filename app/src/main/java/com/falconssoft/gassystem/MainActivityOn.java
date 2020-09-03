@@ -158,7 +158,7 @@ public class MainActivityOn extends AppCompatActivity implements NavigationView.
             sliderView.setOnSliderClickListener(new SliderView.OnSliderClickListener() {
                 @Override
                 public void onSliderClick(SliderView sliderView) {
-                    Toast.makeText(MainActivityOn.this, "This is slider " + (finalI + 1), Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(MainActivityOn.this, "This is slider " + (finalI + 1), Toast.LENGTH_SHORT).show();
 
                 }
             });
@@ -196,10 +196,12 @@ public class MainActivityOn extends AppCompatActivity implements NavigationView.
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
         switch (menuItem.getItemId()){
             case R.id.menu_add_voucher:
+                finish();
                 Intent AddVocher= new Intent(MainActivityOn.this,MakeVoucher.class);
                 startActivity(AddVocher);
                 break;
             case R.id.menu_edit_voucher:
+                finish();
 
                 Intent editIntent=new Intent(MainActivityOn.this,MakeVoucher.class);
                 editIntent.putExtra("EDIT_VOUCHER","EDIT_VOUCHER");
@@ -208,14 +210,17 @@ public class MainActivityOn extends AppCompatActivity implements NavigationView.
                 startActivity(editIntent);
                 break;
             case R.id.menu_print_voucher:
+                finish();
                 Intent PrintVoucherIntent= new Intent(MainActivityOn.this, PrintVoucher.class);
                 startActivity(PrintVoucherIntent);
                 break;
             case R.id.menu_add_receipt_voucher:
+                finish();
                 Intent receipt= new Intent(MainActivityOn.this, Receipt.class);
                 startActivity(receipt);
                 break;
             case R.id.menu_edit_receipt_voucher:
+                finish();
                 Intent editRecIntent=new Intent(MainActivityOn.this,Receipt.class);
                 editRecIntent.putExtra("EDIT_REC","EDIT_REC");
                 // ChequeInfo
@@ -223,6 +228,7 @@ public class MainActivityOn extends AppCompatActivity implements NavigationView.
                 startActivity(editRecIntent);
                 break;
             case R.id.menu_print_receipt_voucher:
+                finish();
                 Intent PrintRecCashIntent= new Intent(MainActivityOn.this, PrintRecCash.class);
                 startActivity(PrintRecCashIntent);
 
@@ -253,6 +259,7 @@ public class MainActivityOn extends AppCompatActivity implements NavigationView.
                 exportDataToServer();
                 break;
             case R.id.menu_settings:
+                finish();
                 Intent SettingIntent= new Intent(MainActivityOn.this, AppSetting.class);
                 startActivity(SettingIntent);
                 break;
@@ -290,7 +297,7 @@ if(isExported) {
     sendCloud.startSending("ExportVoucher");
 }else{
 
-    Toast.makeText(this, "All Voucher Export", Toast.LENGTH_SHORT).show();
+    Toast.makeText(this, "جميع الفواتير تم تصديرها مسبقا", Toast.LENGTH_SHORT).show();
 
 }
 
@@ -317,7 +324,7 @@ if(isExported) {
             sendCloud.startSending("ExportRecCash");
         }else{
 
-            Toast.makeText(this, "All Rec Export", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "جميع السندات تم تصديرها مسبقا ", Toast.LENGTH_SHORT).show();
 
         }
 
@@ -431,7 +438,7 @@ if(isExported) {
 
                     switch (i){
                         case 0://تعديل فاتورة
-
+                            finish();
                             Intent editIntent=new Intent(MainActivityOn.this,MakeVoucher.class);
                             editIntent.putExtra("EDIT_VOUCHER","EDIT_VOUCHER");
                             // ChequeInfo
@@ -439,14 +446,17 @@ if(isExported) {
                             startActivity(editIntent);
                             break;
                         case 1://اضافة فاتورة
+                            finish();
                             Intent AddVocher= new Intent(MainActivityOn.this,MakeVoucher.class);
                             startActivity(AddVocher);
                             break;
                         case 2://طباعة فاتورة
+                            finish();
                             Intent PrintVoucherIntent= new Intent(MainActivityOn.this, PrintVoucher.class);
                             startActivity(PrintVoucherIntent);
                             break;
                         case 3://تعديل سند قبض
+                            finish();
                             Intent editRecIntent=new Intent(MainActivityOn.this,Receipt.class);
                             editRecIntent.putExtra("EDIT_REC","EDIT_REC");
                             // ChequeInfo
@@ -454,15 +464,18 @@ if(isExported) {
                             startActivity(editRecIntent);
                             break;
                         case 4://اضافة سند قبض
+                            finish();
                             Intent receipt= new Intent(MainActivityOn.this, Receipt.class);
                             startActivity(receipt);
                             break;
                         case 5://طباعة سند قبض
+                            finish();
                             Intent PrintRecCashIntent= new Intent(MainActivityOn.this, PrintRecCash.class);
                             startActivity(PrintRecCashIntent);
                             break;
 
                         case 6://اعدادات
+                            finish();
                             Intent SettingIntent= new Intent(MainActivityOn.this, AppSetting.class);
                             startActivity(SettingIntent);
                             break;

@@ -36,9 +36,9 @@
                 <TextView
                     android:id="@+id/textView8"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_marginVertical="10dp"
-                    android:layout_weight="8"
+                    android:layout_weight="0"
                     android:fontFamily="serif-monospace"
                     android:gravity="center"
                     android:text="طباعة فاتوره "
@@ -47,58 +47,12 @@
                     android:textSize="30sp"
                     android:textStyle="bold" />
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_margin="5dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginBottom="3dp"
-                    android:layout_weight="8"
-                    android:background="@drawable/edit_bac_s"
-                    android:gravity="center"
-                    android:orientation="horizontal">
 
-                    <TextView
-                        android:layout_width="100dp"
-                        android:layout_height="wrap_content"
-                        android:elevation="5dp"
-                        android:inputType="number"
-                        android:padding="5dp"
-                        android:text="رقم الفاتوره "
-                        android:textColor="@color/white_dark"
-                        android:textSize="14sp" />
-
-                    <EditText
-                        android:id="@+id/voucherNo"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginRight="10dp"
-                        android:textCursorDrawable="@drawable/cursor_edit_text"
-
-                        android:elevation="2dp"
-                        android:gravity="center"
-                        android:inputType="number"
-                        android:lines="1"
-                        android:nextFocusDown="@id/current_read"
-                        android:padding="5dp"
-                        android:textColor="@color/white_dark"
-                        android:textSize="14sp" />
-
-                    <!--<TextView-->
-                    <!--android:layout_width="match_parent"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:layout_marginRight="10dp"-->
-                    <!--android:layout_weight="1"-->
-                    <!--android:text="16072"-->
-                    <!--android:textColor="@color/darkblue_"-->
-                    <!--android:textSize="12sp" />-->
-
-                </LinearLayout>
 
                 <ScrollView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_weight="2.4">
+                    android:layout_weight="1">
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -149,7 +103,50 @@
 
 
                             </LinearLayout>
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="3dp"
+                                android:padding="5dp"
+                                android:background="@drawable/edite_back"
+                                android:layout_marginTop="10dp"
+                                android:layout_marginBottom="3dp"
+                                android:orientation="horizontal"
+                                android:visibility="visible">
 
+                                <TextView
+                                    android:layout_width="100dp"
+                                    android:layout_height="wrap_content"
+                                    android:elevation="5dp"
+                                    android:inputType="number"
+                                    android:padding="5dp"
+                                    android:text="رقم الفاتوره "
+                                    android:textColor="@color/white_dark"
+                                    android:textSize="14sp" />
+
+                                <EditText
+                                    android:id="@+id/voucherNo"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginRight="10dp"
+                                    android:gravity="center"
+                                    android:inputType="number"
+                                    android:lines="1"
+                                    android:textCursorDrawable="@drawable/cursor_edit_text"
+                                    android:nextFocusDown="@id/current_read"
+                                    android:textColor="@color/white_dark"
+                                    android:textSize="14sp" />
+
+                                <!--<TextView-->
+                                <!--android:layout_width="match_parent"-->
+                                <!--android:layout_height="wrap_content"-->
+                                <!--android:layout_marginRight="10dp"-->
+                                <!--android:layout_weight="1"-->
+                                <!--android:text="16072"-->
+                                <!--android:textColor="@color/darkblue_"-->
+                                <!--android:textSize="12sp" />-->
+
+                            </LinearLayout>
 
                             <LinearLayout
                                 android:layout_width="match_parent"

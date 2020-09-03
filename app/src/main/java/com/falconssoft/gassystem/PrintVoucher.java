@@ -55,7 +55,7 @@ public class PrintVoucher extends AppCompatActivity {
                         }else{
                             clear();
                             PrintOn=false;
-                            Toast.makeText(PrintVoucher.this, "no Voucher", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(PrintVoucher.this, "الفاتوره غير موجوده", Toast.LENGTH_SHORT).show();
                         }
 
 
@@ -74,6 +74,8 @@ public class PrintVoucher extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
+                Intent intent=new Intent(PrintVoucher.this,MainActivityOn.class);
+                startActivity(intent);
                 finish();
 
             }
@@ -89,11 +91,11 @@ public class PrintVoucher extends AppCompatActivity {
                     Intent printExport=new Intent(PrintVoucher.this,BluetoothConnectMenu.class);
                     printExport.putExtra("printKey", "0");
                     startActivity(printExport);
-                    Toast.makeText(PrintVoucher.this, "Print ", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(PrintVoucher.this, "الطباعه ...", Toast.LENGTH_SHORT).show();
 
 
                 }else {
-                    Toast.makeText(PrintVoucher.this, "No Voucher For Print ", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(PrintVoucher.this, "لا يوجد فاتوره لطباعتها", Toast.LENGTH_SHORT).show();
 
                 }
 
@@ -168,6 +170,14 @@ public class PrintVoucher extends AppCompatActivity {
         noteRemark=findViewById(R.id.noteRemark);
 
 
+    }
+
+
+    @Override
+    public void onBackPressed() {
+        Intent intent=new Intent(PrintVoucher.this,MainActivityOn.class);
+        startActivity(intent);
+        finish();
     }
 
 

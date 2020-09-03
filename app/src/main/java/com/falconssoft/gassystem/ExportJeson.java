@@ -188,8 +188,8 @@ public class ExportJeson {
                 pdItem.dismissWithAnimation();
 
                     new SweetAlertDialog(context, SweetAlertDialog.ERROR_TYPE)
-                            .setTitleText("oops")
-                            .setContentText("gg")
+                            .setTitleText("تصدير الفاتوره")
+                            .setContentText("فشل تصدير الفاتوره ")
                             .show();
 
                 }
@@ -312,8 +312,8 @@ Log.e("ipAdress", "ip -->" + ip);
                     pdItem.dismissWithAnimation();
 
                     new SweetAlertDialog(context, SweetAlertDialog.ERROR_TYPE)
-                            .setTitleText("opp")
-                            .setContentText("f")
+                            .setTitleText("تصدير السندات ")
+                            .setContentText("فشل تصدير سندات القبض ")
                             .show();
 
                 }

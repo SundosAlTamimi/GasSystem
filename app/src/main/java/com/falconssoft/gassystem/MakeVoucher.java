@@ -126,6 +126,8 @@ public class MakeVoucher extends AppCompatActivity {
         cancelButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Intent intent=new Intent(MakeVoucher.this,MainActivityOn.class);
+                startActivity(intent);
                 finish();
             }
         });
@@ -178,7 +180,7 @@ public class MakeVoucher extends AppCompatActivity {
 
         yes.setOnTouchListener(onTouchListener);
         no.setOnTouchListener(onTouchListener);
-        counterNo.requestFocus();
+//
 
         RemarkList=DHandler.getAllRemark();
 
@@ -405,9 +407,10 @@ public class MakeVoucher extends AppCompatActivity {
             editButton.setVisibility(View.VISIBLE);
             save.setVisibility(View.GONE);
             editVoucherNoLinear.setVisibility(View.VISIBLE);
-counterNo.setEnabled(false);
+            counterNo.setEnabled(false);
             barCode.setVisibility(View.GONE);
             searchCounter.setVisibility(View.GONE);
+            editTextVoucherNo.requestFocus();
 
         }else{
             editButton.setVisibility(View.GONE);
@@ -416,6 +419,7 @@ counterNo.setEnabled(false);
             barCode.setVisibility(View.VISIBLE);
             counterNo.setEnabled(true);
             searchCounter.setVisibility(View.VISIBLE);
+            counterNo.requestFocus();
 
 
         }
@@ -442,13 +446,20 @@ counterNo.setEnabled(false);
                     if(!TextUtils.isEmpty(editTextVoucherNo.getText().toString())) {
                         voucherModleEdit=new VoucherModle();
                         voucherModleEdit = DHandler.getVoucherByVoucherNo(editTextVoucherNo.getText().toString());
-                        if(!TextUtils.isEmpty( voucherModleEdit.getCounterNo())){
+                        String counterNo="";
+                        try{
+                            counterNo= voucherModleEdit.getCounterNo();
+                        }catch (Exception e) {
+                            counterNo="";
+                        }
+
+                        if(!TextUtils.isEmpty(counterNo)){
                             fillDataInLayout(voucherModleEdit);
 //                            PrintOn=true;
                         }else{
                             clear();
 //                            PrintOn=false;
-                            Toast.makeText(MakeVoucher.this, "no Voucher", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(MakeVoucher.this, "الفاتوره غير موجوده", Toast.LENGTH_SHORT).show();
                         }
 
 
@@ -1144,7 +1155,6 @@ counterNo.setEnabled(false);
                 }
             }else{
                 previousRead.setError("DOT!");
-                currentRead.setText("");
                 clearAfterError();
             }
         }
@@ -1441,7 +1451,12 @@ counterNo.setEnabled(false);
 
     }
 
-
+    @Override
+    public void onBackPressed() {
+        Intent intent=new Intent(MakeVoucher.this,MainActivityOn.class);
+        startActivity(intent);
+        finish();
+    }
 
 
 }

@@ -58,7 +58,9 @@ public class AppSetting extends AppCompatActivity {
         cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-              finish();
+                Intent intent=new Intent(AppSetting.this,MainActivityOn.class);
+                startActivity(intent);
+                finish();
             }
         });
 
@@ -189,4 +191,12 @@ public class AppSetting extends AppCompatActivity {
          databaseHandler=new DatabaseHandler(AppSetting.this);
          upload=findViewById(R.id.upload);
     }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent=new Intent(AppSetting.this,MainActivityOn.class);
+        startActivity(intent);
+        finish();
+    }
+
 }

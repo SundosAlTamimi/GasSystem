@@ -90,8 +90,9 @@ public class Receipt extends AppCompatActivity {
         cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                finish();
-            }
+                Intent intent=new Intent(Receipt.this,MainActivityOn.class);
+                startActivity(intent);
+                finish();            }
         });
         RemarkList = new ArrayList<>();
 //        setSupportActionBar(toolbar);
@@ -213,7 +214,7 @@ public class Receipt extends AppCompatActivity {
                             fillRecCashPrinting(recCashEdit);
                         } else {
                             clearText();
-                            Toast.makeText(Receipt.this, "no RecCash", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(Receipt.this, "سند القبض غير موجوده", Toast.LENGTH_SHORT).show();
                         }
 
 
@@ -447,7 +448,7 @@ public class Receipt extends AppCompatActivity {
         }
 
 
-        Toast.makeText(this, "Save Success", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "تم الحفظ بنجاح", Toast.LENGTH_SHORT).show();
 
 
     }
@@ -487,7 +488,7 @@ public class Receipt extends AppCompatActivity {
 
                                                 receiptNo.setText("");
                                                 clearText();
-                                                Toast.makeText(this, "update Success", Toast.LENGTH_SHORT).show();
+                                                Toast.makeText(this, "تم التعديل بنجاح ", Toast.LENGTH_SHORT).show();
                                             } else {
                                                 value.setError("zero!");
                                             }
@@ -518,7 +519,7 @@ public class Receipt extends AppCompatActivity {
 
         } else {
 
-            Toast.makeText(this, "Can not update", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "لا يمكن التعديل", Toast.LENGTH_SHORT).show();
 
         }
     }
@@ -543,7 +544,7 @@ public class Receipt extends AppCompatActivity {
         Intent printExport = new Intent(Receipt.this, BluetoothConnectMenu.class);
         printExport.putExtra("printKey", "1");
         startActivity(printExport);
-        Toast.makeText(this, "Save Success", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "تم الحفظ بنجاح ", Toast.LENGTH_SHORT).show();
     }
 
 //    View.OnTouchListener onTouchListener = new View.OnTouchListener() {
@@ -804,5 +805,12 @@ public class Receipt extends AppCompatActivity {
         }
     }
 
+
+    @Override
+    public void onBackPressed() {
+        Intent intent=new Intent(Receipt.this,MainActivityOn.class);
+        startActivity(intent);
+        finish();
+    }
 
 }

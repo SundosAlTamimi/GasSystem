@@ -125,7 +125,7 @@ public class importJson {
 //            progressDialog.show();
 //            pd = ProgressDialog.show(context, "title", "loading", true);
             pd.getProgressHelper().setBarColor(Color.parseColor("#FDD835"));
-            pd.setTitleText("import CUSTOMER");
+            pd.setTitleText("يتم استيراد ال Customer ");
 
 
             super.onPreExecute();
@@ -283,8 +283,8 @@ public class importJson {
                 if(pd!=null) {
                     pd.dismiss();
                     new SweetAlertDialog(context, SweetAlertDialog.ERROR_TYPE)
-                            .setTitleText("Opps")
-                            .setContentText("failed")
+                            .setTitleText("استيراد Customer")
+                            .setContentText("فشل استيراد ال Customer")
                             .show();
                 }
 
@@ -310,7 +310,7 @@ public class importJson {
 //            progressDialog.show();
 
             pd.getProgressHelper().setBarColor(Color.parseColor("#FDD835"));
-            pd.setTitleText("import Remark");
+            pd.setTitleText("يتم استيراد Remark");
 
         }
 
@@ -409,8 +409,8 @@ public class importJson {
                 if(pd!=null) {
                     pd.dismiss();
                     new SweetAlertDialog(context, SweetAlertDialog.ERROR_TYPE)
-                            .setTitleText("ops")
-                            .setContentText("failed Remark")
+                            .setTitleText("استيراد Remark")
+                            .setContentText("فشل استيراد Remark")
                             .show();
                 }
             }
@@ -1255,7 +1255,7 @@ public class importJson {
 //            progressDialogSave.show();
 
             pd.getProgressHelper().setBarColor(Color.parseColor("#1F6381"));
-            pd.setTitleText("SAVE iN DB");
+            pd.setTitleText("*يتم حفظ ال Customer *");
 
         }
 
@@ -1331,10 +1331,10 @@ public class importJson {
         @Override
         protected void onPostExecute(String JsonResponse) {
             super.onPostExecute(JsonResponse);
-            Toast.makeText(context, "Save Item Card Success", Toast.LENGTH_SHORT).show();
-            Toast.makeText(context, "Start Import Item Switch", Toast.LENGTH_SHORT).show();
+//            Toast.makeText(context, "Save Item Card Success", Toast.LENGTH_SHORT).show();
+//            Toast.makeText(context, "Start Import Item Switch", Toast.LENGTH_SHORT).show();
             pd.getProgressHelper().setBarColor(Color.parseColor("#A5DC86"));
-            pd.setTitleText("Save Customer");
+            pd.setTitleText("* تم حفظ ال customer table بنجاح *");
 
             new SyncRemark().execute();
 
@@ -1357,7 +1357,7 @@ public class importJson {
 //            progressDialogSave.setProgress(0);
 //            progressDialogSave.show();
             pd.getProgressHelper().setBarColor(Color.parseColor("#1F6381"));
-            pd.setTitleText("SAVE remark");
+            pd.setTitleText(" * يتم حفظ ال remark table *");
 
         }
 
@@ -1412,7 +1412,7 @@ public class importJson {
             super.onPostExecute(JsonResponse);
 
             pd.getProgressHelper().setBarColor(Color.parseColor("#A5DC86"));
-            pd.setTitleText("SAVE");
+            pd.setTitleText("* تم حفظ ال remark table بنجاح *");
 
             pd.dismissWithAnimation();
 
