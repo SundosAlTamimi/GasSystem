@@ -1,0 +1,836 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="320dp"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    >
+
+
+    <LinearLayout
+        android:id="@+id/linerForPrint"
+        android:layout_width="320dp"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:layoutDirection="rtl"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="320dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/logoPic"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:src="@drawable/gas_" />
+
+            <TextView
+                android:id="@+id/CompanyName"
+                android:layout_width="320dp"
+                android:layout_height="wrap_content"
+                android:text="التحكم التقني للغاز المركزي  "
+                android:textAlignment="center"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="320dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="--------------------------------------------------------------------------"
+                android:textColor="@color/black" />
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="5dp">
+
+                <TextView
+                    android:id="@+id/textView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="الرقم الضريبي  : "
+                    android:textColor="@color/black"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/taxno"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="178088170"
+                    android:textColor="@color/black"
+                    android:textSize="14sp" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="320dp"
+                android:layout_height="wrap_content"
+                android:padding="5dp">
+
+                <TextView
+                    android:id="@+id/textView7"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="top|left"
+                    android:text="رقم الفاتوره : "
+                    android:textColor="@color/black"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/voucherNo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="top|left"
+                    android:layout_marginLeft="30dp"
+                    android:text="2036"
+                    android:textColor="@color/black"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/textView2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="التاريخ : "
+                    android:textColor="@color/black"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:text="21/11/2020"
+                    android:textColor="@color/black"
+                    android:textSize="16sp" />
+            </TableRow>
+
+
+            <TextView
+                android:layout_width="320dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="===================================="
+                android:textColor="@color/black" />
+
+
+            <TextView
+                android:layout_width="320dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="----------------------ارقام الاتصال----------------------"
+                android:textColor="@color/black" />
+            <TextView
+                android:layout_width="320dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="0799521940 - 065355760"
+                android:textColor="@color/black" />
+            <TextView
+                android:layout_width="320dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="فاكس : 065355760"
+                android:textColor="@color/black" />
+            <TextView
+                android:layout_width="320dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="الجبيهة : اشارات المنهل"
+                android:textColor="@color/black" />
+
+            <TextView
+                android:layout_width="320dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="- ---------------------------اسم المشروع ----------------------------"
+                android:textColor="@color/black" />
+
+            <TextView
+                android:id="@+id/projectName"
+                android:layout_width="320dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="شركة ابراج الكرامه للاسكان 1"
+                android:textColor="@color/black" />
+            <TextView
+                android:layout_width="320dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="--------------------------------------------------------------------------"
+                android:textColor="@color/black" />
+
+        </LinearLayout>
+
+        <!--<LinearLayout-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:orientation="vertical"-->
+            <!--android:padding="5dp">-->
+
+            <!--<LinearLayout-->
+                <!--android:id="@+id/linearmain"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_marginLeft="2dp"-->
+                <!--android:layout_marginTop="5dp"-->
+                <!--android:layout_marginRight="2dp"-->
+                <!--android:background="@drawable/back_white"-->
+                <!--android:elevation="3dp"-->
+                <!--android:gravity="center"-->
+
+                <!--android:orientation="vertical"-->
+                <!--android:padding="5dp">-->
+
+                <!--<LinearLayout-->
+                    <!--android:id="@+id/linear"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_gravity="end"-->
+                    <!--android:layout_marginTop="20dp"-->
+                    <!--android:alpha="0.7"-->
+                    <!--android:background="@drawable/border"-->
+                    <!--android:gravity="end"-->
+                    <!--android:orientation="horizontal"-->
+                    <!--android:paddingHorizontal="20dp"-->
+                    <!--android:visibility="gone">-->
+
+                    <!--<Button-->
+                        <!--android:id="@+id/search"-->
+                        <!--android:layout_width="50dp"-->
+                        <!--android:layout_height="50dp"-->
+                        <!--android:layout_marginHorizontal="5dp"-->
+                        <!--android:background="@drawable/search_icon" />-->
+
+                    <!--<Button-->
+                        <!--android:id="@+id/note"-->
+                        <!--android:layout_width="60dp"-->
+                        <!--android:layout_height="60dp"-->
+                        <!--android:background="@drawable/note" />-->
+
+
+                <!--</LinearLayout>-->
+
+
+                <!--<LinearLayout-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_marginTop="10dp"-->
+                    <!--android:layout_marginBottom="3dp"-->
+                    <!--android:orientation="horizontal">-->
+
+                    <!--<TextView-->
+                        <!--android:layout_width="100dp"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:elevation="5dp"-->
+                        <!--android:padding="5dp"-->
+                        <!--android:text="رقم العداد"-->
+                        <!--android:textColor="@color/black"-->
+                        <!--android:textSize="16sp" />-->
+
+                    <!--<TextView-->
+                        <!--android:id="@+id/counter_no"-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:layout_marginRight="10dp"-->
+                        <!--android:elevation="2dp"-->
+
+                        <!--android:padding="5dp"-->
+                        <!--android:textColor="@color/black"-->
+                        <!--android:textSize="16sp" />-->
+
+                    <!--&lt;!&ndash;<TextView&ndash;&gt;-->
+                    <!--&lt;!&ndash;android:layout_width="match_parent"&ndash;&gt;-->
+                    <!--&lt;!&ndash;android:layout_height="wrap_content"&ndash;&gt;-->
+                    <!--&lt;!&ndash;android:layout_marginRight="10dp"&ndash;&gt;-->
+                    <!--&lt;!&ndash;android:layout_weight="1"&ndash;&gt;-->
+                    <!--&lt;!&ndash;android:text="16072"&ndash;&gt;-->
+                    <!--&lt;!&ndash;android:textColor="@color/darkblue_"&ndash;&gt;-->
+                    <!--&lt;!&ndash;android:textSize="12sp" />&ndash;&gt;-->
+
+                <!--</LinearLayout>-->
+
+
+                <!--<LinearLayout-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+
+                    <!--android:layout_marginBottom="2dp"-->
+                    <!--android:orientation="horizontal">-->
+
+                    <!--<TextView-->
+                        <!--android:layout_width="100dp"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:elevation="5dp"-->
+                        <!--android:padding="5dp"-->
+                        <!--android:text="رقم الحساب  "-->
+                        <!--android:textColor="@color/black"-->
+                        <!--android:textSize="16sp" />-->
+
+                    <!--<TextView-->
+                        <!--android:id="@+id/acc_no"-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:layout_marginRight="10dp"-->
+                        <!--android:elevation="2dp"-->
+                        <!--android:gravity="start"-->
+                        <!--android:text="12545"-->
+                        <!--android:padding="5dp"-->
+                        <!--android:textColor="@color/black"-->
+                        <!--android:textSize="16sp" />-->
+
+
+                <!--</LinearLayout>-->
+                <!--<LinearLayout-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+
+                    <!--android:layout_marginBottom="2dp"-->
+                    <!--android:orientation="horizontal">-->
+
+                    <!--<TextView-->
+                        <!--android:layout_width="100dp"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:elevation="5dp"-->
+                        <!--android:padding="5dp"-->
+                        <!--android:text="اسم العميل"-->
+                        <!--android:textColor="@color/black"-->
+                        <!--android:textSize="16sp" />-->
+
+                    <!--<TextView-->
+                        <!--android:id="@+id/cust_no"-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:layout_marginRight="10dp"-->
+                        <!--android:elevation="2dp"-->
+                        <!--android:gravity="end"-->
+                        <!--android:padding="5dp"-->
+                        <!--android:textColor="@color/black"-->
+                        <!--android:textSize="16sp" />-->
+
+
+                <!--</LinearLayout>-->
+                <!--<LinearLayout-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+
+                    <!--android:layout_marginBottom="2dp"-->
+                    <!--android:orientation="horizontal">-->
+
+                    <!--<TextView-->
+                        <!--android:layout_width="100dp"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:elevation="2dp"-->
+                        <!--android:padding="5dp"-->
+                        <!--android:text="ضغط الشبكه "-->
+                        <!--android:textColor="@color/black"-->
+                        <!--android:textSize="16sp" />-->
+
+                    <!--<TextView-->
+                        <!--android:id="@+id/prasuGas"-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:layout_marginRight="10dp"-->
+                        <!--android:layout_weight="1"-->
+                        <!--android:elevation="2dp"-->
+                        <!--android:padding="5dp"-->
+                        <!--android:textColor="@color/black"-->
+                        <!--android:textSize="16sp" />-->
+
+                    <!--<TextView-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:layout_marginRight="10dp"-->
+                        <!--android:layout_weight="1.2"-->
+                        <!--android:text="بار"-->
+                        <!--android:textColor="@color/black"-->
+                        <!--android:textSize="14sp" />-->
+
+                <!--</LinearLayout>-->
+                <!--<LinearLayout-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+
+                    <!--android:layout_marginBottom="2dp"-->
+                    <!--android:orientation="horizontal">-->
+
+                    <!--<TextView-->
+                        <!--android:layout_width="100dp"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:elevation="2dp"-->
+                        <!--android:padding="5dp"-->
+                        <!--android:text="سعر الغاز"-->
+                        <!--android:textColor="@color/black"-->
+                        <!--android:textSize="16sp" />-->
+
+                    <!--<TextView-->
+                        <!--android:id="@+id/saleGas"-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:layout_marginRight="10dp"-->
+                        <!--android:layout_weight="1"-->
+                        <!--android:elevation="2dp"-->
+                        <!--android:padding="5dp"-->
+                        <!--android:textColor="@color/black"-->
+                        <!--android:textSize="16sp" />-->
+
+                    <!--<TextView-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:layout_marginRight="10dp"-->
+                        <!--android:layout_weight="1.2"-->
+                        <!--android:text="للطن / دينار "-->
+                        <!--android:textColor="@color/black"-->
+                        <!--android:textSize="14sp" />-->
+
+                <!--</LinearLayout>-->
+                <!--<LinearLayout-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+
+                    <!--android:layout_marginBottom="2dp"-->
+                    <!--android:orientation="horizontal">-->
+
+                    <!--<TextView-->
+                        <!--android:layout_width="100dp"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:elevation="2dp"-->
+                        <!--android:padding="5dp"-->
+                        <!--android:text="معامل التمدد "-->
+                        <!--android:textColor="@color/black"-->
+                        <!--android:textSize="16sp" />-->
+
+                    <!--<TextView-->
+                        <!--android:id="@+id/extendValue"-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:layout_marginRight="10dp"-->
+                        <!--android:layout_weight="1"-->
+                        <!--android:elevation="2dp"-->
+                        <!--android:padding="5dp"-->
+                        <!--android:textColor="@color/black"-->
+                        <!--android:textSize="16sp" />-->
+
+                    <!--<TextView-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:layout_marginRight="10dp"-->
+                        <!--android:layout_weight="1.2"-->
+                        <!--android:text="متر مكعب"-->
+                        <!--android:textColor="@color/black"-->
+                        <!--android:textSize="14sp" />-->
+
+                <!--</LinearLayout>-->
+
+                <!--<LinearLayout-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+
+                    <!--android:layout_marginBottom="2dp"-->
+                    <!--android:orientation="horizontal">-->
+
+                    <!--<TextView-->
+                        <!--android:layout_width="100dp"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:elevation="2dp"-->
+                        <!--android:padding="5dp"-->
+                        <!--android:text="القراءة السابقة"-->
+                        <!--android:textColor="@color/black"-->
+                        <!--android:textSize="16sp" />-->
+
+                    <!--<TextView-->
+                        <!--android:id="@+id/previous_read"-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:layout_marginRight="10dp"-->
+                        <!--android:layout_weight="1"-->
+                        <!--android:elevation="2dp"-->
+                        <!--android:padding="5dp"-->
+                        <!--android:textColor="@color/black"-->
+                        <!--android:textSize="16sp" />-->
+
+                    <!--<TextView-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:layout_marginRight="10dp"-->
+                        <!--android:layout_weight="1.2"-->
+                        <!--android:text="متر مكعب"-->
+                        <!--android:textColor="@color/black"-->
+                        <!--android:textSize="14sp" />-->
+
+                <!--</LinearLayout>-->
+
+                <!--<LinearLayout-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+
+                    <!--android:layout_marginBottom="2dp"-->
+                    <!--android:orientation="horizontal">-->
+
+                    <!--<TextView-->
+                        <!--android:layout_width="100dp"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:elevation="2dp"-->
+                        <!--android:padding="5dp"-->
+                        <!--android:text="القراءة الحالية"-->
+                        <!--android:textColor="@color/black"-->
+                        <!--android:textSize="16sp" />-->
+
+                    <!--<TextView-->
+                        <!--android:id="@+id/current_read"-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:layout_marginRight="10dp"-->
+                        <!--android:layout_weight="1"-->
+                        <!--android:elevation="2dp"-->
+
+                        <!--android:padding="5dp"-->
+                        <!--android:textColor="@color/black"-->
+                        <!--android:textSize="16sp" />-->
+
+                    <!--<TextView-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:layout_marginRight="10dp"-->
+                        <!--android:layout_weight="1.2"-->
+                        <!--android:text="متر مكعب"-->
+                        <!--android:textColor="@color/black"-->
+                        <!--android:textSize="14sp" />-->
+
+                <!--</LinearLayout>-->
+
+                <!--<LinearLayout-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+
+                    <!--android:layout_marginBottom="2dp"-->
+                    <!--android:orientation="horizontal">-->
+
+                    <!--<TextView-->
+                        <!--android:layout_width="100dp"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:elevation="2dp"-->
+                        <!--android:padding="5dp"-->
+                        <!--android:text="الاستهلاك"-->
+                        <!--android:textColor="@color/black"-->
+                        <!--android:textSize="16sp" />-->
+
+                    <!--<TextView-->
+                        <!--android:id="@+id/consuming"-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:layout_marginRight="10dp"-->
+                        <!--android:layout_weight="1"-->
+                        <!--android:elevation="2dp"-->
+                        <!--android:padding="5dp"-->
+                        <!--android:textColor="@color/black"-->
+                        <!--android:textSize="16sp" />-->
+
+                    <!--<TextView-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:layout_marginRight="10dp"-->
+                        <!--android:layout_weight="1.2"-->
+                        <!--android:text="متر مكعب"-->
+                        <!--android:textColor="@color/black"-->
+                        <!--android:textSize="14sp" />-->
+
+                <!--</LinearLayout>-->
+
+                <!--<LinearLayout-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+
+                    <!--android:layout_marginBottom="2dp"-->
+                    <!--android:orientation="horizontal">-->
+
+                    <!--<TextView-->
+                        <!--android:layout_width="100dp"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:elevation="2dp"-->
+                        <!--android:padding="5dp"-->
+                        <!--android:text="قيمة الاستهلاك"-->
+                        <!--android:textColor="@color/black"-->
+                        <!--android:textSize="16sp" />-->
+
+                    <!--<TextView-->
+                        <!--android:id="@+id/consuming_value"-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:layout_marginRight="10dp"-->
+                        <!--android:layout_weight="1"-->
+                        <!--android:elevation="2dp"-->
+
+                        <!--android:padding="5dp"-->
+                        <!--android:textColor="@color/black"-->
+                        <!--android:textSize="16sp" />-->
+
+                    <!--<TextView-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:layout_marginRight="10dp"-->
+                        <!--android:layout_weight="1.2"-->
+                        <!--android:text="دينار"-->
+                        <!--android:textColor="@color/black"-->
+                        <!--android:textSize="14sp" />-->
+
+                <!--</LinearLayout>-->
+
+
+
+                <!--&lt;!&ndash;<LinearLayout&ndash;&gt;-->
+                    <!--&lt;!&ndash;android:layout_width="match_parent"&ndash;&gt;-->
+                    <!--&lt;!&ndash;android:layout_height="wrap_content"&ndash;&gt;-->
+
+                    <!--&lt;!&ndash;android:layout_marginTop="5dp"&ndash;&gt;-->
+                    <!--&lt;!&ndash;android:layout_marginBottom="2dp"&ndash;&gt;-->
+                    <!--&lt;!&ndash;android:orientation="horizontal">&ndash;&gt;-->
+
+                    <!--&lt;!&ndash;<TextView&ndash;&gt;-->
+                        <!--&lt;!&ndash;android:layout_width="100dp"&ndash;&gt;-->
+                        <!--&lt;!&ndash;android:layout_height="wrap_content"&ndash;&gt;-->
+                        <!--&lt;!&ndash;android:elevation="2dp"&ndash;&gt;-->
+                        <!--&lt;!&ndash;android:padding="5dp"&ndash;&gt;-->
+                        <!--&lt;!&ndash;android:text="بدل اعادة غاز"&ndash;&gt;-->
+                        <!--&lt;!&ndash;android:textColor="@color/black"&ndash;&gt;-->
+                        <!--&lt;!&ndash;android:textSize="14sp" />&ndash;&gt;-->
+
+                    <!--&lt;!&ndash;<TextView&ndash;&gt;-->
+                        <!--&lt;!&ndash;android:id="@+id/gas_return"&ndash;&gt;-->
+                        <!--&lt;!&ndash;android:layout_width="match_parent"&ndash;&gt;-->
+                        <!--&lt;!&ndash;android:layout_height="wrap_content"&ndash;&gt;-->
+
+                        <!--&lt;!&ndash;android:layout_marginRight="10dp"&ndash;&gt;-->
+                        <!--&lt;!&ndash;android:elevation="2dp"&ndash;&gt;-->
+                        <!--&lt;!&ndash;android:inputType="numberDecimal"&ndash;&gt;-->
+                        <!--&lt;!&ndash;android:padding="5dp"&ndash;&gt;-->
+
+                        <!--&lt;!&ndash;android:text="0.0"&ndash;&gt;-->
+                        <!--&lt;!&ndash;android:textColor="@color/black"&ndash;&gt;-->
+                        <!--&lt;!&ndash;android:textSize="14sp" />&ndash;&gt;-->
+
+                <!--&lt;!&ndash;</LinearLayout>&ndash;&gt;-->
+
+                <!--&lt;!&ndash;<LinearLayout&ndash;&gt;-->
+                    <!--&lt;!&ndash;android:layout_width="match_parent"&ndash;&gt;-->
+                    <!--&lt;!&ndash;android:layout_height="wrap_content"&ndash;&gt;-->
+
+                    <!--&lt;!&ndash;android:layout_marginBottom="2dp"&ndash;&gt;-->
+                    <!--&lt;!&ndash;android:orientation="horizontal">&ndash;&gt;-->
+
+                    <!--&lt;!&ndash;<TextView&ndash;&gt;-->
+                        <!--&lt;!&ndash;android:layout_width="100dp"&ndash;&gt;-->
+                        <!--&lt;!&ndash;android:layout_height="wrap_content"&ndash;&gt;-->
+                        <!--&lt;!&ndash;android:elevation="2dp"&ndash;&gt;-->
+                        <!--&lt;!&ndash;android:padding="5dp"&ndash;&gt;-->
+                        <!--&lt;!&ndash;android:text="بدل الخدمات"&ndash;&gt;-->
+                        <!--&lt;!&ndash;android:textColor="@color/black"&ndash;&gt;-->
+                        <!--&lt;!&ndash;android:textSize="14sp" />&ndash;&gt;-->
+
+                    <!--&lt;!&ndash;<TextView&ndash;&gt;-->
+                        <!--&lt;!&ndash;android:id="@+id/service_return"&ndash;&gt;-->
+                        <!--&lt;!&ndash;android:layout_width="match_parent"&ndash;&gt;-->
+                        <!--&lt;!&ndash;android:layout_height="wrap_content"&ndash;&gt;-->
+
+                        <!--&lt;!&ndash;android:layout_marginRight="10dp"&ndash;&gt;-->
+                        <!--&lt;!&ndash;android:elevation="2dp"&ndash;&gt;-->
+                        <!--&lt;!&ndash;android:inputType="numberDecimal"&ndash;&gt;-->
+                        <!--&lt;!&ndash;android:padding="5dp"&ndash;&gt;-->
+
+                        <!--&lt;!&ndash;android:text="0.0"&ndash;&gt;-->
+                        <!--&lt;!&ndash;android:textColor="@color/black"&ndash;&gt;-->
+                        <!--&lt;!&ndash;android:textSize="14sp" />&ndash;&gt;-->
+
+
+                <!--&lt;!&ndash;</LinearLayout>&ndash;&gt;-->
+
+                <!--&lt;!&ndash;<LinearLayout&ndash;&gt;-->
+                    <!--&lt;!&ndash;android:layout_width="match_parent"&ndash;&gt;-->
+                    <!--&lt;!&ndash;android:layout_height="wrap_content"&ndash;&gt;-->
+
+                    <!--&lt;!&ndash;android:layout_marginBottom="2dp"&ndash;&gt;-->
+                    <!--&lt;!&ndash;android:orientation="horizontal">&ndash;&gt;-->
+
+                    <!--&lt;!&ndash;<TextView&ndash;&gt;-->
+                        <!--&lt;!&ndash;android:layout_width="170dp"&ndash;&gt;-->
+                        <!--&lt;!&ndash;android:layout_height="wrap_content"&ndash;&gt;-->
+                        <!--&lt;!&ndash;android:elevation="2dp"&ndash;&gt;-->
+                        <!--&lt;!&ndash;android:padding="5dp"&ndash;&gt;-->
+                        <!--&lt;!&ndash;android:text="مجموع بدل الخدمات بعد الضريبة"&ndash;&gt;-->
+                        <!--&lt;!&ndash;android:textColor="@color/black"&ndash;&gt;-->
+                        <!--&lt;!&ndash;android:textSize="12sp" />&ndash;&gt;-->
+
+                    <!--&lt;!&ndash;<TextView&ndash;&gt;-->
+                        <!--&lt;!&ndash;android:id="@+id/tax_services"&ndash;&gt;-->
+                        <!--&lt;!&ndash;android:layout_width="match_parent"&ndash;&gt;-->
+                        <!--&lt;!&ndash;android:layout_height="wrap_content"&ndash;&gt;-->
+                        <!--&lt;!&ndash;android:layout_marginRight="10dp"&ndash;&gt;-->
+                        <!--&lt;!&ndash;android:elevation="2dp"&ndash;&gt;-->
+                        <!--&lt;!&ndash;android:inputType="number"&ndash;&gt;-->
+                        <!--&lt;!&ndash;android:padding="5dp"&ndash;&gt;-->
+                        <!--&lt;!&ndash;android:textColor="@color/black"&ndash;&gt;-->
+                        <!--&lt;!&ndash;android:textSize="14sp" />&ndash;&gt;-->
+
+
+                <!--&lt;!&ndash;</LinearLayout>&ndash;&gt;-->
+
+            <!--</LinearLayout>-->
+
+            <!--&lt;!&ndash;<TextView&ndash;&gt;-->
+                <!--&lt;!&ndash;android:layout_width="370dp"&ndash;&gt;-->
+                <!--&lt;!&ndash;android:layout_height="3dp"&ndash;&gt;-->
+                <!--&lt;!&ndash;android:layout_marginLeft="5dp"&ndash;&gt;-->
+                <!--&lt;!&ndash;android:layout_marginTop="5dp"&ndash;&gt;-->
+                <!--&lt;!&ndash;android:layout_marginRight="5dp"&ndash;&gt;-->
+                <!--&lt;!&ndash;android:background="@color/black" />&ndash;&gt;-->
+
+            <!--&lt;!&ndash;<LinearLayout&ndash;&gt;-->
+                <!--&lt;!&ndash;android:id="@+id/total_layout"&ndash;&gt;-->
+                <!--&lt;!&ndash;android:layout_width="match_parent"&ndash;&gt;-->
+                <!--&lt;!&ndash;android:layout_height="wrap_content"&ndash;&gt;-->
+                <!--&lt;!&ndash;android:layout_gravity="center"&ndash;&gt;-->
+                <!--&lt;!&ndash;android:layout_marginTop="5dp"&ndash;&gt;-->
+                <!--&lt;!&ndash;android:background="@drawable/back_white"&ndash;&gt;-->
+                <!--&lt;!&ndash;android:elevation="3dp"&ndash;&gt;-->
+                <!--&lt;!&ndash;android:gravity="center"&ndash;&gt;-->
+                <!--&lt;!&ndash;android:orientation="vertical"&ndash;&gt;-->
+                <!--&lt;!&ndash;android:padding="5dp">&ndash;&gt;-->
+
+                <!--&lt;!&ndash;<LinearLayout&ndash;&gt;-->
+                    <!--&lt;!&ndash;android:layout_width="match_parent"&ndash;&gt;-->
+                    <!--&lt;!&ndash;android:layout_height="match_parent"&ndash;&gt;-->
+
+                    <!--&lt;!&ndash;android:gravity="center_horizontal"&ndash;&gt;-->
+                    <!--&lt;!&ndash;android:orientation="vertical">&ndash;&gt;-->
+
+                    <!--&lt;!&ndash;<LinearLayout&ndash;&gt;-->
+                        <!--&lt;!&ndash;android:layout_width="match_parent"&ndash;&gt;-->
+                        <!--&lt;!&ndash;android:layout_height="wrap_content"&ndash;&gt;-->
+                        <!--&lt;!&ndash;android:layout_marginBottom="2dp"&ndash;&gt;-->
+                        <!--&lt;!&ndash;android:orientation="horizontal">&ndash;&gt;-->
+
+                        <!--&lt;!&ndash;<TextView&ndash;&gt;-->
+                            <!--&lt;!&ndash;android:layout_width="100dp"&ndash;&gt;-->
+                            <!--&lt;!&ndash;android:layout_height="wrap_content"&ndash;&gt;-->
+                            <!--&lt;!&ndash;android:elevation="2dp"&ndash;&gt;-->
+                            <!--&lt;!&ndash;android:padding="5dp"&ndash;&gt;-->
+                            <!--&lt;!&ndash;android:text="الصافي"&ndash;&gt;-->
+                            <!--&lt;!&ndash;android:textColor="@color/black"&ndash;&gt;-->
+                            <!--&lt;!&ndash;android:textSize="14sp" />&ndash;&gt;-->
+
+                        <!--&lt;!&ndash;<TextView&ndash;&gt;-->
+                            <!--&lt;!&ndash;android:id="@+id/net"&ndash;&gt;-->
+                            <!--&lt;!&ndash;android:layout_width="match_parent"&ndash;&gt;-->
+                            <!--&lt;!&ndash;android:layout_height="wrap_content"&ndash;&gt;-->
+                            <!--&lt;!&ndash;android:layout_marginRight="10dp"&ndash;&gt;-->
+                            <!--&lt;!&ndash;android:elevation="2dp"&ndash;&gt;-->
+
+                            <!--&lt;!&ndash;android:inputType="number"&ndash;&gt;-->
+                            <!--&lt;!&ndash;android:padding="5dp"&ndash;&gt;-->
+                            <!--&lt;!&ndash;android:textColor="@color/black"&ndash;&gt;-->
+                            <!--&lt;!&ndash;android:textSize="14sp" />&ndash;&gt;-->
+
+                    <!--&lt;!&ndash;</LinearLayout>&ndash;&gt;-->
+
+                    <!--&lt;!&ndash;<LinearLayout&ndash;&gt;-->
+                        <!--&lt;!&ndash;android:layout_width="match_parent"&ndash;&gt;-->
+                        <!--&lt;!&ndash;android:layout_height="wrap_content"&ndash;&gt;-->
+                        <!--&lt;!&ndash;android:layout_marginBottom="2dp"&ndash;&gt;-->
+                        <!--&lt;!&ndash;android:orientation="horizontal">&ndash;&gt;-->
+
+                        <!--&lt;!&ndash;<TextView&ndash;&gt;-->
+                            <!--&lt;!&ndash;android:layout_width="100dp"&ndash;&gt;-->
+                            <!--&lt;!&ndash;android:layout_height="wrap_content"&ndash;&gt;-->
+
+                            <!--&lt;!&ndash;android:elevation="2dp"&ndash;&gt;-->
+                            <!--&lt;!&ndash;android:padding="5dp"&ndash;&gt;-->
+                            <!--&lt;!&ndash;android:text="الضريبة"&ndash;&gt;-->
+                            <!--&lt;!&ndash;android:textColor="@color/black"&ndash;&gt;-->
+                            <!--&lt;!&ndash;android:textSize="14sp" />&ndash;&gt;-->
+
+                        <!--&lt;!&ndash;<TextView&ndash;&gt;-->
+                            <!--&lt;!&ndash;android:id="@+id/tax"&ndash;&gt;-->
+                            <!--&lt;!&ndash;android:layout_width="match_parent"&ndash;&gt;-->
+                            <!--&lt;!&ndash;android:layout_height="wrap_content"&ndash;&gt;-->
+                            <!--&lt;!&ndash;android:layout_marginRight="10dp"&ndash;&gt;-->
+                            <!--&lt;!&ndash;android:elevation="2dp"&ndash;&gt;-->
+                            <!--&lt;!&ndash;android:inputType="number"&ndash;&gt;-->
+                            <!--&lt;!&ndash;android:padding="5dp"&ndash;&gt;-->
+                            <!--&lt;!&ndash;android:textColor="@color/black"&ndash;&gt;-->
+                            <!--&lt;!&ndash;android:textSize="14sp" />&ndash;&gt;-->
+
+                    <!--&lt;!&ndash;</LinearLayout>&ndash;&gt;-->
+
+                    <!--&lt;!&ndash;<LinearLayout&ndash;&gt;-->
+                        <!--&lt;!&ndash;android:layout_width="match_parent"&ndash;&gt;-->
+                        <!--&lt;!&ndash;android:layout_height="wrap_content"&ndash;&gt;-->
+                        <!--&lt;!&ndash;android:layout_marginBottom="2dp"&ndash;&gt;-->
+                        <!--&lt;!&ndash;android:orientation="horizontal">&ndash;&gt;-->
+
+                        <!--&lt;!&ndash;<TextView&ndash;&gt;-->
+                            <!--&lt;!&ndash;android:layout_width="100dp"&ndash;&gt;-->
+                            <!--&lt;!&ndash;android:layout_height="wrap_content"&ndash;&gt;-->
+
+                            <!--&lt;!&ndash;android:elevation="2dp"&ndash;&gt;-->
+                            <!--&lt;!&ndash;android:padding="5dp"&ndash;&gt;-->
+                            <!--&lt;!&ndash;android:text="استهلاك الفترة"&ndash;&gt;-->
+                            <!--&lt;!&ndash;android:textColor="@color/black"&ndash;&gt;-->
+                            <!--&lt;!&ndash;android:textSize="14sp" />&ndash;&gt;-->
+
+                        <!--&lt;!&ndash;<TextView&ndash;&gt;-->
+                            <!--&lt;!&ndash;android:id="@+id/current_consuming"&ndash;&gt;-->
+                            <!--&lt;!&ndash;android:layout_width="match_parent"&ndash;&gt;-->
+                            <!--&lt;!&ndash;android:layout_height="wrap_content"&ndash;&gt;-->
+                            <!--&lt;!&ndash;android:layout_marginRight="10dp"&ndash;&gt;-->
+                            <!--&lt;!&ndash;android:elevation="2dp"&ndash;&gt;-->
+                            <!--&lt;!&ndash;android:inputType="number"&ndash;&gt;-->
+                            <!--&lt;!&ndash;android:padding="5dp"&ndash;&gt;-->
+                            <!--&lt;!&ndash;android:textColor="@color/black"&ndash;&gt;-->
+                            <!--&lt;!&ndash;android:textSize="14sp" />&ndash;&gt;-->
+
+                    <!--&lt;!&ndash;</LinearLayout>&ndash;&gt;-->
+
+
+                    <!--&lt;!&ndash;<LinearLayout&ndash;&gt;-->
+                        <!--&lt;!&ndash;android:layout_width="match_parent"&ndash;&gt;-->
+                        <!--&lt;!&ndash;android:layout_height="wrap_content"&ndash;&gt;-->
+                        <!--&lt;!&ndash;android:layout_marginTop="10dp"&ndash;&gt;-->
+                        <!--&lt;!&ndash;android:orientation="horizontal">&ndash;&gt;-->
+
+                        <!--&lt;!&ndash;<TextView&ndash;&gt;-->
+                            <!--&lt;!&ndash;android:layout_width="100dp"&ndash;&gt;-->
+                            <!--&lt;!&ndash;android:layout_height="wrap_content"&ndash;&gt;-->
+                            <!--&lt;!&ndash;android:elevation="2dp"&ndash;&gt;-->
+                            <!--&lt;!&ndash;android:gravity="center"&ndash;&gt;-->
+                            <!--&lt;!&ndash;android:padding="5dp"&ndash;&gt;-->
+                            <!--&lt;!&ndash;android:text="القيمة المطلوبة"&ndash;&gt;-->
+                            <!--&lt;!&ndash;android:textColor="@color/black"&ndash;&gt;-->
+                            <!--&lt;!&ndash;android:textSize="14sp" />&ndash;&gt;-->
+
+                        <!--&lt;!&ndash;<TextView&ndash;&gt;-->
+                            <!--&lt;!&ndash;android:id="@+id/last_value"&ndash;&gt;-->
+                            <!--&lt;!&ndash;android:layout_width="match_parent"&ndash;&gt;-->
+                            <!--&lt;!&ndash;android:layout_height="wrap_content"&ndash;&gt;-->
+                            <!--&lt;!&ndash;android:layout_marginRight="10dp"&ndash;&gt;-->
+                            <!--&lt;!&ndash;android:elevation="2dp"&ndash;&gt;-->
+                            <!--&lt;!&ndash;android:inputType="number"&ndash;&gt;-->
+                            <!--&lt;!&ndash;android:padding="5dp"&ndash;&gt;-->
+                            <!--&lt;!&ndash;android:textColor="@color/black"&ndash;&gt;-->
+                            <!--&lt;!&ndash;android:textSize="14sp" />&ndash;&gt;-->
+
+
+                    <!--&lt;!&ndash;</LinearLayout>&ndash;&gt;-->
+
+                <!--&lt;!&ndash;</LinearLayout>&ndash;&gt;-->
+
+            <!--&lt;!&ndash;</LinearLayout>&ndash;&gt;-->
+
+
+        <!--</LinearLayout>-->
+    </LinearLayout>
+
+
+</LinearLayout>

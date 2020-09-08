@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/gas_bac"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:background="@drawable/jjj"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/clear_buttons"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/close"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="right"
+                android:layout_weight="1"
+                android:drawableRight="@drawable/ic_close_black_24dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="5dp"
+                android:layout_weight="0.3"
+                android:background="@drawable/edit_bac_s"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="5dp"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="Counter No "
+                    android:textColor="@color/white_dark"
+                    android:textSize="16sp" />
+
+                <android.support.v7.widget.SearchView
+                    android:id="@+id/mSearch"
+                    android:layout_width="0dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="left"
+                    android:layout_marginLeft="10dp"
+                    android:layout_weight="2"
+                    android:gravity="right"
+                    android:backgroundTint="@color/white_dark"
+                    app:defaultQueryHint="Search.." />
+            </LinearLayout>
+
+            <ListView
+                android:id="@+id/counterList"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="5dp"
+                android:layout_weight="12"
+                android:background="@drawable/edit_bac_s"
+                android:padding="10dp" />
+
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>

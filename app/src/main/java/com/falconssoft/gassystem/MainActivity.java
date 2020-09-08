@@ -118,6 +118,7 @@ public class MainActivity extends AppCompatActivity {
         users = new ArrayList<>();
         remarks = new ArrayList<>();
         new JSONTask().execute();
+        new JSONTask2().execute();
 //
 
 //        animate(voucher , 700 , 0.8f);
@@ -296,9 +297,154 @@ public class MainActivity extends AppCompatActivity {
 
                  */
 
+//                try {
+//                    JSONArray parentArrayOrders = parentObject.getJSONArray("GAS_REMARKS");
+//                    remarks.clear();
+//                    databaseHandler.deleteRemark();
+//                    for (int i = 0; i < parentArrayOrders.length(); i++) {
+//                        JSONObject finalObject = parentArrayOrders.getJSONObject(i);
+//
+//                        Remarks remark = new Remarks();
+//                        remark.setTitle(ReturnArabic(finalObject.getString("REMARKTITLE")));
+//                        remark.setBody(ReturnArabic(finalObject.getString("REMARKBODY")));
+//
+//                        remarks.add(remark);
+//                        databaseHandler.addRemark(remark);
+//                        Log.e("ImportRemark", remark.getBody());
+//
+//                    }
+//                } catch (JSONException e) {
+//                    Log.e("Import Data3", e.getMessage().toString());
+//                }
+
+            } catch (MalformedURLException e) {
+                Log.e("MalformedURLException", "********ex1");
+                e.printStackTrace();
+            } catch (IOException e) {
+                Log.e("IOException", e.getMessage().toString());
+                e.printStackTrace();
+
+            } catch (JSONException e) {
+                Log.e("JSONException", "********ex3  " + e.toString());
+                e.printStackTrace();
+            } finally {
+                Log.e("finally", "********finally");
+                if (connection != null) {
+                    Log.e("connection", "********ex4");
+                    // connection.disconnect();
+                }
+                try {
+                    if (reader != null) {
+                        reader.close();
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+            return customers;
+        }
+
+
+        @Override
+        protected void onPostExecute(final List<Customer> result) {
+            super.onPostExecute(result);
+
+            if (result != null) {
+                Log.e("result", "*****************" + customers.size());
+//                storeInDatabase();
+            } else {
+                Toast.makeText(MainActivity.this, "Not able to fetch data from server, please check url.", Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
+
+    private class JSONTask2 extends AsyncTask<String, String, List<Customer>> {
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+
+        }
+
+        @Override
+        protected List<Customer> doInBackground(String... params) {
+            URLConnection connection = null;
+            BufferedReader reader = null;
+
+            try {
+
+                URL url = new URL("http://10.0.0.214/GAS_WEB_SERVICE/import.php?FLAG=3");
+
+                URLConnection conn = url.openConnection();
+                conn.setDoOutput(true);
+
+                reader = new BufferedReader(new
+                        InputStreamReader(conn.getInputStream()));
+
+                StringBuilder sb = new StringBuilder();
+                String line = null;
+
+                // Read Server Response
+                while ((line = reader.readLine()) != null) {
+                    sb.append(line);
+                }
+
+                String finalJson = sb.toString();
+                Log.e("finalJson*********", finalJson);
+
+                JSONObject parentObject = new JSONObject(finalJson);
+
+//                try {
+//                    JSONArray parentArrayOrders = parentObject.getJSONArray("CUSTOMER_GAS");
+//                    customers.clear();
+//                    databaseHandler.deleteCustomer();
+//                    for (int i = 0; i < parentArrayOrders.length(); i++) {
+//                        JSONObject finalObject = parentArrayOrders.getJSONObject(i);
+//
+//                        Customer customer = new Customer();
+//                        customer.setCounterNo(finalObject.getString("COUNTERNO"));
+//                        customer.setAccNo(finalObject.getString("ACCNO"));
+//                        customer.setCustName(ReturnArabic(finalObject.getString("CUSTOMERNAME")));
+//                        customer.setGasPressure(finalObject.getDouble("GASPRESSURE"));
+//                        customer.setgPrice(finalObject.getDouble("GPRICE"));
+//                        customer.setProjectName(ReturnArabic(finalObject.getString("PRJECTNAME")));
+//                        customer.setIsPer(finalObject.getInt("IS_PER"));
+//                        customer.setBadalVal(finalObject.getDouble("BDLVAL"));
+//                        //customer.set(finalObject.getDouble("CREDIT"));
+//                        customer.setCustSts(finalObject.getInt("CUSTSTS"));
+//                        customer.setLastRead(finalObject.getDouble("LASTREADER"));
+//
+//                        Log.e("*****", customer.getCustName());
+//                        customers.add(customer);
+//                        databaseHandler.addCustomer(customer);
+//                    }
+//
+//
+//                } catch (JSONException e) {
+//                    Log.e("Import Data1", e.getMessage().toString());
+//                }
+
+                /*try {
+                    JSONArray parentArrayOrders = parentObject.getJSONArray("GAS_USERS");
+                    users.clear();
+                    for (int i = 0; i < parentArrayOrders.length(); i++) {
+                        JSONObject finalObject = parentArrayOrders.getJSONObject(i);
+
+                        Users user = new Users();
+                        user.setUserName(finalObject.getString("USER_NAME"));
+                        user.setPassword(finalObject.getString("PASSWORD"));
+
+                        users.add(user);
+                    }
+                } catch (JSONException e) {
+                    Log.e("Import Data2", e.getMessage().toString());
+                }
+
+                 */
+
                 try {
                     JSONArray parentArrayOrders = parentObject.getJSONArray("GAS_REMARKS");
-                    customers.clear();
+                    remarks.clear();
                     databaseHandler.deleteRemark();
                     for (int i = 0; i < parentArrayOrders.length(); i++) {
                         JSONObject finalObject = parentArrayOrders.getJSONObject(i);
@@ -309,6 +455,8 @@ public class MainActivity extends AppCompatActivity {
 
                         remarks.add(remark);
                         databaseHandler.addRemark(remark);
+                        Log.e("ImportRemark", remark.getBody());
+
                     }
                 } catch (JSONException e) {
                     Log.e("Import Data3", e.getMessage().toString());
@@ -348,7 +496,7 @@ public class MainActivity extends AppCompatActivity {
 
             if (result != null) {
                 Log.e("result", "*****************" + customers.size());
-                storeInDatabase();
+//                storeInDatabase();
             } else {
                 Toast.makeText(MainActivity.this, "Not able to fetch data from server, please check url.", Toast.LENGTH_SHORT).show();
             }

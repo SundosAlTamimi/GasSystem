@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="370dp"
+    android:layout_width="320dp"
     android:layout_height="wrap_content"
     android:orientation="vertical"
     >
@@ -9,14 +9,14 @@
 
     <LinearLayout
         android:id="@+id/linerForPrint"
-        android:layout_width="370dp"
+        android:layout_width="320dp"
         android:layout_height="wrap_content"
         android:background="@color/white"
         android:layoutDirection="rtl"
         android:orientation="vertical">
 
         <!--<LinearLayout-->
-            <!--android:layout_width="370dp"-->
+            <!--android:layout_width="320dp"-->
             <!--android:layout_height="wrap_content"-->
             <!--android:gravity="center"-->
             <!--android:orientation="vertical">-->
@@ -29,7 +29,7 @@
 
             <!--<TextView-->
                 <!--android:id="@+id/textView"-->
-                <!--android:layout_width="370dp"-->
+                <!--android:layout_width="320dp"-->
                 <!--android:layout_height="wrap_content"-->
                 <!--android:gravity="center"-->
                 <!--android:padding="5dp"-->
@@ -38,7 +38,7 @@
                 <!--android:textSize="18sp" />-->
 
             <!--<TableRow-->
-                <!--android:layout_width="370dp"-->
+                <!--android:layout_width="320dp"-->
                 <!--android:layout_height="wrap_content"-->
                 <!--android:gravity="center">-->
 
@@ -63,7 +63,7 @@
         <!--</LinearLayout>-->
 
         <LinearLayout
-            android:layout_width="370dp"
+            android:layout_width="320dp"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:padding="5dp">
@@ -379,7 +379,48 @@
 
                 <!--</LinearLayout>-->
 
-                <LinearLayout
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:layout_marginBottom="2dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:elevation="2dp"
+                    android:padding="5dp"
+                    android:text="بدل الخدمات"
+                    android:textColor="@color/black"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/service_return"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="1"
+                    android:elevation="2dp"
+
+                    android:text="0.0"
+                    android:padding="5dp"
+                    android:textColor="@color/black"
+                    android:textSize="14sp" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="1.2"
+                    android:text="دينار"
+                    android:textColor="@color/black"
+                    android:textSize="14sp" />
+
+
+            </LinearLayout>
+
+
+            <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
 
@@ -400,82 +441,32 @@
                         android:id="@+id/gas_return"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-
                         android:layout_marginRight="10dp"
+                        android:layout_weight="1"
                         android:elevation="2dp"
-                        android:padding="5dp"
 
                         android:text="0.0"
+                        android:padding="5dp"
                         android:textColor="@color/black"
-                        android:textSize="16sp" />
-
-                </LinearLayout>
-
-                <LinearLayout
+                        android:textSize="14sp" />
+                <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-
-                    android:layout_marginBottom="2dp"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:layout_width="100dp"
-                        android:layout_height="wrap_content"
-                        android:elevation="2dp"
-                        android:padding="5dp"
-                        android:text="بدل الخدمات"
-                        android:textColor="@color/black"
-                        android:textSize="16sp" />
-
-                    <TextView
-                        android:id="@+id/service_return"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-
-                        android:layout_marginRight="10dp"
-                        android:elevation="2dp"
-                        android:padding="5dp"
-
-                        android:text="0.0"
-                        android:textColor="@color/black"
-                        android:textSize="16sp" />
-
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="1.2"
+                    android:text="دينار"
+                    android:textColor="@color/black"
+                    android:textSize="14sp" />
 
                 </LinearLayout>
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-
-                    android:layout_marginBottom="2dp"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:layout_width="170dp"
-                        android:layout_height="wrap_content"
-                        android:elevation="2dp"
-                        android:padding="5dp"
-                        android:text="مجموع بدل الخدمات بعد الضريبة"
-                        android:textColor="@color/black"
-                        android:textSize="12sp" />
-
-                    <TextView
-                        android:id="@+id/tax_services"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginRight="10dp"
-                        android:elevation="2dp"
-                        android:padding="5dp"
-                        android:textColor="@color/black"
-                        android:textSize="16sp" />
 
 
-                </LinearLayout>
 
             <!--</LinearLayout>-->
 
             <TextView
-                android:layout_width="370dp"
+                android:layout_width="320dp"
                 android:layout_height="3dp"
                 android:layout_marginLeft="5dp"
                 android:layout_marginTop="5dp"
@@ -514,18 +505,28 @@
                             android:padding="5dp"
                             android:text="الصافي"
                             android:textColor="@color/black"
-                            android:textSize="16sp" />
+                            android:textSize="14sp" />
 
                         <TextView
                             android:id="@+id/net"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginRight="10dp"
+                            android:layout_weight="1"
                             android:elevation="2dp"
 
+                            android:text="0.0"
                             android:padding="5dp"
                             android:textColor="@color/black"
-                            android:textSize="16sp" />
+                            android:textSize="14sp" />
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="10dp"
+                            android:layout_weight="1.2"
+                            android:text="دينار"
+                            android:textColor="@color/black"
+                            android:textSize="14sp" />
 
                     </LinearLayout>
 
@@ -538,24 +539,128 @@
                         <TextView
                             android:layout_width="100dp"
                             android:layout_height="wrap_content"
-
                             android:elevation="2dp"
                             android:padding="5dp"
                             android:text="الضريبة"
                             android:textColor="@color/black"
-                            android:textSize="16sp" />
+                            android:textSize="14sp" />
 
                         <TextView
                             android:id="@+id/tax"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginRight="10dp"
+                            android:layout_weight="1"
                             android:elevation="2dp"
+
+                            android:text="0.0"
                             android:padding="5dp"
                             android:textColor="@color/black"
-                            android:textSize="16sp" />
+                            android:textSize="14sp"/>
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="10dp"
+                            android:layout_weight="1.2"
+                            android:text="دينار"
+                            android:textColor="@color/black"
+                            android:textSize="14sp" />
 
                     </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+
+                        android:layout_marginBottom="2dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="170dp"
+                            android:layout_height="wrap_content"
+                            android:elevation="2dp"
+                            android:padding="5dp"
+                            android:text="مجموع بدل الخدمات بعد الضريبة"
+                            android:textColor="@color/black"
+                            android:textSize="12sp" />
+
+                        <TextView
+                            android:id="@+id/tax_services"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="10dp"
+                            android:layout_weight="1"
+                            android:elevation="2dp"
+
+                            android:text="0.0"
+                            android:padding="5dp"
+                            android:textColor="@color/black"
+                            android:textSize="14sp" />
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="10dp"
+                            android:layout_weight="1.2"
+                            android:text="دينار"
+                            android:textColor="@color/black"
+                            android:textSize="14sp" />
+
+
+                    </LinearLayout>
+
+                    <TextView
+                        android:layout_width="320dp"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="===================================="
+                        android:textColor="@color/black" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+
+
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="100dp"
+                            android:layout_height="wrap_content"
+                            android:elevation="2dp"
+                            android:padding="5dp"
+                            android:text="رصيد سابق"
+                            android:textColor="@color/black"
+                            android:textSize="14sp" />
+
+                        <TextView
+                            android:id="@+id/previous_palance"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="10dp"
+                            android:layout_weight="1"
+                            android:elevation="2dp"
+
+                            android:padding="5dp"
+                            android:textColor="@color/black"
+                            android:textSize="14sp" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="10dp"
+                            android:layout_weight="1.2"
+                            android:text="دينار"
+                            android:textColor="@color/black"
+                            android:textSize="14sp" />
+
+                    </LinearLayout>
+
+
+                    <TextView
+                        android:layout_width="320dp"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="-------------------------------------------------"
+                        android:textColor="@color/black" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -566,22 +671,33 @@
                         <TextView
                             android:layout_width="100dp"
                             android:layout_height="wrap_content"
-
                             android:elevation="2dp"
                             android:padding="5dp"
                             android:text="استهلاك الفترة"
                             android:textColor="@color/black"
-                            android:textSize="16sp" />
+                            android:textSize="14sp" />
 
                         <TextView
                             android:id="@+id/current_consuming"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginRight="10dp"
+                            android:layout_weight="1"
                             android:elevation="2dp"
+
                             android:padding="5dp"
                             android:textColor="@color/black"
-                            android:textSize="16sp" />
+                            android:textSize="14sp" />
+
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="10dp"
+                            android:layout_weight="1.2"
+                            android:text="دينار"
+                            android:textColor="@color/black"
+                            android:textSize="14sp" />
 
                     </LinearLayout>
 
@@ -595,25 +711,88 @@
                             android:layout_width="100dp"
                             android:layout_height="wrap_content"
                             android:elevation="2dp"
-                            android:gravity="center"
                             android:padding="5dp"
                             android:text="القيمة المطلوبة"
                             android:textColor="@color/black"
-                            android:textSize="16sp" />
+                            android:textSize="14sp" />
 
                         <TextView
                             android:id="@+id/last_value"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginRight="10dp"
+                            android:layout_weight="1"
                             android:elevation="2dp"
+
                             android:padding="5dp"
                             android:textColor="@color/black"
-                            android:textSize="16sp" />
+                            android:textSize="14sp" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="10dp"
+                            android:layout_weight="1.2"
+                            android:text="دينار"
+                            android:textColor="@color/black"
+                            android:textSize="14sp" />
 
 
                     </LinearLayout>
 
+                    <TextView
+                        android:layout_width="320dp"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="-------------------------------------------------"
+                        android:textColor="@color/black" />
+
+                    <TextView
+                        android:layout_width="320dp"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="------------------------ملاحظات--------------------"
+                        android:textColor="@color/black" />
+
+                    <TextView
+                        android:layout_width="320dp"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="يرجى تسديد الفاتوره خلال اسبوع من تاريخ اصدارها"
+                        android:textColor="@color/black" />
+
+
+                    <TextView
+                        android:id="@+id/remarkVoucher"
+                        android:layout_width="320dp"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text=""
+                        android:textColor="@color/black" />
+
+                    <TextView
+                        android:layout_width="320dp"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="------------------------------------------------"
+                        android:textColor="@color/black" />
+
+
+
+                    <TextView
+                        android:layout_width="320dp"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="رقم الحساب لدى البنك الاردني االكويتي\n فرع شارع المدينه المنورة"
+                        android:textColor="@color/black" />
+
+                    <TextView
+                        android:id="@+id/AccNoCompany"
+                        android:layout_width="320dp"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text=""
+                        android:textColor="@color/black" />
                 </LinearLayout>
 
             </LinearLayout>

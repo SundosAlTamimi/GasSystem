@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <group>
+
+        <item
+            android:id="@+id/menu_add_voucher"
+            android:icon="@drawable/ic_add_black_24dp"
+            android:title="اضافة فاتورة"
+            app:showAsAction="always" />
+
+        <item
+            android:id="@+id/menu_edit_voucher"
+            android:icon="@drawable/ic_edit_black_24dp"
+            android:title="تعديل فاتورة"
+            app:showAsAction="always" />
+
+        <item
+            android:id="@+id/menu_print_voucher"
+            android:icon="@drawable/ic_print_black_24dp"
+            android:title="طباعة فاتورة"
+            app:showAsAction="always" />
+
+    </group>
+
+    <group android:id="@+id/group">
+
+        <item
+            android:id="@+id/menu_add_receipt_voucher"
+            android:icon="@drawable/ic_add_black_24dp"
+            android:title="اضافة سند قبض"
+            app:showAsAction="always" />
+
+        <item
+            android:id="@+id/menu_edit_receipt_voucher"
+            android:icon="@drawable/ic_edit_black_24dp"
+            android:title="تعديل سند قبض"
+            app:showAsAction="always" />
+
+        <item
+            android:id="@+id/menu_print_receipt_voucher"
+            android:icon="@drawable/ic_print_black_24dp"
+            android:title="طباعة سند قبض"
+            app:showAsAction="always" />
+    </group>
+
+    <group android:id="@+id/group2">
+
+        <item
+            android:id="@+id/menu_import"
+            android:icon="@drawable/ic_import"
+            android:title="استيراد"
+            app:showAsAction="always" />
+
+        <item
+            android:id="@+id/menu_export"
+            android:icon="@drawable/ic_export"
+            android:title="تصدير"
+            app:showAsAction="always" />
+
+        <item
+            android:id="@+id/menu_settings"
+            android:icon="@drawable/ic_settings_black_24dp"
+            android:title="اعدادات"
+            app:showAsAction="always" />
+
+    </group>
+</menu>
