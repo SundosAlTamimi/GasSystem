@@ -14,6 +14,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -37,6 +38,7 @@ public class AppSetting extends AppCompatActivity {
     private Uri fileUri;
     Bitmap serverPicBitmap;
     TextView upload;
+    CheckBox saveCheckBox;
 
 
     @Override
@@ -123,6 +125,11 @@ public class AppSetting extends AppCompatActivity {
             taxNo.setText(settingModles.getTaxNo());
             accNo.setText(settingModles.getAccNo());
             imageView.setImageBitmap(settingModles.getLogo());
+            if(settingModles.getSavePrint()==1){
+                saveCheckBox.setChecked(true);
+            }else {
+                saveCheckBox.setChecked(false);
+            }
 
         }else{
 
@@ -142,6 +149,11 @@ public class AppSetting extends AppCompatActivity {
                         settingModle.setCompanyName(companyName.getText().toString());
                         settingModle.setTaxNo(taxNo.getText().toString());
                         settingModle.setAccNo(accNo.getText().toString());
+                        if(saveCheckBox.isChecked()) {
+                            settingModle.setSavePrint(1);
+                        }else {
+                            settingModle.setSavePrint(0);
+                        }
 
                         if(serverPicBitmap!=null) {
                             settingModle.setLogo(serverPicBitmap);
@@ -190,6 +202,7 @@ public class AppSetting extends AppCompatActivity {
          imageView=findViewById(R.id.logoImageSetting);
          databaseHandler=new DatabaseHandler(AppSetting.this);
          upload=findViewById(R.id.upload);
+         saveCheckBox=findViewById(R.id.saveCheckBox);
     }
 
     @Override

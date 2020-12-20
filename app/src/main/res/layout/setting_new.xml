@@ -146,11 +146,54 @@
 
 
                 </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="3dp"
+                    android:layout_marginHorizontal="30dp"
+                    android:layout_marginTop="20dp"
+                    android:orientation="horizontal">
+
+                    <!--<TextView-->
+                        <!--android:layout_width="130dp"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:elevation="5dp"-->
+                        <!--android:inputType="number"-->
+                        <!--android:padding="5dp"-->
+                        <!--android:textColor="@color/white_dark"-->
+                        <!--android:textDirection="rtl"-->
+                        <!--android:textSize="18sp" />-->
+
+                    <CheckBox
+                        android:id="@+id/saveCheckBox"
+                        android:layout_width="130dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:textColor="@color/white_dark"
+                        android:textDirection="rtl"
+                        android:text="حفظ و طباعة" />
+
+
+                    <!--<EditText-->
+                        <!--android:id="@+id/ipTextSetting"-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:textCursorDrawable="@drawable/cursor_edit_text"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:layout_marginRight="10dp"-->
+                        <!--android:background="@drawable/edite_back"-->
+                        <!--android:elevation="2dp"-->
+                        <!--android:gravity="center"-->
+                        <!--android:padding="5dp"-->
+                        <!--android:textColor="@color/white_dark"-->
+                        <!--android:textSize="18sp" />-->
+
+
+                </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="30dp"
+                    android:layout_marginTop="20dp"
                     android:layout_marginBottom="3dp"
                     android:background="@drawable/save_yelow_btn"
                     android:gravity="center"
@@ -309,7 +352,6 @@
                         android:background="@drawable/edite_back"
                         android:elevation="2dp"
                         android:gravity="center"
-                        android:inputType="number"
                         android:textCursorDrawable="@drawable/cursor_edit_text"
 
                         android:padding="5dp"

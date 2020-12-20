@@ -106,7 +106,7 @@ public class Receipt extends AppCompatActivity {
 //        });
         DHandler = new DatabaseHandler(Receipt.this);
 //        maxVouNo= DHandler.getMax("RECCASH")+1;
-
+        globelFunction.GlobelFunctionSetting(DHandler);
         MaxSerial maxSerial = DHandler.getMaxSerialTable();
         if (!TextUtils.isEmpty(maxSerial.getColomMax())) {
             maxSerialRec = maxSerial.getColomMax();
@@ -541,9 +541,19 @@ public class Receipt extends AppCompatActivity {
         DHandler.updateMaxRec("" + (Integer.parseInt(maxSerialRec) + 1));
         receiptNo.setText("" + (Integer.parseInt(maxSerialRec) + 1));
         clearText();
-        Intent printExport = new Intent(Receipt.this, BluetoothConnectMenu.class);
-        printExport.putExtra("printKey", "1");
-        startActivity(printExport);
+        if(globelFunction.savePrint==1) {
+            if(globelFunction.printType.equals("0")) {
+                Intent printExport = new Intent(Receipt.this, BluetoothConnectMenu.class);
+                printExport.putExtra("printKey", "1");
+                startActivity(printExport);
+            }else {
+                Intent printExportEsc = new Intent(Receipt.this, bMITP.class);
+                printExportEsc.putExtra("printKey", "1");
+                startActivity(printExportEsc);
+            }
+          }else{
+            Toast.makeText(this, "حفظ دون طباعه", Toast.LENGTH_SHORT).show();
+        }
         Toast.makeText(this, "تم الحفظ بنجاح ", Toast.LENGTH_SHORT).show();
     }
 

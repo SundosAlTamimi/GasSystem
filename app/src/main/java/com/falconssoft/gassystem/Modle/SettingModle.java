@@ -9,6 +9,7 @@ public class SettingModle {
     private String accNo;
     private String taxNo;
     private Bitmap logo;
+    private int savePrint;
 
     public SettingModle() {
 
@@ -42,6 +43,10 @@ public class SettingModle {
         this.logo = logo;
     }
 
+    public void setSavePrint(int savePrint) {
+        this.savePrint = savePrint;
+    }
+
     public String getIpAddress() {
         return ipAddress;
     }
@@ -60,5 +65,9 @@ public class SettingModle {
 
     public Bitmap getLogo() {
         return logo;
+    }
+
+    public int getSavePrint() {
+        return savePrint;
     }
 }

@@ -485,7 +485,7 @@ public class BluetoothConnectMenu extends Activity {
                             Bitmap bitmap = null, bitmap3 = null, bitmap4 = null, bitmap5 = null;
 
 
-                            if(false) {
+                            if(globelFunction.formType.equals("1")) {
                                 bitmap = CovertVoucherTopBitmap(voucherGas);
                                 bitmap3 = CovertVoucherToBitmap(voucherGas);
                                 bitmap4 = CovertVoucherBoutomToBitmap(voucherGas);
@@ -551,7 +551,7 @@ public class BluetoothConnectMenu extends Activity {
                             Bitmap bitmap2 = null, bitmap6 = null, bitmap7 = null, bitmap8 = null;
 
 
-                            if (false){
+                            if (globelFunction.formType.equals("1")){
                                 bitmap6 = CovertRecipteTopBitmap(recCash);
                                 bitmap2 = CovertRecipteToBitmap(recCash);
 

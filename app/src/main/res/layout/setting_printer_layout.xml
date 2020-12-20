@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/gas_bac"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:background="@drawable/jjj"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/clear_buttons"
+            android:orientation="vertical">
+
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:layout_weight="0.3"
+                android:layoutDirection="rtl"
+                android:orientation="horizontal">
+                <TextView
+                    android:id="@+id/close"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right"
+                    android:layout_weight="6"
+                    android:drawableRight="@drawable/ic_close_black_24dp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="5dp"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="اعدادات الطابعة"
+                    android:textColor="@color/Orange"
+                    android:textSize="30sp" />
+
+
+
+
+                <!--<android.support.v7.widget.SearchView-->
+                    <!--android:id="@+id/mSearch"-->
+                    <!--android:layout_width="0dp"-->
+                    <!--android:layout_height="40dp"-->
+                    <!--android:layout_gravity="left"-->
+                    <!--android:layout_marginLeft="10dp"-->
+                    <!--android:layout_weight="2"-->
+                    <!--android:gravity="right"-->
+                    <!--android:backgroundTint="@color/white_dark"-->
+                    <!--app:defaultQueryHint="Search.." />-->
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="10dp"
+                android:layout_weight="12"
+                android:layoutDirection="rtl"
+                android:padding="5dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:layout_weight="0"
+                    android:padding="10dp"
+                    android:background="@drawable/save_yelow_btn"
+                    android:text="نوع الطابعه "
+                    android:textColor="@color/white_dark"
+                    android:textSize="18sp" />
+
+                <RadioGroup
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="20dp"
+                    android:layout_weight="0" >
+
+                    <RadioButton
+                        android:id="@+id/cpclPrinter"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:textDirection="rtl"
+                        android:textSize="18sp"
+                       android:layout_margin="5dp"
+                        android:text="sewoo K30 (CPCL)"
+                        android:checked="true"
+                        android:textColor="@color/white_dark" />
+                    <RadioButton
+                        android:id="@+id/escPrinter"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_margin="5dp"
+                        android:textSize="18sp"
+                        android:text="Mobile Printer (Esc/POS)"
+                        android:textDirection="rtl"
+                        android:textColor="@color/white_dark" />
+
+
+                </RadioGroup>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="5dp"
+                    android:layout_weight="3"
+                    android:layoutDirection="rtl"
+
+                    android:orientation="vertical">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:layout_weight="0"
+                        android:padding="10dp"
+                        android:background="@drawable/save_yelow_btn"
+                        android:text="شكل الفاتوره"
+                        android:textColor="@color/white_dark"
+                        android:textSize="18sp" />
+                    <RadioGroup
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="20dp"
+                        android:layout_weight="0" >
+
+                        <RadioButton
+                            android:id="@+id/GreenGas"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:textDirection="rtl"
+                            android:textSize="18sp"
+                            android:layout_margin="5dp"
+                            android:text="For Tablet (Green Gas)"
+                            android:checked="true"
+                            android:textColor="@color/white_dark" />
+                        <RadioButton
+                            android:id="@+id/smartPhone"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:layout_margin="5dp"
+                            android:textSize="18sp"
+                            android:text="For Phone "
+                            android:textDirection="rtl"
+                            android:textColor="@color/white_dark" />
+
+
+                    </RadioGroup>
+
+
+
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:elevation="10dp"
+                    android:gravity="center">
+
+                    <Button
+                        android:id="@+id/save_"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_margin="5dp"
+                        android:layout_weight="0"
+                        android:background="@drawable/save_yelow_btn"
+                        android:elevation="15dp"
+                        android:gravity="center"
+                        android:padding="5dp"
+                        android:text="حفظ"
+                        android:textColor="@color/white_dark"
+                        android:textSize="18sp" />
+
+                    <Button
+                        android:id="@+id/editRecCash"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+
+                        android:layout_marginRight="30dp"
+                        android:layout_weight="0"
+                        android:background="@drawable/save_yelow_btn"
+                        android:elevation="15dp"
+                        android:gravity="center"
+                        android:padding="5dp"
+                        android:text="تعديل"
+                        android:textColor="@color/white_dark"
+                        android:textSize="18sp"
+                        android:visibility="gone"/>
+
+                    <Button
+                        android:id="@+id/cancel_btn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+
+                        android:layout_marginRight="30dp"
+                        android:layout_weight="0"
+                        android:background="@drawable/back_white"
+                        android:elevation="15dp"
+                        android:gravity="center"
+                        android:padding="5dp"
+                        android:text="الغاء"
+                        android:textColor="@color/Orange"
+                        android:textSize="18sp" />
+                </LinearLayout>
+                <!--<ListView-->
+                <!--android:id="@+id/counterList"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="match_parent"-->
+                <!--android:layout_margin="5dp"-->
+                <!--android:layout_weight="12"-->
+                <!--android:background="@drawable/edit_bac_s"-->
+                <!--android:padding="10dp" />-->
+            </LinearLayout>
+
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>

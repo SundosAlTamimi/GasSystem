@@ -113,6 +113,7 @@ public class MakeVoucher extends AppCompatActivity {
         threeDForm = new DecimalFormat("#.###");
 
         DHandler = new DatabaseHandler(MakeVoucher.this);
+        globelFunction.GlobelFunctionSetting(DHandler);
 //        DHandler.addCustomer(new Customer("24458","2225","ahmad",215,0.254,20,10,"al-yas",1,0,1));
 //        DHandler.addCustomer(new Customer("2441","2225","ahmad",215,0.254,20,10,"al-yas",1,0,1));
 //        DHandler.addCustomer(new Customer("2442","2221","ahmad",211,0.254,20,10,"al-yas",1,0,1));
@@ -159,7 +160,7 @@ public class MakeVoucher extends AppCompatActivity {
                     if (customer.getCounterNo() != null) {
 
                         custNo.setText(customer.getCustName());
-                        previousRead.setText("" + customer.getLastRead());
+                        previousRead.setText(globelFunction.DecimalFormat("" + customer.getLastRead()));
                         previousPalance.setText("" + customer.getCredet());
                         serviceReturn.setText("" + customer.getBadalVal());
 
@@ -348,7 +349,7 @@ public class MakeVoucher extends AppCompatActivity {
                         if (customer.getCounterNo() != null) {
 
                             custNo.setText(customer.getCustName());
-                            previousRead.setText("" + customer.getLastRead());
+                            previousRead.setText(globelFunction.DecimalFormat("" + customer.getLastRead()));
                             previousPalance.setText("" + customer.getCredet());
                             serviceReturn.setText("" + customer.getBadalVal());
 
@@ -859,9 +860,25 @@ public class MakeVoucher extends AppCompatActivity {
         DHandler.updateMaxVoucher(""+(Integer.parseInt(maxSerialVoucher)+1));
         counterNo.setText("");
         clearText();
-        Intent printExport=new Intent(MakeVoucher.this,BluetoothConnectMenu.class);
-        printExport.putExtra("printKey", "0");
-        startActivity(printExport);
+
+        if(globelFunction.savePrint==1) {
+
+            if(globelFunction.printType.equals("0")) {
+                Intent printExport = new Intent(MakeVoucher.this, BluetoothConnectMenu.class);
+                printExport.putExtra("printKey", "0");
+                startActivity(printExport);
+            }else {
+                Intent printExportEsc = new Intent(MakeVoucher.this, bMITP.class);
+                printExportEsc.putExtra("printKey", "0");
+                startActivity(printExportEsc);
+            }
+
+
+
+
+        }else {
+            Toast.makeText(this, "حفظ دون طباعه", Toast.LENGTH_SHORT).show();
+        }
 
 
     }
@@ -1091,21 +1108,21 @@ public class MakeVoucher extends AppCompatActivity {
                     if(Double.parseDouble(currentRead.getText().toString())!=0) {
 
                         currentRead.setText(""+Double.parseDouble(currentRead.getText().toString()));//this for make number in text double format
-                        previousRead.setText(""+Double.parseDouble(previousRead.getText().toString()));//this for make number in text double format
+                        previousRead.setText(globelFunction.DecimalFormat(""+Double.parseDouble(previousRead.getText().toString())));//this for make number in text double format
                         //_____________________________________الاستهلاك ___________________________________
                         DPR = Double.parseDouble(currentRead.getText().toString()) - Double.parseDouble(previousRead.getText().toString());
-                        consuming.setText("" + DPR);
+                        consuming.setText(globelFunction.DecimalFormat("" + DPR));
                         //_____________________________________قيمة الاستهلاك ___________________________________
 
-                        String vo = convertToEnglish(threeDForm.format(((DPR * GP * COE / 0.436) * GPRC) / 1000));
+                        String vo = convertToEnglish(threeDForm.format(((DPR * (GP+1) * COE) / 0.436) *( GPRC / 1000)));
                         VOD = Double.parseDouble(vo);
-                        consumingValue.setText("" + VOD);
+                        consumingValue.setText("" +globelFunction.DecimalFormat(""+VOD));
 
                         //_____________________________________استهلاك الفتره ___________________________________
 
                         if (!gasReturn.getText().toString().equals("")) {
                             if (!gasReturn.getText().toString().equals(".")) {
-                                gasReturn.setText(""+Double.parseDouble(gasReturn.getText().toString()));//this for make number in text double format
+                                gasReturn.setText(globelFunction.DecimalFormat(""+Double.parseDouble(gasReturn.getText().toString())));//this for make number in text double format
                                 GRV = Double.parseDouble(gasReturn.getText().toString());
                             } else {
                                 gasReturn.setError("DOT!");
@@ -1131,20 +1148,20 @@ public class MakeVoucher extends AppCompatActivity {
                         }
 
                         netValue = (GRV + SRV);//الصافي
-                        net.setText("" + netValue);
+                        net.setText(globelFunction.DecimalFormat("" + netValue));
 
 
                         TX = Double.parseDouble(convertToEnglish(threeDForm.format((GRV + SRV) * 0.16))); //الضريبه
-                        tax.setText("" + TX);
+                        tax.setText(globelFunction.DecimalFormat(globelFunction.DecimalFormat("" + TX)));
 
                         TXV = Double.parseDouble(convertToEnglish(threeDForm.format((GRV + SRV) + TX)));//مجموع بدل خدمات
-                        taxService.setText("" + TXV);
+                        taxService.setText(globelFunction.DecimalFormat("" + TXV));
 
                         DP = Double.parseDouble(convertToEnglish(threeDForm.format(VOD + TXV))); //استهلاك الفتره
-                        currentConsuming.setText("" + DP);
+                        currentConsuming.setText(globelFunction.DecimalFormat("" + DP));
 
                         NetTotal = Double.parseDouble(convertToEnglish(threeDForm.format(DP + Double.parseDouble(previousPalance.getText().toString())))); //القيمه المطلوبه
-                        lastValue.setText("" + NetTotal);
+                        lastValue.setText(globelFunction.DecimalFormat("" + NetTotal));
                     }else {
                         currentRead.setError("Zero!");
                         clearAfterError();
@@ -1340,10 +1357,10 @@ public class MakeVoucher extends AppCompatActivity {
 
         counterNo.setText(voucherModle.getCounterNo());
         custNo .setText(voucherModle.getCustomerName());
-        previousRead .setText(voucherModle.getLastReader());
+        previousRead .setText(globelFunction.DecimalFormat(voucherModle.getLastReader()));
         currentRead .setText(voucherModle.getCurrentReader());
-        consuming.setText(voucherModle.getCCost());
-        consumingValue .setText(voucherModle.getcCostVal());
+        consuming.setText(globelFunction.DecimalFormat(voucherModle.getCCost()));
+        consumingValue .setText(globelFunction.DecimalFormat(voucherModle.getcCostVal()));
         previousPalance .setText(voucherModle.getCredit());
         gasReturn.setText(voucherModle.getGret());
         serviceReturn .setText(voucherModle.getService());

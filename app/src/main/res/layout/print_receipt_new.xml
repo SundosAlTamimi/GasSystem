@@ -38,11 +38,11 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_margin="5dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="3dp"
-                android:layout_weight="8"
+                android:layout_weight="0"
                 android:padding="5dp"
                 android:background="@drawable/edite_back"
                 android:gravity="center"

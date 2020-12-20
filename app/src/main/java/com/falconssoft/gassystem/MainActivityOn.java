@@ -1,19 +1,20 @@
 package com.falconssoft.gassystem;
 
 import android.annotation.SuppressLint;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.content.ContextCompat;
-import android.support.v4.graphics.drawable.DrawableCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Display;
@@ -21,8 +22,13 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ListView;
+import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -31,6 +37,7 @@ import com.azoft.carousellayoutmanager.CarouselLayoutManager;
 import com.azoft.carousellayoutmanager.CarouselZoomPostLayoutListener;
 import com.azoft.carousellayoutmanager.CenterScrollListener;
 import com.facebook.stetho.Stetho;
+import com.falconssoft.gassystem.Modle.PrintSetting;
 import com.falconssoft.gassystem.Modle.RecCash;
 import com.falconssoft.gassystem.Modle.VoucherModle;
 import com.smarteist.autoimageslider.DefaultSliderView;
@@ -263,6 +270,12 @@ public class MainActivityOn extends AppCompatActivity implements NavigationView.
                 Intent SettingIntent= new Intent(MainActivityOn.this, AppSetting.class);
                 startActivity(SettingIntent);
                 break;
+
+            case R.id.menu_printer_settings:
+
+                passwordForSetting();
+
+                break;
         }
         return false;
     }
@@ -328,6 +341,134 @@ if(isExported) {
 
         }
 
+
+    }
+
+public void passwordForSetting(){
+    final EditText editText = new EditText(MainActivityOn.this);
+    final TextView textView = new TextView(MainActivityOn.this);
+    editText.setHint("ادخل كلمة السر ");
+    editText.setTextColor(Color.BLACK);
+    textView.setTextColor(Color.RED);
+    if (SweetAlertDialog.DARK_STYLE) {
+        editText.setTextColor(Color.BLACK);
+    }
+    LinearLayout linearLayout = new LinearLayout(getApplicationContext());
+    linearLayout.setOrientation(LinearLayout.VERTICAL);
+    linearLayout.addView(editText);
+    linearLayout.addView(textView);
+
+    SweetAlertDialog dialog = new SweetAlertDialog(MainActivityOn.this, SweetAlertDialog.NORMAL_TYPE)
+            .setTitleText("كلمة السر ")
+            .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                @Override
+                public void onClick(SweetAlertDialog sweetAlertDialog) {
+                    String password=editText.getText().toString();
+                    textView.setText("");
+                    if(!password.equals("")){
+
+                        if(password.equals("1221")){
+
+                            textView.setText("");
+                            printerSettingDialog();
+
+                            sweetAlertDialog.dismissWithAnimation();
+
+                        }else{
+                            textView.setText("كلمة السر خطا ");
+                        }
+
+                    }
+
+                }
+            });
+//                        .hideConfirmButton();
+
+    dialog.setCustomView(linearLayout);
+    dialog.show();
+
+}
+    public void printerSettingDialog(){
+        final Dialog dialog = new Dialog(this,R.style.Theme_Dialog);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.setting_printer_layout);
+        dialog.setCancelable(true);
+
+        final RadioButton greenGass,smartPhone,cpclPrinter,EscPosPrinter;
+
+
+        greenGass=dialog.findViewById(R.id.GreenGas);
+        smartPhone=dialog.findViewById(R.id.smartPhone);
+        cpclPrinter=dialog.findViewById(R.id.cpclPrinter);
+        EscPosPrinter=dialog.findViewById(R.id.escPrinter);
+
+
+        Button save,cancel;
+
+        save=dialog.findViewById(R.id.save_);
+        cancel=dialog.findViewById(R.id.cancel_btn);
+
+        PrintSetting printSetting=databaseHandler.getPrinterSetting();
+        String printTypes=printSetting.getPrintType();
+        String formTypes=printSetting.getFormType();
+
+        if(!TextUtils.isEmpty(printTypes)){
+
+            if(printTypes.equals("1")){
+                EscPosPrinter.setChecked(true);
+
+            }else  if(printTypes.equals("0")){
+                cpclPrinter.setChecked(true);
+            }
+
+
+            if(formTypes.equals("1")){
+                smartPhone.setChecked(true);
+
+            }else  if(formTypes.equals("0")){
+                greenGass.setChecked(true);
+            }
+
+        }else {
+
+        }
+
+
+        save.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String printType="0";
+                String formType="0";
+                if(cpclPrinter.isChecked()){
+                    printType="0";//sewo big printer
+                }else if(EscPosPrinter.isChecked()) {
+                    printType="1";//mopile printer
+                }
+
+                if(greenGass.isChecked()){
+                    formType="0";
+                }else if(smartPhone.isChecked()) {
+                    formType="1";
+                }
+
+                databaseHandler.deleteAllPrintSetting();
+                databaseHandler.addPrintSettingTable(new PrintSetting(printType,formType));
+
+                Toast.makeText(MainActivityOn.this, "Save Successful", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+
+        cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                 dialog.dismiss();
+
+            }
+        });
+
+        dialog.show();
 
     }
 

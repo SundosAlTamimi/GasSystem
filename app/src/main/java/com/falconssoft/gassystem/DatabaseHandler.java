@@ -11,6 +11,7 @@ import android.util.Log;
 
 import com.falconssoft.gassystem.Modle.Customer;
 import com.falconssoft.gassystem.Modle.MaxSerial;
+import com.falconssoft.gassystem.Modle.PrintSetting;
 import com.falconssoft.gassystem.Modle.RecCash;
 import com.falconssoft.gassystem.Modle.Receipts;
 import com.falconssoft.gassystem.Modle.Remarks;
@@ -26,7 +27,7 @@ import java.util.List;
 public class DatabaseHandler extends SQLiteOpenHelper {
 
     private static String TAG = "DatabaseHandler";
-    private static final int DATABASE_VERSION = 16;
+    private static final int DATABASE_VERSION = 19;
     private static final String DATABASE_NAME = "GasDatabase";
     static SQLiteDatabase db;
 
@@ -153,6 +154,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     private static final String ACC_NO3 = "ACC_NO";
     private static final String TAX_NO3 = "TAX_NO";
     private static final String LOGO3 = "LOGO";
+    private static final String SAVE_PRINT3 = "SAVE_PRINT";
 
     //******************************************************************
     private static final String SERIAL_TABLE = "MAXSERIAL";
@@ -203,7 +205,13 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
 
     //******************************************************************
+    private static final String SETTING_PRINTER_TABLE  = "SETTING_PRINTER_TABLE";
 
+    private static final String PRINT_TYPE = "PRINT_TYPE";
+    private static final String FORM_TYPE = "FORM_TYPE";
+
+
+    //******************************************************************
 
 
 
@@ -367,8 +375,16 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                 + COMPANY_NAME3 + " TEXT,"
                 + ACC_NO3 + " TEXT,"
                 + TAX_NO3 + " TEXT,"
-                + LOGO3 + " BLOB" + ")";
+                + LOGO3 + " BLOB,"
+                + SAVE_PRINT3 + " TEXT" + ")";
         db.execSQL(CREATE_SETTING_TABLE);
+
+
+        String CREATE_SETTING_PRINTER_TABLE = "CREATE TABLE " + SETTING_PRINTER_TABLE + "("
+                + PRINT_TYPE + " TEXT,"
+                + FORM_TYPE + " TEXT"
+                + ")";
+        db.execSQL(CREATE_SETTING_PRINTER_TABLE);
 
 
     }
@@ -568,6 +584,26 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
         }
 
+        try{
+            db.execSQL("ALTER TABLE SETTING_TABLE ADD " + SAVE_PRINT3 + " TEXT"+" DEFAULT '0'");
+
+        }catch (Exception e){
+            Log.e("upgrade","Ex ... SETTING_TABLE SAVE_PRINT3");
+        }
+
+
+        try{
+            String CREATE_SETTING_PRINTER_TABLE = "CREATE TABLE " + SETTING_PRINTER_TABLE + "("
+                    + PRINT_TYPE + " TEXT,"
+                    + FORM_TYPE + " TEXT"
+                    + ")";
+            db.execSQL(CREATE_SETTING_PRINTER_TABLE);
+        }catch (Exception ex){
+            Log.e("upgrade","Ex ... CREATE_SETTING_PRINTER_TABLE TABLE ");
+
+        }
+
+
     }
 
     // **************************************************** Adding ****************************************************
@@ -758,6 +794,17 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         db.close();
     }
 
+    public void addPrintSettingTable(PrintSetting printSetting) {
+        db = this.getReadableDatabase();
+        ContentValues contentValues = new ContentValues();
+
+        contentValues.put(PRINT_TYPE, printSetting.getPrintType());
+        contentValues.put(FORM_TYPE, printSetting.getFormType());
+
+        db.insert(SETTING_PRINTER_TABLE, null, contentValues);
+        db.close();
+    }
+
 //    public void addRecCash(RecCash receipt) {
 //        SQLiteDatabase db = this.getReadableDatabase();
 //        ContentValues contentValues = new ContentValues();
@@ -822,7 +869,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         contentValues.put(ACC_NO3, settingModle.getAccNo());
         contentValues.put(TAX_NO3, settingModle.getTaxNo());
         contentValues.put(LOGO3, byteImage);
-
+        contentValues.put(SAVE_PRINT3, settingModle.getSavePrint());
 
         db.insert(SETTING_TABLE, null, contentValues);
         db.close();
@@ -1083,6 +1130,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                 settingModle.setCompanyName(cursor.getString(1));
                 settingModle.setAccNo(cursor.getString(2));
                 settingModle.setTaxNo(cursor.getString(3));
+                settingModle.setSavePrint(cursor.getInt(5));
 
                 try {
                     settingModle.setLogo(BitmapFactory.decodeByteArray(cursor.getBlob(4), 0, cursor.getBlob(4).length));
@@ -1094,6 +1142,25 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         }
         return settingModle;
     }
+
+    public PrintSetting getPrinterSetting() {
+        PrintSetting printSetting = new PrintSetting();
+
+        String selectQuery = "SELECT  * FROM " + SETTING_PRINTER_TABLE ;
+        db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+
+        if (cursor.moveToFirst()) {
+            do {
+
+                printSetting.setPrintType(cursor.getString(0));
+                printSetting.setFormType(cursor.getString(1));
+
+            } while (cursor.moveToNext());
+        }
+        return printSetting;
+    }
+
 
     public List<MaxSerial> getMaxSerial() {
         List<MaxSerial> customerList=new ArrayList<>();
@@ -1261,6 +1328,13 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     public void deleteAllSetting() {
         SQLiteDatabase db = this.getWritableDatabase();
         db.execSQL("delete from " + SETTING_TABLE);
+        db.close();
+    }
+
+
+    public void deleteAllPrintSetting() {
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.execSQL("delete from " + SETTING_PRINTER_TABLE);
         db.close();
     }
 

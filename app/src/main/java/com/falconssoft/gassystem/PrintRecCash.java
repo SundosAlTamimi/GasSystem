@@ -26,6 +26,7 @@ public class PrintRecCash extends AppCompatActivity {
     boolean PrintOn=false;
     RecCash recCashPrint;
     Button print,cancel;
+    GlobelFunction globelFunction;
 
 
     @Override
@@ -35,7 +36,8 @@ public class PrintRecCash extends AppCompatActivity {
         setContentView(R.layout.print_receipt_new);
         inti();
 
-
+        globelFunction=new GlobelFunction();
+        globelFunction.GlobelFunctionSetting(databaseHandler);
         RecCashNoEditText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
@@ -72,15 +74,41 @@ public class PrintRecCash extends AppCompatActivity {
         print.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+
+
                 if(PrintOn){
-                    recCash=recCashPrint;
-                    Intent printExport=new Intent(PrintRecCash.this,BluetoothConnectMenu.class);
-                    printExport.putExtra("printKey", "1");
-                    startActivity(printExport);
-                    Toast.makeText(PrintRecCash.this, "print Success", Toast.LENGTH_SHORT).show();
-                    PrintOn=false;
-                    recCashPrint=new RecCash();
-                    clearText();
+//                    recCash=recCashPrint;
+//                    Intent printExport=new Intent(PrintRecCash.this,BluetoothConnectMenu.class);
+//                    printExport.putExtra("printKey", "1");
+//                    startActivity(printExport);
+//                    Toast.makeText(PrintRecCash.this, "print Success", Toast.LENGTH_SHORT).show();
+//                    PrintOn=false;
+//                    recCashPrint=new RecCash();
+//                    clearText();
+
+                    if(globelFunction.printType.equals("0")) {
+                        recCash=recCashPrint;
+                        Intent printExport=new Intent(PrintRecCash.this,BluetoothConnectMenu.class);
+                        printExport.putExtra("printKey", "1");
+                        startActivity(printExport);
+                        Toast.makeText(PrintRecCash.this, "print Success", Toast.LENGTH_SHORT).show();
+                        PrintOn=false;
+                        recCashPrint=new RecCash();
+                        clearText();
+                    }else {
+
+                        recCash=recCashPrint;
+                        Intent printExportEsc = new Intent(PrintRecCash.this, bMITP.class);
+                        printExportEsc.putExtra("printKey", "1");
+                        startActivity(printExportEsc);
+                        Toast.makeText(PrintRecCash.this, "print Success", Toast.LENGTH_SHORT).show();
+                        PrintOn=false;
+                        recCashPrint=new RecCash();
+                        clearText();
+
+                    }
+
                 }else {
                     Toast.makeText(PrintRecCash.this, "No Voucher For Print ", Toast.LENGTH_SHORT).show();
 

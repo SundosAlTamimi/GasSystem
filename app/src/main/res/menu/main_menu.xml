@@ -64,6 +64,11 @@
             android:icon="@drawable/ic_settings_black_24dp"
             android:title="اعدادات"
             app:showAsAction="always" />
+        <item
+            android:id="@+id/menu_printer_settings"
+            android:icon="@drawable/ic_print_black_24dp"
+            android:title="اعدادات الطابعة"
+            app:showAsAction="always" />
 
     </group>
 </menu>

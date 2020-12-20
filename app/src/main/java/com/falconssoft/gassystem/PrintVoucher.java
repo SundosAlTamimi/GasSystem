@@ -41,6 +41,7 @@ public class PrintVoucher extends AppCompatActivity {
         init();
 //        getVoucherByVoucherNo
         globelFunction=new GlobelFunction();
+        globelFunction.GlobelFunctionSetting(databaseHandler);
         voucherNo.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
@@ -87,12 +88,19 @@ public class PrintVoucher extends AppCompatActivity {
 
 
                 if(PrintOn){
-                    voucherGas=voucherModle;
-                    Intent printExport=new Intent(PrintVoucher.this,BluetoothConnectMenu.class);
-                    printExport.putExtra("printKey", "0");
-                    startActivity(printExport);
-                    Toast.makeText(PrintVoucher.this, "الطباعه ...", Toast.LENGTH_SHORT).show();
-
+                    if(globelFunction.printType.equals("0")) {
+                        voucherGas=voucherModle;
+                        Intent printExport=new Intent(PrintVoucher.this,BluetoothConnectMenu.class);
+                        printExport.putExtra("printKey", "0");
+                        startActivity(printExport);
+                        Toast.makeText(PrintVoucher.this, "الطباعه ...", Toast.LENGTH_SHORT).show();
+                    }else {
+                        voucherGas=voucherModle;
+                        Intent printExportEsc=new Intent(PrintVoucher.this,bMITP.class);
+                        printExportEsc.putExtra("printKey", "0");
+                        startActivity(printExportEsc);
+                        Toast.makeText(PrintVoucher.this, "الطباعه ...", Toast.LENGTH_SHORT).show();
+                    }
 
                 }else {
                     Toast.makeText(PrintVoucher.this, "لا يوجد فاتوره لطباعتها", Toast.LENGTH_SHORT).show();

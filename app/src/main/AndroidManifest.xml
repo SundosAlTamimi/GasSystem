@@ -79,6 +79,13 @@
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Dialog" />
 
+        <activity
+            android:name=".bMITP"
+            android:excludeFromRecents="true"
+            android:label="Printing"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Dialog" />
+
         <activity android:name=".Receipt"
             android:screenOrientation="sensorPortrait">
 

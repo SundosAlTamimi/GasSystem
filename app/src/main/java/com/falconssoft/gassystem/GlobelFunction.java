@@ -6,6 +6,7 @@ import android.text.TextUtils;
 import android.util.Log;
 
 import com.falconssoft.gassystem.Modle.Customer;
+import com.falconssoft.gassystem.Modle.PrintSetting;
 import com.falconssoft.gassystem.Modle.SettingModle;
 
 import java.text.DecimalFormat;
@@ -24,6 +25,9 @@ public class GlobelFunction {
     public  static String taxNo;
     public  static String accNo;
     public  static String companyName;
+    public static int savePrint;
+    public  static String formType;
+    public  static String printType;
 
     public GlobelFunction() {
 
@@ -36,6 +40,18 @@ public class GlobelFunction {
         SettingModle settingModle=databaseHandler.getSetting();
         ipAddress=settingModle.getIpAddress();
 
+        PrintSetting printSetting=databaseHandler.getPrinterSetting();
+        printType=printSetting.getPrintType();
+
+        if(!TextUtils.isEmpty(printType)){
+            printType=printSetting.getPrintType();
+            formType=printSetting.getFormType();
+        }else {
+            printType="0";//0= cpcl big sewoo  1=ESCpos
+            formType="0";// 0= green big layout  / 1 = smart phone small layout
+        }
+
+
         if(!TextUtils.isEmpty(ipAddress)){
             Log.e("ipAddress","globlFunction"+ipAddress);
             logoPic=settingModle.getLogo();
@@ -43,6 +59,7 @@ public class GlobelFunction {
             taxNo=settingModle.getTaxNo();
             accNo=settingModle.getAccNo();
             companyName=settingModle.getCompanyName();
+            savePrint=settingModle.getSavePrint();
             return  ipAddress;
 
         }else{
@@ -52,7 +69,7 @@ public class GlobelFunction {
             taxNo=null;
             accNo=null;
             companyName=null;
-
+            savePrint=0;
             return "noSetting";
 
         }
