@@ -29,6 +29,9 @@ public class GlobelFunction {
     public  static String formType;
     public  static String printType;
 
+    public  static String serialVoucher;
+    public  static String serialRec;
+
     public GlobelFunction() {
 
 
@@ -60,6 +63,8 @@ public class GlobelFunction {
             accNo=settingModle.getAccNo();
             companyName=settingModle.getCompanyName();
             savePrint=settingModle.getSavePrint();
+            serialVoucher=settingModle.getVoucherSerial();
+            serialRec=settingModle.getRecSerial();
             return  ipAddress;
 
         }else{
@@ -70,6 +75,8 @@ public class GlobelFunction {
             accNo=null;
             companyName=null;
             savePrint=0;
+            serialVoucher="-1";
+            serialRec="-1";
             return "noSetting";
 
         }

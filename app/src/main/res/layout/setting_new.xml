@@ -171,7 +171,10 @@
                         android:layout_weight="1"
                         android:textColor="@color/white_dark"
                         android:textDirection="rtl"
-                        android:text="حفظ و طباعة" />
+                        android:text="حفظ و طباعة"
+                        android:checked="true"
+                        android:visibility="gone"
+                        />
 
 
                     <!--<EditText-->
@@ -357,6 +360,95 @@
                         android:padding="5dp"
                         android:textColor="@color/white_dark"
                         android:textSize="18sp" />
+
+
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="3dp"
+                    android:layout_marginHorizontal="30dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="130dp"
+                        android:layout_height="wrap_content"
+                        android:elevation="2dp"
+                        android:padding="5dp"
+                        android:text="تسلسل الفاتوره "
+                        android:textColor="@color/white_dark"
+                        android:textSize="18sp" />
+
+                    <EditText
+                        android:id="@+id/serialVoucherTextSetting"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="10dp"
+                        android:background="@drawable/edite_back"
+                        android:elevation="2dp"
+                        android:gravity="center"
+                        android:textCursorDrawable="@drawable/cursor_edit_text"
+
+                        android:inputType="number"
+                        android:padding="5dp"
+                        android:textColor="@color/white_dark"
+                        android:textSize="18sp" />
+
+
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="3dp"
+                    android:layout_marginHorizontal="30dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="130dp"
+                        android:layout_height="wrap_content"
+                        android:elevation="2dp"
+                        android:padding="5dp"
+                        android:text="تسلسل سند القبض"
+                        android:textColor="@color/white_dark"
+                        android:textSize="18sp" />
+
+                    <EditText
+                        android:id="@+id/serialRecTextSetting"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="10dp"
+                        android:background="@drawable/edite_back"
+                        android:elevation="2dp"
+                        android:gravity="center"
+                        android:textCursorDrawable="@drawable/cursor_edit_text"
+
+                        android:inputType="number"
+                        android:padding="5dp"
+                        android:textColor="@color/white_dark"
+                        android:textSize="18sp" />
+
+
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="3dp"
+                    android:layout_marginHorizontal="30dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/serialButton"
+                        android:layout_width="130dp"
+                        android:layout_height="wrap_content"
+                        android:elevation="2dp"
+                        android:padding="5dp"
+                        android:text="تعديل التسلسل"
+                        android:gravity="center"
+                        android:textColor="@color/white_dark"
+                        android:textSize="18sp"
+                        android:background="@drawable/save_yelow_btn"/>
+
+
 
 
                 </LinearLayout>

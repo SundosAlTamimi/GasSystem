@@ -27,7 +27,7 @@ import java.util.List;
 public class DatabaseHandler extends SQLiteOpenHelper {
 
     private static String TAG = "DatabaseHandler";
-    private static final int DATABASE_VERSION = 19;
+    private static final int DATABASE_VERSION = 20;
     private static final String DATABASE_NAME = "GasDatabase";
     static SQLiteDatabase db;
 
@@ -155,7 +155,8 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     private static final String TAX_NO3 = "TAX_NO";
     private static final String LOGO3 = "LOGO";
     private static final String SAVE_PRINT3 = "SAVE_PRINT";
-
+    private static final String SERIAL_VOUCHER = "SERIAL_VOUCHER";
+    private static final String SERIAL_REC = "SERIAL_REC";
     //******************************************************************
     private static final String SERIAL_TABLE = "MAXSERIAL";
 
@@ -376,7 +377,9 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                 + ACC_NO3 + " TEXT,"
                 + TAX_NO3 + " TEXT,"
                 + LOGO3 + " BLOB,"
-                + SAVE_PRINT3 + " TEXT" + ")";
+                + SAVE_PRINT3 + " TEXT,"
+                + SERIAL_VOUCHER + " TEXT,"
+                + SERIAL_REC + " TEXT" + ")";
         db.execSQL(CREATE_SETTING_TABLE);
 
 
@@ -601,6 +604,18 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         }catch (Exception ex){
             Log.e("upgrade","Ex ... CREATE_SETTING_PRINTER_TABLE TABLE ");
 
+        }
+        try{
+            db.execSQL("ALTER TABLE SETTING_TABLE ADD " + SERIAL_VOUCHER + " TEXT"+" DEFAULT '0'");
+
+        }catch (Exception e){
+            Log.e("upgrade","Ex ... SETTING_TABLE SERIAL_VOUCHER");
+        }
+        try{
+            db.execSQL("ALTER TABLE SETTING_TABLE ADD " + SERIAL_REC + " TEXT"+" DEFAULT '0'");
+
+        }catch (Exception e){
+            Log.e("upgrade","Ex ... SETTING_TABLE SERIAL_REC");
         }
 
 
@@ -870,6 +885,8 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         contentValues.put(TAX_NO3, settingModle.getTaxNo());
         contentValues.put(LOGO3, byteImage);
         contentValues.put(SAVE_PRINT3, settingModle.getSavePrint());
+        contentValues.put(SERIAL_VOUCHER, settingModle.getVoucherSerial());
+        contentValues.put(SERIAL_REC, settingModle.getRecSerial());
 
         db.insert(SETTING_TABLE, null, contentValues);
         db.close();
@@ -1131,6 +1148,9 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                 settingModle.setAccNo(cursor.getString(2));
                 settingModle.setTaxNo(cursor.getString(3));
                 settingModle.setSavePrint(cursor.getInt(5));
+                settingModle.setVoucherSerial(cursor.getString(6));
+                settingModle.setRecSerial(cursor.getString(7));
+
 
                 try {
                     settingModle.setLogo(BitmapFactory.decodeByteArray(cursor.getBlob(4), 0, cursor.getBlob(4).length));
@@ -1413,6 +1433,31 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     }
 
 
+    public int  getMaxNo(String tableName,int flag){
+        int maxNo=0;
+        //select IFNULL(Max(VHF_NO),0)  FROM TRANSFER_ITEMS_INFO
+        String selectQuery;
+                if(flag==1) {
+                     selectQuery = "select IFNULL(Max(INV_NO),1)  FROM  " + tableName;
+                }else {
+                    selectQuery = "select IFNULL(Max(RECNO),1)  FROM  " + tableName;
+                }
+        db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+
+        if (cursor.moveToFirst()) {
+            do {
+
+                maxNo=cursor.getInt(0);
+
+
+            } while (cursor.moveToNext());
+        }
+        return maxNo;
+
+    }
+
+
 
     public VoucherModle getVoucherByVoucherNo(String voucherNo) {
         VoucherModle voucherModle = new VoucherModle();
@@ -1563,5 +1608,22 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
     }
 
+    public int  getMax(){
+        int maxNo=0;
+        //select IFNULL(Max(VHF_NO),0)  FROM TRANSFER_ITEMS_INFO
+        String selectQuery = "select IFNULL(Max(SERIAL),1)  FROM RECCASH";
+        db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
 
+        if (cursor.moveToFirst()) {
+            do {
+
+                maxNo=cursor.getInt(0);
+
+
+            } while (cursor.moveToNext());
+        }
+        return maxNo;
+
+    }
 }

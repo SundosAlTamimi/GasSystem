@@ -45,6 +45,8 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+import cn.pedant.SweetAlert.SweetAlertDialog;
+
 
 public class Receipt extends AppCompatActivity {
 
@@ -71,7 +73,7 @@ public class Receipt extends AppCompatActivity {
     EditText RecCashEditText;
     LinearLayout editRecNoLinear;
     RecCash recCashEdit;
-    String maxSerialRec = "0";
+    String maxSerialRec = "0",serialNo="-1";
 
     @SuppressLint("ClickableViewAccessibility")
     @Override
@@ -107,12 +109,21 @@ public class Receipt extends AppCompatActivity {
         DHandler = new DatabaseHandler(Receipt.this);
 //        maxVouNo= DHandler.getMax("RECCASH")+1;
         globelFunction.GlobelFunctionSetting(DHandler);
+        List<RecCash>rec=DHandler.getRecCash();
+
         MaxSerial maxSerial = DHandler.getMaxSerialTable();
+        if(rec.size()==0 && TextUtils.isEmpty(maxSerial.getColomMax())){
+            DHandler.addMaxSerialTable(new MaxSerial(globelFunction.serialVoucher,globelFunction.serialRec));
+        }else if(rec.size()==0){
+            DHandler.updateMaxRec(globelFunction.serialRec);
+        }
+
+        maxSerial = DHandler.getMaxSerialTable();
         if (!TextUtils.isEmpty(maxSerial.getColomMax())) {
             maxSerialRec = maxSerial.getColomMax();
         } else {
-            maxSerialRec = "1";
-            DHandler.addMaxSerialTable(new MaxSerial("1", "1"));
+            maxSerialRec = globelFunction.serialRec;
+            DHandler.addMaxSerialTable(new MaxSerial(globelFunction.serialVoucher,globelFunction.serialRec));
         }
         customerList = DHandler.getAllCustomers();
         RemarkList = DHandler.getAllRemark();
@@ -395,11 +406,11 @@ public class Receipt extends AppCompatActivity {
                                             if (!TextUtils.isEmpty(maxSerial.getColomMax())) {
                                                 maxSerialRec = maxSerial.getColomMax();
                                             } else {
-                                                maxSerialRec = "1";
-                                                DHandler.addMaxSerialTable(new MaxSerial("1", "1"));
+                                                maxSerialRec = globelFunction.serialRec;
+                                                DHandler.addMaxSerialTable(new MaxSerial(globelFunction.serialVoucher,globelFunction.serialRec));
                                             }
 
-//                                        int  maxVno= DHandler.getMax("RECCASH")+1;
+                                           int  maxVno= DHandler.getMax("RECCASH")+1;
                                             recCash.setResNo(maxSerialRec);
                                             recCash.setAccNo(accountNo.getText().toString());
                                             recCash.setAccName(custNo.getText().toString());
@@ -411,7 +422,7 @@ public class Receipt extends AppCompatActivity {
                                             recCash.setLastBalance(lastBalance.getText().toString());
                                             recCash.setCounterNo(counterNo.getText().toString());
                                             recCash.setProjectName(project.getText().toString());
-                                            recCash.setSerial(maxSerialRec);
+                                            recCash.setSerial(""+maxVno);
                                             recCash.setOldCash("");
                                             recCash.setOldRemark("");
                                             recCash.setStatus("0");
@@ -541,19 +552,39 @@ public class Receipt extends AppCompatActivity {
         DHandler.updateMaxRec("" + (Integer.parseInt(maxSerialRec) + 1));
         receiptNo.setText("" + (Integer.parseInt(maxSerialRec) + 1));
         clearText();
-        if(globelFunction.savePrint==1) {
-            if(globelFunction.printType.equals("0")) {
-                Intent printExport = new Intent(Receipt.this, BluetoothConnectMenu.class);
-                printExport.putExtra("printKey", "1");
-                startActivity(printExport);
-            }else {
-                Intent printExportEsc = new Intent(Receipt.this, bMITP.class);
-                printExportEsc.putExtra("printKey", "1");
-                startActivity(printExportEsc);
-            }
-          }else{
-            Toast.makeText(this, "حفظ دون طباعه", Toast.LENGTH_SHORT).show();
-        }
+//        if(globelFunction.savePrint==1) {
+
+      SweetAlertDialog sweetAlertDialog=  new SweetAlertDialog(Receipt.this, SweetAlertDialog.WARNING_TYPE);
+        sweetAlertDialog .setTitleText("الطباعة " + "!");
+        sweetAlertDialog.setContentText("تم الحفظ , هل تريد طباعة الفاتوره ؟ ");
+        sweetAlertDialog.setConfirmText("طباعة");
+        sweetAlertDialog .showCancelButton(true);
+        sweetAlertDialog .setCancelButton("الغاء", new SweetAlertDialog.OnSweetClickListener() {
+                    @Override
+                    public void onClick(SweetAlertDialog sweetAlertDialog) {
+                        sweetAlertDialog.dismissWithAnimation();
+                    }
+                });
+        sweetAlertDialog .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                    @Override
+                    public void onClick(SweetAlertDialog sweetAlertDialog) {
+
+                        if(globelFunction.printType.equals("0")) {
+                            Intent printExport = new Intent(Receipt.this, BluetoothConnectMenu.class);
+                            printExport.putExtra("printKey", "1");
+                            startActivity(printExport);
+                        }else {
+                            Intent printExportEsc = new Intent(Receipt.this, bMITP.class);
+                            printExportEsc.putExtra("printKey", "1");
+                            startActivity(printExportEsc);
+                        }
+                        sweetAlertDialog.dismissWithAnimation();
+
+                    }
+                });
+        sweetAlertDialog  .setCanceledOnTouchOutside(false);
+        sweetAlertDialog  .show();
+
         Toast.makeText(this, "تم الحفظ بنجاح ", Toast.LENGTH_SHORT).show();
     }
 

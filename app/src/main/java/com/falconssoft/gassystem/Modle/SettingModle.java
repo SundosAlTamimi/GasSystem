@@ -10,6 +10,8 @@ public class SettingModle {
     private String taxNo;
     private Bitmap logo;
     private int savePrint;
+    private String voucherSerial;
+    private String recSerial;
 
     public SettingModle() {
 
@@ -69,5 +71,21 @@ public class SettingModle {
 
     public int getSavePrint() {
         return savePrint;
+    }
+
+    public String getVoucherSerial() {
+        return voucherSerial;
+    }
+
+    public void setVoucherSerial(String voucherSerial) {
+        this.voucherSerial = voucherSerial;
+    }
+
+    public String getRecSerial() {
+        return recSerial;
+    }
+
+    public void setRecSerial(String recSerial) {
+        this.recSerial = recSerial;
     }
 }

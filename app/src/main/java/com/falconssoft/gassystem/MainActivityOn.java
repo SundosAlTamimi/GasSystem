@@ -266,14 +266,13 @@ public class MainActivityOn extends AppCompatActivity implements NavigationView.
                 exportDataToServer();
                 break;
             case R.id.menu_settings:
-                finish();
-                Intent SettingIntent= new Intent(MainActivityOn.this, AppSetting.class);
-                startActivity(SettingIntent);
+
+                passwordForSetting(2);
                 break;
 
             case R.id.menu_printer_settings:
 
-                passwordForSetting();
+                passwordForSetting(1);
 
                 break;
         }
@@ -344,7 +343,7 @@ if(isExported) {
 
     }
 
-public void passwordForSetting(){
+public void passwordForSetting(final int flagSetting){
     final EditText editText = new EditText(MainActivityOn.this);
     final TextView textView = new TextView(MainActivityOn.this);
     editText.setHint("ادخل كلمة السر ");
@@ -353,31 +352,49 @@ public void passwordForSetting(){
     if (SweetAlertDialog.DARK_STYLE) {
         editText.setTextColor(Color.BLACK);
     }
-    LinearLayout linearLayout = new LinearLayout(getApplicationContext());
+    final LinearLayout linearLayout = new LinearLayout(getApplicationContext());
     linearLayout.setOrientation(LinearLayout.VERTICAL);
     linearLayout.addView(editText);
     linearLayout.addView(textView);
 
-    SweetAlertDialog dialog = new SweetAlertDialog(MainActivityOn.this, SweetAlertDialog.NORMAL_TYPE)
+    final SweetAlertDialog dialog = new SweetAlertDialog(MainActivityOn.this, SweetAlertDialog.NORMAL_TYPE)
             .setTitleText("كلمة السر ")
             .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
                 @Override
                 public void onClick(SweetAlertDialog sweetAlertDialog) {
                     String password=editText.getText().toString();
                     textView.setText("");
-                    if(!password.equals("")){
+                    if(!password.equals("")) {
 
-                        if(password.equals("1221")){
+                        if (flagSetting==1) {
 
-                            textView.setText("");
-                            printerSettingDialog();
+                            if (password.equals("112020")) {
 
-                            sweetAlertDialog.dismissWithAnimation();
+                                textView.setText("");
+                                printerSettingDialog();
 
-                        }else{
-                            textView.setText("كلمة السر خطا ");
+                                sweetAlertDialog.dismissWithAnimation();
+
+                            } else {
+                                textView.setText("كلمة السر خطا ");
+                            }
+
+                        }else if ( flagSetting==2){
+
+                            if (password.equals("112020")) {
+
+                                textView.setText("");
+                                finish();
+                                Intent SettingIntent= new Intent(MainActivityOn.this, AppSetting.class);
+                                startActivity(SettingIntent);
+
+                                sweetAlertDialog.dismissWithAnimation();
+
+                            } else {
+                                textView.setText("كلمة السر خطا ");
+                            }
+
                         }
-
                     }
 
                 }
@@ -616,9 +633,7 @@ public void passwordForSetting(){
                             break;
 
                         case 6://اعدادات
-                            finish();
-                            Intent SettingIntent= new Intent(MainActivityOn.this, AppSetting.class);
-                            startActivity(SettingIntent);
+                            passwordForSetting(2);
                             break;
                     }
 
