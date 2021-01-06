@@ -56,13 +56,13 @@
                         android:layout_weight="1"
                         android:fontFamily="serif-monospace"
                         android:gravity="center"
-                        android:text="اسم العميل/رقم الحساب /رقم الفاتوره"
+                        android:text="بحث"
                         android:textColor="@color/white_dark"
                         android:textSize="18sp" />
 
                     <EditText
                         android:id="@+id/noteSearch"
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:ems="5"
@@ -70,6 +70,8 @@
                         android:inputType="textPersonName"
                         android:textColor="@color/white_dark"
                         android:textCursorDrawable="@drawable/cursor_edit_text"
+                        android:hint="اسم العميل/رقم الحساب /رقم الفاتوره"
+                        android:textColorHint="@color/white_two"
                         android:textSize="16sp" />
 
                 </TableRow>
