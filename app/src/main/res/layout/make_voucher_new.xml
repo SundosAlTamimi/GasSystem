@@ -142,11 +142,19 @@
                                 android:layout_marginRight="10dp"
                                 android:gravity="center"
                                 android:inputType="number"
+                                android:layout_weight="1"
                                 android:lines="1"
                                 android:textCursorDrawable="@drawable/cursor_edit_text"
                                 android:nextFocusDown="@id/current_read"
                                 android:textColor="@color/white_dark"
                                 android:textSize="14sp" />
+
+                            <Button
+                                android:id="@+id/searchVoucher"
+                                android:layout_width="30dp"
+                                android:layout_height="35dp"
+                                android:background="@drawable/ic_search_black_24dp"
+                                android:backgroundTint="@color/Orange"/>
 
                             <!--<TextView-->
                             <!--android:layout_width="match_parent"-->
@@ -181,6 +189,7 @@
                                 android:id="@+id/voucher_no"
                                 android:layout_width="match_parent"
 
+                                android:layout_weight="1"
                                 android:layout_height="wrap_content"
                                 android:layout_marginRight="10dp"
                                 android:background="@drawable/edite_back"
@@ -189,6 +198,7 @@
                                 android:padding="5dp"
                                 android:textColor="@color/white_dark"
                                 android:textSize="18sp" />
+
 
 
                         </LinearLayout>

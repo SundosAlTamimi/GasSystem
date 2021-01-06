@@ -2,7 +2,6 @@ package com.falconssoft.gassystem;
 
 import android.annotation.SuppressLint;
 import android.app.Dialog;
-import android.content.ClipData;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -24,7 +23,6 @@ import android.view.Window;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.view.inputmethod.EditorInfo;
-import android.widget.Adapter;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -85,11 +83,13 @@ public class MakeVoucher extends AppCompatActivity {
 
     String maxSerialVoucher = "0";
 
-    Button searchCounter;
+    Button searchCounter,searchVoucher;
     ListAdapterNOTE listAdapterNOTE;
     List<Remarks> RemarkList;
     TextView voucherNo;
     LinearLayout voucherNoLinear;
+    List<VoucherModle> voucherModles;
+    ListAdapterSearchVoucher listAdapterSearchVoucher;
 
     @SuppressLint({"ClickableViewAccessibility", "RestrictedApi"})
     @Override
@@ -146,7 +146,8 @@ public class MakeVoucher extends AppCompatActivity {
         });
 
         MaxSerial maxSerial = DHandler.getMaxSerialTable();
-        List<VoucherModle> voucherModles = DHandler.getAllVouchers();
+        voucherModles=new ArrayList<>();
+        voucherModles = DHandler.getAllVouchers();
         if (voucherModles.size() == 0 && TextUtils.isEmpty(maxSerial.getColomMax())) {
             DHandler.addMaxSerialTable(new MaxSerial(globelFunction.serialVoucher, globelFunction.serialRec));
         } else if (voucherModles.size() == 0) {
@@ -503,7 +504,16 @@ public class MakeVoucher extends AppCompatActivity {
 
             }
         });
+        searchVoucher.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
+                counterNo.requestFocus();
+                clearText();
+                ShowSearchDialog();
+
+            }
+        });
 
         noteRemark.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -572,8 +582,16 @@ public class MakeVoucher extends AppCompatActivity {
 
 
     void Update() {
+        String count = "";
+        try {
+            if (!TextUtils.isEmpty(voucherModleEdit.getCounterNo())) {
+                count = "4";
+            }
 
-        if (!TextUtils.isEmpty(voucherModleEdit.getCounterNo())) {
+        } catch (Exception e) {
+            count = "";
+        }
+        if (!TextUtils.isEmpty(count)) {
             if (!TextUtils.isEmpty(counterNo.getText().toString())) {
                 if (!TextUtils.isEmpty(currentRead.getText().toString())) {
                     if (!TextUtils.isEmpty(gasReturn.getText().toString())) {
@@ -1140,6 +1158,7 @@ public class MakeVoucher extends AppCompatActivity {
         searchCounter = findViewById(R.id.searchCounter);
         noteRemark = findViewById(R.id.noteRemark);
         voucherNoLinear=findViewById(R.id.voucherNoLinear);
+        searchVoucher=findViewById(R.id.searchVoucher);
     }
 
     void calculateFunction(double GP, double COE, double GPRC) {
@@ -1391,7 +1410,7 @@ public class MakeVoucher extends AppCompatActivity {
     }
 
     @SuppressLint("SetTextI18n")
-    private void fillDataInLayout(VoucherModle voucherModle) {
+    public void fillDataInLayout(VoucherModle voucherModle) {
 
         counterNo.setText(voucherModle.getCounterNo());
         custNo.setText(voucherModle.getCustomerName());
@@ -1409,6 +1428,7 @@ public class MakeVoucher extends AppCompatActivity {
         currentConsuming.setText(voucherModle.getConsumption());
         lastValue.setText(voucherModle.getReQalValue());
         noteRemark.setText(voucherModle.getRemarks());
+        editTextVoucherNo.setText(voucherModle.getInvoiceNo());
 
 
     }
@@ -1492,6 +1512,63 @@ public class MakeVoucher extends AppCompatActivity {
                 } else {
                     listAdapterNOTE = new ListAdapterNOTE(MakeVoucher.this, RemarkList, textView, dialog);
                     ListNote.setAdapter(listAdapterNOTE);
+                }
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
+        dialog.show();
+
+    }
+
+    public void ShowSearchDialog() {
+        final Dialog dialog = new Dialog(this, R.style.Theme_Dialog);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.search_dialog_show_);
+        dialog.setCancelable(true);
+
+        final EditText noteSearch = dialog.findViewById(R.id.noteSearch);
+        final ListView ListNote = dialog.findViewById(R.id.ListNote);
+
+        listAdapterSearchVoucher = new ListAdapterSearchVoucher(MakeVoucher.this, voucherModles, dialog, 1, MakeVoucher.this);
+        ListNote.setAdapter(listAdapterSearchVoucher);
+
+        noteSearch.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+                if (!noteSearch.getText().toString().equals("")) {
+                    List<VoucherModle> searchRec = new ArrayList<>();
+                    searchRec.clear();
+                    for (int i = 0; i < voucherModles.size(); i++) {
+                        if (voucherModles.get(i).getCustomerName().contains(noteSearch.getText().toString())
+                                ||voucherModles.get(i).getAccNo().contains(noteSearch.getText().toString())
+                                ||voucherModles.get(i).getInvoiceNo().contains(noteSearch.getText().toString())) {
+                            searchRec.add(voucherModles.get(i));
+
+                        }
+                    }
+
+
+                    listAdapterSearchVoucher = new ListAdapterSearchVoucher(MakeVoucher.this, searchRec, dialog, 1, MakeVoucher.this);
+                    ListNote.setAdapter(listAdapterSearchVoucher);
+
+
+                } else {
+                    listAdapterSearchVoucher = new ListAdapterSearchVoucher(MakeVoucher.this, voucherModles, dialog, 1, MakeVoucher.this);
+                    ListNote.setAdapter(listAdapterSearchVoucher);
+
+
                 }
 
             }

@@ -144,7 +144,24 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     private static final String OLD_REMARK2 = "OLD_REMARK";
     private static final String STATUS2 = "STATUS";
 
+    //******************************************************************
+  /*  private static final String RECCASH_TABLE = "RECCASH";
 
+    private static final String RECNO2 = "RECNO";
+    private static final String ACCNAME2 = "ACCNAME";
+    private static final String ACCNO2 = "ACCNO";
+    private static final String CASH2 = "CASH";
+    private static final String REMARKS2 = "REMARKS";
+    private static final String RECDATE2 = "RECDATE";
+    private static final String IS_POST2 = "IS_POST";
+    private static final String PRJNAME2 = "PRJNAME";
+    private static final String IS_EXPORT2 = "IS_EXPORT";
+    private static final String SERIAL2 = "SERIAL";
+    private static final String COUNTER_REC_NO2 = "COUNTER_REC_NO";
+    private static final String LAST_BALANCE2 = "LAST_BALANCE";
+    private static final String OLD_CASH2 = "OLD_CASH";
+    private static final String OLD_REMARK2 = "OLD_REMARK";
+    private static final String STATUS2 = "STATUS";*/
 
     //******************************************************************
     private static final String SETTING_TABLE = "SETTING_TABLE";
@@ -1536,17 +1553,30 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
     //*******************************************************update************************************
 
-    public void updateRecCash(String serial,String recNo,String newCashValue,String oldCashValue,String newNote,String oldNote) {
+    public void updateRecCash(String serial,String recNo,RecCash receipt) {
         db = this.getWritableDatabase();
         String filter= SERIAL2 + " = '" + serial + "' and RECNO = '"+recNo+"'";
-        ContentValues args = new ContentValues();
-        args.put(CASH2, newCashValue);
-        args.put(OLD_CASH2, oldCashValue);
-        args.put(OLD_REMARK2, oldNote);
-        args.put(REMARKS2, newNote);
-        args.put(STATUS2, "2");//update
+        ContentValues values = new ContentValues();
 
-        db.update(RECCASH_TABLE, args, filter, null);
+        values.put(RECNO2, receipt.getResNo());
+        values.put(ACCNAME2, receipt.getAccName());
+        values.put(ACCNO2, receipt.getAccNo());
+        values.put(CASH2, receipt.getCash());
+        values.put(REMARKS2, receipt.getRemarks());
+        values.put(RECDATE2, receipt.getRecDate());
+        values.put(IS_POST2, receipt.getIs_Post());
+        values.put(PRJNAME2, receipt.getProjectName());
+        values.put(IS_EXPORT2, receipt.getIsExport());
+        values.put(SERIAL2, receipt.getSerial());
+        values.put(COUNTER_REC_NO2, receipt.getCounterNo());
+        values.put(LAST_BALANCE2, receipt.getLastBalance());
+
+        values.put(OLD_CASH2, receipt.getOldCash());
+        values.put(OLD_REMARK2, receipt.getOldRemark());
+        values.put(STATUS2, "2");
+
+
+        db.update(RECCASH_TABLE, values, filter, null);
 
 
     }

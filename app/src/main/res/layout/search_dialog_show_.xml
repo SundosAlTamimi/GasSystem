@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/gas_bac"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:background="@drawable/jjj"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/clear_buttons"
+            android:orientation="vertical"
+            android:padding="5dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/textView14"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:fontFamily="serif-monospace"
+                    android:gravity="center"
+                    android:padding="10dp"
+                    android:text="البحث عن العملاء"
+                    android:textAllCaps="true"
+                    android:textColor="@color/Orange"
+                    android:textSize="25sp"
+                    android:textStyle="bold" />
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:background="@drawable/edit_bac_s"
+                    android:layoutDirection="rtl"
+                    android:padding="10dp">
+
+                    <TextView
+                        android:id="@+id/textView5"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:fontFamily="serif-monospace"
+                        android:gravity="center"
+                        android:text="اسم العميل"
+                        android:textColor="@color/white_dark"
+                        android:textSize="18sp" />
+
+                    <EditText
+                        android:id="@+id/noteSearch"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:ems="5"
+                        android:gravity="center"
+                        android:textCursorDrawable="@drawable/cursor_edit_text"
+                        android:inputType="textPersonName"
+                        android:textColor="@color/white_dark"
+                        android:textSize="16sp" />
+
+                </TableRow>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="5dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/edit_bac_s"
+                    android:orientation="vertical">
+
+                    <TableRow
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:padding="10dp">
+
+                        <TextView
+                            android:id="@+id/body3"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:fontFamily="serif-monospace"
+
+                            android:gravity="center"
+
+                            android:text="رقم الحساب"
+                            android:textColor="@color/Orange"
+                            android:textSize="18sp" />
+
+                        <TextView
+                            android:id="@+id/body2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:fontFamily="serif-monospace"
+
+                            android:gravity="center"
+
+                            android:text="اسم العميل"
+                            android:textColor="@color/Orange"
+                            android:textSize="18sp" />
+
+                        <TextView
+                            android:id="@+id/body"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:fontFamily="serif-monospace"
+
+                            android:gravity="center"
+
+                            android:text="رقم السند"
+                            android:textColor="@color/Orange"
+                            android:textSize="18sp" />
+
+                    </TableRow>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="3dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginBottom="5dp"
+                        android:background="@color/Orange" />
+
+                    <ListView
+                        android:id="@+id/ListNote"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_margin="5dp"
+                        android:layout_weight="1"
+                        android:padding="10dp" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

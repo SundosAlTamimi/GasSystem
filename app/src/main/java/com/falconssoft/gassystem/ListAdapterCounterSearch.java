@@ -2,6 +2,7 @@ package com.falconssoft.gassystem;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.os.Handler;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -76,7 +77,13 @@ this.currentReader=currentReader;
             @Override
             public void onClick(View v) {
                 noteText.setText(""+itemsList.get(i).getCounterNo());
-                currentReader.requestFocus();
+                new Handler().post(new Runnable() {
+                                @Override
+                                public void run() {
+                                    currentReader.requestFocus();
+                                }
+                            });
+
                 dialog.dismiss();
             }
         });
