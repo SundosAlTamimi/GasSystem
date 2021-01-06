@@ -34,7 +34,7 @@
                     android:fontFamily="serif-monospace"
                     android:gravity="center"
                     android:padding="10dp"
-                    android:text="البحث عن العملاء"
+                    android:text="البحث"
                     android:textAllCaps="true"
                     android:textColor="@color/Orange"
                     android:textSize="25sp"
@@ -45,6 +45,7 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="5dp"
                     android:background="@drawable/edit_bac_s"
+                    android:gravity="center"
                     android:layoutDirection="rtl"
                     android:padding="10dp">
 
@@ -55,20 +56,20 @@
                         android:layout_weight="1"
                         android:fontFamily="serif-monospace"
                         android:gravity="center"
-                        android:text="اسم العميل"
+                        android:text="اسم العميل/رقم الحساب /رقم الفاتوره"
                         android:textColor="@color/white_dark"
                         android:textSize="18sp" />
 
                     <EditText
                         android:id="@+id/noteSearch"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:ems="5"
                         android:gravity="center"
-                        android:textCursorDrawable="@drawable/cursor_edit_text"
                         android:inputType="textPersonName"
                         android:textColor="@color/white_dark"
+                        android:textCursorDrawable="@drawable/cursor_edit_text"
                         android:textSize="16sp" />
 
                 </TableRow>
@@ -122,7 +123,7 @@
 
                             android:gravity="center"
 
-                            android:text="رقم السند"
+                            android:text="رقم الفاتورة"
                             android:textColor="@color/Orange"
                             android:textSize="18sp" />
 
