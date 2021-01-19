@@ -268,7 +268,8 @@ public class MainActivity extends AppCompatActivity {
                         //customer.set(finalObject.getDouble("CREDIT"));
                         customer.setCustSts(finalObject.getInt("CUSTSTS"));
                         customer.setLastRead(finalObject.getDouble("LASTREADER"));
-
+                        customer.setAddFromIn(0);
+                        customer.setIsExport(0);
                         //Log.e("*****", customer.getCustName());
                         customers.add(customer);
                         databaseHandler.addCustomer(customer);

@@ -101,7 +101,9 @@ public class GlobelFunction {
         String returnVale="";
         double valueD=Double.parseDouble(value);
         DecimalFormat threeDForm;
-        threeDForm = new DecimalFormat("#.###");
+//        threeDForm = new DecimalFormat("#.###");
+        threeDForm = new DecimalFormat("0.000");
+
         returnVale=convertToEnglish(threeDForm.format(valueD));
 
         return  returnVale;

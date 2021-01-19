@@ -54,7 +54,7 @@ this.dialog=dialog;
     }
 
     private class ViewHolder {
-        TextView tital,body;//, price
+        TextView tital,body,cusNo;//, price
 TableRow tableRow;
 
 
@@ -69,6 +69,8 @@ TableRow tableRow;
         holder.tableRow=  view.findViewById(R.id.table);
         holder.tital =  view.findViewById(R.id.tital);
         holder.body =  view.findViewById(R.id.body);
+        holder.cusNo =  view.findViewById(R.id.cusNo);
+        holder.cusNo.setVisibility(View.GONE);
 
 
 //        holder.state.setText("" + itemsList.get(i).getStatus());

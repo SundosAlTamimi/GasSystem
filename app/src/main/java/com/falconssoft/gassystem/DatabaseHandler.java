@@ -27,7 +27,7 @@ import java.util.List;
 public class DatabaseHandler extends SQLiteOpenHelper {
 
     private static String TAG = "DatabaseHandler";
-    private static final int DATABASE_VERSION = 20;
+    private static final int DATABASE_VERSION = 22;
     private static final String DATABASE_NAME = "GasDatabase";
     static SQLiteDatabase db;
 
@@ -110,6 +110,9 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     private static final String IS_PER = "IS_PER";
     private static final String BDLVAL = "BDLVAL";
     private static final String CUSTSTS = "CUSTSTS";
+    private static final String ADD_FROM_IN = "ADD_FROM_IN";
+    private static final String IS_EXPORT = "IS_EXPORT";
+
 
     //******************************************************************
 
@@ -264,7 +267,9 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                 + PRJECT_NAME + " TEXT,"
                 + IS_PER + " INTEGER,"
                 + BDLVAL + " INTEGER,"
-                + CUSTSTS + " INTEGER" + ")";
+                + CUSTSTS + " INTEGER,"
+                + ADD_FROM_IN + " INTEGER,"
+                + IS_EXPORT + " INTEGER" + ")";
         db.execSQL(CREATE_CUSTOMER_TABLE);
 
         String CREATE_VOUCHER_TABLE = "CREATE TABLE " + VOUCHERS_TABLE + "("
@@ -635,6 +640,19 @@ public class DatabaseHandler extends SQLiteOpenHelper {
             Log.e("upgrade","Ex ... SETTING_TABLE SERIAL_REC");
         }
 
+        try{
+            db.execSQL("ALTER TABLE CUSTOMER ADD " + ADD_FROM_IN + " TEXT"+" DEFAULT '0'");
+
+        }catch (Exception e){
+            Log.e("upgrade","Ex ... CUSTOMER ADD_FROM_IN");
+        }
+
+        try{
+            db.execSQL("ALTER TABLE CUSTOMER ADD " + IS_EXPORT + " TEXT"+" DEFAULT '0'");
+
+        }catch (Exception e){
+            Log.e("upgrade","Ex ... CUSTOMER IS_EXPORT");
+        }
 
     }
 
@@ -655,6 +673,8 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         contentValues.put(IS_PER, customer.getIsPer());
         contentValues.put(BDLVAL, customer.getBadalVal());
         contentValues.put(CUSTSTS, customer.getCustSts());
+        contentValues.put(ADD_FROM_IN, customer.getAddFromIn());
+        contentValues.put(IS_EXPORT, customer.getIsExport());
 
         db.insert(CUSTOMER_TABLE, null, contentValues);
         db.close();
@@ -968,6 +988,44 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                 customer.setIsPer(Integer.parseInt(cursor.getString(8)));
                 customer.setBadalVal(Double.parseDouble(cursor.getString(9)));
                 customer.setCustSts(Integer.parseInt(cursor.getString(10)));
+                customer.setAddFromIn(Integer.parseInt(cursor.getString(11)));
+                customer.setIsExport(Integer.parseInt(cursor.getString(12)));
+
+                customerList.add(customer);
+            } while (cursor.moveToNext());
+        }
+        return customerList;
+    }
+
+
+    public ArrayList<Customer> getAllCustomersAddInSystem() {
+        ArrayList<Customer> customerList = new ArrayList<>();
+
+        String selectQuery = "SELECT  * FROM " + CUSTOMER_TABLE +" where ADD_FROM_IN= 1 and IS_EXPORT=0";
+        db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+
+        if (cursor.moveToFirst()) {
+            do {
+                Customer customer = new Customer();
+
+                customer.setCounterNo(cursor.getString(0));
+                customer.setAccNo(cursor.getString(1));
+                customer.setCustName(cursor.getString(2));
+                customer.setLastRead(Double.parseDouble(cursor.getString(3)));
+                customer.setGasPressure(Double.parseDouble(cursor.getString(4)));
+                try {
+                    customer.setCredet(Double.parseDouble(cursor.getString(5)));
+                }catch (Exception e){
+                    customer.setCredet(0.0);
+                }
+                customer.setgPrice(Double.parseDouble(cursor.getString(6)));
+                customer.setProjectName(cursor.getString(7));
+                customer.setIsPer(Integer.parseInt(cursor.getString(8)));
+                customer.setBadalVal(Double.parseDouble(cursor.getString(9)));
+                customer.setCustSts(Integer.parseInt(cursor.getString(10)));
+                customer.setAddFromIn(Integer.parseInt(cursor.getString(11)));
+                customer.setIsExport(Integer.parseInt(cursor.getString(12)));
 
                 customerList.add(customer);
             } while (cursor.moveToNext());
@@ -1144,6 +1202,8 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                 customer.setIsPer(Integer.parseInt(cursor.getString(8)));
                 customer.setBadalVal(Double.parseDouble(cursor.getString(9)));
                 customer.setCustSts(Integer.parseInt(cursor.getString(10)));
+                customer.setAddFromIn(Integer.parseInt(cursor.getString(11)));
+                customer.setIsExport(Integer.parseInt(cursor.getString(12)));
 
             } while (cursor.moveToNext());
         }
@@ -1627,6 +1687,20 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
 
     }
+
+
+    public void updateIsExportCustomer() {
+        db = this.getWritableDatabase();
+        ContentValues args = new ContentValues();
+
+        args.put(IS_EXPORT, "1");//update
+
+        db.update(CUSTOMER_TABLE, args, null, null);
+
+
+    }
+
+
     public void updateIsExportVoucher() {
         db = this.getWritableDatabase();
         ContentValues args = new ContentValues();

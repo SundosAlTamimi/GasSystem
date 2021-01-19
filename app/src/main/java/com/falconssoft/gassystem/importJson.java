@@ -1296,7 +1296,8 @@ public class importJson {
                     obj.setCustSts(Integer.parseInt(finalObject.getString("CUSTSTS")));
 //                    obj.setCustame(finalObject.getString("CUSTTYPE"));
                     obj.setLastRead(Double.parseDouble(finalObject.getString("LASTREADER")));
-
+                    obj.setAddFromIn(1);
+                    obj.setIsExport(0);
                     itemCard.add(obj);
                     dbHandler.addCustomer(obj);
 //                    if(stopBollen){

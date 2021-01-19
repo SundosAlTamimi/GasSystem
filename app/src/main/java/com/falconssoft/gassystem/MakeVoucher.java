@@ -59,7 +59,6 @@ public class MakeVoucher extends AppCompatActivity {
     double consumingV = 0;
 
     private Animation animation;
-    DecimalFormat threeDForm;
     String noteText = "";
     private Toolbar toolbar;
     public static VoucherModle voucherGas;
@@ -113,7 +112,6 @@ public class MakeVoucher extends AppCompatActivity {
 //            }
 //        });
 
-        threeDForm = new DecimalFormat("#.###");
 
         DHandler = new DatabaseHandler(MakeVoucher.this);
         globelFunction.GlobelFunctionSetting(DHandler);
@@ -370,7 +368,12 @@ public class MakeVoucher extends AppCompatActivity {
 
                             custNo.setText(customer.getCustName());
                             previousRead.setText(globelFunction.DecimalFormat("" + customer.getLastRead()));
-                            previousPalance.setText("" + customer.getCredet());
+                            if(customer.getLastRead()!=0){
+                                previousRead.setEnabled(false);
+                            }else{
+                                previousRead.setEnabled(true);
+                            }
+                            previousPalance.setText(globelFunction.DecimalFormat("" + customer.getCredet()));
                             serviceReturn.setText("" + customer.getBadalVal());
 
                             gasPressure = customer.getGasPressure();
@@ -554,7 +557,8 @@ public class MakeVoucher extends AppCompatActivity {
                     List<Customer> searchCounter = new ArrayList<>();
                     searchCounter.clear();
                     for (int i = 0; i < customerList.size(); i++) {
-                        if (customerList.get(i).getCounterNo().contains(noteSearch.getText().toString()) || customerList.get(i).getCustName().contains(noteSearch.getText().toString())) {
+                        if (customerList.get(i).getCounterNo().toUpperCase().contains(noteSearch.getText().toString().toUpperCase()) || customerList.get(i).getCustName().toUpperCase().contains(noteSearch.getText().toString().toUpperCase())
+                                || customerList.get(i).getAccNo().toUpperCase().contains(noteSearch.getText().toString().toUpperCase())) {
                             searchCounter.add(customerList.get(i));
 
                         }
@@ -1171,14 +1175,14 @@ public class MakeVoucher extends AppCompatActivity {
                 if (!currentRead.getText().toString().equals(".")) {
                     if (Double.parseDouble(currentRead.getText().toString()) != 0) {
 
-                        currentRead.setText("" + Double.parseDouble(currentRead.getText().toString()));//this for make number in text double format
+                        currentRead.setText(globelFunction.DecimalFormat("" + Double.parseDouble(currentRead.getText().toString())));//this for make number in text double format
                         previousRead.setText(globelFunction.DecimalFormat("" + Double.parseDouble(previousRead.getText().toString())));//this for make number in text double format
                         //_____________________________________الاستهلاك ___________________________________
                         DPR = Double.parseDouble(currentRead.getText().toString()) - Double.parseDouble(previousRead.getText().toString());
                         consuming.setText(globelFunction.DecimalFormat("" + DPR));
                         //_____________________________________قيمة الاستهلاك ___________________________________
 
-                        String vo = convertToEnglish(threeDForm.format(((DPR * (GP + 1) * COE) / 0.436) * (GPRC / 1000)));
+                        String vo = globelFunction.DecimalFormat(""+((((DPR * (GP + 1) * COE) / 0.436) * (GPRC / 1000))));
                         VOD = Double.parseDouble(vo);
                         consumingValue.setText("" + globelFunction.DecimalFormat("" + VOD));
 
@@ -1200,7 +1204,7 @@ public class MakeVoucher extends AppCompatActivity {
 
                         if (!serviceReturn.getText().toString().equals("")) {
                             if (!serviceReturn.getText().toString().equals(".")) {
-                                serviceReturn.setText("" + Double.parseDouble(serviceReturn.getText().toString()));//this for make number in text double format
+                                serviceReturn.setText(globelFunction.DecimalFormat("" + Double.parseDouble(serviceReturn.getText().toString())));//this for make number in text double format
                                 SRV = Double.parseDouble(serviceReturn.getText().toString());
                             } else {
                                 serviceReturn.setError("DOT!");
@@ -1215,16 +1219,16 @@ public class MakeVoucher extends AppCompatActivity {
                         net.setText(globelFunction.DecimalFormat("" + netValue));
 
 
-                        TX = Double.parseDouble(convertToEnglish(threeDForm.format((GRV + SRV) * 0.16))); //الضريبه
+                        TX = ((GRV + SRV) * 0.16); //الضريبه
                         tax.setText(globelFunction.DecimalFormat(globelFunction.DecimalFormat("" + TX)));
 
-                        TXV = Double.parseDouble(convertToEnglish(threeDForm.format((GRV + SRV) + TX)));//مجموع بدل خدمات
+                        TXV = Double.parseDouble(globelFunction.DecimalFormat(""+((GRV + SRV) + TX)));//مجموع بدل خدمات
                         taxService.setText(globelFunction.DecimalFormat("" + TXV));
 
-                        DP = Double.parseDouble(convertToEnglish(threeDForm.format(VOD + TXV))); //استهلاك الفتره
+                        DP = Double.parseDouble(globelFunction.DecimalFormat(""+((VOD + TXV)))); //استهلاك الفتره
                         currentConsuming.setText(globelFunction.DecimalFormat("" + DP));
 
-                        NetTotal = Double.parseDouble(convertToEnglish(threeDForm.format(DP + Double.parseDouble(previousPalance.getText().toString())))); //القيمه المطلوبه
+                        NetTotal = Double.parseDouble(globelFunction.DecimalFormat(""+(DP + Double.parseDouble(previousPalance.getText().toString())))); //القيمه المطلوبه
                         lastValue.setText(globelFunction.DecimalFormat("" + NetTotal));
                     } else {
                         currentRead.setError("Zero!");

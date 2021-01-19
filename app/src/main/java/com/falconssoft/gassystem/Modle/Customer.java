@@ -1,5 +1,10 @@
 package com.falconssoft.gassystem.Modle;
 
+import android.util.Log;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
 public class Customer {
 
     private String counterNo;
@@ -13,6 +18,8 @@ public class Customer {
     private int isPer;
     private double badalVal;
     private int custSts;
+    private int addFromIn;
+    private int isExport;
 
     public Customer(String counterNo, String accNo, String custName, double lastRead, double gasPressure, double credet, double gPrice, String projectName, int isPer, double badalVal, int custSts) {
         this.counterNo = counterNo;
@@ -118,5 +125,43 @@ public class Customer {
 
     public void setCustSts(int custSts) {
         this.custSts = custSts;
+    }
+
+    public int getAddFromIn() {
+        return addFromIn;
+    }
+
+    public void setAddFromIn(int addFromIn) {
+        this.addFromIn = addFromIn;
+    }
+
+    public int getIsExport() {
+        return isExport;
+    }
+
+    public void setIsExport(int isExport) {
+        this.isExport = isExport;
+    }
+
+    public JSONObject getJSONObjectCustomer() { // for server
+        JSONObject obj = new JSONObject();
+        try {
+
+            obj.put("COUNTER_NO",counterNo );
+            obj.put("ACC_NO", accNo);
+            obj.put("CUSTOMER_NAME", custName);
+            obj.put("LAST_READ", lastRead);
+            obj.put("GAS_PRESSURE", gasPressure);
+            obj.put("CREDIT",credet );
+            obj.put("G_PRICE", gPrice);
+            obj.put("PRJNAME", projectName);
+            obj.put("IS_PER", isPer);
+            obj.put("CUSTSTS", custSts);
+            obj.put("BADAL_VAL",badalVal);
+
+        } catch (JSONException e) {
+            Log.e("Tag" , "JSONException");
+        }
+        return obj;
     }
 }

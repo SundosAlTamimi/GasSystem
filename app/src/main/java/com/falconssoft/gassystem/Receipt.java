@@ -372,7 +372,8 @@ public class Receipt extends AppCompatActivity {
                     List<Customer> searchCustomer = new ArrayList<>();
                     searchCustomer.clear();
                     for (int i = 0; i < customerList.size(); i++) {
-                        if (customerList.get(i).getCustName().contains(noteSearch.getText().toString())) {
+                        if (customerList.get(i).getCustName().toUpperCase().contains(noteSearch.getText().toString().toUpperCase())||customerList.get(i).getAccNo().toUpperCase().contains(noteSearch.getText().toString().toUpperCase())
+                        ||customerList.get(i).getCounterNo().toUpperCase().contains(noteSearch.getText().toString().toUpperCase())) {
                             searchCustomer.add(customerList.get(i));
 
                         }
@@ -486,7 +487,7 @@ public class Receipt extends AppCompatActivity {
                                             recCash.setResNo(maxSerialRec);
                                             recCash.setAccNo(accountNo.getText().toString());
                                             recCash.setAccName(custNo.getText().toString());
-                                            recCash.setCash(""+Double.parseDouble(value.getText().toString()));
+                                            recCash.setCash(""+globelFunction.DecimalFormat(value.getText().toString()));
                                             recCash.setRemarks(note.getText().toString());
                                             recCash.setRecDate(globelFunction.DateInToday());
                                             recCash.setIs_Post("0");
@@ -556,7 +557,7 @@ public class Receipt extends AppCompatActivity {
                                         recCash.setResNo(recCashEdit.getResNo());
                                         recCash.setAccNo( accountNo.getText().toString());
                                         recCash.setAccName(custNo.getText().toString());
-                                        recCash.setCash( value.getText().toString());
+                                        recCash.setCash(""+globelFunction.DecimalFormat(value.getText().toString()));
                                         recCash.setRemarks(note.getText().toString());
                                         recCash.setRecDate(globelFunction.DateInToday());
                                         recCash.setIs_Post("0");

@@ -55,7 +55,7 @@ this.currentReader=currentReader;
     }
 
     private class ViewHolder {
-        TextView counterNo,customerName;
+        TextView counterNo,customerName,customerNo;
          TableRow tableRow;
 
 
@@ -70,9 +70,11 @@ this.currentReader=currentReader;
         holder.tableRow=  view.findViewById(R.id.table);
         holder.counterNo =  view.findViewById(R.id.tital);
         holder.customerName =  view.findViewById(R.id.body);
+        holder.customerNo =  view.findViewById(R.id.cusNo);
 
         holder.counterNo.setText(itemsList.get(i).getCounterNo());
         holder.customerName.setText(itemsList.get(i).getCustName());
+        holder.customerNo.setText(itemsList.get(i).getAccNo());
         holder.tableRow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

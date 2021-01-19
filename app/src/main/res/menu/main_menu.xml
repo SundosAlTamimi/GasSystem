@@ -45,6 +45,17 @@
             app:showAsAction="always" />
     </group>
 
+    <group android:id="@+id/group3">
+
+        <item
+            android:id="@+id/menu_add_customer"
+            android:icon="@drawable/ic_baseline_person_add_24"
+            android:title="اضافة عميل"
+            app:showAsAction="always" />
+
+
+    </group>
+
     <group android:id="@+id/group2">
 
         <item

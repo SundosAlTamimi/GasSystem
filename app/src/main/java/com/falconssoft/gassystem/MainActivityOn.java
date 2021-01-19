@@ -37,6 +37,7 @@ import com.azoft.carousellayoutmanager.CarouselLayoutManager;
 import com.azoft.carousellayoutmanager.CarouselZoomPostLayoutListener;
 import com.azoft.carousellayoutmanager.CenterScrollListener;
 import com.facebook.stetho.Stetho;
+import com.falconssoft.gassystem.Modle.Customer;
 import com.falconssoft.gassystem.Modle.PrintSetting;
 import com.falconssoft.gassystem.Modle.RecCash;
 import com.falconssoft.gassystem.Modle.VoucherModle;
@@ -275,6 +276,10 @@ public class MainActivityOn extends AppCompatActivity implements NavigationView.
                 passwordForSetting(1);
 
                 break;
+            case R.id.menu_add_customer:
+                Intent addCustomerIntent=new Intent(MainActivityOn.this,AddCustomer.class);
+                startActivity(addCustomerIntent);
+                break;
         }
         return false;
     }
@@ -340,9 +345,43 @@ if(isExported) {
 
         }
 
+        exportDataCustomerToServer();
 
     }
 
+
+    public  void exportDataCustomerToServer(){
+        List<Customer> customer=new ArrayList<>();
+        boolean isExportedCustomer=false;
+
+        customer=databaseHandler.getAllCustomersAddInSystem();
+        JSONArray ArrayCustomer = new JSONArray();
+        for (int i = 0; i < customer.size(); i++) {
+
+            ArrayCustomer.put(customer.get(i).getJSONObjectCustomer());
+            isExportedCustomer = true;
+
+        }
+
+
+        JSONObject objCustomer = new JSONObject();
+        try {
+            objCustomer.put("customer", ArrayCustomer);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        if(isExportedCustomer) {
+            ExportJeson sendCloud = new ExportJeson(MainActivityOn.this, objCustomer);
+            sendCloud.startSending("ExportCustomer");
+        }else{
+
+            Toast.makeText(this, "جميع العملاء تم تصديرها مسبقا ", Toast.LENGTH_SHORT).show();
+
+        }
+
+
+    }
 public void passwordForSetting(final int flagSetting){
     final EditText editText = new EditText(MainActivityOn.this);
     final TextView textView = new TextView(MainActivityOn.this);
@@ -524,7 +563,7 @@ public void passwordForSetting(final int flagSetting){
 
         @SuppressLint("SetTextI18n")
         @Override
-        public void onBindViewHolder( final CViewHolderForbar cViewHolder, final int i) {
+        public void onBindViewHolder(final CViewHolderForbar cViewHolder, @SuppressLint("RecyclerView") final int i) {
             cViewHolder.ItemName.setText(list.get(i));
             cViewHolder.layBar.setTag("" + i);
 

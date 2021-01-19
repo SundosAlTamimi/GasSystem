@@ -93,12 +93,14 @@ public class PrintVoucher extends AppCompatActivity {
                         Intent printExport=new Intent(PrintVoucher.this,BluetoothConnectMenu.class);
                         printExport.putExtra("printKey", "0");
                         startActivity(printExport);
+                        clear();
                         Toast.makeText(PrintVoucher.this, "الطباعه ...", Toast.LENGTH_SHORT).show();
                     }else {
                         voucherGas=voucherModle;
                         Intent printExportEsc=new Intent(PrintVoucher.this,bMITP.class);
                         printExportEsc.putExtra("printKey", "0");
                         startActivity(printExportEsc);
+                        clear();
                         Toast.makeText(PrintVoucher.this, "الطباعه ...", Toast.LENGTH_SHORT).show();
                     }
 
