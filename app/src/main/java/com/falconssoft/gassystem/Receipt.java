@@ -291,6 +291,7 @@ public class Receipt extends AppCompatActivity {
             counterNo.setText(receipt.getCounterNo());
             value.setText(receipt.getCash());
             note.setText(receipt.getRemarks());
+            RecCashEditText.setText(receipt.getResNo());
 
         } else {
         }
