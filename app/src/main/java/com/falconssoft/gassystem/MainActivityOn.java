@@ -283,6 +283,7 @@ public class MainActivityOn extends AppCompatActivity implements NavigationView.
         }
         return false;
     }
+    
 
 
     void exportDataToServer(){
