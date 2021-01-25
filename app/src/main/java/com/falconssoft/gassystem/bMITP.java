@@ -450,7 +450,7 @@ public class bMITP extends Activity {
                         try {
                             if(!setting.equals("noSetting")) {
 //                                if(globelFunction.formType.equals("1")) {
-                                    sample.printMultilingualFontVoucheEsc(globelFunction.DateInToday(), globelFunction.settingModleG, 0, voucherGas);
+                                    sample.printMultilingualFontVoucheGreenEsc(globelFunction.DateInToday(), globelFunction.settingModleG, 0, voucherGas);
 //                                }else {
 
 //                                }
@@ -474,7 +474,7 @@ public class bMITP extends Activity {
 
                         try {
                             if(!setting.equals("noSetting")) {
-                                sample.printMultilingualFontEsc3(globelFunction.DateInToday(),globelFunction.settingModleG, 0, recCash);
+                                sample.printMultilingualFontGreenEsc3(globelFunction.DateInToday(),globelFunction.settingModleG, 0, recCash);
                             }else{
                                 new SweetAlertDialog(bMITP.this, SweetAlertDialog.WARNING_TYPE)
                                         .setTitleText("الاعدادات " + "!")
