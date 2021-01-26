@@ -1286,16 +1286,53 @@ public class importJson {
                     obj.setCounterNo(finalObject.getString("COUNTERNO"));
                     obj.setAccNo(finalObject.getString("ACCNO"));
                     obj.setCustName(finalObject.getString("CUSTOMERNAME"));
-                    obj.setGasPressure(Double.parseDouble(finalObject.getString("GASPRESSURE")));
-                    obj.setgPrice(Double.parseDouble(finalObject.getString("GPRICE")));
+                    try {
+                        obj.setGasPressure(Double.parseDouble(finalObject.getString("GASPRESSURE")));
+                    }catch (Exception e){
+                        obj.setGasPressure(0.0);
+                        Log.e("GASPRESSURE","0.0E");
+                    }
+                    try{
+                        obj.setgPrice(Double.parseDouble(finalObject.getString("GPRICE")));
+                    }catch (Exception e){
+                        obj.setgPrice(0.0);
+                        Log.e("GPRICE","0.0E");
+                    }
                     obj.setProjectName(finalObject.getString("PRJECTNAME"));
-                    obj.setIsPer(Integer.parseInt(finalObject.getString("IS_PER")));
-                    obj.setBadalVal(Double.parseDouble(finalObject.getString("BDLVAL")));
-                    obj.setCredet(Double.parseDouble(finalObject.getString("CREDIT")));
+                    try{
+                        obj.setIsPer(Integer.parseInt(finalObject.getString("IS_PER")));
+
+                    }catch (Exception e){
+                        obj.setIsPer(0);
+                        Log.e("IS_PER","0E");
+                    }
+                    try {
+                        obj.setBadalVal(Double.parseDouble(finalObject.getString("BDLVAL")));
+                    }catch (Exception e){
+                        Log.e("BDLVAL","0.0E");
+                        obj.setBadalVal(0.0);
+                    }
+                    try{
+                        obj.setCredet(Double.parseDouble(finalObject.getString("CREDIT")));
+
+                    }catch (Exception e){
+                        Log.e("CREDIT","0.0E");
+                        obj.setCredet(0.0);
+                    }
 //                    obj.setno(finalObject.getString("REMARKS"));
-                    obj.setCustSts(Integer.parseInt(finalObject.getString("CUSTSTS")));
+                    try {
+                        obj.setCustSts(Integer.parseInt(finalObject.getString("CUSTSTS")));
+                    }catch (Exception e){
+                        Log.e("CUSTSTS","0.0E");
+                        obj.setCustSts(0);
+                    }
 //                    obj.setCustame(finalObject.getString("CUSTTYPE"));
-                    obj.setLastRead(Double.parseDouble(finalObject.getString("LASTREADER")));
+                    try {
+                        obj.setLastRead(Double.parseDouble(finalObject.getString("LASTREADER")));
+                    }catch (Exception e){
+                        Log.e("LASTREADER","0.0E");
+                        obj.setLastRead(0);
+                    }
                     obj.setAddFromIn(1);
                     obj.setIsExport(0);
                     itemCard.add(obj);
